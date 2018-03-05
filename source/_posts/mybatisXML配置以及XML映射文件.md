@@ -4,7 +4,7 @@ tags: mybatis,xml配置
 author : 李鳌
 grammar_cjkRuby: true
 ---
-最近在公司内部技术交流会上分享了mybatis相关的配置资料，现在整理下弄到微博上面。<!--more-->
+最近在公司内部技术交流会上分享了mybatis相关的配置资料，现在整理下弄到博客上面。<!--more-->
 ## <a name="XML_"></a>XML 映射配置文件
 
 MyBatis 的配置文件包含了会深深影响 MyBatis 行为的设置（settings）和属性（properties）信息。文档的顶层结构如下：
