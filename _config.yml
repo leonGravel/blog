@@ -22,7 +22,7 @@ favicon: # your favicon png
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://haojen.github.io
+url: http://L-Gravel.github.io
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -126,7 +126,7 @@ markdown:
     - markdown-it-emoji
 
 ## Themes: https://hexo.io/themes/
-theme: Hacker
+theme: Anisina
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
