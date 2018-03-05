@@ -10,7 +10,7 @@ install:
  # - npm install -g gulp
 
 script:
-  - hexo d -g
+  - hexo g
 
 after_script:
   - cd ./public
