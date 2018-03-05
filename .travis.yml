@@ -1,0 +1,30 @@
+language: node_js
+node_js: stable
+
+# S: Build Lifecycle
+install:
+  - npm install
+
+
+#before_script:
+ # - npm install -g gulp
+
+script:
+  - hexo g
+
+after_script:
+  - cd ./public
+  - git init
+  - git config user.name "gravel"
+  - git config user.email "la9249@163.com"
+  - git add .
+  - git commit -m "Update docs"
+  - git push --force --quiet "https://${hexoCI}@${GH_REF}" master:master
+# E: Build LifeCycle
+
+branches:
+  only:
+    - hexo
+env:
+ global:
+   - GH_REF: github.com/L-Gravel/L-Gravel.github.io.git
