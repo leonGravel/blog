@@ -63,7 +63,9 @@ pagination_dir: page
 ## Plugins: http://hexo.io/plugins/
 ## Themes: http://hexo.io/themes/
 theme: Hacker
-
+#RSS订阅
+plugin:
+- hexo-generator-feed
 feed:
   type: atom
   path: atom.xml
