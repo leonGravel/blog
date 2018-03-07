@@ -2,6 +2,7 @@
 title: mybatisXML配置以及XML映射文件
 tags: mybatis,xml配置
 author : 李鳌
+date: 2017-09-22 19:33:40 #发表日期，一般不改动
 grammar_cjkRuby: true
 ---
 最近在公司内部技术交流会上分享了mybatis相关的配置资料，现在整理下弄到博客上面。<!--more-->
