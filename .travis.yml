@@ -27,4 +27,4 @@ branches:
     - hexo
 env:
  global:
-   - GH_REF: github.com/L-Gravel/L-Gravel.github.io.git
+   - GH_REF: github.com/LeonGravel/Hexo-blog.git
