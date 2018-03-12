@@ -1,11 +1,13 @@
-title:【转载】 java.lang.String
+---
+title: 【转载】java.lang.String
 categories: Coding
 tags: [java]
 date: 2018-03-12 20:54:41
 ---
-# java.lang.String
 
-- 基于 Java9
+
+
+整理一下关于String类的方法。<!-- more -->
 
 ---
 

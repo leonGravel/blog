@@ -1,10 +1,11 @@
+---
 title: git 生成SSH key
 categories: Coding
 tags: [git]
 date: 2018-03-11 20:54:41
 ---
 
-使用git的过程中，我们会初始化创建关联服务器的SSH key.<!-- more -->
+使用git的过程中，我们会初始化创建关联服务器的SSH key。<!-- more -->
 
 # 1 设置用户名和邮箱
 
