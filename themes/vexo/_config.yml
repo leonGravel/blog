@@ -32,7 +32,7 @@ comment: gitment
 
 # Gitment
 gitment_owner: LeonGravel
-gitment_repo: hexo-blog
+gitment_repo: Gitment-Issue-Page
 gitment_oauth_id: 68512493679a784821d2
 gitment_oauth_secret: 8ca49523a6640b73cfdfc5148c1a2910f6246964
 
@@ -42,7 +42,7 @@ gitment_oauth_secret: 8ca49523a6640b73cfdfc5148c1a2910f6246964
 baidu_id: 
 
 about: 
-  banner: http://file.muyutech.com/about.jpg
+  #banner: http://file.muyutech.com/about.jpg
   avatar: https://avatars3.githubusercontent.com/u/13548712?s=460&v=4
   description: "一个脱离了低级趣味的空栈工程师"
  # weibo_username: gravel

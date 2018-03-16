@@ -21,7 +21,8 @@
 <script>
   (function () {
     var url = '<%= config.url %>/<%= page.path %>';
-    $('#article-banner').geopattern(url);
+	console.log(url);
+    $('#article-banner').geopattern(url+Math.random());
     $('.header').removeClass('fixed-header');
   })();
 </script>

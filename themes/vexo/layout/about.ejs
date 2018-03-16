@@ -59,6 +59,8 @@
 
 <script>
   (function () {
+   var url = '<%= config.url %>/<%= page.path %>'
+    $('#about-banner').geopattern(url+Math.random())
     $('.header').removeClass('fixed-header')
     var windowH = $(window).height();
     var author = $('.author')
