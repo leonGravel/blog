@@ -18,7 +18,7 @@ after_script:
   - git config user.name "gravel"
   - git config user.email "la9249@163.com"
   - git add .
-  - git commit -m " :rocket: Update docs :construction_worker: build by Travis-CI"
+  - git commit -m "Update docs :construction_worker: build by Travis-CI"
   - git push --force --quiet "https://${hexoCI}@${GH_REF}" master:master
 # E: Build LifeCycle
 
