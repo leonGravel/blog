@@ -1,9 +1,9 @@
 ---
 title: tomcat启动报are only available on JDK 1.5 and higher错误
-categories: java
-tags: [tomcat,bug]
-author:gravel
-date: 2018-04-04 20:54:41
+categories: java 
+tags: [tomcat,bug] 
+aothor : gravel 
+date: 2018-04-04 20:54:41 
 ---
 
 
