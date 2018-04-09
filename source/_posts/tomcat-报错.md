@@ -1,12 +1,12 @@
 ---
-title: tomcat启动报are only available on JDK 1.5 and higher错误
+title: tomcat启动报错
 categories: java 
 tags: [tomcat,bug] 
 aothor : gravel 
 date: 2018-04-04 20:54:41 
 ---
 
-
+`are only available on JDK 1.5 and higher`
 因为jdk升级成为了jdk8，但是spring的jar包版本比较低，并没有兼容到jdk8，所以才造成了现在的这个错误。
 
 
