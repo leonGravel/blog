@@ -1,7 +1,7 @@
 ---
 title: Redis简单讲解 
 tags: 基础,redis
-grammar_cjkRuby: true
+date: 2018-04-26 20:54:41 
 ---
 
 
@@ -9,7 +9,7 @@ grammar_cjkRuby: true
 
 # Redis是什么
 
-Redis是由意大利人[Salvatore Sanfilippo][1]（网名：antirez）开发的一款内存高速缓存数据库。Redis全称为：Remote Dictionary Server（远程数据服务），该软件使用C语言编写，Redis是一个key-value存储系统，它支持丰富的数据类型，如：string、list、set、zset(sorted set)、hash。
+Redis是由意大利人[Salvatore Sanfilippo][1]（网名：antirez）开发的一款内存高速缓存数据库。Redis全称为：Remote Dictionary Server（远程数据服务），该软件使用C语言编写，Redis是一个key-value存储系统，它支持丰富的数据类型，如：string、list、set、zset(sorted set)、hash。 
 
 
 # Redis数据结构 
