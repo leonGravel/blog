@@ -37,7 +37,7 @@ Integer  a=1;//这就是一个自动装箱，如果没有自动装箱的话，�
 int b=a;//这就是一个自动拆箱，如果没有自动拆箱的话，需要这样：int b=a.intValue()  
 这样就能看出自动装箱和自动拆箱是简化了基本数据类型和相对应对象的转化步骤  
 [Java中的自动装箱与拆箱](http://droidyue.com/blog/2015/04/07/autoboxing-and-autounboxing-in-java/index.html)
-## Java 异常的体系结构
+### Java 异常的体系结构
 Java把异常当作对象来处理，并定义一个基类java.lang.Throwable作为所有异常的超类。
 
 在Java API中已经定义了许多异常类，这些异常类分为两大类，错误Error和异常Exception。
@@ -45,7 +45,7 @@ Java把异常当作对象来处理，并定义一个基类java.lang.Throwable作
 Error：Error类对象由 Java 虚拟机生成并抛出，Error表示编译时和系统错误，通常不能预期和恢复，比如硬件故障、JVM崩溃、内存不足等 。例如，Java虚拟机运行错误（Virtual MachineError），当JVM不再有继续执行操作所需的内存资源时，将出现 OutOfMemoryError。这些异常发生时，Java虚拟机（JVM）一般会选择线程终止；还有发生在虚拟机试图执行应用时，如类定义错误（NoClassDefFoundError）、链接错误（LinkageError）。这些错误是不可查的，因为它们在应用程序的控制和处理能力之 外，而且绝大多数是程序运行时不允许出现的状况。对于设计合理的应用程序来说，即使确实发生了错误，本质上也不应该试图去处理它所引起的异常状况。在Java中，错误通常是使用Error的子类描述。
 
 Exception：在Exception分支中有一个重要的子类RuntimeException（运行时异常），该类型的异常自动为你所编写的程序定义ArrayIndexOutOfBoundsException（数组下标越界）、NullPointerException（空指针异常）、ArithmeticException（算术异常）、MissingResourceException（丢失资源）、ClassNotFoundException（找不到类）等异常，这些异常是不检查异常，程序中可以选择捕获处理，也可以不处理。这些异常一般是由程序逻辑错误引起的，程序应该从逻辑角度尽可能避免这类异常的发生；而RuntimeException之外的异常我们统称为非运行时异常，类型上属于Exception类及其子类，从程序语法角度讲是必须进行处理的异常，如果不处理，程序就不能编译通过。如IOException、SQLException等以及用户自定义的Exception异常，一般情况下不自定义检查异常。
-## throw和throws区别
+### throw和throws区别
 **throw：（针对对象的做法）**
  抛出一个异常，可以是系统定义的，也可以是自己定义的
  
@@ -211,6 +211,14 @@ main方法中a=20
 ### 进程和线程的区别
 一个进程对应一个程序的执行，而一个线程则是进程执行过程中的一个单独的执行序列，一个进程可以包含多个线程。线程有时候也被称为轻量级进程。
 一个Java虚拟机的实例运行在一个单独的进程中，不同的线程共享Java虚拟机进程所属的堆内存。这也是为什么不同的线程可以访问同一个对象。线程彼此共享堆内存并保有他们自己独自的栈空间。这也是为什么当一个线程调用一个方法时，他的局部变量可以保证线程安全。但堆内存并不是线程安全的，必须通过显示的声明同步来确保线程安全。
+###  如何在Java中实现线程？
+　　在语言层面有两种方式。java.lang.Thread 类的实例就是一个线程但是它需要调用java.lang.Runnable接口来执行，由于线程类本身就是调用的Runnable接口所以你可以继承java.lang.Thread 类或者直接调用Runnable接口来重写run()方法实现线程。
+
+###  Thread 类中的start() 和 run() 方法有什么区别？
+　start()方法被用来启动新创建的线程，而且start()内部调用了run()方法，这和直接调用run()方法的效果不一样。当你调用run()方法的时候，只会是在原来的线程中调用，没有新的线程启动，start()方法才会启动新线程。更多讨论请点击这里
+
+###  Java中Runnable和Callable有什么不同？
+　　Runnable和Callable都代表那些要在不同的线程中执行的任务。Runnable从JDK1.0开始就有了，Callable是在JDK1.5增加的。它们的主要区别是Callable的 call() 方法可以返回值和抛出异常，而Runnable的run()方法没有这些功能。Callable可以返回装载有计算结果的Future对象。
 
 
 
