@@ -1,7 +1,9 @@
 ---
 title: Redis简单讲解 
-tags: 基础,redis
+categories: redis
+tags: [redis]
 date: 2018-04-26 20:54:41 
+author: gravel
 ---
 
 

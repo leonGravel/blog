@@ -1,7 +1,8 @@
 ---
 title: SSD优势分析
-tags: SSD,开发
-author: liao
+categories: 硬件
+tags: [SSD]
+author: gravel
 date: 2018-05-23 22:54:41
 ---
 在工作中，代码量不断提高，项目工程的体量不断增大，势必会给编码效率带来一定的负面影响。例如打开IDE变慢，保存大文件变慢问题。
