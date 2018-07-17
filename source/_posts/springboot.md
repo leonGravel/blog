@@ -103,31 +103,31 @@ Hello,World！
 ### 自定义属性与加载
 在使用Spring Boot的时候，通常也需要定义一些自己使用的属性，可以如下方式直接定义：
 ```
-com.thunisoft.name=李鳌
-com.thunisoft.title=李鳌的文章
+com.gravel.name=李鳌
+com.gravel.title=李鳌的文章
 ```
 然后通过`@Value("${属性名}")`注解来加载对应的配置属性，具体如下：
 ```
 @Component
-public class thunisoftProperties {
+public class gravelProperties {
 
-    @Value("${com.thunisoft.name}")
+    @Value("${com.gravel.name}")
     private String name;
-    @Value("${com.thunisoft.title}")
+    @Value("${com.gravel.title}")
     private String title;
 
     // 省略getter和setter
 
 }
 ```
-可以通过单元测试来验证`thunisoftProperties`中的属性是否已经根据配置文件加载了。
+可以通过单元测试来验证`gravelProperties`中的属性是否已经根据配置文件加载了。
 ```
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(Application.class)
 public class ApplicationTests {
 
     @Autowired
-    private thunisoftProperties tProperties;
+    private gravelProperties tProperties;
 
 
     @Test
@@ -160,7 +160,7 @@ Spring Boot 配置提示 resources/META-INF/spring-configuration-metadata.json
     {
       "name": "custom.name",
       "type": "java.lang.String",
-      "sourceType": "com.thunisoft.config.StaticProperties"
+      "sourceType": "com.gravel.config.StaticProperties"
     }
   ]
 }
@@ -173,11 +173,11 @@ custom.name=liao
 ### 参数间的引用
 在`application.properties`中的各个参数之间也可以直接引用来使用，就像下面的设置：
 ```
-com.thunisoft.name=李鳌
-com.thunisoft.title=李鳌的文章
-com.thunisoft.blog.desc=${com.thunisoft.name}正在努力写《${com.thunisoft.title}》
+com.gravel.name=李鳌
+com.gravel.title=李鳌的文章
+com.gravel.blog.desc=${com.gravel.name}正在努力写《${com.gravel.title}》
 ```
-`com.thunisoft.blog.desc`参数引用了上文中定义的name和title属性，最后该属性的值就是李鳌正在努力写《李鳌的文章》。
+`com.gravel.blog.desc`参数引用了上文中定义的name和title属性，最后该属性的值就是李鳌正在努力写《李鳌的文章》。
 
 ### 通过命令行设置属性值
 相信使用过一段时间`Spring Boot`的用户，一定知道这条命令：`java -jar xxx.jar --server.port=8888`，通过使用`—server.port`属性来设置`xxx.jar`应用的端口为`8888`。
