@@ -1,4 +1,6 @@
-# Hexo-blog
+# Hexo-blog 
+
+[![Build Status](https://www.travis-ci.org/LeonGravel/Hexo-blog.svg?branch=hexo)](https://www.travis-ci.org/LeonGravel/Hexo-blog)
 * 使用hexo搭建的个人博客
 * 使用Travis CI自动构建
 
