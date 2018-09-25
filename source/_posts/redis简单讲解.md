@@ -1,8 +1,9 @@
 ---
 title: Redis简单讲解 
-tags: 基础,redis
-grammar_cjkRuby: true
+categories: Redis
+tags: [redis]
 date: 2018-7-25 23:01:41 
+author: gravel
 ---
 
 
