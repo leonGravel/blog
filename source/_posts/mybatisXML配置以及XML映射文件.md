@@ -1,6 +1,7 @@
 ---
 title: mybatisXML配置以及XML映射文件
-tags: mybatis,xml配置
+categories: Java
+tags: [mybatis]
 author : 李鳌
 date: 2017-09-22 19:33:40 #发表日期，一般不改动
 grammar_cjkRuby: true
