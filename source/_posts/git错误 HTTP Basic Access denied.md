@@ -1,7 +1,7 @@
 ---
 title: git错误 HTTP Basic Access denied
 categories: Git
-tags: [git,问题收集]
+tags: [git,bugfix]
 date: 2018-10-8 23:01:41 
 author: gravel
 ---

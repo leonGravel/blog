@@ -1,10 +1,11 @@
 ---
 title: Docker容器扩容
 categories: Docker
-tags: [docker,问题收集]
+tags: [docker,bugfix]
 date: 2018-10-9 23:01:41 
 author: gravel
 ---
+今天遇到一个问题，flink的job分块，把容器的空间占满了，导致无法上传新的job。所以需要容器扩容。简单查了一下，做下记录。
 Docker默认空间大小分为两个，一个是池空间大小，另一个是容器空间大小。
 
 池空间大小默认为：100G
