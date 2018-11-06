@@ -75,4 +75,4 @@ feed:
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: git@github.com:L-Gravel/L-Gravel.github.io.git
+  repo: git@github.com:leonGravel/Hexo-blog.git
