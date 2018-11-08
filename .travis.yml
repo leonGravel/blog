@@ -12,7 +12,7 @@ deploy:
         branch: hugo
     local_dir: public
     repo: leongravel/blog
-    fqdn: <custom-domain-if-needed>
+    fqdn: leongravel.com
     target_branch: master
     email: la9249@163.com
     name: leonGravel
