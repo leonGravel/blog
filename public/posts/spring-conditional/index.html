@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="cn" lang="cn">
+<head>
+  <link href="//gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.49" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>spring-conditional &middot; Gravel</title>
+
+  
+  <link type="text/css" rel="stylesheet" href="https://leongravel.com/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="https://leongravel.com/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="https://leongravel.com/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="https://leongravel.com/css/hyde.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="Gravel" />
+
+  
+</head>
+
+  <body class=" ">
+  <aside class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="https://leongravel.com/"><h1>Gravel</h1></a>
+      <p class="lead">
+       A Empty-Stack Developer.
+      </p>
+    </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li><a href="https://leongravel.com/">Home</a> </li>
+        <li><a href="/posts/"> Posts </a></li><li><a href="/portfolio/"> Portfolio </a></li><li><a href="/about/about"> About </a></li>
+      </ul>
+    </nav>
+
+    <p>&copy; 2018. All rights reserved. </p>
+  </div>
+</aside>
+
+    <main class="content container">
+    <div class="post">
+  <h1>spring-conditional</h1>
+  <time datetime=2018-07-21T23:01:41Z class="post-date">Sat, Jul 21, 2018</time>
+  
+
+<p><code>@Conditional</code> 注解是 Spring 4 提供的基于条件的 Bean 的创建方式，Spring Boot 大量利用了这个特定来实现自动配置。比如，当某一个 jar 包在一个类路径下时，自动配置一个或者多个 Bean；或者只有一个 Bean 创建时，才会创建另一个 Bean。总的来说，就是根据特定条件来控制 Bean 的创建行为，这样就可以利用这个特性进行一些自动配置。</p>
+
+<!-- more -->
+
+<h2 id="自定义-condition-实例">自定义 Condition 实例</h2>
+
+<p>下面的示例将以不同的操作系统作为条件，通过实现 Condition 接口，并重写其 matches 方法来构造判断条件，获取在不同操作系统下的操作命令。如在 Windows 系统下运行程序调用获取文件列表命名的方法则输出 <code>dir</code>，如果在 Linux 下则输出 <code>ls</code>。</p>
+
+<h3 id="通过实现-spring-提供的-condition-接口创建两个-condition-类">通过实现 Spring 提供的 <code>Condition</code> 接口创建两个 Condition 类</h3>
+
+<p>自定义 Condition 需要实现 <code>org.springframework.context.annotation.Condition</code> 接口中的 <code>boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata)</code> 方法，我们的条件判断逻辑则应该放在此方法中。</p>
+
+<pre><code class="language-java">public class WindowsCondition implements Condition {
+    @Override
+    public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
+        System.out.println(&quot;os.name:&quot; + context.getEnvironment().getProperty(&quot;os.name&quot;));
+        return context.getEnvironment().getProperty(&quot;os.name&quot;).contains(&quot;Windows&quot;);
+    }
+}
+
+public class LinuxCondition implements Condition {
+    @Override
+    public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
+        System.out.println(&quot;os.name:&quot; + context.getEnvironment().getProperty(&quot;os.name&quot;));
+        return context.getEnvironment().getProperty(&quot;os.name&quot;).contains(&quot;Linux&quot;);
+    }
+}
+</code></pre>
+
+<h3 id="创建获取命令的接口并分别创建-linux-和-windows-下的实现">创建获取命令的接口并分别创建  Linux 和 Windows 下的实现</h3>
+
+<pre><code class="language-java">public interface CmdService {
+    String getListCmd();    
+}
+
+public class WindowsCmdServiceImpl implements CmdService {
+    @Override
+    public String getListCmd() {
+        return &quot;dir&quot;;
+    }
+}
+
+public class LinuxCmdServiceImpl implements CmdService {
+    @Override
+    public String getListCmd() {
+        return &quot;ls&quot;;
+    }
+}
+</code></pre>
+
+<h3 id="创建配置类并使用-conditional-注解将-bean-定义为条件创建">创建配置类并使用 <code>@Conditional</code> 注解将 Bean 定义为条件创建</h3>
+
+<pre><code class="language-java">@Configuration
+public class SpringConditionalConf {
+    
+    @Bean
+    @Conditional(WindowsCondition.class) //WindowsCondition 条件成立时创建此 Bean
+    public CmdService windowsCmdService(){
+        return new WindowsCmdServiceImpl();
+    }
+    
+    @Bean
+    @Conditional(LinuxCondition.class) //LinuxCondition 条件成立时创建此 Bean
+    public CmdService linuxCmdService(){
+        return new LinuxCmdServiceImpl();
+    }
+    
+}
+</code></pre>
+
+<h3 id="测试类">测试类</h3>
+
+<pre><code class="language-java">@RunWith(SpringRunner.class)
+@SpringBootTest(classes = HelloSpringBoot.class)
+public class SpringConditionalDemoTest {
+
+    @Autowired
+    private CmdService cmdService;
+    
+    @Test
+    public void testConditional(){
+        System.out.println(cmdService.getListCmd());
+    }
+    
+}
+</code></pre>
+
+<p>在 windows 主机上运行测试得到输出 <code>dir</code>，说明只有 <code>WindowsCmdServiceImpl</code> 实例被创建并且得到了正确的指令。</p>
+
+<h2 id="conditional-常见使用方法"><code>@Conditional</code> 常见使用方法</h2>
+
+<p>在上例中 <code>@Conditional</code> 注解标注到 <code>@Bean</code> 的方法上；除此之外还可以作为类级别的注解放在注标识有@Component（包含@Configuration）的类上，这时所有标识了 <code>@Bean</code> 的方法和 <code>@Import</code> 注解导入的相关类将遵从这些条件；最后还可以作为一个 meta-annotation，组成自定义注解。</p>
+
+<h2 id="spring-内置-conditional">Spring 内置 Conditional</h2>
+
+<p>除了类似上例的自定义 Condition 之外，Spring 还内置了一些 Condition 给我们使用：</p>
+
+<ul>
+<li><code>@ConditionalOnBean</code> 仅仅在当前上下文中存在某个对象时，才会实例化一个 Bean</li>
+<li><code>@ConditionalOnClass</code> 某个 class 位于类路径上，才会实例化一个 Bean</li>
+<li><code>@ConditionalOnExpression</code> 当表达式为 true 的时候，才会实例化一个 Bean</li>
+<li><code>@ConditionalOnMissingBean</code> 仅仅在当前上下文中不存在某个对象时，才会实例化一个 Bean</li>
+<li><code>@ConditionalOnMissingClass</code> 某个 class 类路径上不存在的时候，才会实例化一个 Bean</li>
+<li><code>@ConditionalOnNotWebApplication</code> 不是 web 应用时才会实例化一个 Bean</li>
+</ul>
+
+<h2 id="conditional-与-profile-区别"><code>@Conditional</code> 与 <code>@Profile</code> 区别</h2>
+
+<p>Spring 3.1 推出的 @Profiles 注解功能与 @Conditional 注解类似，都是提供一种 “If-Then-Else” 能力，即条件配置功能。但是更早出现的 @Profiles 主要是用来根据不同的运行环境加载不同的应用配置；@Conditional 注解是一种更高层次的实现，他没有 @Profile 注解的一些限制，是 @profile 的一种更加通用的版本，其主要被用作 Bean 的条件加载。</p>
+
+<p>@Profile 注解使用举例</p>
+
+<pre><code class="language-java">@Profile(&quot;Development&quot;)
+@Configuration
+public class DevDatabaseConfig implements DatabaseConfig {
+    @Override
+    @Bean
+    public DataSource createDataSource() {
+        System.out.println(&quot;Creating DEV database&quot;);
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        /*
+         * Set MySQL specific properties for Development Environment
+         */
+        return dataSource;
+    }
+}
+
+@Profile(&quot;Production&quot;)
+@Configuration
+public class ProductionDatabaseConfig implements DatabaseConfig {
+    @Override
+    @Bean
+    public DataSource createDataSource() {
+        System.out.println(&quot;Creating Production database&quot;);
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        /*
+         * Set ORACLE specific properties for Production environment
+         */
+        return dataSource;
+    }
+}
+</code></pre>
+
+<p>以上两个配置类都实现了 DatabaseConfig 接口，特殊的地方在于它们都用 @Profile 标注，被 @Profile 标注的组件只有当指定 profile 值匹配时才生效。可以通过以下方式设置 profile 值：</p>
+
+<ol>
+<li>设置 spring.profiles.active 属性（通过 JVM 参数、环境变量或者 web.xml 中的 Servlet context 参数）</li>
+<li>ApplicationContext.getEnvironment().setActiveProfiles(“ProfileName”)</li>
+</ol>
+
+<p>在 Spring 3.x 里 @Profiles 注解只能用在类级别，但是在 Spring 4.0 以后则既可以用在类级别也可以用在方法级别，主要是因为在 4.0 中 Spring 使用 @Conditional 对其做了重构：</p>
+
+<pre><code class="language-java">@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.TYPE, ElementType.METHOD})
+@Documented
+@Conditional(ProfileCondition.class)  // 使用 @Conditional 实现 @Profile
+public @interface Profile {
+    String[] value();
+}
+</code></pre>
+
+<h2 id="conditional-注解使用场景"><code>@Conditional</code> 注解使用场景</h2>
+
+<p>我们知道在 Spring Boot 中大量使用了 <code>@Conditional</code> 注解，我们在平时的开发中如果遇到以下一些场景则可以考虑使用该注解:</p>
+
+<ul>
+<li>Condition whether a property is available or not using Environment variables, irrespective of its value.</li>
+<li>Like Profiles, Condition whether a property value is available or not using Environment variables.</li>
+<li>Conditions based on a Bean definition are present in Spring Application context.</li>
+<li>Conditions based on a Bean object are present in Spring Application context.</li>
+<li>Conditions based on some or all Bean properties values.</li>
+<li>Conditions based on some Resources are present in current Spring Application Context or not.</li>
+<li>Conditions based on Bean’s Annotations</li>
+<li>Conditions Bean’s Method’s Annotations.</li>
+<li>Conditions based on Bean’s Annotation’s parameter values</li>
+<li>Conditions based on  Bean’s Method’s Annotation’s parameter values.</li>
+</ul>
+
+<h2 id="参考">参考</h2>
+
+<ul>
+<li><a href="https://javapapers.com/spring/spring-conditional-annotation/">Spring @Conditional Annotation</a></li>
+<li><a href="http://wiselyman.iteye.com/blog/2002449">Spring4.0系列5-@Conditional</a></li>
+</ul>
+
+</div>
+
+<h2>Comments</h2>
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "leongravel" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </main>
+
+    
+  </body>
+</html>

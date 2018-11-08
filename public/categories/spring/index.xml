@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Spring on Gravel</title>
+    <link>https://leongravel.com/categories/spring/</link>
+    <description>Recent content in Spring on Gravel</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>cn</language>
+    <lastBuildDate>Sat, 21 Jul 2018 23:01:41 +0000</lastBuildDate>
+    
+	<atom:link href="https://leongravel.com/categories/spring/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>spring-conditional</title>
+      <link>https://leongravel.com/posts/spring-conditional/</link>
+      <pubDate>Sat, 21 Jul 2018 23:01:41 +0000</pubDate>
+      
+      <guid>https://leongravel.com/posts/spring-conditional/</guid>
+      <description>@Conditional 注解是 Spring 4 提供的基于条件的 Bean 的创建方式，Spring Boot 大量利用了这个特定来实现自动配置。比如，当某一个 jar 包在一个类路径下时，自动配置一个或者多个 Bean；或者只有一个 Bean 创建时，才会创建另一个 Bean。总的来说，就是根据特定条件来控制 Bean 的创建行为，这样就可以利用这个特性进行一些自动配置。
+自定义 Condition 实例 下面的示例将以不同的操作系统作为条件，通过实现 Condition 接口，并重写其 matches 方法来构造判断条件，获取在不同操作系统下的操作命令。如在 Windows 系统下运行程序调用获取文件列表命名的方法则输出 dir，如果在 Linux 下则输出 ls。
+通过实现 Spring 提供的 Condition 接口创建两个 Condition 类 自定义 Condition 需要实现 org.springframework.context.annotation.Condition 接口中的 boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) 方法，我们的条件判断逻辑则应该放在此方法中。
+public class WindowsCondition implements Condition { @Override public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) { System.out.println(&amp;quot;os.name:&amp;quot; + context.getEnvironment().getProperty(&amp;quot;os.name&amp;quot;)); return context.getEnvironment().getProperty(&amp;quot;os.name&amp;quot;).contains(&amp;quot;Windows&amp;quot;); } } public class LinuxCondition implements Condition { @Override public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) { System.</description>
+    </item>
+    
+  </channel>
+</rss>

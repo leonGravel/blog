@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="cn" lang="cn">
+<head>
+  <link href="//gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.49" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Redis简单讲解 &middot; Gravel</title>
+
+  
+  <link type="text/css" rel="stylesheet" href="https://leongravel.com/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="https://leongravel.com/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="https://leongravel.com/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="https://leongravel.com/css/hyde.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="Gravel" />
+
+  
+</head>
+
+  <body class=" ">
+  <aside class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="https://leongravel.com/"><h1>Gravel</h1></a>
+      <p class="lead">
+       A Empty-Stack Developer.
+      </p>
+    </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li><a href="https://leongravel.com/">Home</a> </li>
+        <li><a href="/posts/"> Posts </a></li><li><a href="/portfolio/"> Portfolio </a></li><li><a href="/about/about"> About </a></li>
+      </ul>
+    </nav>
+
+    <p>&copy; 2018. All rights reserved. </p>
+  </div>
+</aside>
+
+    <main class="content container">
+    <div class="post">
+  <h1>Redis简单讲解</h1>
+  <time datetime=2018-07-25T23:01:41Z class="post-date">Wed, Jul 25, 2018</time>
+  <h2 id="redis是什么">Redis是什么</h2>
+
+<p>Redis是由意大利人[Salvatore Sanfilippo][1]（网名：antirez）开发的一款内存高速缓存数据库。Redis全称为：Remote Dictionary Server（远程数据服务），该软件使用C语言编写，Redis是一个key-value存储系统，它支持丰富的数据类型，如：string、list、set、zset(sorted set)、hash。</p>
+
+<p></p>
+
+<h2 id="redis数据结构">Redis数据结构</h2>
+
+<p>redis是一种高级的key:value存储系统，其中value支持五种数据类型：</p>
+
+<p>1.字符串（string）
+2.列表（list）
+3.集合（set）
+4.有序集合（sorted set）
+5.哈希（hashes）</p>
+
+<h3 id="string">String</h3>
+
+<p>String是Redis值的最基础的类型。Redis中使用的字符串是通过包装的，基于c语言字符数组实现的简单动态字符串(simple dynamic string, SDS)一个抽象数据结构。在大多数情况下，redis不能对string类型有什么进一步的操作。其基本操作命令有set、get、strlen、getrange、append：</p>
+
+<pre><code>SET key value
+GET key
+STRLEN key
+GETRANGE  key start end
+APPEND key value
+</code></pre>
+
+<p>在大多数情况之外，就是string中存储的为纯数字的情况，redis可以将字符串当做数字进行进一步操作，这些操作包括decr、decrby、incr、incrby和incrbyfloat。</p>
+
+<h3 id="list">List</h3>
+
+<p>Redis的List类型其实就是每一个元素都是String类型的双向链表。使用list时,可以像对待栈一样使用pop和push操作，但是这个栈两端都能进行操作；也可以像对待数组一样使用一个index参数来操作。list的操作命令略杂，主要分为两类：L开头的和R开头的，L代表LEFT或者LIST，进行一些从列表左端进行的操作，或者一些与端无关的操作；R代表RIGHT，进行一些从列表右端进行的操作。常用命令有：</p>
+
+<ul>
+<li><p>lpush——在key对应的list的头部添加一个元素。</p></li>
+
+<li><p>lrange——获取key对应的list的指定下标范围的元素，-1表示获取所有元素。</p></li>
+
+<li><p>lpop——从key对应的list的尾部删除一个元素，并返回该元素。</p></li>
+
+<li><p>rpush——在key对应的list的尾部添加一个元素。</p></li>
+
+<li><p>rpop——从key对应的list的尾部删除一个元素，并返回该元素。</p></li>
+</ul>
+
+<h3 id="set">Set</h3>
+
+<p>set用于存储一组不重复的值，类似List的一个列表，与List不同的是Set不能有重复的数据。基本操作有sadd和sismember：</p>
+
+<pre><code>SADD key member [member ...]
+SISMEMBER key member
+</code></pre>
+
+<p>关于集合的操作有这些：</p>
+
+<pre><code>SINTER key [key ...] --取交集
+SUNION key [key ...] --取并集
+SDIFF key [key ...] --求差
+</code></pre>
+
+<h3 id="sorted-set">sorted set</h3>
+
+<p>SortSet顾名思义，是一个排好序的Set，它在Set的基础上增加了一个顺序属性score，这个属性在添加修改元素时可以指定，每次指定后，SortSet会自动重新按新的值排序。基本操作有zadd、zcount、zrank：</p>
+
+<pre><code>ZADD key score member [score member ...]
+ZCOUNT key min max
+ZRANK key member
+</code></pre>
+
+<h3 id="hash">hash</h3>
+
+<p>最后要给大家介绍的是hashes，即哈希。哈希是从redis-2.0.0版本之后才有的数据结构。Hash是一个String类型的field和value之间的映射表，即redis的Hash数据类型的key（hash表名称）对应的value实际的内部存储结构为一个HashMap，因此Hash特别适合存储对象。相对于把一个对象的每个属性存储为String类型，将整个对象存储在Hash类型中会占用更少内存。常用命令有：</p>
+
+<ul>
+<li><p>hset——设置key对应的HashMap中的field的value</p></li>
+
+<li><p>hget——获取key对应的HashMap中的field的value</p></li>
+
+<li><p>hgetall&ndash;获取key对应的hashMap中的所有属性</p></li>
+</ul>
+
+<h2 id="redis持久化">redis持久化</h2>
+
+<p>redis提供了两种持久化的方式，分别是RDB（Redis DataBase）和AOF（Append Only File）。</p>
+
+<h3 id="rdb">RDB</h3>
+
+<p>简而言之，就是在不同的时间点，将redis存储的数据生成快照并存储到磁盘等介质上；RDB，是将redis某一时刻的数据持久化到磁盘中，是一种快照式的持久化方法。</p>
+
+<p>redis在进行数据持久化的过程中，会先将数据写入到一个临时文件中，待持久化过程都结束了，才会用这个临时文件替换上次持久化好的文件。正是这种特性，让我们可以随时来进行备份，因为快照文件总是完整可用的。</p>
+
+<p>对于RDB方式，redis会单独创建（fork）一个子进程来进行持久化，而主进程是不会进行任何IO操作的，这样就确保了redis极高的性能。</p>
+
+<p>如果需要进行大规模数据的恢复，且对于数据恢复的完整性不是非常敏感，那RDB方式要比AOF方式更加的高效。</p>
+
+<h4 id="缺点">缺点</h4>
+
+<p>如果你对数据的完整性非常敏感，那么RDB方式就不太适合你，因为即使你每5分钟都持久化一次，当redis故障时，仍然会有近5分钟的数据丢失。</p>
+
+<h3 id="aof">AOF</h3>
+
+<p>则是换了一个角度来实现持久化，那就是将redis执行过的所有写指令记录下来，在下次redis重新启动时，只要把这些写指令从前到后再重复执行一遍，就可以实现数据恢复了。</p>
+
+<p>其实RDB和AOF两种方式也可以同时使用，在这种情况下，如果redis重启的话，则会优先采用AOF方式来进行数据恢复，这是因为AOF方式的数据恢复完整度更高。</p>
+
+<p>如果你没有数据持久化的需求，也完全可以关闭RDB和AOF方式，这样的话，redis将变成一个纯内存数据库，就像memcache一样。
+我们通过配置redis.conf中的appendonly yes就可以打开AOF功能。如果有写操作（如SET等），redis就会被追加到AOF文件的末尾。</p>
+
+<p>默认的AOF持久化策略是每秒钟fsync一次（fsync是指把缓存中的写指令记录到磁盘中），因为在这种情况下，redis仍然可以保持很好的处理性能，即使redis故障，也只会丢失最近1秒钟的数据。
+因为采用了追加方式，如果不做任何处理的话，AOF文件会变得越来越大，为此，redis提供了AOF文件重写（rewrite）机制，即当AOF文件的大小超过所设定的阈值时，redis就会启动AOF文件的内容压缩，只保留可以恢复数据的最小指令集。举个例子或许更形象，假如我们调用了100次INCR指令，在AOF文件中就要存储100条指令，但这明显是很低效的，完全可以把这100条指令合并成一条SET指令，这就是重写机制的原理。</p>
+
+<h4 id="缺点-1">缺点</h4>
+
+<p>在同样数据规模的情况下，AOF文件要比RDB文件的体积大。而且，AOF方式的恢复速度也要慢于RDB方式。</p>
+
+<h3 id="应用场景">应用场景</h3>
+
+<h4 id="排行榜应用-取top-n操作">排行榜应用，取TOP N操作</h4>
+
+<p>比如微信的跳一跳，根据得分你通常想要得到：</p>
+
+<ul>
+<li><p>列出前50名高分选手</p></li>
+
+<li><p>列出某用户当前的全国排名</p></li>
+</ul>
+
+<p>这些操作对于Redis来说应该很简单，在每次用户产生新的分数时：</p>
+
+<pre><code>ZADD topScore  &lt;score&gt;  &lt;username&gt;
+</code></pre>
+
+<p>得到前50名高分用户：</p>
+
+<pre><code>ZREVRANGE topScore 0 49
+</code></pre>
+
+<p>用户的全球排名也相似，只需要：</p>
+
+<pre><code>ZRANK topScore &lt;username&gt;
+</code></pre>
+
+<h3 id="简单实例展示">简单实例展示</h3>
+
+<p>打开你的idea</p>
+</div>
+
+<h2>Comments</h2>
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "leongravel" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </main>
+
+    
+  </body>
+</html>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>K8s on Gravel</title>
+    <link>https://leongravel.com/tags/k8s/</link>
+    <description>Recent content in K8s on Gravel</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>cn</language>
+    <lastBuildDate>Mon, 10 Sep 2018 20:54:41 +0000</lastBuildDate>
+    
+	<atom:link href="https://leongravel.com/tags/k8s/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>k8s集群搭建</title>
+      <link>https://leongravel.com/posts/k8s%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/</link>
+      <pubDate>Mon, 10 Sep 2018 20:54:41 +0000</pubDate>
+      
+      <guid>https://leongravel.com/posts/k8s%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/</guid>
+      <description>&lt;h3 id=&#34;使用minikube单机部署&#34;&gt;使用minikube单机部署&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/kubernetes/minikube&#34;&gt;minikube&lt;/a&gt;是一个用go语言开发的可以在本地运行kubernetes的利器。首先，我们需要安装它：&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

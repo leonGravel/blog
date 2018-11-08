@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="cn" lang="cn">
+<head>
+  <link href="//gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.49" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>HEXO&#43;Github,搭建个人博客 &middot; Gravel</title>
+
+  
+  <link type="text/css" rel="stylesheet" href="https://leongravel.com/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="https://leongravel.com/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="https://leongravel.com/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="https://leongravel.com/css/hyde.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="Gravel" />
+
+  
+</head>
+
+  <body class=" ">
+  <aside class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="https://leongravel.com/"><h1>Gravel</h1></a>
+      <p class="lead">
+       A Empty-Stack Developer.
+      </p>
+    </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li><a href="https://leongravel.com/">Home</a> </li>
+        <li><a href="/posts/"> Posts </a></li><li><a href="/portfolio/"> Portfolio </a></li><li><a href="/about/about"> About </a></li>
+      </ul>
+    </nav>
+
+    <p>&copy; 2018. All rights reserved. </p>
+  </div>
+</aside>
+
+    <main class="content container">
+    <div class="post">
+  <h1>HEXO&#43;Github,搭建个人博客</h1>
+  <time datetime=2016-04-22T19:33:40Z class="post-date">Fri, Apr 22, 2016</time>
+  <p>很久之前就想搭建一个自己的个人博客，甚至想过自己的毕业设计的题目就选择这个。但因为种种原因(<code>懒</code>)，直到上个星期才通过hexo完成博客的搭建。为了方便大家<code>(装逼</code>)也不至于让我这里变得冷清，我决定还是写一个简单平快的教程出来。文笔拙劣，还请赐教。</p>
+
+<p></p>
+
+<h2 id="正文">正文</h2>
+
+<p>由于我没有mac，所以本教程只针对windows用户哟。</p>
+
+<h2 id="配置环境">配置环境</h2>
+
+<h3 id="安装git">安装git</h3>
+
+<p>Git是一个开源的分布式版本控制系统，用以有效、高速的处理从很小到非常大的项目版本管理。Git 是大神Linus Torvalds 为了帮助管理 Linux 内核开发而开发的一个开放源码的版本控制软件。在这里我们主要用它来实现把本地的hexo内容提交到github也就是我们的博客上去。你可以选择<a href="http://git-scm.com/download/win/">git官网</a>或者<a href="https://github.com/waylau/git-for-win/">git国内下载站</a>下载</p>
+
+<h3 id="安装node-js">安装Node.js</h3>
+
+<p>由于hexo是基于Node.js的博客程序，所以安装<a href="http://nodejs.cn/">Node.js</a>是必须的。可以参考此教程来安装。</p>
+
+<h3 id="安装hexo">安装hexo</h3>
+
+<p>完成以上步骤之后，可以开始我们的hexo安装。在此我建议新建一个文件夹blog来存放关于博客相关的内容和hexo装文件。在这个文件夹下右键git bash，用以下命令安装hexo.</p>
+
+<pre><code>$ npm install hexo-cli -g
+</code></pre>
+
+<p>在blog文件夹下面创建hexo文件夹，在这使用以下命令初始化博客搭建所需的所有文件</p>
+
+<pre><code>$ hexo init
+</code></pre>
+
+<p>安装依赖包</p>
+
+<pre><code>$ npm install
+</code></pre>
+
+<p>在当前文件夹执行以下命令</p>
+
+<pre><code>$ hexo g
+$ hexo s
+</code></pre>
+
+<p>如果一切顺利的话，在浏览器输入<code>http://localhost:4000/</code>,就可以看到hexo生成的本地博客，hexo的默认主题是landscape，知乎上有人总结hexo的许多好看的主题，有兴趣的可以下载替换。</p>
+
+<h3 id="注册github">注册Github</h3>
+
+<p>如果你已经有<a href="https://github.com/">github</a>账号，可以跳过此步骤。</p>
+
+<h3 id="创建repository">创建repository</h3>
+
+<p>repository是你的个人仓库，你可以往里面放你的项目代码，在这里我们新建一个repository。如图所示
+<img src="http://7xt2ta.com2.z0.glb.clouddn.com/1.png" alt="github示例图" /></p>
+
+<p>红框处的项目名必须为<code>username.github.io</code>这种格式，如我的github用户名为L-Gravel,那么这个项目名就是L-Gravel.github.io,这样可以方便github解析你的博客地址。之后点击箭头所指的按钮生成repository.
+  ## 连接本地git与github
+  ### 配置Git</p>
+
+<p>首先在本地创建ssh key；</p>
+
+<pre><code>  ssh-keygen -t rsa -C &quot;your_email@youremail.com&quot;
+</code></pre>
+
+<p>后面的your_email@youremail.com改为你的邮箱，之后会要求确认路径和输入密码，我们这使用默认的一路回车就行。成功的话会在~/下生成.ssh文件夹，进去，打开id_rsa.pub，复制里面的key。</p>
+
+<p>回到github，进入Settings
+<img src="http://7xt2ta.com2.z0.glb.clouddn.com/2.png" alt="enter description here" /></p>
+
+<p>左边选择SSH Keys，new SSH Key,title随便填，粘贴key。为了验证是否成功，右键git bash输入：</p>
+
+<pre><code>$ ssh -T git@github.com
+</code></pre>
+
+<p>如果是第一次的会提示是否<code>continue</code>，输入yes就会看到：<code>You’ve successfully authenticated, but GitHub does not provide shell access</code>。这就表示已成功连上github。
+接下来我们要做的就是把本地仓库传到github上去，在此之前还需要设置username和email，因为github每次commit都会记录他们。</p>
+
+<pre><code>$ git config --global user.name &quot;your name&quot;  
+$ git config --global user.email &quot;your_email@youremail.com&quot;
+</code></pre>
+
+<p>在这里填写你们的github邮箱就好。</p>
+
+<h3 id="将本地博客文件上传到github">将本地博客文件上传到github</h3>
+
+<p>在上一步，我们创建了博客代码所需的仓库，并且建立了本地git和github的链接。现在当然是要把本地的博客代码上传到仓库里面。编辑hexo文件夹路径下的<code>_config.yml</code>文件。在这个文件末尾添加以下代码：</p>
+
+<pre><code># Deployment
+## Docs: https://hexo.io/docs/deployment.html
+deploy: 
+  type: git
+  repository: git@github.com:L-Gravel/L-Gravel.github.io.git
+  branch: master
+</code></pre>
+
+<p>注意，<code>L-Gravel</code>应该替换为你自己的用户名。配置好<code>_config.yml</code>并保存后，执行以下命令部署到Github上。</p>
+
+<pre><code>  $ hexo g
+$ hexo d
+</code></pre>
+
+<p>如果这个时候出现<code>ERROR Deployer not found : github</code>,可以试试输入以下代码：</p>
+
+<pre><code>$ npm install hexo-deployer-git --save
+$ hexo g
+$ hexo d
+</code></pre>
+
+<p>执行完以上步骤之后，如果一切顺利的话，博客就应该已经顺利的发布在github上了，可以通过<code>username.github.io</code>直接访问。</p>
+
+<h2 id="发布一篇文章">发布一篇文章</h2>
+
+<p>1.在Git Bash执行命令：</p>
+
+<pre><code>$ hexo new &quot;my new post&quot;
+</code></pre>
+
+<p>2.在hexo\source_post中打开my-new-post.md，建议使用notepad++或editplus。
+hexo中写文章使用的是Markdown，没接触过的可以看下<a href="http://sspai.com/25137">Markdown相关教程</a>。</p>
+
+<pre><code>title: my new post #可以改成中文或者其他的，如“第一篇博客”
+date: 2016-04-22 19:33:40 #发表日期，一般不改动
+categories: blog #文章文类
+tags: [博客，文章] #文章标签，不同主题对于不同的标签的分类不太一样，这一点我正在研究
+---
+#这里是正文，用markdown写，你可以选择写一段显示在首页的简介后，加上
+&lt;!--more--&gt;，在&lt;!--more--&gt;之前的内容会显示在首页，之后的内容会被隐藏，当游客点击Read more才能看到。
+</code></pre>
+
+<h2 id="总结">总结</h2>
+
+<p>至此为止，我们已经完成了基础hexo的博客搭建，关于域名绑定这一块我之后会写另外一篇博客来说明。如果你参考此文遇到了什么问题，欢迎点击右边图标链接或是在下方留言与我联系。</p>
+</div>
+
+<h2>Comments</h2>
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "leongravel" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </main>
+
+    
+  </body>
+</html>

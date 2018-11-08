@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="cn" lang="cn">
+<head>
+  <link href="//gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.49" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Docker容器扩容 &middot; Gravel</title>
+
+  
+  <link type="text/css" rel="stylesheet" href="https://leongravel.com/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="https://leongravel.com/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="https://leongravel.com/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="https://leongravel.com/css/hyde.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="Gravel" />
+
+  
+</head>
+
+  <body class=" ">
+  <aside class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="https://leongravel.com/"><h1>Gravel</h1></a>
+      <p class="lead">
+       A Empty-Stack Developer.
+      </p>
+    </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li><a href="https://leongravel.com/">Home</a> </li>
+        <li><a href="/posts/"> Posts </a></li><li><a href="/portfolio/"> Portfolio </a></li><li><a href="/about/about"> About </a></li>
+      </ul>
+    </nav>
+
+    <p>&copy; 2018. All rights reserved. </p>
+  </div>
+</aside>
+
+    <main class="content container">
+    <div class="post">
+  <h1>Docker容器扩容</h1>
+  <time datetime=2018-10-09T23:01:41Z class="post-date">Tue, Oct 9, 2018</time>
+  <p>今天遇到一个问题，flink的job分块，把容器的空间占满了，导致无法上传新的job。所以需要容器扩容。简单查了一下，做下记录。</p>
+
+<p></p>
+
+<p>Docker默认空间大小分为两个，一个是池空间大小，另一个是容器空间大小。</p>
+
+<p>池空间大小默认为：100G</p>
+
+<p>容器空间大小默认为是：10G</p>
+
+<p>所以修改空间大小也分为两个。</p>
+
+<p>首先关闭docker:</p>
+
+<pre><code>systemctl stop docker
+</code></pre>
+
+<p>然后删除docker数据：</p>
+
+<pre><code>rm -rf /var/lib/docker
+</code></pre>
+
+<p>创建新的docker数据池:</p>
+
+<pre><code>mkdir -p /var/lib/docker/devicemapper/devicemapper
+
+dd if=/dev/zero of=/var/lib/docker/devicemapper/devicemapper/data bs=1G count=0 seek=1000
+dd if=/dev/zero of=/var/lib/docker/devicemapper/devicemapper/metadata bs=1G count=0 seek=10
+
+</code></pre>
+
+<p>上面的1000为1TB大小，即为数据池空间大小为1TB，而10则为Metadata的空间大小，10GB</p>
+
+<p>重启容器即可完成扩容：</p>
+
+<pre><code>systemctl restart docker
+</code></pre>
+</div>
+
+<h2>Comments</h2>
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "leongravel" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </main>
+
+    
+  </body>
+</html>

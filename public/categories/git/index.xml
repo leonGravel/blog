@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Git on Gravel</title>
+    <link>https://leongravel.com/categories/git/</link>
+    <description>Recent content in Git on Gravel</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>cn</language>
+    <lastBuildDate>Thu, 01 Nov 2018 23:01:41 +0000</lastBuildDate>
+    
+	<atom:link href="https://leongravel.com/categories/git/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>使用BFG给git仓库瘦身</title>
+      <link>https://leongravel.com/posts/%E4%BD%BF%E7%94%A8bfg%E7%BB%99git%E4%BB%93%E5%BA%93%E7%98%A6%E8%BA%AB/</link>
+      <pubDate>Thu, 01 Nov 2018 23:01:41 +0000</pubDate>
+      
+      <guid>https://leongravel.com/posts/%E4%BD%BF%E7%94%A8bfg%E7%BB%99git%E4%BB%93%E5%BA%93%E7%98%A6%E8%BA%AB/</guid>
+      <description>&lt;p&gt;今天遇到一个问题，如何给一个gitlab的仓库瘦身。在我们日常开发中，由于不规范或者不小心，误提交了一些大文件，导致git的仓库变得很大，这是你直接删除大文件也无济于事，因为git commit log里面，会记录你每一次的提交详情。一般来说，给git瘦身有两种方式，一种是官方提供的&lt;code&gt;git-filter-branch&lt;/code&gt;,这种命令用起来极为繁琐。另一种是本文将要说到的BFG.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>git错误 HTTP Basic Access denied</title>
+      <link>https://leongravel.com/posts/git%E9%94%99%E8%AF%AF-http-basic-access-denied/</link>
+      <pubDate>Mon, 08 Oct 2018 23:01:41 +0000</pubDate>
+      
+      <guid>https://leongravel.com/posts/git%E9%94%99%E8%AF%AF-http-basic-access-denied/</guid>
+      <description> 问题症状 修改了git密码之后，拉取项目代码出错：
+git remote: HTTP Basic: Access denied  原因 远程服务端的用户名和密码与当前系统中git保存的用户名和密码有冲突
+解决方案 git config --system --unset credential.helper.  </description>
+    </item>
+    
+    <item>
+      <title>git学习笔记</title>
+      <link>https://leongravel.com/posts/learngit-0/</link>
+      <pubDate>Thu, 21 Jul 2016 23:01:41 +0000</pubDate>
+      
+      <guid>https://leongravel.com/posts/learngit-0/</guid>
+      <description>虽然很早就接触github，但对git的版本控制并不了解，最近开始学习使用git，对其使用简单做一些整理。
+git 介绍 Git是一个开源的分布式版本控制系统，用以有效、高速的处理从很小到非常大的项目版本管理。关于她的特点Git官网是这么介绍的：
+ Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.
+ 总之，对于开源项目来说，使用Git可以极大地提高了开发效率、扩大了开源项目的参与度、 增强了版本控制系统的安全性，选择Git已是大势所趋。
+以下为本人学习git过程中的一些练习和笔记，相关参考：廖雪峰的Git教程
+git 本地仓库常用操作 git 创建本地仓库 $ mkdir learngit //创建文件夹 $ cd learngit $ pwd //查看当前目录 /Users/michael/learngit $ git init //将当前文件夹变成git仓库，init后目录下会多出.git文件（默认隐藏） 可以用ls -ah查看 Initialized empty Git repository in /Users/michael/learngit/.git/ $ git log //显示从最近到最远的提交日志 如果出现end标记可以按q退出历史记录列表 $ git log --pretty=oneline $ git reset --hard HEAD^ //回退上个版本  在Git中，用HEAD表示当前版本，上一个版本就是HEAD^，上上一个版本就是HEAD^^，当然往上100个版本写100个^比较容易数不过来，所以写成HEAD~100。</description>
+    </item>
+    
+  </channel>
+</rss>

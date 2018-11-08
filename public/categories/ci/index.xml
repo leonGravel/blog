@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ci on Gravel</title>
+    <link>https://leongravel.com/categories/ci/</link>
+    <description>Recent content in Ci on Gravel</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>cn</language>
+    <lastBuildDate>Sun, 04 Nov 2018 23:01:41 +0000</lastBuildDate>
+    
+	<atom:link href="https://leongravel.com/categories/ci/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>gitlab CI vs jenkins 如何选择</title>
+      <link>https://leongravel.com/posts/gitlab-ci-vs-jenkins-%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9/</link>
+      <pubDate>Sun, 04 Nov 2018 23:01:41 +0000</pubDate>
+      
+      <guid>https://leongravel.com/posts/gitlab-ci-vs-jenkins-%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9/</guid>
+      <description>&lt;p&gt;之前在项目中做过CI的技术选型，基本成熟之后，现在来总结一下两者的优劣。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

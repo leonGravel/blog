@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on Gravel</title>
+    <link>https://leongravel.com/categories/</link>
+    <description>Recent content in Categories on Gravel</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>cn</language>
+    <lastBuildDate>Sat, 17 Mar 2018 00:54:41 +0000</lastBuildDate>
+    
+	<atom:link href="https://leongravel.com/categories/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Blog</title>
+      <link>https://leongravel.com/categories/blog/</link>
+      <pubDate>Sat, 17 Mar 2018 00:54:41 +0000</pubDate>
+      
+      <guid>https://leongravel.com/categories/blog/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ci</title>
+      <link>https://leongravel.com/categories/ci/</link>
+      <pubDate>Sun, 04 Nov 2018 23:01:41 +0000</pubDate>
+      
+      <guid>https://leongravel.com/categories/ci/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Coding</title>
+      <link>https://leongravel.com/categories/coding/</link>
+      <pubDate>Mon, 19 Mar 2018 21:18:41 +0000</pubDate>
+      
+      <guid>https://leongravel.com/categories/coding/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Docker</title>
+      <link>https://leongravel.com/categories/docker/</link>
+      <pubDate>Sun, 04 Nov 2018 20:54:41 +0000</pubDate>
+      
+      <guid>https://leongravel.com/categories/docker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Git</title>
+      <link>https://leongravel.com/categories/git/</link>
+      <pubDate>Thu, 01 Nov 2018 23:01:41 +0000</pubDate>
+      
+      <guid>https://leongravel.com/categories/git/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Java</title>
+      <link>https://leongravel.com/categories/java/</link>
+      <pubDate>Fri, 28 Sep 2018 23:01:41 +0000</pubDate>
+      
+      <guid>https://leongravel.com/categories/java/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Redis</title>
+      <link>https://leongravel.com/categories/redis/</link>
+      <pubDate>Wed, 25 Jul 2018 23:01:41 +0000</pubDate>
+      
+      <guid>https://leongravel.com/categories/redis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Spring</title>
+      <link>https://leongravel.com/categories/spring/</link>
+      <pubDate>Sat, 21 Jul 2018 23:01:41 +0000</pubDate>
+      
+      <guid>https://leongravel.com/categories/spring/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Springboot</title>
+      <link>https://leongravel.com/categories/springboot/</link>
+      <pubDate>Wed, 11 Jul 2018 23:01:41 +0000</pubDate>
+      
+      <guid>https://leongravel.com/categories/springboot/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>硬件</title>
+      <link>https://leongravel.com/categories/%E7%A1%AC%E4%BB%B6/</link>
+      <pubDate>Wed, 23 May 2018 22:54:41 +0000</pubDate>
+      
+      <guid>https://leongravel.com/categories/%E7%A1%AC%E4%BB%B6/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

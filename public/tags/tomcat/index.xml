@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tomcat on Gravel</title>
+    <link>https://leongravel.com/tags/tomcat/</link>
+    <description>Recent content in Tomcat on Gravel</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>cn</language>
+    <lastBuildDate>Wed, 26 Sep 2018 23:01:41 +0000</lastBuildDate>
+    
+	<atom:link href="https://leongravel.com/tags/tomcat/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Docker 如何进入运行的tomcat容器</title>
+      <link>https://leongravel.com/posts/%E5%A6%82%E4%BD%95%E8%BF%9B%E5%85%A5%E8%BF%90%E8%A1%8C%E7%9A%84tomcat%E5%AE%B9%E5%99%A8/</link>
+      <pubDate>Wed, 26 Sep 2018 23:01:41 +0000</pubDate>
+      
+      <guid>https://leongravel.com/posts/%E5%A6%82%E4%BD%95%E8%BF%9B%E5%85%A5%E8%BF%90%E8%A1%8C%E7%9A%84tomcat%E5%AE%B9%E5%99%A8/</guid>
+      <description>&lt;h3 id=&#34;问题描述&#34;&gt;问题描述&lt;/h3&gt;
+
+&lt;p&gt;当docker在 “-d”守护态运行tomcat容器的时候，，docker attach 容器id 就会一直卡着。
+因为此时容器运行的进程是ssh，而不是/bin/bash 也没有虚拟终端（-it）参数，所以是进入不到的。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>tomcat启动报错</title>
+      <link>https://leongravel.com/posts/tomcat%E5%90%AF%E5%8A%A8%E6%8A%A5%E9%94%99/</link>
+      <pubDate>Fri, 21 Sep 2018 23:01:41 +0000</pubDate>
+      
+      <guid>https://leongravel.com/posts/tomcat%E5%90%AF%E5%8A%A8%E6%8A%A5%E9%94%99/</guid>
+      <description>&lt;p&gt;tomcat 启动报错&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>tomcat启动报错</title>
+      <link>https://leongravel.com/posts/tomcat_error/</link>
+      <pubDate>Wed, 04 Apr 2018 20:54:41 +0000</pubDate>
+      
+      <guid>https://leongravel.com/posts/tomcat_error/</guid>
+      <description>&lt;p&gt;今天启动项目的时候，tomcat报了&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;are only available on JDK 1.5 and higher
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;的错。查了一些资料发现，这是因为jdk升级成为了jdk8，但是spring的jar包版本比较低，并没有兼容到jdk8，所以才造成了现在的这个错误。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

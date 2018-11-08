@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Java on Gravel</title>
+    <link>https://leongravel.com/tags/java/</link>
+    <description>Recent content in Java on Gravel</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>cn</language>
+    <lastBuildDate>Wed, 26 Sep 2018 23:01:41 +0000</lastBuildDate>
+    
+	<atom:link href="https://leongravel.com/tags/java/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>java-String知识点汇总</title>
+      <link>https://leongravel.com/posts/%E5%85%B3%E4%BA%8Ejava-string%E7%9A%84%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB-md/</link>
+      <pubDate>Wed, 26 Sep 2018 23:01:41 +0000</pubDate>
+      
+      <guid>https://leongravel.com/posts/%E5%85%B3%E4%BA%8Ejava-string%E7%9A%84%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB-md/</guid>
+      <description>&lt;p&gt;Java 的 String 类几乎是 Java 中最常使用到的对象类型，关于 String 的一些基础知识对开发者来说显得尤为重要。下面就对 String 相关的一些知识点进行列举和归纳，希望能够加深对 String 对象的认识。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>tomcat启动报错</title>
+      <link>https://leongravel.com/posts/tomcat%E5%90%AF%E5%8A%A8%E6%8A%A5%E9%94%99/</link>
+      <pubDate>Fri, 21 Sep 2018 23:01:41 +0000</pubDate>
+      
+      <guid>https://leongravel.com/posts/tomcat%E5%90%AF%E5%8A%A8%E6%8A%A5%E9%94%99/</guid>
+      <description>&lt;p&gt;tomcat 启动报错&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>引入spring-cloud-starter-openfeign后有些类找不到</title>
+      <link>https://leongravel.com/posts/springcloud-%E7%89%88%E6%9C%AC%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Mon, 03 Sep 2018 23:01:41 +0000</pubDate>
+      
+      <guid>https://leongravel.com/posts/springcloud-%E7%89%88%E6%9C%AC%E9%97%AE%E9%A2%98/</guid>
+      <description>&lt;p&gt;今天用ali maven重新导入的spring-cloud-starter-openfeign&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Base64转CommonsMultipartFile</title>
+      <link>https://leongravel.com/posts/base64/</link>
+      <pubDate>Mon, 27 Aug 2018 23:01:41 +0000</pubDate>
+      
+      <guid>https://leongravel.com/posts/base64/</guid>
+      <description>&lt;p&gt;今天在项目中遇到一个问题，需要把Base64的字符串转为CommonsMultipartFile。
+首先需要对Base64的字符串进行解码&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>schedule</title>
+      <link>https://leongravel.com/posts/schedule/</link>
+      <pubDate>Wed, 01 Aug 2018 23:01:41 +0000</pubDate>
+      
+      <guid>https://leongravel.com/posts/schedule/</guid>
+      <description>最近使用 spring boot、 quartz、H2(内存数据库) 以及 RabbitMQ 等实现了一个动态的任务管理系统，可以动态的进行任务的创建、修改、暂停、运行以及删除操作，并且使用了 RabbitMQ 消息队列实现了定时任务系统与具体业务系统的解耦，再也不需要每次加个定时任务都上线一次了。
+Java 实现定时任务的几种方式对比 目前 Java 系统中实现调度任务的方式大体有一下三种：
+ 使用 JDK 自带的 java.util.Timer 及 java.util.TimerTask 类实现 使用 Spring 定时任务 使用第三方插件 Quartz  如果是在纯粹的 Java 环境需要实现定时任务毫无疑问就使用 JDK 自带的java.util.concurrent.ScheduledExecutorService 替代 Timer &amp;amp; TimerTask 实现即可，这种场景一般比较简单，也不存在集群的问题。
+如果是集成 Spring 框架开发应用，则使用 Spring 的 @Scheduled 注解实现，简洁方便省事。但是此类应用很可能是集群部署，因此需要通过一定的途径避免集群环境下任务被多次调用的现象发生。常见的方法有使用 Redis 存储一个会过期的常量锁，每台容器执行器先读取锁变量值判断任务是否已被执行；另一种常见的方法是只让指定IP的容器执行定时任务（存在单点的问题）。
+如果在集群环境下，想实现定时任务的可视化管理，或者想做一个统一的定时任务应用，亦或者定时任务的场景非常复杂，则建议使用企业级应用系统常用的 Quartz，而且现在 Spring 或者 Springboot 集成Quartz 也非常方便。
+Spring Boot + Quartz 任务调度系统预览 源码：https://github.com/LeonGravel/springboot-quartz
+预览：
+这里也将常规的 Quartz 与 Spring 的整合过程记录如下。
+实现步骤 添加依赖 &amp;lt;!-- Includes spring&#39;s support classes for quartz --&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.</description>
+    </item>
+    
+    <item>
+      <title>spring-conditional</title>
+      <link>https://leongravel.com/posts/spring-conditional/</link>
+      <pubDate>Sat, 21 Jul 2018 23:01:41 +0000</pubDate>
+      
+      <guid>https://leongravel.com/posts/spring-conditional/</guid>
+      <description>@Conditional 注解是 Spring 4 提供的基于条件的 Bean 的创建方式，Spring Boot 大量利用了这个特定来实现自动配置。比如，当某一个 jar 包在一个类路径下时，自动配置一个或者多个 Bean；或者只有一个 Bean 创建时，才会创建另一个 Bean。总的来说，就是根据特定条件来控制 Bean 的创建行为，这样就可以利用这个特性进行一些自动配置。
+自定义 Condition 实例 下面的示例将以不同的操作系统作为条件，通过实现 Condition 接口，并重写其 matches 方法来构造判断条件，获取在不同操作系统下的操作命令。如在 Windows 系统下运行程序调用获取文件列表命名的方法则输出 dir，如果在 Linux 下则输出 ls。
+通过实现 Spring 提供的 Condition 接口创建两个 Condition 类 自定义 Condition 需要实现 org.springframework.context.annotation.Condition 接口中的 boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) 方法，我们的条件判断逻辑则应该放在此方法中。
+public class WindowsCondition implements Condition { @Override public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) { System.out.println(&amp;quot;os.name:&amp;quot; + context.getEnvironment().getProperty(&amp;quot;os.name&amp;quot;)); return context.getEnvironment().getProperty(&amp;quot;os.name&amp;quot;).contains(&amp;quot;Windows&amp;quot;); } } public class LinuxCondition implements Condition { @Override public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) { System.</description>
+    </item>
+    
+    <item>
+      <title>java基础以及进阶知识点总结</title>
+      <link>https://leongravel.com/posts/java%E5%9F%BA%E7%A1%80%E4%BB%A5%E5%8F%8A%E8%BF%9B%E9%98%B6%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/</link>
+      <pubDate>Sun, 15 Jul 2018 23:01:41 +0000</pubDate>
+      
+      <guid>https://leongravel.com/posts/java%E5%9F%BA%E7%A1%80%E4%BB%A5%E5%8F%8A%E8%BF%9B%E9%98%B6%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/</guid>
+      <description>&lt;h3 id=&#34;抽象类和接口的比较&#34;&gt;抽象类和接口的比较&lt;/h3&gt;
+
+&lt;p&gt;相同点：&lt;br /&gt;
+都不能被实例化&lt;br /&gt;
+都包含抽象方法，这些抽象方法用于描述系统能提供哪些服务，而这些服务是由子类来提供实现的&lt;br /&gt;
+在系统设计上，两者都代表系统的抽象层，当一个系统使用一棵继承树上的类时，应该尽量把引用变量声明为继承树的上层抽象类型，这样可以提高两个系统之间的松耦合&lt;br /&gt;
+不同点：&lt;br /&gt;
+在抽象类中可以为部分方法提供默认的实现，从而避免在子类中重复实现它们；但是抽象类不支持多继承。接口不能提供任何方法的实现，但是支持多继承。&lt;br /&gt;
+接口代表了接口定义者和接口实现者的一种契约；而抽象类和具体类一般而言是一种继承的关系，即两者在概念本质上是不同。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>springboot</title>
+      <link>https://leongravel.com/posts/springboot/</link>
+      <pubDate>Wed, 11 Jul 2018 23:01:41 +0000</pubDate>
+      
+      <guid>https://leongravel.com/posts/springboot/</guid>
+      <description>&lt;h2 id=&#34;spring-boot-简介&#34;&gt;Spring Boot 简介&lt;/h2&gt;
+
+&lt;p&gt;Spring Boot(英文中是&lt;code&gt;引导&lt;/code&gt;的意思)，是用来简化Spring应用的搭建到开发的过程。应用开箱即用，只要通过 &lt;code&gt;just run&lt;/code&gt;（可能是 java -jar 或 tomcat 或 maven插件run 或 shell脚本），就可以启动项目。二者，Spring Boot 只要很少的Spring配置文件（例如那些xml，property）。 因为&lt;code&gt;习惯优先于配置&lt;/code&gt;的原则，使得Spring Boot在快速开发应用和微服务架构实践中得到广泛应用。   Javaer装好JDK环境和Maven工具就可以开始学习Boot了~&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>【转载】java.lang.String</title>
+      <link>https://leongravel.com/posts/java.lang.string/</link>
+      <pubDate>Mon, 12 Mar 2018 20:54:41 +0000</pubDate>
+      
+      <guid>https://leongravel.com/posts/java.lang.string/</guid>
+      <description>整理一下关于String类的方法。
+ 概览 继承结构  Serializable CharSequence Comparable  字符集简介 重要域成员 重要方法  代码点及代码单元 比较 搜索 提取子串 创建全大写/全小写副本  一些体会 参考  概览 String 类代表了字符串。所有类似于 &amp;quot;abc&amp;quot; 的字符串字面量都是该类的实例。
+字符串是常量，从创建后就不可更改。需要修改的字符串可以使用 StringBuffer。因为 String 实例不可变，所以他们可以安全的共享。一些例子：
+String str = &amp;quot;abc&amp;quot;; // 与上面一行代码效果相同 char data[] = {&#39;a&#39;, &#39;b&#39;, &#39;c&#39;}; String str = new String(data); System.out.println(&amp;quot;abc&amp;quot;); String cde = &amp;quot;cde&amp;quot;; System.out.println(&amp;quot;abc&amp;quot; + cde); String c = &amp;quot;abc&amp;quot;.substring(2,3); String d = cde.substring(1, 2);  String 类也包含了一些对单个字符的操作、比较、搜索、提取子串、创建全大写/全小写副本的方法。
+Java 语言为字符串连接操作符(+)添加了特殊支持。向左连接。</description>
+    </item>
+    
+  </channel>
+</rss>

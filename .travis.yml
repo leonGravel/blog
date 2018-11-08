@@ -1,0 +1,19 @@
+sudo: false
+language: go
+git:
+    depth: 1
+install: go get -v github.com/gohugoio/hugo
+script:
+    ‐ hugo
+deploy:
+    provider: pages
+    skip_cleanup: true
+    github_token: $hexoCI
+    on:
+        branch: hugo
+    local_dir: public
+    repo: leongravel/blog
+    fqdn: <custom-domain-if-needed>
+    target_branch: master
+    email: la9249@163.com
+    name: leonGravel

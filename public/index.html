@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="cn" lang="cn">
+<head>
+  <link href="//gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.49" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Gravel</title>
+
+  
+  <link type="text/css" rel="stylesheet" href="https://leongravel.com/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="https://leongravel.com/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="https://leongravel.com/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="https://leongravel.com/css/hyde.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="https://leongravel.com/index.xml" rel="alternate" type="application/rss+xml" title="Gravel" />
+
+  
+</head>
+
+  <body class=" ">
+  <aside class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="https://leongravel.com/"><h1>Gravel</h1></a>
+      <p class="lead">
+       A Empty-Stack Developer.
+      </p>
+    </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li><a href="https://leongravel.com/">Home</a> </li>
+        <li><a href="/posts/"> Posts </a></li><li><a href="/portfolio/"> Portfolio </a></li><li><a href="/about/about"> About </a></li>
+      </ul>
+    </nav>
+
+    <p>&copy; 2018. All rights reserved. </p>
+  </div>
+</aside>
+
+    <main class="content container">
+    <div class="posts">
+<article class="post">
+  <h1 class="post-title">
+    <a href="https://leongravel.com/posts/gitlab-ci-vs-jenkins-%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9/">gitlab CI vs jenkins 如何选择</a>
+  </h1>
+  <time datetime="2018-11-04T23:01:41Z" class="post-date">Sun, Nov 4, 2018</time>
+  <p>之前在项目中做过CI的技术选型，基本成熟之后，现在来总结一下两者的优劣。</p>
+
+<p></p>
+  
+  <div class="read-more-link">
+    <a href="/posts/gitlab-ci-vs-jenkins-%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9/">Read More…</a>
+  </div>
+  
+</article><article class="post">
+  <h1 class="post-title">
+    <a href="https://leongravel.com/posts/%E8%A7%A3%E5%86%B3docker-%E5%AE%B9%E5%99%A8%E5%86%85%E8%AE%BF%E9%97%AE%E5%AE%BF%E4%B8%BB%E6%9C%BAno-route-to-host%E7%9A%84%E9%97%AE%E9%A2%98/">解决docker 容器内访问宿主机“No route to host”的问题</a>
+  </h1>
+  <time datetime="2018-11-04T20:54:41Z" class="post-date">Sun, Nov 4, 2018</time>
+  <p>首先确认是否已经关闭防火墙； 请顺序运行以下命令：</p>
+
+<p></p>
+  
+  <div class="read-more-link">
+    <a href="/posts/%E8%A7%A3%E5%86%B3docker-%E5%AE%B9%E5%99%A8%E5%86%85%E8%AE%BF%E9%97%AE%E5%AE%BF%E4%B8%BB%E6%9C%BAno-route-to-host%E7%9A%84%E9%97%AE%E9%A2%98/">Read More…</a>
+  </div>
+  
+</article><article class="post">
+  <h1 class="post-title">
+    <a href="https://leongravel.com/posts/%E4%BD%BF%E7%94%A8bfg%E7%BB%99git%E4%BB%93%E5%BA%93%E7%98%A6%E8%BA%AB/">使用BFG给git仓库瘦身</a>
+  </h1>
+  <time datetime="2018-11-01T23:01:41Z" class="post-date">Thu, Nov 1, 2018</time>
+  <p>今天遇到一个问题，如何给一个gitlab的仓库瘦身。在我们日常开发中，由于不规范或者不小心，误提交了一些大文件，导致git的仓库变得很大，这是你直接删除大文件也无济于事，因为git commit log里面，会记录你每一次的提交详情。一般来说，给git瘦身有两种方式，一种是官方提供的<code>git-filter-branch</code>,这种命令用起来极为繁琐。另一种是本文将要说到的BFG.</p>
+
+<p></p>
+  
+  <div class="read-more-link">
+    <a href="/posts/%E4%BD%BF%E7%94%A8bfg%E7%BB%99git%E4%BB%93%E5%BA%93%E7%98%A6%E8%BA%AB/">Read More…</a>
+  </div>
+  
+</article><article class="post">
+  <h1 class="post-title">
+    <a href="https://leongravel.com/posts/minio%E4%B8%8B%E8%BD%BD%E6%8A%A5%E9%94%99/">使用wget下载minio中的内容报错</a>
+  </h1>
+  <time datetime="2018-10-30T23:01:41Z" class="post-date">Tue, Oct 30, 2018</time>
+  <h3 id="问题描述">问题描述</h3>
+
+<p>在构建jdk镜像的时候，由于无法直接从oracle上获取到jdk的压缩包，所以我把压缩包放到minio上，通过wget下载（实际上是多此一举，可以直接ADD进去）。但是我在用wget下载minio的数据的时候，直接报错了。</p>
+
+<p></p>
+  
+  <div class="read-more-link">
+    <a href="/posts/minio%E4%B8%8B%E8%BD%BD%E6%8A%A5%E9%94%99/">Read More…</a>
+  </div>
+  
+</article><article class="post">
+  <h1 class="post-title">
+    <a href="https://leongravel.com/posts/docker%E5%AE%89%E8%A3%85%E7%9B%AE%E5%BD%95%E8%BF%81%E7%A7%BB/">docker安装目录迁移</a>
+  </h1>
+  <time datetime="2018-10-20T23:01:41Z" class="post-date">Sat, Oct 20, 2018</time>
+  <p>docker默认安装路径是<code>var/lib/docker</code>这个目录下面的，如果这个目录挂载的空间不大的话，那么在实际使用中，可能会导致docker空间不足的情况，我们需要将这个默认目录迁移到比较大的空间下面去。</p>
+
+<p></p>
+  
+  <div class="read-more-link">
+    <a href="/posts/docker%E5%AE%89%E8%A3%85%E7%9B%AE%E5%BD%95%E8%BF%81%E7%A7%BB/">Read More…</a>
+  </div>
+  
+</article><article class="post">
+  <h1 class="post-title">
+    <a href="https://leongravel.com/posts/docker-compose%E6%90%AD%E5%BB%BAflink%E7%8E%AF%E5%A2%83/">docker-compose搭建flink环境</a>
+  </h1>
+  <time datetime="2018-10-15T23:01:41Z" class="post-date">Mon, Oct 15, 2018</time>
+  <p>嗯，最近在搭建flink的环境，用普通的docker命令构建的时候，老是遇到各种的问题。于是转为用docker-compose试试。</p>
+
+<p></p>
+  
+  <div class="read-more-link">
+    <a href="/posts/docker-compose%E6%90%AD%E5%BB%BAflink%E7%8E%AF%E5%A2%83/">Read More…</a>
+  </div>
+  
+</article><article class="post">
+  <h1 class="post-title">
+    <a href="https://leongravel.com/posts/docker-%E5%AE%B9%E5%99%A8%E6%89%A9%E5%AE%B9/">Docker容器扩容</a>
+  </h1>
+  <time datetime="2018-10-09T23:01:41Z" class="post-date">Tue, Oct 9, 2018</time>
+  <p>今天遇到一个问题，flink的job分块，把容器的空间占满了，导致无法上传新的job。所以需要容器扩容。简单查了一下，做下记录。</p>
+
+<p></p>
+  
+  <div class="read-more-link">
+    <a href="/posts/docker-%E5%AE%B9%E5%99%A8%E6%89%A9%E5%AE%B9/">Read More…</a>
+  </div>
+  
+</article><article class="post">
+  <h1 class="post-title">
+    <a href="https://leongravel.com/posts/git%E9%94%99%E8%AF%AF-http-basic-access-denied/">git错误 HTTP Basic Access denied</a>
+  </h1>
+  <time datetime="2018-10-08T23:01:41Z" class="post-date">Mon, Oct 8, 2018</time>
+   问题症状 修改了git密码之后，拉取项目代码出错：
+git remote: HTTP Basic: Access denied  原因 远程服务端的用户名和密码与当前系统中git保存的用户名和密码有冲突
+解决方案 git config --system --unset credential.helper.  
+  
+</article><article class="post">
+  <h1 class="post-title">
+    <a href="https://leongravel.com/posts/dubbo%E5%9C%A8docker%E4%B8%AD%E7%9A%84%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C/">Dubbo在Docker中的服务注册</a>
+  </h1>
+  <time datetime="2018-09-28T23:01:41Z" class="post-date">Fri, Sep 28, 2018</time>
+  <p>今天在部署的时候，发现服务提供者启动成功，但是消费者没法拿到服务。查了下发现是服务提供者没注册成功。</p>
+
+<p></p>
+  
+  <div class="read-more-link">
+    <a href="/posts/dubbo%E5%9C%A8docker%E4%B8%AD%E7%9A%84%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C/">Read More…</a>
+  </div>
+  
+</article><article class="post">
+  <h1 class="post-title">
+    <a href="https://leongravel.com/posts/%E6%8B%B7%E8%B4%9D%E6%9C%AC%E5%9C%B0%E6%96%87%E4%BB%B6%E5%88%B0docker%E5%AE%B9%E5%99%A8/">拷贝文件到Docker容器中</a>
+  </h1>
+  <time datetime="2018-09-27T23:01:41Z" class="post-date">Thu, Sep 27, 2018</time>
+  <p>查找需要拷贝的目的地容器</p>
+
+<p></p>
+  
+  <div class="read-more-link">
+    <a href="/posts/%E6%8B%B7%E8%B4%9D%E6%9C%AC%E5%9C%B0%E6%96%87%E4%BB%B6%E5%88%B0docker%E5%AE%B9%E5%99%A8/">Read More…</a>
+  </div>
+  
+</article><article class="post">
+  <h1 class="post-title">
+    <a href="https://leongravel.com/posts/%E5%A6%82%E4%BD%95%E8%BF%9B%E5%85%A5%E8%BF%90%E8%A1%8C%E7%9A%84tomcat%E5%AE%B9%E5%99%A8/">Docker 如何进入运行的tomcat容器</a>
+  </h1>
+  <time datetime="2018-09-26T23:01:41Z" class="post-date">Wed, Sep 26, 2018</time>
+  <h3 id="问题描述">问题描述</h3>
+
+<p>当docker在 “-d”守护态运行tomcat容器的时候，，docker attach 容器id 就会一直卡着。
+因为此时容器运行的进程是ssh，而不是/bin/bash 也没有虚拟终端（-it）参数，所以是进入不到的。</p>
+
+<p></p>
+  
+  <div class="read-more-link">
+    <a href="/posts/%E5%A6%82%E4%BD%95%E8%BF%9B%E5%85%A5%E8%BF%90%E8%A1%8C%E7%9A%84tomcat%E5%AE%B9%E5%99%A8/">Read More…</a>
+  </div>
+  
+</article><article class="post">
+  <h1 class="post-title">
+    <a href="https://leongravel.com/posts/%E5%85%B3%E4%BA%8Ejava-string%E7%9A%84%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB-md/">java-String知识点汇总</a>
+  </h1>
+  <time datetime="2018-09-26T23:01:41Z" class="post-date">Wed, Sep 26, 2018</time>
+  <p>Java 的 String 类几乎是 Java 中最常使用到的对象类型，关于 String 的一些基础知识对开发者来说显得尤为重要。下面就对 String 相关的一些知识点进行列举和归纳，希望能够加深对 String 对象的认识。</p>
+
+<p></p>
+  
+  <div class="read-more-link">
+    <a href="/posts/%E5%85%B3%E4%BA%8Ejava-string%E7%9A%84%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB-md/">Read More…</a>
+  </div>
+  
+</article><article class="post">
+  <h1 class="post-title">
+    <a href="https://leongravel.com/posts/tomcat%E5%90%AF%E5%8A%A8%E6%8A%A5%E9%94%99/">tomcat启动报错</a>
+  </h1>
+  <time datetime="2018-09-21T23:01:41Z" class="post-date">Fri, Sep 21, 2018</time>
+  <p>tomcat 启动报错</p>
+
+<p></p>
+  
+  <div class="read-more-link">
+    <a href="/posts/tomcat%E5%90%AF%E5%8A%A8%E6%8A%A5%E9%94%99/">Read More…</a>
+  </div>
+  
+</article><article class="post">
+  <h1 class="post-title">
+    <a href="https://leongravel.com/posts/docker%E5%AE%89%E8%A3%85redis%E5%B9%B6%E4%BD%BF%E7%94%A8%E5%A4%96%E9%83%A8%E9%85%8D%E7%BD%AE%E5%92%8C%E6%95%B0%E6%8D%AE%E5%88%9D%E5%A7%8B%E5%8C%96/">docker安装redis并使用外部配置和数据初始化</a>
+  </h1>
+  <time datetime="2018-09-19T23:01:41Z" class="post-date">Wed, Sep 19, 2018</time>
+  <p>我这里安装的是redis:4.0</p>
+
+<p></p>
+  
+  <div class="read-more-link">
+    <a href="/posts/docker%E5%AE%89%E8%A3%85redis%E5%B9%B6%E4%BD%BF%E7%94%A8%E5%A4%96%E9%83%A8%E9%85%8D%E7%BD%AE%E5%92%8C%E6%95%B0%E6%8D%AE%E5%88%9D%E5%A7%8B%E5%8C%96/">Read More…</a>
+  </div>
+  
+</article><article class="post">
+  <h1 class="post-title">
+    <a href="https://leongravel.com/posts/gitlabrunner&#43;docker%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85%E9%95%9C%E5%83%8Fpush%E5%88%B0%E5%85%AC%E5%8F%B8%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93/">gitlab runner &#43; docker 自动构建</a>
+  </h1>
+  <time datetime="2018-09-11T23:01:41Z" class="post-date">Tue, Sep 11, 2018</time>
+  <p>最开始的时候，我尝试Jenkins+docker，可是Jenkins的docker依赖和插件，实在太过麻烦，配置项等等，太重。所以我转为使用gitlab runner来实现自动构建并打包镜像。</p>
+
+<p></p>
+  
+  <div class="read-more-link">
+    <a href="/posts/gitlabrunner&#43;docker%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85%E9%95%9C%E5%83%8Fpush%E5%88%B0%E5%85%AC%E5%8F%B8%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93/">Read More…</a>
+  </div>
+  
+</article><article class="post">
+  <h1 class="post-title">
+    <a href="https://leongravel.com/posts/k8s%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/">k8s集群搭建</a>
+  </h1>
+  <time datetime="2018-09-10T20:54:41Z" class="post-date">Mon, Sep 10, 2018</time>
+  <h3 id="使用minikube单机部署">使用minikube单机部署</h3>
+
+<p><a href="https://github.com/kubernetes/minikube">minikube</a>是一个用go语言开发的可以在本地运行kubernetes的利器。首先，我们需要安装它：</p>
+
+<p></p>
+  
+  <div class="read-more-link">
+    <a href="/posts/k8s%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/">Read More…</a>
+  </div>
+  
+</article><article class="post">
+  <h1 class="post-title">
+    <a href="https://leongravel.com/posts/docker%E5%87%BA%E9%94%99/">Docker上传镜像到私服出错</a>
+  </h1>
+  <time datetime="2018-09-05T23:01:41Z" class="post-date">Wed, Sep 5, 2018</time>
+  <p>今天在公司将自己的镜像上传到公司仓库的时候，出现了错误：</p>
+
+<p></p>
+  
+  <div class="read-more-link">
+    <a href="/posts/docker%E5%87%BA%E9%94%99/">Read More…</a>
+  </div>
+  
+</article><article class="post">
+  <h1 class="post-title">
+    <a href="https://leongravel.com/posts/springcloud-%E7%89%88%E6%9C%AC%E9%97%AE%E9%A2%98/">引入spring-cloud-starter-openfeign后有些类找不到</a>
+  </h1>
+  <time datetime="2018-09-03T23:01:41Z" class="post-date">Mon, Sep 3, 2018</time>
+  <p>今天用ali maven重新导入的spring-cloud-starter-openfeign</p>
+
+<p></p>
+  
+  <div class="read-more-link">
+    <a href="/posts/springcloud-%E7%89%88%E6%9C%AC%E9%97%AE%E9%A2%98/">Read More…</a>
+  </div>
+  
+</article><article class="post">
+  <h1 class="post-title">
+    <a href="https://leongravel.com/posts/base64/">Base64转CommonsMultipartFile</a>
+  </h1>
+  <time datetime="2018-08-27T23:01:41Z" class="post-date">Mon, Aug 27, 2018</time>
+  <p>今天在项目中遇到一个问题，需要把Base64的字符串转为CommonsMultipartFile。
+首先需要对Base64的字符串进行解码</p>
+
+<p></p>
+  
+  <div class="read-more-link">
+    <a href="/posts/base64/">Read More…</a>
+  </div>
+  
+</article><article class="post">
+  <h1 class="post-title">
+    <a href="https://leongravel.com/posts/schedule/">schedule</a>
+  </h1>
+  <time datetime="2018-08-01T23:01:41Z" class="post-date">Wed, Aug 1, 2018</time>
+  最近使用 spring boot、 quartz、H2(内存数据库) 以及 RabbitMQ 等实现了一个动态的任务管理系统，可以动态的进行任务的创建、修改、暂停、运行以及删除操作，并且使用了 RabbitMQ 消息队列实现了定时任务系统与具体业务系统的解耦，再也不需要每次加个定时任务都上线一次了。
+Java 实现定时任务的几种方式对比 目前 Java 系统中实现调度任务的方式大体有一下三种：
+ 使用 JDK 自带的 java.util.Timer 及 java.util.TimerTask 类实现 使用 Spring 定时任务 使用第三方插件 Quartz  如果是在纯粹的 Java 环境需要实现定时任务毫无疑问就使用 JDK 自带的java.util.concurrent.ScheduledExecutorService 替代 Timer &amp; TimerTask 实现即可，这种场景一般比较简单，也不存在集群的问题。
+如果是集成 Spring 框架开发应用，则使用 Spring 的 @Scheduled 注解实现，简洁方便省事。但是此类应用很可能是集群部署，因此需要通过一定的途径避免集群环境下任务被多次调用的现象发生。常见的方法有使用 Redis 存储一个会过期的常量锁，每台容器执行器先读取锁变量值判断任务是否已被执行；另一种常见的方法是只让指定IP的容器执行定时任务（存在单点的问题）。
+如果在集群环境下，想实现定时任务的可视化管理，或者想做一个统一的定时任务应用，亦或者定时任务的场景非常复杂，则建议使用企业级应用系统常用的 Quartz，而且现在 Spring 或者 Springboot 集成Quartz 也非常方便。
+Spring Boot + Quartz 任务调度系统预览 源码：https://github.com/LeonGravel/springboot-quartz
+预览：
+这里也将常规的 Quartz 与 Spring 的整合过程记录如下。
+实现步骤 添加依赖 &lt;!-- Includes spring's support classes for quartz --&gt; &lt;dependency&gt; &lt;groupId&gt;org.
+  
+  <div class="read-more-link">
+    <a href="/posts/schedule/">Read More…</a>
+  </div>
+  
+</article><article class="post">
+  <h1 class="post-title">
+    <a href="https://leongravel.com/posts/redis%E7%AE%80%E5%8D%95%E8%AE%B2%E8%A7%A3/">Redis简单讲解</a>
+  </h1>
+  <time datetime="2018-07-25T23:01:41Z" class="post-date">Wed, Jul 25, 2018</time>
+  <h2 id="redis是什么">Redis是什么</h2>
+
+<p>Redis是由意大利人[Salvatore Sanfilippo][1]（网名：antirez）开发的一款内存高速缓存数据库。Redis全称为：Remote Dictionary Server（远程数据服务），该软件使用C语言编写，Redis是一个key-value存储系统，它支持丰富的数据类型，如：string、list、set、zset(sorted set)、hash。</p>
+
+<p></p>
+  
+  <div class="read-more-link">
+    <a href="/posts/redis%E7%AE%80%E5%8D%95%E8%AE%B2%E8%A7%A3/">Read More…</a>
+  </div>
+  
+</article><article class="post">
+  <h1 class="post-title">
+    <a href="https://leongravel.com/posts/spring-conditional/">spring-conditional</a>
+  </h1>
+  <time datetime="2018-07-21T23:01:41Z" class="post-date">Sat, Jul 21, 2018</time>
+  @Conditional 注解是 Spring 4 提供的基于条件的 Bean 的创建方式，Spring Boot 大量利用了这个特定来实现自动配置。比如，当某一个 jar 包在一个类路径下时，自动配置一个或者多个 Bean；或者只有一个 Bean 创建时，才会创建另一个 Bean。总的来说，就是根据特定条件来控制 Bean 的创建行为，这样就可以利用这个特性进行一些自动配置。
+自定义 Condition 实例 下面的示例将以不同的操作系统作为条件，通过实现 Condition 接口，并重写其 matches 方法来构造判断条件，获取在不同操作系统下的操作命令。如在 Windows 系统下运行程序调用获取文件列表命名的方法则输出 dir，如果在 Linux 下则输出 ls。
+通过实现 Spring 提供的 Condition 接口创建两个 Condition 类 自定义 Condition 需要实现 org.springframework.context.annotation.Condition 接口中的 boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) 方法，我们的条件判断逻辑则应该放在此方法中。
+public class WindowsCondition implements Condition { @Override public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) { System.out.println(&quot;os.name:&quot; + context.getEnvironment().getProperty(&quot;os.name&quot;)); return context.getEnvironment().getProperty(&quot;os.name&quot;).contains(&quot;Windows&quot;); } } public class LinuxCondition implements Condition { @Override public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) { System.
+  
+  <div class="read-more-link">
+    <a href="/posts/spring-conditional/">Read More…</a>
+  </div>
+  
+</article><article class="post">
+  <h1 class="post-title">
+    <a href="https://leongravel.com/posts/java%E5%9F%BA%E7%A1%80%E4%BB%A5%E5%8F%8A%E8%BF%9B%E9%98%B6%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/">java基础以及进阶知识点总结</a>
+  </h1>
+  <time datetime="2018-07-15T23:01:41Z" class="post-date">Sun, Jul 15, 2018</time>
+  <h3 id="抽象类和接口的比较">抽象类和接口的比较</h3>
+
+<p>相同点：<br />
+都不能被实例化<br />
+都包含抽象方法，这些抽象方法用于描述系统能提供哪些服务，而这些服务是由子类来提供实现的<br />
+在系统设计上，两者都代表系统的抽象层，当一个系统使用一棵继承树上的类时，应该尽量把引用变量声明为继承树的上层抽象类型，这样可以提高两个系统之间的松耦合<br />
+不同点：<br />
+在抽象类中可以为部分方法提供默认的实现，从而避免在子类中重复实现它们；但是抽象类不支持多继承。接口不能提供任何方法的实现，但是支持多继承。<br />
+接口代表了接口定义者和接口实现者的一种契约；而抽象类和具体类一般而言是一种继承的关系，即两者在概念本质上是不同。</p>
+
+<p></p>
+  
+  <div class="read-more-link">
+    <a href="/posts/java%E5%9F%BA%E7%A1%80%E4%BB%A5%E5%8F%8A%E8%BF%9B%E9%98%B6%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/">Read More…</a>
+  </div>
+  
+</article><article class="post">
+  <h1 class="post-title">
+    <a href="https://leongravel.com/posts/%E5%B8%B8%E7%94%A8%E7%9A%84%E5%87%A0%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">常用的几种设计模式</a>
+  </h1>
+  <time datetime="2018-07-14T18:01:41Z" class="post-date">Sat, Jul 14, 2018</time>
+  <p>在《设计模式》这本书里，GoF定义了23种设计模式，个人能力有限，在实际使用或者业余编码过程中，并没有完全接触完全。这里我罗列一下在java中几种常用的设计模式。</p>
+
+<p></p>
+  
+  <div class="read-more-link">
+    <a href="/posts/%E5%B8%B8%E7%94%A8%E7%9A%84%E5%87%A0%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">Read More…</a>
+  </div>
+  
+</article><article class="post">
+  <h1 class="post-title">
+    <a href="https://leongravel.com/posts/springboot/">springboot</a>
+  </h1>
+  <time datetime="2018-07-11T23:01:41Z" class="post-date">Wed, Jul 11, 2018</time>
+  <h2 id="spring-boot-简介">Spring Boot 简介</h2>
+
+<p>Spring Boot(英文中是<code>引导</code>的意思)，是用来简化Spring应用的搭建到开发的过程。应用开箱即用，只要通过 <code>just run</code>（可能是 java -jar 或 tomcat 或 maven插件run 或 shell脚本），就可以启动项目。二者，Spring Boot 只要很少的Spring配置文件（例如那些xml，property）。 因为<code>习惯优先于配置</code>的原则，使得Spring Boot在快速开发应用和微服务架构实践中得到广泛应用。   Javaer装好JDK环境和Maven工具就可以开始学习Boot了~</p>
+
+<p></p>
+  
+  <div class="read-more-link">
+    <a href="/posts/springboot/">Read More…</a>
+  </div>
+  
+</article><article class="post">
+  <h1 class="post-title">
+    <a href="https://leongravel.com/posts/think_in_java%E7%AC%AC%E4%B8%80%E7%AB%A0/">think-in-Java（第一章）</a>
+  </h1>
+  <time datetime="2018-06-06T22:54:41Z" class="post-date">Wed, Jun 6, 2018</time>
+  <p>在大学时候买了《Think  In java》这本书。最近开始重读，做一个笔记记录，并且谈谈我读这本书的感受。
+这本书是由Bruce Eckel，这个人也许不熟悉，但是他的作品可是如雷贯耳啊，Bruce Eckel是MindView公司的总裁，这个公司提供一些软件资讯和培训。他是C++标准委员会拥有表决权的成员之一，拥有应用物理学学士和计算机工程硕士学位。Bruce Eckel从1984年至今，已经发表了超过150篇计算机技术文章，出版了6本书.他的《Thinking in C++》一本书在1995年被评为“最佳软件开发图书”，《Thinking in Java》被评为1999年Java World<code>最受读者欢迎图书</code>，并且赢得了编辑首选图书奖。</p>
+
+<p></p>
+  
+  <div class="read-more-link">
+    <a href="/posts/think_in_java%E7%AC%AC%E4%B8%80%E7%AB%A0/">Read More…</a>
+  </div>
+  
+</article><article class="post">
+  <h1 class="post-title">
+    <a href="https://leongravel.com/posts/ssd%E5%88%86%E6%9E%90/">SSD优势分析</a>
+  </h1>
+  <time datetime="2018-05-23T22:54:41Z" class="post-date">Wed, May 23, 2018</time>
+  <p>在工作中，代码量不断提高，项目工程的体量不断增大，势必会给编码效率带来一定的负面影响。例如打开IDE变慢，保存大文件变慢问题。</p>
+
+<p></p>
+  
+  <div class="read-more-link">
+    <a href="/posts/ssd%E5%88%86%E6%9E%90/">Read More…</a>
+  </div>
+  
+</article><article class="post">
+  <h1 class="post-title">
+    <a href="https://leongravel.com/posts/%E5%B8%B8%E8%A7%81%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0/">常见排序算法实现</a>
+  </h1>
+  <time datetime="2018-04-15T20:54:41Z" class="post-date">Sun, Apr 15, 2018</time>
+  <p>整理一下比较常见的几种排序算法</p>
+
+<p></p>
+  
+  <div class="read-more-link">
+    <a href="/posts/%E5%B8%B8%E8%A7%81%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0/">Read More…</a>
+  </div>
+  
+</article><article class="post">
+  <h1 class="post-title">
+    <a href="https://leongravel.com/posts/tomcat_error/">tomcat启动报错</a>
+  </h1>
+  <time datetime="2018-04-04T20:54:41Z" class="post-date">Wed, Apr 4, 2018</time>
+  <p>今天启动项目的时候，tomcat报了</p>
+
+<pre><code>are only available on JDK 1.5 and higher
+</code></pre>
+
+<p>的错。查了一些资料发现，这是因为jdk升级成为了jdk8，但是spring的jar包版本比较低，并没有兼容到jdk8，所以才造成了现在的这个错误。</p>
+
+<p></p>
+  
+  <div class="read-more-link">
+    <a href="/posts/tomcat_error/">Read More…</a>
+  </div>
+  
+</article><article class="post">
+  <h1 class="post-title">
+    <a href="https://leongravel.com/posts/postgresql-date-functions/">postgreSQL 日期函数整理</a>
+  </h1>
+  <time datetime="2018-03-19T21:18:41Z" class="post-date">Mon, Mar 19, 2018</time>
+  最近在项目中维护某一张表的固定数据的时候，经常会用到postgreSQL的各种日期函数，所以简单整理一下。获取系统时间的函数 获取当前完整时间  通过now()获取的时间是最完整的时间，包括时区，秒也保留到了6位小数。  select now(); -- 得到如下结果 '2018-03-19 21:28:31.545145+08'  current_timestamp 效果是和now()一样的。
+select current_timestamp效果是和now; -- 得到如下结果 '2018-03-19 21:29:31.545145+08'  获取当前时间 current_time 只显示当前的时间，不包括日期
+select current_time; -- 得到的结果如下 21:29:31.545145+08'  获取当前日期 current_date 只显示当前的日期，不包括小时等信息
+select current_date; -- 得到的结果如下 '2018-03-19'   日期计算函数 日期简单的加减  一年后  select now() + interval '1 years'; select now() + interval '1 year'; select now() + interval '1 y'; select now() + interval '2 Y'; select now() + interval '2Y';  这几种写法都OK的。 一个月后  select now() + interval '1 month';  一周后  select now() + interval '1 week';  一天后  select now() + '1 day'  一分钟后  select now() + '1 min';   interval 可以不写，其值可以是：
+  
+  <div class="read-more-link">
+    <a href="/posts/postgresql-date-functions/">Read More…</a>
+  </div>
+  
+</article><article class="post">
+  <h1 class="post-title">
+    <a href="https://leongravel.com/posts/gitment/">使用Gitment作为博客评论插件</a>
+  </h1>
+  <time datetime="2018-03-17T00:54:41Z" class="post-date">Sat, Mar 17, 2018</time>
+  Gitment除了会产生大量无用的issue，这个插件使用起来，还是相当不错的。 作者的博客写得相当详细，我这里就不一一赘述使用方法了。
+  
+</article><article class="post">
+  <h1 class="post-title">
+    <a href="https://leongravel.com/posts/java.lang.string/">【转载】java.lang.String</a>
+  </h1>
+  <time datetime="2018-03-12T20:54:41Z" class="post-date">Mon, Mar 12, 2018</time>
+  整理一下关于String类的方法。
+ 概览 继承结构  Serializable CharSequence Comparable  字符集简介 重要域成员 重要方法  代码点及代码单元 比较 搜索 提取子串 创建全大写/全小写副本  一些体会 参考  概览 String 类代表了字符串。所有类似于 &quot;abc&quot; 的字符串字面量都是该类的实例。
+字符串是常量，从创建后就不可更改。需要修改的字符串可以使用 StringBuffer。因为 String 实例不可变，所以他们可以安全的共享。一些例子：
+String str = &quot;abc&quot;; // 与上面一行代码效果相同 char data[] = {'a', 'b', 'c'}; String str = new String(data); System.out.println(&quot;abc&quot;); String cde = &quot;cde&quot;; System.out.println(&quot;abc&quot; + cde); String c = &quot;abc&quot;.substring(2,3); String d = cde.substring(1, 2);  String 类也包含了一些对单个字符的操作、比较、搜索、提取子串、创建全大写/全小写副本的方法。
+Java 语言为字符串连接操作符(+)添加了特殊支持。向左连接。
+  
+  <div class="read-more-link">
+    <a href="/posts/java.lang.string/">Read More…</a>
+  </div>
+  
+</article><article class="post">
+  <h1 class="post-title">
+    <a href="https://leongravel.com/posts/%E7%94%9F%E6%88%90ssh-key/">git 生成SSH key</a>
+  </h1>
+  <time datetime="2018-03-11T20:54:41Z" class="post-date">Sun, Mar 11, 2018</time>
+  使用git的过程中，我们会初始化创建关联服务器的SSH key。
+1 设置用户名和邮箱 开发过程中，提交的时候会在log中显示用户名和密码，便于管理。
+$ git config --global user.name &quot;gravel&quot; $ git config --global user.email &quot;leebroncc@gmail.com&quot;  2 检查现有的SSH keys 在创建SSH keys之前，我们可以看看电脑内是否有SSH keys秘钥。
+打开Terminal输入如下命令。
+$ ls -al ~/.ssh  或输入
+$ ls ~/.ssh  如果看见如下文件，则代表SSH keys已创建好。
+ id_dsa.pub id_ecdsa.pub id_ed25519.pub id_rsa.pub  查看已创建好的SSH key，使用如下命令。
+$ cat ~/.ssh/id_rsa.pub  3 生成新的SSH key 如果没创建SSH key，我们可以创建新的SSH key。
+1 设置电子邮件并创建对应的key
+$ ssh-keygen -t rsa -b 4096 -C &quot;your_email@example.com&quot; # Creates a new ssh key, using the provided email as a label Generating public/private rsa key pair.
+  
+  <div class="read-more-link">
+    <a href="/posts/%E7%94%9F%E6%88%90ssh-key/">Read More…</a>
+  </div>
+  
+</article><article class="post">
+  <h1 class="post-title">
+    <a href="https://leongravel.com/posts/hexo-ci/">测试持续集成，明晚更新具体博客</a>
+  </h1>
+  <time datetime="2018-03-05T19:33:40Z" class="post-date">Mon, Mar 5, 2018</time>
+  测试持续集成，再次测试
+  
+</article><article class="post">
+  <h1 class="post-title">
+    <a href="https://leongravel.com/posts/mybatisxml%E9%85%8D%E7%BD%AE%E4%BB%A5%E5%8F%8Axml%E6%98%A0%E5%B0%84%E6%96%87%E4%BB%B6/">mybatisXML配置以及XML映射文件</a>
+  </h1>
+  <time datetime="2017-09-22T19:33:40Z" class="post-date">Fri, Sep 22, 2017</time>
+  <p>最近在公司内部技术交流会上分享了mybatis相关的配置资料，现在整理下弄到博客上面。</p>
+
+<p></p>
+  
+  <div class="read-more-link">
+    <a href="/posts/mybatisxml%E9%85%8D%E7%BD%AE%E4%BB%A5%E5%8F%8Axml%E6%98%A0%E5%B0%84%E6%96%87%E4%BB%B6/">Read More…</a>
+  </div>
+  
+</article><article class="post">
+  <h1 class="post-title">
+    <a href="https://leongravel.com/posts/learngit-0/">git学习笔记</a>
+  </h1>
+  <time datetime="2016-07-21T23:01:41Z" class="post-date">Thu, Jul 21, 2016</time>
+  虽然很早就接触github，但对git的版本控制并不了解，最近开始学习使用git，对其使用简单做一些整理。
+git 介绍 Git是一个开源的分布式版本控制系统，用以有效、高速的处理从很小到非常大的项目版本管理。关于她的特点Git官网是这么介绍的：
+ Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.
+ 总之，对于开源项目来说，使用Git可以极大地提高了开发效率、扩大了开源项目的参与度、 增强了版本控制系统的安全性，选择Git已是大势所趋。
+以下为本人学习git过程中的一些练习和笔记，相关参考：廖雪峰的Git教程
+git 本地仓库常用操作 git 创建本地仓库 $ mkdir learngit //创建文件夹 $ cd learngit $ pwd //查看当前目录 /Users/michael/learngit $ git init //将当前文件夹变成git仓库，init后目录下会多出.git文件（默认隐藏） 可以用ls -ah查看 Initialized empty Git repository in /Users/michael/learngit/.git/ $ git log //显示从最近到最远的提交日志 如果出现end标记可以按q退出历史记录列表 $ git log --pretty=oneline $ git reset --hard HEAD^ //回退上个版本  在Git中，用HEAD表示当前版本，上一个版本就是HEAD^，上上一个版本就是HEAD^^，当然往上100个版本写100个^比较容易数不过来，所以写成HEAD~100。
+  
+  <div class="read-more-link">
+    <a href="/posts/learngit-0/">Read More…</a>
+  </div>
+  
+</article><article class="post">
+  <h1 class="post-title">
+    <a href="https://leongravel.com/posts/hexo-blog/">HEXO&#43;Github,搭建个人博客</a>
+  </h1>
+  <time datetime="2016-04-22T19:33:40Z" class="post-date">Fri, Apr 22, 2016</time>
+  <p>很久之前就想搭建一个自己的个人博客，甚至想过自己的毕业设计的题目就选择这个。但因为种种原因(<code>懒</code>)，直到上个星期才通过hexo完成博客的搭建。为了方便大家<code>(装逼</code>)也不至于让我这里变得冷清，我决定还是写一个简单平快的教程出来。文笔拙劣，还请赐教。</p>
+
+<p></p>
+  
+  <div class="read-more-link">
+    <a href="/posts/hexo-blog/">Read More…</a>
+  </div>
+  
+</article>
+</div>
+    </main>
+
+    
+  </body>
+</html>

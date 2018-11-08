@@ -23,4 +23,4 @@ disqusShortname = "leongravel"
     name = "About"
     identifier = "about"
     weight = 300
-    url = "/about/" 
+    url = "/about/about" 

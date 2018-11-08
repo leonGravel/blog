@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dubbo on Gravel</title>
+    <link>https://leongravel.com/tags/dubbo/</link>
+    <description>Recent content in Dubbo on Gravel</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>cn</language>
+    <lastBuildDate>Fri, 28 Sep 2018 23:01:41 +0000</lastBuildDate>
+    
+	<atom:link href="https://leongravel.com/tags/dubbo/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Dubbo在Docker中的服务注册</title>
+      <link>https://leongravel.com/posts/dubbo%E5%9C%A8docker%E4%B8%AD%E7%9A%84%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C/</link>
+      <pubDate>Fri, 28 Sep 2018 23:01:41 +0000</pubDate>
+      
+      <guid>https://leongravel.com/posts/dubbo%E5%9C%A8docker%E4%B8%AD%E7%9A%84%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C/</guid>
+      <description>&lt;p&gt;今天在部署的时候，发现服务提供者启动成功，但是消费者没法拿到服务。查了下发现是服务提供者没注册成功。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
