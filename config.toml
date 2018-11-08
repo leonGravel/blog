@@ -1,0 +1,26 @@
+## Basic Configuration
+baseurl = "https://leongravel.com/"
+languageCode = "cn"
+
+title = "Gravel"
+theme = "hyde"
+
+## Hugo Built-in Features
+disqusShortname = "leongravel"
+
+## Main Menu
+[[menu.main]]
+    name = "Posts"
+    weight = 100
+    identifier = "posts"
+    url = "/posts/"
+[[menu.main]]
+    name = "Portfolio"
+    identifier = "portfolio"
+    weight = 200
+    url = "/portfolio/"
+[[menu.main]]
+    name = "About"
+    identifier = "about"
+    weight = 300
+    url = "/about/" 
