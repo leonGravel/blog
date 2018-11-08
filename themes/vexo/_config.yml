@@ -28,7 +28,7 @@ qrcode: true
 # comment
 # you can set gitment or uyan
 
-comment: gitment
+comment: disqus
 
 # Gitment
 gitment_owner: LeonGravel
@@ -39,6 +39,8 @@ gitment_oauth_secret: 8ca49523a6640b73cfdfc5148c1a2910f6246964
 # uyan
 # if you want to use uyan as your blog comment, plz remove/comment out gitment config
 
+# disqus config
+disqus_shortname: leongravel
 baidu_id: 
 
 about: 
