@@ -1,7 +1,7 @@
 baseURL = "http://leongravel.com"
 languageCode = "en"
 defaultContentLanguage = "en"                             # en / zh-cn / ... (This field determines which i18n file to use)
-title = "Gravel's Blog"
+title = "gravel's blog"
 preserveTaxonomyNames = true
 enableRobotsTXT = true
 enableEmoji = true
@@ -60,8 +60,8 @@ copyright = ""            # default: author.name ↓        # 默认为下面配
   since = "2016"            # Site creation time          # 站点建立时间
 
   # site info (optional)                                  # 站点信息（可选，不需要的可以直接注释掉）
-  logoTitle = "Gravel's Blog"        # default: the title value    # 默认值: 上面设置的title值
-  keywords = ["Hugo", "Gravel's Blog"]
+  logoTitle = "gravel's blog"        # default: the title value    # 默认值: 上面设置的title值
+  keywords = ["Hugo", "gravel's blog"]
   description = "An Empty-Stack Devoloper."
 
   # paginate of archives, tags and categories             # 归档、标签、分类每页显示的文章数目，建议修改为一个较大的值
