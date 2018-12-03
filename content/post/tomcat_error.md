@@ -6,11 +6,11 @@ aothor : gravel
 date: 2018-04-04 20:54:41 
 ---
 
-今天启动项目的时候，tomcat报了
+今天启动tomcat项目的时候，tomcat抛出了下面这个异常：
 ```
 are only available on JDK 1.5 and higher
 ```
-的错。查了一些资料发现，这是因为jdk升级成为了jdk8，但是spring的jar包版本比较低，并没有兼容到jdk8，所以才造成了现在的这个错误。
+看源码是org.springframework.context.annotation.AnnotationConfigBeanDefinitionParser自动检测，jdk版本检测时需要jre1.5以上版本，但是JdkVersion只检查到了1.7，jre1.8 时不匹配任何jdk。
 
 <!--more-->
 
@@ -18,7 +18,7 @@ are only available on JDK 1.5 and higher
 
 1. 将jdk8换成jdk7，重新启动项目就好了。
 
-2. 第二种手动修改spring的jar包，在org.springframework.core目录下，有一个JdkVersion.class，自己参照包路径，重新写一个JdkVersion.java，如下所示：。<!-- more -->
+2. 第二种手动修改spring的jar包，在org.springframework.core目录下，有一个JdkVersion.class，自己参照包路径，重新写一个JdkVersion.java，如下所示（一般不推荐使用这种方式，可能会导致其他的问题）：
 
 ```
 package org.springframework.core;  
