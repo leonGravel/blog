@@ -1,6 +1,6 @@
 ---
 title: 使用wget下载minio中的内容报错
-categories: ["Docker"]
+categories: ["minio"]
 tags: ["docker","minio"]
 date: 2018-10-30 23:01:41 
 author: gravel

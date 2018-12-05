@@ -1,10 +1,9 @@
 ---
-title: minio设置永久下载链接
-categories: ["Minio"]
+title: 设置永久下载链接
+categories: ["minio"]
 tags: ["docker","minio"]
-date: 2018-12-05 23:01:41 
+date: 2018-12-05 10:01:41 
 author: gravel
-
 ---
 
 今天在构建oraclejdk7的时候，为了方便自己以后能够随时编译jdk，于是将oracle-jdk-的tar.gz包上传到了minio服务器上，可以直接使用wget随时下载。
