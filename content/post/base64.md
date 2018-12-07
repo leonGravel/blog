@@ -6,29 +6,30 @@ date: 2018-08-27 23:01:41
 author: gravel
 ---
 
-今天在项目中遇到一个问题，需要把Base64的字符串转为CommonsMultipartFile。
-首先需要对Base64的字符串进行解码
+在做一个上传组件的时候，需要把前端传过来的 `Base64` 的字符串转为 `CommonsMultipartFile`，然后解析保存。
 
 <!--more-->
+
+这里我直接使用的 `apache` 的 `Base64` 类进行转码：
 
 ```
  public static byte[] base64ToData(String base64) {
         return Base64.decodeBase64(base64.substring("data:image/png;base64,".length()));
     }
 ```
-这里需要注意的是，解码之前需要将data的格式说明截去。
+这里需要注意的是，解码之前需要将 `data` 的格式说明截去。
 
-然后将Byte数组转为InputStream：
+然后将 `Byte` 数组转为 `InputStream`：
 ```
 InputStream in = new ByteArrayInputStream(is);
 ```
-然后将InputStream的数据，复制到temp文件。
+然后将 `InputStream` 的数据，复制到临时的 `temp` 文件。
 
 ```
 File temp = new File(.....);
 FileUtils.copyInputStreamToFile(in, temp);
 ```
-生成FileItem：```FileItem fileitem = createFileItem(file.getName());```
+生成 `FileItem` ：```FileItem fileitem = createFileItem(file.getName());```
 
 ```
  private FileItem createFileItem(String filePath)  
@@ -55,7 +56,7 @@ FileUtils.copyInputStreamToFile(in, temp);
         return item;  
     }
 ```
-CommonsMultipartFile的构造函数可以直接通过FileItem生成CommonsMultipartFile：
+`CommonsMultipartFile` 的构造函数可以直接通过 `FileItem` 生成 `CommonsMultipartFile`：
 
 
 ```

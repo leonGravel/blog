@@ -1,5 +1,5 @@
 ---
-title: 设置永久下载链接
+title: minio设置永久下载链接
 categories: ["minio"]
 tags: ["docker","minio"]
 date: 2018-12-05 10:01:41 
