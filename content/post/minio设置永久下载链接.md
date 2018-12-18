@@ -6,15 +6,15 @@ date: 2018-12-05 10:01:41
 author: gravel
 ---
 
-今天在构建oraclejdk7的时候，为了方便自己以后能够随时编译jdk，于是将oracle-jdk-的tar.gz包上传到了minio服务器上，可以直接使用wget随时下载。
+今天在构建[ `oraclejdk7` 镜像](https://hub.docker.com/r/leebroncc/alpine-oraclejdk7)的时候，为了方便自己以后能够随时编译 `jdk` 镜像，于是将 `oracle-jdk-7` 的 `tar.gz` 包上传到了 `minio` 服务器上，可以直接使用 `wget` 命令随时下载。
 
 <!--more-->
 
-在实际操作的时候，发现minio分享文件，最多支持分享七天，这显然和我的需求有冲突。查看了minio的文档，发现minio的功能远比我想象的强大，他提供了一个客户端工具。可以直接对minio server进行配置。下面我具体说下minio客户端是怎么设置永久下载链接的。
+在实际操作的时候，发现 `minio` 分享文件，最多支持分享七天，这显然和我的需求有冲突。查看了 `minio` 的文档，发现 `minio` 的功能远比我想象的强大，他提供了一个客户端工具。可以直接对 `minio server` 进行配置。下面我具体说下 `minio` 客户端是怎么设置永久下载链接的。
 
 ### 安装客户端
 
-首先，当然是安装客户端，我最开始的时候，使用的Docker 安装，但我发现docker还需要配置数据卷这些，命令很长，用起来有点麻烦。正好服务器上有Go的环境，于是直接用Go命令获取minio客户端二进制安装文件进行下载了。
+首先，当然是安装客户端，我最开始的时候，使用的 `Docker` 安装，但我发现 `docker` 还需要配置数据卷这些，命令很长，用起来有点麻烦。正好服务器上有 `Go` 的环境，于是直接用 `Go` 命令获取 `minio` 客户端二进制安装文件进行下载了。
 
 ```
 go get -d github.com/minio/mc
@@ -39,7 +39,7 @@ chmod +x mc
 alias mc="${GOPATH}/src/github.com/minio/mc/./mc"
 ```
 
-至此，我们的minio client就安装完成了。
+至此，我们的 `minio client` 就安装完成了。
 
 ### 添加minio host
 
