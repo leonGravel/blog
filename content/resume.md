@@ -26,11 +26,10 @@ title: "李鳌的简历"
 * 团队技术建设（CI/CD、缓存相关）
 * 存储服务框架搭建
 
-## 中电福富信息科技有限公司（2016 年 3 月 - 20187年 7 月）
+## 中电福富信息科技有限公司（2016 年 3 月 - 2017年 7 月）
 
 - 西南片区ITM项目team leader
 - 框架性能优化
-
 - 流程引擎二次开发
 
 # 开源项目及作品
@@ -39,7 +38,7 @@ title: "李鳌的简历"
 
 - [Alioth-cloud](https://github.com/leonGravel/Alioth-Cloud)：一个基于 `springboot` 和 `springcloud` 的微服务项目
 
-- [Herba](https://github.com/Alkaids/Herba)：Herba是一个前后端分离方式实现的博客程序
+- [Herba](https://github.com/Alkaids/Herba)：`Herba` 是一个前后端分离方式实现的博客程序
 
 - [https://leongravel.com](https://leongravel.com/)
 
@@ -49,10 +48,11 @@ title: "李鳌的简历"
 * 网络协议：TCP/IP，HTTP，MQTT
 * 数据库：PostgreSQL，MySQL
 * 容器化：Docker，Docker-compose
-* 主流框架：Spring，SpringMVC，Spring Boot，Springcloud，Dubbo
+* 主流框架：Spring，SpringMVC，SpringBoot，SpringCloud，Dubbo，Mybatis
 * 消息中间件：kafka 
-* 缓存：Redis，Guawa
+* 缓存：Redis，Guawa Cache
 * 操作系统：linux
+* CI/CD：gitlab-CI，Jenkins
 
 ------
 
