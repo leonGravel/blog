@@ -50,7 +50,7 @@ title: "李鳌的简历"
 * 容器化：Docker，Docker-compose
 * 主流框架：Spring，SpringMVC，SpringBoot，SpringCloud，Dubbo，Mybatis
 * 消息中间件：kafka 
-* 缓存：Redis，Guawa Cache
+* 缓存：Redis，Guava Cache
 * 操作系统：linux
 * CI/CD：gitlab-CI，Jenkins
 
