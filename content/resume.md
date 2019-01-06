@@ -40,7 +40,7 @@ title: "李鳌的简历"
 
 - [Herba](https://github.com/Alkaids/Herba)：`Herba` 是一个前后端分离方式实现的博客程序
 
-- [https://leongravel.com](https://leongravel.com/)
+- 个人博客： [https://leongravel.com](https://leongravel.com/)
 
 
 # 职业专长
