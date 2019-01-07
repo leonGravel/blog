@@ -2,9 +2,8 @@
 title: gitlab-CI常见问题整理 
 categories: ["CI"]
 tags: ["gitlab","CI"]
-date: 2019-01-07 21:01:41 
+date: 2019-01-07 00:01:41
 author: gravel
-
 ---
 
 整理一下自己在工作中踩过的关于`gitlab-CI`的坑。
