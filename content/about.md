@@ -3,7 +3,7 @@ title: "About Me"
 ---
 ### 关于博客
 
-本站使用`hugo`强力驱动。
+本站使用[hugo](https://gohugo.io/)强力驱动。
 
 * 源码以及博客`md`原文请查看[这里](https://github.com/leonGravel/blog)。
 * 域名来自[namecheap](https://www.namecheap.com/)。
