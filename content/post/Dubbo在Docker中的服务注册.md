@@ -10,14 +10,15 @@ author: gravel
 <!--more-->
 
 ### 问题分析
-当docker容器部署dubbo提供者和常规部署应用混合使用一套zookeeper时，将出现Docker容器中的dubbo提供者向zookeeper注册容器IP导致常规部署应用无法访问容器IP而失败。
+当docker容器部署dubbo提供者和常规部署应用混合使用一套`zookeeper`时，将出现`Docker`容器中的`dubbo`提供者向`zookeeper`注册容器IP导致常规部署应用无法访问容器IP而失败。
 ### 解决方案
-在github上查的时候，发现有人提出了这个[问题][1]，官方回复是将在2.5.7的版本中解决。
-Dubbo在启动阶段提供两对系统属性，用于设置外部通信的IP和端口地址。
-* DUBBO_IP_TO_REGISTRY --- 注册到注册中心的IP地址
-* DUBBO_PORT_TO_REGISTRY --- 注册到注册中心的端口
-* DUBBO_IP_TO_BIND --- 监听IP地址
-* DUBBO_PORT_TO_BIND --- 监听端口
+在`github`上查的时候，发现有人提出了这个[问题][1]，官方回复是将在`2.5.7`的版本中解决。
+`Dubbo`在启动阶段提供两对系统属性，用于设置外部通信的IP和端口地址。
+
+* `DUBBO_IP_TO_REGISTRY` --- 注册到注册中心的IP地址
+* `DUBBO_PORT_TO_REGISTRY` --- 注册到注册中心的端口
+* `DUBBO_IP_TO_BIND` --- 监听IP地址
+* `DUBBO_PORT_TO_BIND` --- 监听端口
 
 我将启动命令改为如下格式：
 ```

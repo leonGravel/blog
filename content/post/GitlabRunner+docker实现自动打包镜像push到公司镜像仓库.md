@@ -6,18 +6,19 @@ date: 2018-09-11 23:01:41
 author: gravel
 ---
 
-最开始的时候，我尝试Jenkins+docker，可是Jenkins的docker依赖和插件，实在太过麻烦，配置项等等，太重。所以我转为使用gitlab runner来实现自动构建并打包镜像。
+最开始的时候，我尝试`Jenkins`+`docker`，可是`Jenkins`的`docker`依赖和插件，实在太过麻烦，配置项等等，太重。所以我转为使用`gitlab runner`来实现自动构建并打包镜像。
 
 <!--more-->
 
 ## 准备工作
-* 安装docker
-* 在docker同一个机器上安装gitlab runner
-* 配置.gitlab-ci.yml
+* 安装`docker`
+* 在`docker`同一个机器上安装`gitlab runner`
+* 配置`.gitlab-ci.yml`
 
 ### 安装Docker 
-参考官方文档，唯一需要注意的是，需要将镜像仓库地址修改为私有的地址。可以通过配置Deamon.json实现。具体配置如下。
-`registry-mirrors`代表私有仓库地址，`insecure-registries`的作用是，push指向的地址。
+参考官方文档，唯一需要注意的是，需要将镜像仓库地址修改为私有的地址。可以通过配置`Deamon.json`实现。具体配置如下。
+`registry-mirrors`代表私有仓库地址，`insecure-registries`的作用是，`push`指向的地址。
+
 > Docker自从1.3.X之后docker registry交互默认使用的是HTTPS，所以这里最好直接指定仓库地址，不然push的时候会报错。
 
 
@@ -34,7 +35,7 @@ author: gravel
 }
 ```
 ### 安装gitlab runner
-服务器是centos 7,以下的步骤都是基于centos 7
+服务器是`centos 7`,以下的步骤都是基于`centos 7`
 #### 下载二进制安装文件
 ```
 curl -L https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.rpm.sh | sudo bash
@@ -174,4 +175,4 @@ push-job:
 
 这个配置文件中，`only`部分代表你的分支，script部分代表对应的脚本。其他业务系统需要替换的东西（比如构建镜像的名字，缓存的名称，这些可以自定义）。
 ### 结束
-以上就是gitlab runner + docker实现自动构建打包镜像并上传的简单教程。
+以上就是`gitlab runner `+ `docker`实现自动构建打包镜像并上传的简单教程。
