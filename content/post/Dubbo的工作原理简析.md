@@ -1,5 +1,5 @@
 ---
-title: Dubbo在Docker中的服务注册
+title: Dubbo的工作原理简析
 categories: ["Java"]
 tags: ["dubbo"]
 date: 2018-09-18 23:01:41 
