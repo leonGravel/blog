@@ -1,7 +1,7 @@
 ---
-title: docker安装redis并使用外部配置和数据初始化
+title: 基于Alpine的基础镜像构建
 categories: ["Docker"]
-tags: ["docker","redis"]
+tags: ["docker","linux","alpine"]
 date: 2019-02-23 23:01:41 
 author: gravel
 
