@@ -2,7 +2,7 @@
 title: python脚本引用同级文件夹中的方法 
 categories: ["python","问题整理"]
 tags: ["python"]
-date: 2019-04-29 23:01:41 
+date: 2019-04-29 21:01:41 
 author: gravel
 
 ---
