@@ -28,6 +28,4 @@ from config import getdb
 getdb()
 ```
 
-
-
 大功告成！
