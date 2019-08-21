@@ -19,7 +19,12 @@ title: "李鳌的简历"
 
 # 工作经历
 
-## 北京华宇信息技术有限公司（2017 年 8 月 - 至今）
+## 重庆金融资产交易所（2019年4月 - 至今）
+
+- python数据分析框架搭建
+- 基于azkaban的任务调度系统研发
+
+## 北京华宇信息技术有限公司（2017 年 8 月 - 2019年4月）
 
 * 项目主程
 * 负责多个省份Docker部署方案
@@ -46,9 +51,10 @@ title: "李鳌的简历"
 # 职业专长
 
 * 网络协议：TCP/IP，HTTP，MQTT
+* 语言：Java，python
 * 数据库：PostgreSQL，MySQL
 * 容器化：Docker，Docker-compose
-* 主流框架：Spring，SpringMVC，SpringBoot，SpringCloud，Dubbo，Mybatis
+* 主流框架：Spring，SpringMVC，SpringBoot，SpringCloud，Dubbo，Mybatis，pandas
 * 消息中间件：kafka 
 * 缓存：Redis，Guava Cache
 * 操作系统：linux
