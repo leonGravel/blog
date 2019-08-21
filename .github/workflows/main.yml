@@ -16,7 +16,6 @@ jobs:
         args: --gc --minify --cleanDestinationDir
     - name: deploy
       uses: peaceiris/actions-gh-pages@v1.1.0
-      if: contains(github.ref, 'master')
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         PUBLISH_BRANCH: master
