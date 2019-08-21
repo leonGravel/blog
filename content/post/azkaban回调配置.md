@@ -27,3 +27,4 @@ dependencies=callback
 
 ```
 
+其中主要配置是`job.notification.xxxxx.1.url`。
