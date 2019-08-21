@@ -1,0 +1,72 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><title>docker-compose搭建flink环境 - gravel&#39;s blog</title><meta name=renderer content=webkit><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=cache-control content=no-transform><meta http-equiv=cache-control content=no-siteapp><meta name=theme-color content=#f8f5ec><meta name=msapplication-navbutton-color content=#f8f5ec><meta name=apple-mobile-web-app-capable content=yes><meta name=apple-mobile-web-app-status-bar-style content=#f8f5ec><meta name=author content=gravel><meta name=description content="嗯，最近在搭建flink的环境，用普通的 docker 命令构建的时候，老是遇到各种的问题。于是转为用 docker-compose 试试。"><meta name=keywords content="Hugo,gravel's blog"><meta name=generator content="Hugo 0.57.2 with even 4.0.0"><link rel=canonical href=https://leongravel.com/post/docker-compose%E6%90%AD%E5%BB%BAflink%E7%8E%AF%E5%A2%83/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><link href=/dist/even.1cafc379.min.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><meta property=og:title content=docker-compose搭建flink环境><meta property=og:description content="嗯，最近在搭建flink的环境，用普通的 docker 命令构建的时候，老是遇到各种的问题。于是转为用 docker-compose 试试。"><meta property=og:type content=article><meta property=og:url content=https://leongravel.com/post/docker-compose%E6%90%AD%E5%BB%BAflink%E7%8E%AF%E5%A2%83/><meta property=article:published_time content=2018-10-15T23:01:41+00:00><meta property=article:modified_time content=2018-10-15T23:01:41+00:00><meta itemprop=name content=docker-compose搭建flink环境><meta itemprop=description content="嗯，最近在搭建flink的环境，用普通的 docker 命令构建的时候，老是遇到各种的问题。于是转为用 docker-compose 试试。"><meta itemprop=datePublished content=2018-10-15T23:01:41&#43;00:00><meta itemprop=dateModified content=2018-10-15T23:01:41&#43;00:00><meta itemprop=wordCount content=551><meta itemprop=keywords content=docker,docker-compose,><meta name=twitter:card content=summary><meta name=twitter:title content=docker-compose搭建flink环境><meta name=twitter:description content="嗯，最近在搭建flink的环境，用普通的 docker 命令构建的时候，老是遇到各种的问题。于是转为用 docker-compose 试试。"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script><script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>gravel&#39;s blog</a></div><div class=mobile-navbar-icon><span></span><span></span><span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/><li class=mobile-menu-item>Home</li></a><a href=/post/><li class=mobile-menu-item>Archives</li></a><a href=/tags/><li class=mobile-menu-item>Tags</li></a><a href=/categories/><li class=mobile-menu-item>Categories</li></a><a href=/resume><li class=mobile-menu-item>Resume</li></a><a href=/about><li class=mobile-menu-item>About</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>gravel&#39;s blog</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/>Home</a></li><li class=menu-item><a class=menu-item-link href=/post/>Archives</a></li><li class=menu-item><a class=menu-item-link href=/tags/>Tags</a></li><li class=menu-item><a class=menu-item-link href=/categories/>Categories</a></li><li class=menu-item><a class=menu-item-link href=/resume>Resume</a></li><li class=menu-item><a class=menu-item-link href=/about>About</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>docker-compose搭建flink环境</h1><div class=post-meta><span class=post-time>2018-10-15</span><div class=post-category><a href=/categories/docker/>Docker</a></div><span class=more-meta>551 words</span>
+<span class=more-meta>2 mins read</span>
+<span id=busuanzi_container_page_pv class=more-meta><span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> times read</span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>Contents</h2><div class="post-toc-content always-active"><nav id=TableOfContents><ul><li><ul><li><ul><li><a href=#docker-compose-介绍>docker-compose 介绍</a></li><li><a href=#安装docker-compse>安装docker-compse</a></li><li><a href=#安装flink>安装flink</a></li></ul></li></ul></li></ul></nav></div></div><div class=post-content><p>嗯，最近在搭建flink的环境，用普通的 <code>docker</code> 命令构建的时候，老是遇到各种的问题。于是转为用 <code>docker-compose</code> 试试。</p><h3 id=docker-compose-介绍>docker-compose 介绍</h3><p><code>docker-compose</code> 是一个用来把 <code>docker</code> 自动化的东西。
+有了 <code>docker-compose</code> 你可以把所有繁复的 <code>docker</code> 操作全都一条命令，自动化的完成。
+用通俗的语言来说，我们平时操作 <code>docker</code> 还是很原始的一系列动作，你手动使用 <code>docker</code> 的动作可以拆分成：</p><blockquote><ol><li>找到一个系统镜像 // docker search</li><li>安装好 vm 或者 virtual box // apt-get install docker</li><li>在 vm 中安装镜像 // docker run -d -it 你的镜像</li></ol></blockquote><p>这是最小的动作， 如果你要映射硬盘，设置 <code>nat</code> 网络或者桥接网络，等等…你就要做更多的 <code>docker</code> 操作， 这显然是非常没有效率的。</p><p>但是我们写在 <code>docker-compose.yaml</code> 里面就很好了。 你只需要写好后 只运行一句
+<code>docker-compose up -d</code> 就可以启动了。</p><h3 id=安装docker-compse>安装docker-compse</h3><p>下载最新版的 <code>docker-compose</code>文件:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span></pre></td><td class=lntd><pre class=chroma>udo curl -L https://github.com/docker/compose/releases/download/1.16.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose</pre></td></tr></table></div></div><p>添加可执行权限</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span></pre></td><td class=lntd><pre class=chroma>sudo chmod +x /usr/local/bin/docker-compose</pre></td></tr></table></div></div><p>测试安装结果</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span></pre></td><td class=lntd><pre class=chroma>docker-compose --version </pre></td></tr></table></div></div><h3 id=安装flink>安装flink</h3><ol><li><p>在指定目录下，新建 <code>docker-compose.yml</code> 文件如下：[]()</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span></pre></td><td class=lntd><pre class=chroma>version: &#34;2.1&#34;
+services:
+jobmanager:
+image: ${FLINK_DOCKER_IMAGE_NAME:-flink}
+expose:
+  - &#34;6123&#34;
+ports:
+  - &#34;8081:8081&#34;
+command: jobmanager
+environment:
+  - JOB_MANAGER_RPC_ADDRESS=jobmanager
+
+taskmanager:
+image: ${FLINK_DOCKER_IMAGE_NAME:-flink}
+expose:
+  - &#34;6121&#34;
+  - &#34;6122&#34;
+depends_on:
+  - jobmanager
+command: taskmanager
+links:
+  - &#34;jobmanager:jobmanager&#34;
+environment:
+  - JOB_MANAGER_RPC_ADDRESS=jobmanager</pre></td></tr></table></div></div></li></ol><p>文件的意思是，先基于 <code>flink</code> 镜像，启动一个 <code>jobmanager</code>，然后再基于 <code>jobmanager</code> 和 <code>flink</code> 镜像，启动一个<code>taskmanager</code>。</p><p>新建完成之后，在当前目录<code>docker-compose up</code>.然后访问<a href=http:localhost:8080>localhost:8080</a>查看结果，如果 <code>taskmanager</code> 页面有配置数据。说明 <code>flink</code> 已经部署成功。</p></div><div class=post-copyright><p class=copyright-item><span class=item-title>Author</span>
+<span class=item-content>gravel</span></p><p class=copyright-item><span class=item-title>LastMod</span>
+<span class=item-content>2018-10-15</span></p><p class=copyright-item><span class=item-title>License</span>
+<span class=item-content><a rel="license noopener" href=https://creativecommons.org/licenses/by-nc-nd/4.0/ target=_blank>CC BY-NC-ND 4.0</a></span></p></div><footer class=post-footer><div class=post-tags><a href=/tags/docker/>docker</a>
+<a href=/tags/docker-compose/>docker-compose</a></div><nav class=post-nav><a class=prev href=/post/docker%E5%AE%89%E8%A3%85%E7%9B%AE%E5%BD%95%E8%BF%81%E7%A7%BB/><i class="iconfont icon-left"></i><span class="prev-text nav-default">docker安装目录迁移</span>
+<span class="prev-text nav-mobile">Prev</span></a>
+<a class=next href=/post/docker-%E5%AE%B9%E5%99%A8%E6%89%A9%E5%AE%B9/><span class="next-text nav-default">Docker容器扩容</span>
+<span class="next-text nav-mobile">Next</span>
+<i class="iconfont icon-right"></i></a></nav></footer></article></div><div id=disqus_thread></div><script type=text/javascript>(function(){if(window.location.hostname==='localhost')return;var dsq=document.createElement('script');dsq.type='text/javascript';dsq.async=true;var disqus_shortname='leongravel';dsq.src='//'+disqus_shortname+'.disqus.com/embed.js';(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(dsq);})();</script><noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript></div></main><footer id=footer class=footer><div class=social-links><a href=mailto:leebroncc@gmail.com class="iconfont icon-email" title=email></a><a href=https://twitter.com/leebroncc class="iconfont icon-twitter" title=twitter></a><a href=https://github.com/leonGravel class="iconfont icon-github" title=github></a><a href=https://www.zhihu.com/people/gravel-20/activities class="iconfont icon-zhihu" title=zhihu></a><a href=https://space.bilibili.com/321842652/#/ class="iconfont icon-bilibili" title=bilibili></a><a href=https://leongravel.com/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a></div><div class=copyright><span class=power-by>Powered by <a class=hexo-link href=https://gohugo.io>Hugo</a></span>
+<span class=division>|</span>
+<span class=theme-info>Theme -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a></span><div class=busuanzi-footer><span id=busuanzi_container_site_pv>site pv: <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span></span>
+<span class=division>|</span>
+<span id=busuanzi_container_site_uv>site uv: <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span></span></div><span class=copyright-year>&copy;
+2016 -
+2019
+<span class=heart><i class="iconfont icon-heart"></i></span><span class=author>Gravel</span></span></div></footer><div class=back-to-top id=back-to-top><i class="iconfont icon-up"></i></div></div><script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script><script type=text/javascript src=/dist/even.ece58db6.min.js></script></body></html>

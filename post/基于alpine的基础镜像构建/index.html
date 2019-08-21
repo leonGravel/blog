@@ -1,0 +1,212 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><title>基于Alpine的基础镜像构建 - gravel&#39;s blog</title><meta name=renderer content=webkit><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=cache-control content=no-transform><meta http-equiv=cache-control content=no-siteapp><meta name=theme-color content=#f8f5ec><meta name=msapplication-navbutton-color content=#f8f5ec><meta name=apple-mobile-web-app-capable content=yes><meta name=apple-mobile-web-app-status-bar-style content=#f8f5ec><meta name=author content=gravel><meta name=description content=刚开始在项目中使用docker的时候，使用的是centos作为基础镜像。centos的官方镜像有70M左右。加上jdk、tomcat，一个完整的业务系统，可能有450M左右。在项目组同学去试用部署的时候，所以的应用包加上服务包，有点过于大了。而且以centos作为基础镜像，可能包含很多我们并不需要的功能。所以，决定转用alpine。><meta name=keywords content="Hugo,gravel's blog"><meta name=generator content="Hugo 0.57.2 with even 4.0.0"><link rel=canonical href=https://leongravel.com/post/%E5%9F%BA%E4%BA%8Ealpine%E7%9A%84%E5%9F%BA%E7%A1%80%E9%95%9C%E5%83%8F%E6%9E%84%E5%BB%BA/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><link href=/dist/even.1cafc379.min.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><meta property=og:title content=基于Alpine的基础镜像构建><meta property=og:description content=刚开始在项目中使用docker的时候，使用的是centos作为基础镜像。centos的官方镜像有70M左右。加上jdk、tomcat，一个完整的业务系统，可能有450M左右。在项目组同学去试用部署的时候，所以的应用包加上服务包，有点过于大了。而且以centos作为基础镜像，可能包含很多我们并不需要的功能。所以，决定转用alpine。><meta property=og:type content=article><meta property=og:url content=https://leongravel.com/post/%E5%9F%BA%E4%BA%8Ealpine%E7%9A%84%E5%9F%BA%E7%A1%80%E9%95%9C%E5%83%8F%E6%9E%84%E5%BB%BA/><meta property=article:published_time content=2019-02-23T23:01:41+00:00><meta property=article:modified_time content=2019-02-23T23:01:41+00:00><meta itemprop=name content=基于Alpine的基础镜像构建><meta itemprop=description content=刚开始在项目中使用docker的时候，使用的是centos作为基础镜像。centos的官方镜像有70M左右。加上jdk、tomcat，一个完整的业务系统，可能有450M左右。在项目组同学去试用部署的时候，所以的应用包加上服务包，有点过于大了。而且以centos作为基础镜像，可能包含很多我们并不需要的功能。所以，决定转用alpine。><meta itemprop=datePublished content=2019-02-23T23:01:41&#43;00:00><meta itemprop=dateModified content=2019-02-23T23:01:41&#43;00:00><meta itemprop=wordCount content=1733><meta itemprop=keywords content=docker,linux,alpine,><meta name=twitter:card content=summary><meta name=twitter:title content=基于Alpine的基础镜像构建><meta name=twitter:description content=刚开始在项目中使用docker的时候，使用的是centos作为基础镜像。centos的官方镜像有70M左右。加上jdk、tomcat，一个完整的业务系统，可能有450M左右。在项目组同学去试用部署的时候，所以的应用包加上服务包，有点过于大了。而且以centos作为基础镜像，可能包含很多我们并不需要的功能。所以，决定转用alpine。><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script><script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>gravel&#39;s blog</a></div><div class=mobile-navbar-icon><span></span><span></span><span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/><li class=mobile-menu-item>Home</li></a><a href=/post/><li class=mobile-menu-item>Archives</li></a><a href=/tags/><li class=mobile-menu-item>Tags</li></a><a href=/categories/><li class=mobile-menu-item>Categories</li></a><a href=/resume><li class=mobile-menu-item>Resume</li></a><a href=/about><li class=mobile-menu-item>About</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>gravel&#39;s blog</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/>Home</a></li><li class=menu-item><a class=menu-item-link href=/post/>Archives</a></li><li class=menu-item><a class=menu-item-link href=/tags/>Tags</a></li><li class=menu-item><a class=menu-item-link href=/categories/>Categories</a></li><li class=menu-item><a class=menu-item-link href=/resume>Resume</a></li><li class=menu-item><a class=menu-item-link href=/about>About</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>基于Alpine的基础镜像构建</h1><div class=post-meta><span class=post-time>2019-02-23</span><div class=post-category><a href=/categories/docker/>Docker</a></div><span class=more-meta>1733 words</span>
+<span class=more-meta>4 mins read</span>
+<span id=busuanzi_container_page_pv class=more-meta><span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> times read</span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>Contents</h2><div class="post-toc-content always-active"><nav id=TableOfContents><ul><li><ul><li><ul><li><a href=#alpine介绍>alpine介绍</a></li><li><a href=#编写基础镜像的dockerfile>编写基础镜像的Dockerfile</a></li><li><a href=#通过基础镜像构建其他应用>通过基础镜像构建其他应用</a></li><li><a href=#dockerfile相关问题解释>Dockerfile相关问题解释</a></li></ul></li></ul></li></ul></nav></div></div><div class=post-content><p>刚开始在项目中使用docker的时候，使用的是centos作为基础镜像。centos的官方镜像有70M左右。加上jdk、tomcat，一个完整的业务系统，可能有450M左右。在项目组同学去试用部署的时候，所以的应用包加上服务包，有点过于大了。而且以centos作为基础镜像，可能包含很多我们并不需要的功能。所以，决定转用alpine。</p><h3 id=alpine介绍>alpine介绍</h3><p>在alpine的官网上写着：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span></pre></td><td class=lntd><pre class=chroma>Alpine Linux is a security-oriented, lightweight Linux distribution based on musl libc and busybox.//Alpine Linux 是一个社区开发的面向安全应用的轻量级 Linux 发行版。</pre></td></tr></table></div></div><p>最令人吃惊的是，他的官方docker镜像，只有5M。所以在2016年的时候，docker官方已经将推荐基础镜像，从Ubuntu转为alpine。</p><h3 id=编写基础镜像的dockerfile>编写基础镜像的Dockerfile</h3><p>alpine优点是安全，体积小，但同时，他肯定也缺少一些本地化的东西。</p><p>我尝试过直接将alpine作为基础镜像去运行一个tomcat应用，发现在解压war包的时候，里面的中文文件无法被识别。另外无法直接将时区设置为东八区。</p><p>在结合网上资料整理之后发现，alpine主要也是这两个问题困扰着使用中文的程序员。所以我们需要定制化自己的alpine基础镜像。结合Dockerfile来说吧。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span></pre></td><td class=lntd><pre class=chroma>FROM  alpine:3.6
+
+MAINTAINER leongravel &#34;leebroncc@gmail.com&#34;
+
+## 设置默认语言环境
+ENV LANG=C.UTF-8
+
+# 安装 GNU libc (aka glibc)和C.UTF-8 locale的依赖 以及设置时区
+# 下面这么长一串，主要是通过apk安装glibc的依赖，他的作用主要是本地化支持，和字符集的切换。
+RUN ALPINE_GLIBC_BASE_URL=&#34;https://github.com/sgerrand/alpine-pkg-glibc/releases/download&#34; &amp;&amp; \
+    ALPINE_GLIBC_PACKAGE_VERSION=&#34;2.27-r0&#34; &amp;&amp; \
+    ALPINE_GLIBC_BASE_PACKAGE_FILENAME=&#34;glibc-$ALPINE_GLIBC_PACKAGE_VERSION.apk&#34; &amp;&amp; \
+    ALPINE_GLIBC_BIN_PACKAGE_FILENAME=&#34;glibc-bin-$ALPINE_GLIBC_PACKAGE_VERSION.apk&#34; &amp;&amp; \
+    ALPINE_GLIBC_I18N_PACKAGE_FILENAME=&#34;glibc-i18n-$ALPINE_GLIBC_PACKAGE_VERSION.apk&#34; &amp;&amp; \
+    apk add --no-cache --virtual=.build-dependencies wget ca-certificates &amp;&amp; \
+    echo \
+        &#34;-----BEGIN PUBLIC KEY-----\
+        MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApZ2u1KJKUu/fW4A25y9m\
+        y70AGEa/J3Wi5ibNVGNn1gT1r0VfgeWd0pUybS4UmcHdiNzxJPgoWQhV2SSW1JYu\
+        tOqKZF5QSN6X937PTUpNBjUvLtTQ1ve1fp39uf/lEXPpFpOPL88LKnDBgbh7wkCp\
+        m2KzLVGChf83MS0ShL6G9EQIAUxLm99VpgRjwqTQ/KfzGtpke1wqws4au0Ab4qPY\
+        KXvMLSPLUp7cfulWvhmZSegr5AdhNw5KNizPqCJT8ZrGvgHypXyiFvvAH5YRtSsc\
+        Zvo9GI2e2MaZyo9/lvb+LbLEJZKEQckqRj4P26gmASrZEPStwc+yqy1ShHLA0j6m\
+        1QIDAQAB\
+        -----END PUBLIC KEY-----&#34; | sed &#39;s/   */\n/g&#39; &gt; &#34;/etc/apk/keys/sgerrand.rsa.pub&#34; &amp;&amp; \
+    wget \
+        &#34;$ALPINE_GLIBC_BASE_URL/$ALPINE_GLIBC_PACKAGE_VERSION/$ALPINE_GLIBC_BASE_PACKAGE_FILENAME&#34; \
+        &#34;$ALPINE_GLIBC_BASE_URL/$ALPINE_GLIBC_PACKAGE_VERSION/$ALPINE_GLIBC_BIN_PACKAGE_FILENAME&#34; \
+        &#34;$ALPINE_GLIBC_BASE_URL/$ALPINE_GLIBC_PACKAGE_VERSION/$ALPINE_GLIBC_I18N_PACKAGE_FILENAME&#34; &amp;&amp; \
+    apk add --no-cache \
+        &#34;$ALPINE_GLIBC_BASE_PACKAGE_FILENAME&#34; \
+        &#34;$ALPINE_GLIBC_BIN_PACKAGE_FILENAME&#34; \
+        &#34;$ALPINE_GLIBC_I18N_PACKAGE_FILENAME&#34; &amp;&amp; \
+    \
+    rm &#34;/etc/apk/keys/sgerrand.rsa.pub&#34; &amp;&amp; \
+    /usr/glibc-compat/bin/localedef --force --inputfile POSIX --charmap UTF-8 &#34;$LANG&#34; || true &amp;&amp; \
+    echo &#34;export LANG=$LANG&#34; &gt; /etc/profile.d/locale.sh &amp;&amp; \
+    \
+    apk del glibc-i18n &amp;&amp; \
+    \
+    rm &#34;/root/.wget-hsts&#34; &amp;&amp; \
+    apk del .build-dependencies &amp;&amp; \
+    rm \
+        &#34;$ALPINE_GLIBC_BASE_PACKAGE_FILENAME&#34; \
+        &#34;$ALPINE_GLIBC_BIN_PACKAGE_FILENAME&#34; \
+        &#34;$ALPINE_GLIBC_I18N_PACKAGE_FILENAME&#34; &amp;&amp; \
+  echo &#39;http://mirrors.ustc.edu.cn/alpine/v3.6/main&#39; &gt; /etc/apk/repositories \
+    &amp;&amp; echo &#39;http://mirrors.ustc.edu.cn/alpine/v3.6/community&#39; &gt;&gt;/etc/apk/repositories \
+&amp;&amp; apk update &amp;&amp; apk add tzdata \
+&amp;&amp; ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \ 
+&amp;&amp; echo &#34;Asia/Shanghai&#34; &gt; /etc/timezone
+
+## 上面这三行代码，是通过apk添加tzdata支持，将时区设置为东八区，也就是中国区的时间。</pre></td></tr></table></div></div><p>构建docker镜像</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span></pre></td><td class=lntd><pre class=chroma>docker build -t base-alpine . // 构建镜像</pre></td></tr></table></div></div><p>通过以上这个命令，我们就完成了基础镜像的构建。这个镜像只比最纯净的alpine官方镜像大2M。</p><h3 id=通过基础镜像构建其他应用>通过基础镜像构建其他应用</h3><p>完成以上的基础镜像之后，其实大部分工作都已经完成了。下面也通过Dockerfile来讲个例子。</p><ol><li><p>jdk8的镜像构建</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span></pre></td><td class=lntd><pre class=chroma>FROM cdjd/ci/base-alpine
+
+MAINTAINER  leongravel &#34;leebroncc@gmail.com&#34;
+
+ENV JAVA_VERSION=8 \
+JAVA_UPDATE=192 \
+JAVA_BUILD=12 \
+JAVA_PATH=750e1c8617c5452694857ad95c3ee230 \
+JAVA_HOME=&#34;/usr/lib/jvm/default-jvm&#34;
+
+RUN apk add --no-cache --virtual=build-dependencies wget ca-certificates unzip &amp;&amp; \
+cd &#34;/tmp&#34; &amp;&amp; \
+wget --header &#34;Cookie: oraclelicense=accept-securebackup-cookie;&#34; \
+    &#34;http://download.oracle.com/otn-pub/java/jdk/${JAVA_VERSION}u${JAVA_UPDATE}-b${JAVA_BUILD}/${JAVA_PATH}/jdk-${JAVA_VERSION}u${JAVA_UPDATE}-linux-x64.tar.gz&#34; &amp;&amp; \
+tar -xzf &#34;jdk-${JAVA_VERSION}u${JAVA_UPDATE}-linux-x64.tar.gz&#34; &amp;&amp; \
+mkdir -p &#34;/usr/lib/jvm&#34; &amp;&amp; \
+mv &#34;/tmp/jdk1.${JAVA_VERSION}.0_${JAVA_UPDATE}&#34; &#34;/usr/lib/jvm/java-${JAVA_VERSION}-oracle&#34; &amp;&amp; \
+ln -s &#34;java-${JAVA_VERSION}-oracle&#34; &#34;$JAVA_HOME&#34; &amp;&amp; \
+ln -s &#34;$JAVA_HOME/bin/&#34;* &#34;/usr/bin/&#34; &amp;&amp; \
+rm -rf &#34;$JAVA_HOME/&#34;*src.zip &amp;&amp; \
+wget --header &#34;Cookie: oraclelicense=accept-securebackup-cookie;&#34; \
+    &#34;http://download.oracle.com/otn-pub/java/jce/${JAVA_VERSION}/jce_policy-${JAVA_VERSION}.zip&#34; &amp;&amp; \
+unzip -jo -d &#34;${JAVA_HOME}/jre/lib/security&#34; &#34;jce_policy-${JAVA_VERSION}.zip&#34; &amp;&amp; \
+rm &#34;${JAVA_HOME}/jre/lib/security/README.txt&#34; &amp;&amp; \
+apk del build-dependencies &amp;&amp; \
+rm &#34;/tmp/&#34;*</pre></td></tr></table></div></div></li></ol><p>这个dockerfile比上面的那个要好理解一点，首先基于我们已经构建好的cdjd/ci/base-alpine，从oracle官网上，通过wget下载JDK8，然后解压。将解压后的文件移动到定义好的java-home,然后同ln软连接，配置java环境变量。然后下载jce_policy补丁包，放入/jre/lib/security文件夹。 删除一些不必要文件。</p><p>然后：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span></pre></td><td class=lntd><pre class=chroma>docker build -t jdk1.8 . // 构建镜像</pre></td></tr></table></div></div><p>完成JDK8环境的构建。我们可以通过这个镜像，去运行一些springboot的项目。</p><p>接下来说下tomcat镜像，tomcat我这里选用的是tomcat7，Dockerfile如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></pre></td><td class=lntd><pre class=chroma># 版本信息
+FROM jdk1.8
+MAINTAINER  leongravel &#34;leebroncc@gmail.com&#34;
+
+# add tomcat
+COPY tomcat /opt/tomcat
+
+#设置环境变量
+ENV TOMCAT_HOME /opt/tomcat \
+  PATH ${PATH}:${TOMCAT_HOME}/bin
+
+#开启内部服务端口
+EXPOSE 8080
+ENTRYPOINT [&#34;/opt/tomcat/bin/catalina.sh&#34;, &#34;run&#34;]</pre></td></tr></table></div></div><p>这里我是把已经解压好的tomcat copy进镜像构建，然后设置tomcat环境变量。</p><h3 id=dockerfile相关问题解释>Dockerfile相关问题解释</h3><p>我们知道镜像都是由一层一层的layer构成的，而这一层一层的layer就是我们所写的dockerfile里面的命令所定义的，比如:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span></pre></td><td class=lntd><pre class=chroma>RUN mkdir -p /opt/thunisoft
+RUN cd /opt/thunisoft</pre></td></tr></table></div></div><p>这就会生成两个layer，所以我们再编写dockerfile时候，应该尽可能的将所有的命令，都通过各种方式合并起来，这样构建的镜像会比两条命令，小很多。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span></pre></td><td class=lntd><pre class=chroma>RUN mkdir -p /opt/thunisoft &amp;&amp; \
+    cd /opt/thunisoft </pre></td></tr></table></div></div><p>以上是正确示范。</p><p>另外，如果需要在dockerfile里面下载外部资源，最好下载到tmp目录里面，使用完成之后，再将这个目录统一删除。</p></div><div class=post-copyright><p class=copyright-item><span class=item-title>Author</span>
+<span class=item-content>gravel</span></p><p class=copyright-item><span class=item-title>LastMod</span>
+<span class=item-content>2019-02-23</span></p><p class=copyright-item><span class=item-title>License</span>
+<span class=item-content><a rel="license noopener" href=https://creativecommons.org/licenses/by-nc-nd/4.0/ target=_blank>CC BY-NC-ND 4.0</a></span></p></div><footer class=post-footer><div class=post-tags><a href=/tags/docker/>docker</a>
+<a href=/tags/linux/>linux</a>
+<a href=/tags/alpine/>alpine</a></div><nav class=post-nav><a class=prev href=/post/%E4%BD%BF%E7%94%A8gitrebase%E5%90%88%E5%B9%B6%E5%A4%9A%E4%B8%AAcommit%E6%8F%90%E4%BA%A4/><i class="iconfont icon-left"></i><span class="prev-text nav-default">使用git rebase合并多个commit提交</span>
+<span class="prev-text nav-mobile">Prev</span></a>
+<a class=next href=/post/docker%E5%AF%BC%E5%87%BA%E9%95%9C%E5%83%8F%E5%8E%8B%E7%BC%A9%E5%8C%85/><span class="next-text nav-default">docker导出镜像压缩包</span>
+<span class="next-text nav-mobile">Next</span>
+<i class="iconfont icon-right"></i></a></nav></footer></article></div><div id=disqus_thread></div><script type=text/javascript>(function(){if(window.location.hostname==='localhost')return;var dsq=document.createElement('script');dsq.type='text/javascript';dsq.async=true;var disqus_shortname='leongravel';dsq.src='//'+disqus_shortname+'.disqus.com/embed.js';(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(dsq);})();</script><noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript></div></main><footer id=footer class=footer><div class=social-links><a href=mailto:leebroncc@gmail.com class="iconfont icon-email" title=email></a><a href=https://twitter.com/leebroncc class="iconfont icon-twitter" title=twitter></a><a href=https://github.com/leonGravel class="iconfont icon-github" title=github></a><a href=https://www.zhihu.com/people/gravel-20/activities class="iconfont icon-zhihu" title=zhihu></a><a href=https://space.bilibili.com/321842652/#/ class="iconfont icon-bilibili" title=bilibili></a><a href=https://leongravel.com/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a></div><div class=copyright><span class=power-by>Powered by <a class=hexo-link href=https://gohugo.io>Hugo</a></span>
+<span class=division>|</span>
+<span class=theme-info>Theme -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a></span><div class=busuanzi-footer><span id=busuanzi_container_site_pv>site pv: <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span></span>
+<span class=division>|</span>
+<span id=busuanzi_container_site_uv>site uv: <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span></span></div><span class=copyright-year>&copy;
+2016 -
+2019
+<span class=heart><i class="iconfont icon-heart"></i></span><span class=author>Gravel</span></span></div></footer><div class=back-to-top id=back-to-top><i class="iconfont icon-up"></i></div></div><script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script><script type=text/javascript src=/dist/even.ece58db6.min.js></script></body></html>

@@ -1,0 +1,246 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><title>springboot - gravel&#39;s blog</title><meta name=renderer content=webkit><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=cache-control content=no-transform><meta http-equiv=cache-control content=no-siteapp><meta name=theme-color content=#f8f5ec><meta name=msapplication-navbutton-color content=#f8f5ec><meta name=apple-mobile-web-app-capable content=yes><meta name=apple-mobile-web-app-status-bar-style content=#f8f5ec><meta name=author content=gravel><meta name=description content="Spring Boot 简介 Spring Boot(英文中是引导的意思)，是用来简化Spring应用的搭建到开发的过程。应用开箱即用，只要通过 just run（可能是 java -jar 或 tomcat 或 maven插件run 或 shell脚本），就可以启动项目。二者，Spring Boot 只要很少的Spring配置文件（例如那些xml，property）。 因为习惯优先于配置的原则，使得Spring Boot在快速开发应用和微服务架构实践中得到广泛应用。 Javaer装好JDK环境和Maven工具就可以开始学习Boot了~"><meta name=keywords content="Hugo,gravel's blog"><meta name=generator content="Hugo 0.57.2 with even 4.0.0"><link rel=canonical href=https://leongravel.com/post/springboot/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><link href=/dist/even.1cafc379.min.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><meta property=og:title content=springboot><meta property=og:description content="Spring Boot 简介
+
+Spring Boot(英文中是引导的意思)，是用来简化Spring应用的搭建到开发的过程。应用开箱即用，只要通过 just run（可能是 java -jar 或 tomcat 或 maven插件run 或 shell脚本），就可以启动项目。二者，Spring Boot 只要很少的Spring配置文件（例如那些xml，property）。 因为习惯优先于配置的原则，使得Spring Boot在快速开发应用和微服务架构实践中得到广泛应用。   Javaer装好JDK环境和Maven工具就可以开始学习Boot了~"><meta property=og:type content=article><meta property=og:url content=https://leongravel.com/post/springboot/><meta property=article:published_time content=2018-07-11T23:01:41+00:00><meta property=article:modified_time content=2018-07-11T23:01:41+00:00><meta itemprop=name content=springboot><meta itemprop=description content="Spring Boot 简介
+
+Spring Boot(英文中是引导的意思)，是用来简化Spring应用的搭建到开发的过程。应用开箱即用，只要通过 just run（可能是 java -jar 或 tomcat 或 maven插件run 或 shell脚本），就可以启动项目。二者，Spring Boot 只要很少的Spring配置文件（例如那些xml，property）。 因为习惯优先于配置的原则，使得Spring Boot在快速开发应用和微服务架构实践中得到广泛应用。   Javaer装好JDK环境和Maven工具就可以开始学习Boot了~"><meta itemprop=datePublished content=2018-07-11T23:01:41&#43;00:00><meta itemprop=dateModified content=2018-07-11T23:01:41&#43;00:00><meta itemprop=wordCount content=3559><meta itemprop=keywords content=java,springboot,><meta name=twitter:card content=summary><meta name=twitter:title content=springboot><meta name=twitter:description content="Spring Boot 简介
+
+Spring Boot(英文中是引导的意思)，是用来简化Spring应用的搭建到开发的过程。应用开箱即用，只要通过 just run（可能是 java -jar 或 tomcat 或 maven插件run 或 shell脚本），就可以启动项目。二者，Spring Boot 只要很少的Spring配置文件（例如那些xml，property）。 因为习惯优先于配置的原则，使得Spring Boot在快速开发应用和微服务架构实践中得到广泛应用。   Javaer装好JDK环境和Maven工具就可以开始学习Boot了~"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script><script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>gravel&#39;s blog</a></div><div class=mobile-navbar-icon><span></span><span></span><span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/><li class=mobile-menu-item>Home</li></a><a href=/post/><li class=mobile-menu-item>Archives</li></a><a href=/tags/><li class=mobile-menu-item>Tags</li></a><a href=/categories/><li class=mobile-menu-item>Categories</li></a><a href=/resume><li class=mobile-menu-item>Resume</li></a><a href=/about><li class=mobile-menu-item>About</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>gravel&#39;s blog</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/>Home</a></li><li class=menu-item><a class=menu-item-link href=/post/>Archives</a></li><li class=menu-item><a class=menu-item-link href=/tags/>Tags</a></li><li class=menu-item><a class=menu-item-link href=/categories/>Categories</a></li><li class=menu-item><a class=menu-item-link href=/resume>Resume</a></li><li class=menu-item><a class=menu-item-link href=/about>About</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>springboot</h1><div class=post-meta><span class=post-time>2018-07-11</span><div class=post-category><a href=/categories/springboot/>springboot</a></div><span class=more-meta>3559 words</span>
+<span class=more-meta>8 mins read</span>
+<span id=busuanzi_container_page_pv class=more-meta><span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> times read</span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>Contents</h2><div class="post-toc-content always-active"><nav id=TableOfContents><ul><li><ul><li><a href=#spring-boot-简介>Spring Boot 简介</a></li><li><a href=#hello-world>Hello world</a><ul><li><a href=#pom-xml配置>pom.xml配置</a></li><li><a href=#controller层>Controller层</a></li><li><a href=#启动应用类>启动应用类</a></li></ul></li><li><a href=#运行>运行</a></li><li><a href=#配置文件>配置文件</a><ul><li><a href=#自定义属性与加载>自定义属性与加载</a></li><li><a href=#属性配置类>属性配置类</a></li><li><a href=#参数间的引用>参数间的引用</a></li><li><a href=#通过命令行设置属性值>通过命令行设置属性值</a></li><li><a href=#多环境配置>多环境配置</a></li></ul></li></ul></li></ul></nav></div></div><div class=post-content><h2 id=spring-boot-简介>Spring Boot 简介</h2><p>Spring Boot(英文中是<code>引导</code>的意思)，是用来简化Spring应用的搭建到开发的过程。应用开箱即用，只要通过 <code>just run</code>（可能是 java -jar 或 tomcat 或 maven插件run 或 shell脚本），就可以启动项目。二者，Spring Boot 只要很少的Spring配置文件（例如那些xml，property）。 因为<code>习惯优先于配置</code>的原则，使得Spring Boot在快速开发应用和微服务架构实践中得到广泛应用。 Javaer装好JDK环境和Maven工具就可以开始学习Boot了~</p><h2 id=hello-world>Hello world</h2><p>首先得有个maven基础项目，可以直接使用Maven骨架工程生成Maven骨架Web项目，即man archetype:generate命令：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span></pre></td><td class=lntd><pre class=chroma>mvn archetype:generate -DgroupId=springboot -DartifactId=springboot-helloworld -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false</pre></td></tr></table></div></div><h3 id=pom-xml配置>pom.xml配置</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span></pre></td><td class=lntd><pre class=chroma>&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;
+&lt;project xmlns=&#34;http://maven.apache.org/POM/4.0.0&#34; xmlns:xsi=&#34;http://www.w3.org/2001/XMLSchema-instance&#34;
+         xsi:schemaLocation=&#34;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&#34;&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+
+    &lt;groupId&gt;springboot&lt;/groupId&gt;
+    &lt;artifactId&gt;springboot-helloworld&lt;/artifactId&gt;
+    &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+    &lt;name&gt;springboot-helloworld :: HelloWorld Demo&lt;/name&gt;
+
+    &lt;!-- Spring Boot 启动父依赖 --&gt;
+    &lt;parent&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
+        &lt;version&gt;1.3.3.RELEASE&lt;/version&gt;
+    &lt;/parent&gt;
+
+    &lt;dependencies&gt;
+        &lt;!-- Spring Boot web依赖 --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+
+        &lt;!-- Junit --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;junit&lt;/groupId&gt;
+            &lt;artifactId&gt;junit&lt;/artifactId&gt;
+            &lt;version&gt;4.12&lt;/version&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+&lt;/project&gt;</pre></td></tr></table></div></div><p>只要加入一个 Spring Boot 启动父依赖即可。</p><h3 id=controller层>Controller层</h3><p>HelloWorldController的代码如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></pre></td><td class=lntd><pre class=chroma>/**
+ * Spring Boot HelloWorld案例
+ *
+ * Created by liao on 2018/7/12.
+ */
+@RestController
+public class HelloWorldController {
+
+    @RequestMapping(&#34;/&#34;)
+    public String sayHello() {
+        return &#34;Hello,World!&#34;;
+    }
+}</pre></td></tr></table></div></div><p>@RestController和@RequestMapping注解是来自SpringMVC的注解，它们不是SpringBoot的特定部分。 1. @RestController：提供实现了REST API，可以服务JSON,XML或者其他。这里是以String的形式渲染出结果。 2. @RequestMapping：提供路由信息，&rdquo;/&ldquo;路径的HTTP Request都会被映射到sayHello方法进行处理。</p><h3 id=启动应用类>启动应用类</h3><p>和第一段描述一样，开箱即用。如下面Application类：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></pre></td><td class=lntd><pre class=chroma>/**
+ * Spring Boot应用启动类
+ *
+ * Created by liao on 2018/7/12.
+ */
+@SpringBootApplication
+public class Application {
+
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class,args);
+    }
+}</pre></td></tr></table></div></div><ol><li>@SpringBootApplication：Spring Boot 应用的标识</li><li>Application很简单，一个main函数作为主入口。SpringApplication引导应用，并将Application本身作为参数传递给run方法。具体run方法会启动嵌入式的Tomcat并初始化Spring环境及其各Spring组件。<br></li></ol><h2 id=运行>运行</h2><p>Just Run的宗旨，运行很简单，直接右键Run运行Application类。同样你也可以Debug Run。可以在控制台中看到：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span></pre></td><td class=lntd><pre class=chroma>Tomcat started on port(s): 8080 (http)
+Started Application in 5.986 seconds (JVM running for 7.398)</pre></td></tr></table></div></div><p>然后访问<a href=http://localhost:8080/>http://localhost:8080/</a>,即可在页面中看到Spring Boot对你 say hello：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span></pre></td><td class=lntd><pre class=chroma>Hello,World！</pre></td></tr></table></div></div><h2 id=配置文件>配置文件</h2><p>我在Spring Boot使用过程中，最直观的感受就是没有了原来自己整合Spring应用时繁多的XML配置内容，替代它的是在pom.xml中引入模块化的Starter POMs，其中各个模块都有自己的默认配置，所以如果不是特殊应用场景，就只需要在application.properties中完成一些属性配置就能开启各模块的应用。</p><h3 id=自定义属性与加载>自定义属性与加载</h3><p>在使用Spring Boot的时候，通常也需要定义一些自己使用的属性，可以如下方式直接定义：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span></pre></td><td class=lntd><pre class=chroma>com.gravel.name=李鳌
+com.gravel.title=李鳌的文章</pre></td></tr></table></div></div><p>然后通过<code>@Value(&quot;${属性名}&quot;)</code>注解来加载对应的配置属性，具体如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></pre></td><td class=lntd><pre class=chroma>@Component
+public class gravelProperties {
+
+    @Value(&#34;${com.gravel.name}&#34;)
+    private String name;
+    @Value(&#34;${com.gravel.title}&#34;)
+    private String title;
+
+    // 省略getter和setter
+
+}</pre></td></tr></table></div></div><p>可以通过单元测试来验证<code>gravelProperties</code>中的属性是否已经根据配置文件加载了。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></pre></td><td class=lntd><pre class=chroma>@RunWith(SpringJUnit4ClassRunner.class)
+@SpringApplicationConfiguration(Application.class)
+public class ApplicationTests {
+
+    @Autowired
+    private gravelProperties tProperties;
+
+
+    @Test
+    public void getHello() throws Exception {
+        Assert.assertEquals(tProperties.getName(), &#34;李鳌&#34;);
+        Assert.assertEquals(tProperties.getTitle(), &#34;李鳌的文章&#34;);
+    }
+
+}</pre></td></tr></table></div></div><h3 id=属性配置类>属性配置类</h3><p>springboot还支持引入外部配置文件，这里举个例子。属性配置类 <code>StaticProperties.class</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></pre></td><td class=lntd><pre class=chroma>@Component
+public class StaticProperties {
+
+    public static String CUSTOM_NAME;
+
+    @Value(&#34;${custom.name}&#34;)
+    public void setCustomName(String customName) {
+        CUSTOM_NAME = customName;
+    }
+
+}</pre></td></tr></table></div></div><p>Spring Boot 配置提示 resources/META-INF/spring-configuration-metadata.json</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></pre></td><td class=lntd><pre class=chroma>{
+  &#34;properties&#34;: [
+    {
+      &#34;name&#34;: &#34;custom.name&#34;,
+      &#34;type&#34;: &#34;java.lang.String&#34;,
+      &#34;sourceType&#34;: &#34;com.gravel.config.StaticProperties&#34;
+    }
+  ]
+}</pre></td></tr></table></div></div><p>Spring Boot 配置 application.properties</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span></pre></td><td class=lntd><pre class=chroma>custom.name=liao</pre></td></tr></table></div></div><p>至此，即可在 Spring Boot 全局任意引用 StaticProperties.CUSTOM_NAME来获取这个属性啦。</p><h3 id=参数间的引用>参数间的引用</h3><p>在<code>application.properties</code>中的各个参数之间也可以直接引用来使用，就像下面的设置：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></pre></td><td class=lntd><pre class=chroma>com.gravel.name=李鳌
+com.gravel.title=李鳌的文章
+com.gravel.blog.desc=${com.gravel.name}正在努力写《${com.gravel.title}》</pre></td></tr></table></div></div><p><code>com.gravel.blog.desc</code>参数引用了上文中定义的name和title属性，最后该属性的值就是李鳌正在努力写《李鳌的文章》。</p><h3 id=通过命令行设置属性值>通过命令行设置属性值</h3><p>相信使用过一段时间<code>Spring Boot</code>的用户，一定知道这条命令：<code>java -jar xxx.jar --server.port=8888</code>，通过使用<code>—server.port</code>属性来设置<code>xxx.jar</code>应用的端口为<code>8888</code>。</p><p>在命令行运行时，连续的两个减号&ndash;就是对<code>application.properties</code>中的属性值进行赋值的标识。所以，<code>java -jar xxx.jar --server.port=8888</code>命令，等价于我们在<code>application.properties</code>中添加属性<code>server.port=8888</code>，该设置在样例工程中可见，读者可通过删除该值或使用命令行来设置该值来验证。</p><p>通过命令行来修改属性值固然提供了不错的便利性，但是通过命令行就能更改应用运行的参数，那岂不是很不安全？是的，所以Spring Boot也贴心的提供了屏蔽命令行访问属性的设置，只需要这句设置就能屏蔽：<code>SpringApplication.setAddCommandLineProperties(false)</code>。</p><h3 id=多环境配置>多环境配置</h3><p>我们在开发Spring Boot应用时，通常同一套程序会被应用和安装到几个不同的环境，比如：开发、测试、生产等。其中每个环境的数据库地址、服务器端口等等配置都会不同，如果在为不同环境打包时都要频繁修改配置文件的话，那必将是个非常繁琐且容易发生错误的事。</p><p>对于多环境的配置，各种项目构建工具或是框架的基本思路是一致的，通过配置多份不同环境的配置文件，再通过打包命令指定需要打包的内容之后进行区分打包，Spring Boot也不例外，或者说更加简单。</p><p>在Spring Boot中多环境配置文件名需要满足<code>application-{profile}.properties</code>的格式，其中<code>{profile}</code>对应你的环境标识，比如：
+* <code>application-dev.properties</code>：开发环境
+* <code>application-test.properties</code>：测试环境
+* <code>application-prod.properties</code>：生产环境</p><p>至于哪个具体的配置文件会被加载，需要在<code>application.properties</code>文件中通过<code>spring.profiles.active</code>属性来设置，其值对应<code>{profile}</code>值。
+如：<code>spring.profiles.active=test</code>就会加载<code>application-test.properties</code>配置文件内容。`
+下面，以不同环境配置不同的服务端口为例，进行样例实验。</p><p>针对各环境新建不同的配置文件<code>application-dev.properties</code>、<code>application-test.properties</code>、<code>application-prod.properties</code>;</p><p>在这三个文件均都设置不同的<code>server.port</code>属性，如：dev环境设置为1111，test环境设置为2222，prod环境设置为3333,</p><p><code>application.properties</code>中设置<code>spring.profiles.active=dev</code>，就是说默认以dev环境设置</p><p>测试不同配置的加载</p><ul><li>执行<code>java -jar xxx.jar</code>，可以观察到服务端口被设置为1111，也就是默认的开发环境（dev）</li><li>执行<code>java -jar xxx.jar --spring.profiles.active=test</code>，可以观察到服务端口被设置为2222，也就是测试环境的配置（test）</li><li>执行<code>java -jar xxx.jar --spring.profiles.active=prod</code>，可以观察到服务端口被设置为3333，也就是生产环境的配置（prod）
+按照上面的实验，可以如下总结多环境的配置思路：</li></ul><p><code>application.properties</code>中配置通用内容，并设置<code>spring.profiles.active=dev</code>，以开发环境为默认配置
+<code>application-{profile}.properties</code>中配置各个环境不同的内容
+通过命令行方式去激活不同环境的配置。</p></div><div class=post-copyright><p class=copyright-item><span class=item-title>Author</span>
+<span class=item-content>gravel</span></p><p class=copyright-item><span class=item-title>LastMod</span>
+<span class=item-content>2018-07-11</span></p><p class=copyright-item><span class=item-title>License</span>
+<span class=item-content><a rel="license noopener" href=https://creativecommons.org/licenses/by-nc-nd/4.0/ target=_blank>CC BY-NC-ND 4.0</a></span></p></div><footer class=post-footer><div class=post-tags><a href=/tags/java/>java</a>
+<a href=/tags/springboot/>springboot</a></div><nav class=post-nav><a class=prev href=/post/%E5%B8%B8%E7%94%A8%E7%9A%84%E5%87%A0%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/><i class="iconfont icon-left"></i><span class="prev-text nav-default">常用的几种设计模式</span>
+<span class="prev-text nav-mobile">Prev</span></a>
+<a class=next href=/post/think_in_java%E7%AC%AC%E4%B8%80%E7%AB%A0/><span class="next-text nav-default">think-in-Java（第一章）</span>
+<span class="next-text nav-mobile">Next</span>
+<i class="iconfont icon-right"></i></a></nav></footer></article></div><div id=disqus_thread></div><script type=text/javascript>(function(){if(window.location.hostname==='localhost')return;var dsq=document.createElement('script');dsq.type='text/javascript';dsq.async=true;var disqus_shortname='leongravel';dsq.src='//'+disqus_shortname+'.disqus.com/embed.js';(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(dsq);})();</script><noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript></div></main><footer id=footer class=footer><div class=social-links><a href=mailto:leebroncc@gmail.com class="iconfont icon-email" title=email></a><a href=https://twitter.com/leebroncc class="iconfont icon-twitter" title=twitter></a><a href=https://github.com/leonGravel class="iconfont icon-github" title=github></a><a href=https://www.zhihu.com/people/gravel-20/activities class="iconfont icon-zhihu" title=zhihu></a><a href=https://space.bilibili.com/321842652/#/ class="iconfont icon-bilibili" title=bilibili></a><a href=https://leongravel.com/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a></div><div class=copyright><span class=power-by>Powered by <a class=hexo-link href=https://gohugo.io>Hugo</a></span>
+<span class=division>|</span>
+<span class=theme-info>Theme -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a></span><div class=busuanzi-footer><span id=busuanzi_container_site_pv>site pv: <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span></span>
+<span class=division>|</span>
+<span id=busuanzi_container_site_uv>site uv: <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span></span></div><span class=copyright-year>&copy;
+2016 -
+2019
+<span class=heart><i class="iconfont icon-heart"></i></span><span class=author>Gravel</span></span></div></footer><div class=back-to-top id=back-to-top><i class="iconfont icon-up"></i></div></div><script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script><script type=text/javascript src=/dist/even.ece58db6.min.js></script></body></html>

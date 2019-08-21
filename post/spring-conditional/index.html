@@ -1,0 +1,206 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><title>spring-conditional - gravel&#39;s blog</title><meta name=renderer content=webkit><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=cache-control content=no-transform><meta http-equiv=cache-control content=no-siteapp><meta name=theme-color content=#f8f5ec><meta name=msapplication-navbutton-color content=#f8f5ec><meta name=apple-mobile-web-app-capable content=yes><meta name=apple-mobile-web-app-status-bar-style content=#f8f5ec><meta name=author content=gravel><meta name=description content="@Conditional 注解是 Spring 4 提供的基于条件的 Bean 的创建方式，Spring Boot 大量利用了这个特定来实现自动配置。比如，当某一个 jar 包在一个类路径下时，自动配置一个或"><meta name=keywords content="Hugo,gravel's blog"><meta name=generator content="Hugo 0.57.2 with even 4.0.0"><link rel=canonical href=https://leongravel.com/post/spring-conditional/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><link href=/dist/even.1cafc379.min.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><meta property=og:title content=spring-conditional><meta property=og:description content="@Conditional 注解是 Spring 4 提供的基于条件的 Bean 的创建方式，Spring Boot 大量利用了这个特定来实现自动配置。比如，当某一个 jar 包在一个类路径下时，自动配置一个或"><meta property=og:type content=article><meta property=og:url content=https://leongravel.com/post/spring-conditional/><meta property=article:published_time content=2018-07-21T23:01:41+00:00><meta property=article:modified_time content=2018-07-21T23:01:41+00:00><meta itemprop=name content=spring-conditional><meta itemprop=description content="@Conditional 注解是 Spring 4 提供的基于条件的 Bean 的创建方式，Spring Boot 大量利用了这个特定来实现自动配置。比如，当某一个 jar 包在一个类路径下时，自动配置一个或"><meta itemprop=datePublished content=2018-07-21T23:01:41&#43;00:00><meta itemprop=dateModified content=2018-07-21T23:01:41&#43;00:00><meta itemprop=wordCount content=1635><meta itemprop=keywords content=java,><meta name=twitter:card content=summary><meta name=twitter:title content=spring-conditional><meta name=twitter:description content="@Conditional 注解是 Spring 4 提供的基于条件的 Bean 的创建方式，Spring Boot 大量利用了这个特定来实现自动配置。比如，当某一个 jar 包在一个类路径下时，自动配置一个或"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script><script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>gravel&#39;s blog</a></div><div class=mobile-navbar-icon><span></span><span></span><span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/><li class=mobile-menu-item>Home</li></a><a href=/post/><li class=mobile-menu-item>Archives</li></a><a href=/tags/><li class=mobile-menu-item>Tags</li></a><a href=/categories/><li class=mobile-menu-item>Categories</li></a><a href=/resume><li class=mobile-menu-item>Resume</li></a><a href=/about><li class=mobile-menu-item>About</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>gravel&#39;s blog</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/>Home</a></li><li class=menu-item><a class=menu-item-link href=/post/>Archives</a></li><li class=menu-item><a class=menu-item-link href=/tags/>Tags</a></li><li class=menu-item><a class=menu-item-link href=/categories/>Categories</a></li><li class=menu-item><a class=menu-item-link href=/resume>Resume</a></li><li class=menu-item><a class=menu-item-link href=/about>About</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>spring-conditional</h1><div class=post-meta><span class=post-time>2018-07-21</span><div class=post-category><a href=/categories/spring/>spring</a></div><span class=more-meta>1635 words</span>
+<span class=more-meta>4 mins read</span>
+<span id=busuanzi_container_page_pv class=more-meta><span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> times read</span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>Contents</h2><div class="post-toc-content always-active"><nav id=TableOfContents><ul><li><ul><li><a href=#自定义-condition-实例>自定义 Condition 实例</a><ul><li><a href=#通过实现-spring-提供的-condition-接口创建两个-condition-类>通过实现 Spring 提供的 <code>Condition</code> 接口创建两个 Condition 类</a></li><li><a href=#创建获取命令的接口并分别创建-linux-和-windows-下的实现>创建获取命令的接口并分别创建 Linux 和 Windows 下的实现</a></li><li><a href=#创建配置类并使用-conditional-注解将-bean-定义为条件创建>创建配置类并使用 <code>@Conditional</code> 注解将 Bean 定义为条件创建</a></li><li><a href=#测试类>测试类</a></li></ul></li><li><a href=#conditional-常见使用方法><code>@Conditional</code> 常见使用方法</a></li><li><a href=#spring-内置-conditional>Spring 内置 Conditional</a></li><li><a href=#conditional-与-profile-区别><code>@Conditional</code> 与 <code>@Profile</code> 区别</a></li><li><a href=#conditional-注解使用场景><code>@Conditional</code> 注解使用场景</a></li><li><a href=#参考>参考</a></li></ul></li></ul></nav></div></div><div class=post-content><p><code>@Conditional</code> 注解是 Spring 4 提供的基于条件的 Bean 的创建方式，Spring Boot 大量利用了这个特定来实现自动配置。比如，当某一个 jar 包在一个类路径下时，自动配置一个或者多个 Bean；或者只有一个 Bean 创建时，才会创建另一个 Bean。总的来说，就是根据特定条件来控制 Bean 的创建行为，这样就可以利用这个特性进行一些自动配置。</p><h2 id=自定义-condition-实例>自定义 Condition 实例</h2><p>下面的示例将以不同的操作系统作为条件，通过实现 Condition 接口，并重写其 matches 方法来构造判断条件，获取在不同操作系统下的操作命令。如在 Windows 系统下运行程序调用获取文件列表命名的方法则输出 <code>dir</code>，如果在 Linux 下则输出 <code>ls</code>。</p><h3 id=通过实现-spring-提供的-condition-接口创建两个-condition-类>通过实现 Spring 提供的 <code>Condition</code> 接口创建两个 Condition 类</h3><p>自定义 Condition 需要实现 <code>org.springframework.context.annotation.Condition</code> 接口中的 <code>boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata)</code> 方法，我们的条件判断逻辑则应该放在此方法中。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code class=language-java data-lang=java><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-java data-lang=java><span class=kd>public</span> <span class=nf>class</span> <span class=n>WindowsCondition</span> <span class=nf>implements</span> <span class=n>Condition</span> <span class=p>{</span>
+	<span class=nd>@Override</span>
+	<span class=kd>public</span> <span class=nf>boolean</span> <span class=n>matches</span><span class=p>(</span><span class=n>ConditionContext</span> <span class=nf>context</span><span class=p>,</span> <span class=n>AnnotatedTypeMetadata</span> <span class=nf>metadata</span><span class=p>)</span> <span class=p>{</span>
+		<span class=n>System</span><span class=p>.</span><span class=na>out</span><span class=p>.</span><span class=na>println</span><span class=p>(</span><span class=s>&#34;os.name:&#34;</span> <span class=o>+</span> <span class=n>context</span><span class=p>.</span><span class=na>getEnvironment</span><span class=p>().</span><span class=na>getProperty</span><span class=p>(</span><span class=s>&#34;os.name&#34;</span><span class=p>));</span>
+		<span class=k>return</span> <span class=n>context</span><span class=p>.</span><span class=na>getEnvironment</span><span class=p>().</span><span class=na>getProperty</span><span class=p>(</span><span class=s>&#34;os.name&#34;</span><span class=p>).</span><span class=na>contains</span><span class=p>(</span><span class=s>&#34;Windows&#34;</span><span class=p>);</span>
+	<span class=p>}</span>
+<span class=p>}</span>
+
+<span class=kd>public</span> <span class=nf>class</span> <span class=n>LinuxCondition</span> <span class=nf>implements</span> <span class=n>Condition</span> <span class=p>{</span>
+	<span class=nd>@Override</span>
+	<span class=kd>public</span> <span class=nf>boolean</span> <span class=n>matches</span><span class=p>(</span><span class=n>ConditionContext</span> <span class=nf>context</span><span class=p>,</span> <span class=n>AnnotatedTypeMetadata</span> <span class=nf>metadata</span><span class=p>)</span> <span class=p>{</span>
+		<span class=n>System</span><span class=p>.</span><span class=na>out</span><span class=p>.</span><span class=na>println</span><span class=p>(</span><span class=s>&#34;os.name:&#34;</span> <span class=o>+</span> <span class=n>context</span><span class=p>.</span><span class=na>getEnvironment</span><span class=p>().</span><span class=na>getProperty</span><span class=p>(</span><span class=s>&#34;os.name&#34;</span><span class=p>));</span>
+		<span class=k>return</span> <span class=n>context</span><span class=p>.</span><span class=na>getEnvironment</span><span class=p>().</span><span class=na>getProperty</span><span class=p>(</span><span class=s>&#34;os.name&#34;</span><span class=p>).</span><span class=na>contains</span><span class=p>(</span><span class=s>&#34;Linux&#34;</span><span class=p>);</span>
+	<span class=p>}</span>
+<span class=p>}</span></code></pre></td></tr></table></div></div><h3 id=创建获取命令的接口并分别创建-linux-和-windows-下的实现>创建获取命令的接口并分别创建 Linux 和 Windows 下的实现</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code class=language-java data-lang=java><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-java data-lang=java><span class=kd>public</span> <span class=nf>interface</span> <span class=n>CmdService</span> <span class=p>{</span>
+	<span class=n>String</span> <span class=nf>getListCmd</span><span class=p>();</span>	
+<span class=p>}</span>
+
+<span class=kd>public</span> <span class=nf>class</span> <span class=n>WindowsCmdServiceImpl</span> <span class=nf>implements</span> <span class=n>CmdService</span> <span class=p>{</span>
+	<span class=nd>@Override</span>
+	<span class=kd>public</span> <span class=nf>String</span> <span class=n>getListCmd</span><span class=p>()</span> <span class=p>{</span>
+		<span class=k>return</span> <span class=s>&#34;dir&#34;</span><span class=p>;</span>
+	<span class=p>}</span>
+<span class=p>}</span>
+
+<span class=kd>public</span> <span class=nf>class</span> <span class=n>LinuxCmdServiceImpl</span> <span class=nf>implements</span> <span class=n>CmdService</span> <span class=p>{</span>
+	<span class=nd>@Override</span>
+	<span class=kd>public</span> <span class=nf>String</span> <span class=n>getListCmd</span><span class=p>()</span> <span class=p>{</span>
+		<span class=k>return</span> <span class=s>&#34;ls&#34;</span><span class=p>;</span>
+	<span class=p>}</span>
+<span class=p>}</span></code></pre></td></tr></table></div></div><h3 id=创建配置类并使用-conditional-注解将-bean-定义为条件创建>创建配置类并使用 <code>@Conditional</code> 注解将 Bean 定义为条件创建</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code class=language-java data-lang=java><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-java data-lang=java><span class=nd>@Configuration</span>
+<span class=kd>public</span> <span class=nf>class</span> <span class=n>SpringConditionalConf</span> <span class=p>{</span>
+	
+	<span class=nd>@Bean</span>
+	<span class=nd>@Conditional</span><span class=p>(</span><span class=n>WindowsCondition</span><span class=p>.</span><span class=na>class</span><span class=p>)</span> <span class=c1>//WindowsCondition 条件成立时创建此 Bean
+</span><span class=c1></span>	<span class=kd>public</span> <span class=nf>CmdService</span> <span class=n>windowsCmdService</span><span class=p>(){</span>
+		<span class=k>return</span> <span class=k>new</span> <span class=n>WindowsCmdServiceImpl</span><span class=p>();</span>
+	<span class=p>}</span>
+	
+	<span class=nd>@Bean</span>
+	<span class=nd>@Conditional</span><span class=p>(</span><span class=n>LinuxCondition</span><span class=p>.</span><span class=na>class</span><span class=p>)</span> <span class=c1>//LinuxCondition 条件成立时创建此 Bean
+</span><span class=c1></span>	<span class=kd>public</span> <span class=nf>CmdService</span> <span class=n>linuxCmdService</span><span class=p>(){</span>
+		<span class=k>return</span> <span class=k>new</span> <span class=n>LinuxCmdServiceImpl</span><span class=p>();</span>
+	<span class=p>}</span>
+	
+<span class=p>}</span></code></pre></td></tr></table></div></div><h3 id=测试类>测试类</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code class=language-java data-lang=java><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-java data-lang=java><span class=nd>@RunWith</span><span class=p>(</span><span class=n>SpringRunner</span><span class=p>.</span><span class=na>class</span><span class=p>)</span>
+<span class=nd>@SpringBootTest</span><span class=p>(</span><span class=n>classes</span> <span class=o>=</span> <span class=n>HelloSpringBoot</span><span class=p>.</span><span class=na>class</span><span class=p>)</span>
+<span class=kd>public</span> <span class=nf>class</span> <span class=n>SpringConditionalDemoTest</span> <span class=p>{</span>
+
+	<span class=nd>@Autowired</span>
+	<span class=kd>private</span> <span class=nf>CmdService</span> <span class=n>cmdService</span><span class=p>;</span>
+	
+	<span class=nd>@Test</span>
+	<span class=kd>public</span> <span class=nf>void</span> <span class=n>testConditional</span><span class=p>(){</span>
+		<span class=n>System</span><span class=p>.</span><span class=na>out</span><span class=p>.</span><span class=na>println</span><span class=p>(</span><span class=n>cmdService</span><span class=p>.</span><span class=na>getListCmd</span><span class=p>());</span>
+	<span class=p>}</span>
+	
+<span class=p>}</span></code></pre></td></tr></table></div></div><p>在 windows 主机上运行测试得到输出 <code>dir</code>，说明只有 <code>WindowsCmdServiceImpl</code> 实例被创建并且得到了正确的指令。</p><h2 id=conditional-常见使用方法><code>@Conditional</code> 常见使用方法</h2><p>在上例中 <code>@Conditional</code> 注解标注到 <code>@Bean</code> 的方法上；除此之外还可以作为类级别的注解放在注标识有@Component（包含@Configuration）的类上，这时所有标识了 <code>@Bean</code> 的方法和 <code>@Import</code> 注解导入的相关类将遵从这些条件；最后还可以作为一个 meta-annotation，组成自定义注解。</p><h2 id=spring-内置-conditional>Spring 内置 Conditional</h2><p>除了类似上例的自定义 Condition 之外，Spring 还内置了一些 Condition 给我们使用：</p><ul><li><code>@ConditionalOnBean</code> 仅仅在当前上下文中存在某个对象时，才会实例化一个 Bean</li><li><code>@ConditionalOnClass</code> 某个 class 位于类路径上，才会实例化一个 Bean</li><li><code>@ConditionalOnExpression</code> 当表达式为 true 的时候，才会实例化一个 Bean</li><li><code>@ConditionalOnMissingBean</code> 仅仅在当前上下文中不存在某个对象时，才会实例化一个 Bean</li><li><code>@ConditionalOnMissingClass</code> 某个 class 类路径上不存在的时候，才会实例化一个 Bean</li><li><code>@ConditionalOnNotWebApplication</code> 不是 web 应用时才会实例化一个 Bean</li></ul><h2 id=conditional-与-profile-区别><code>@Conditional</code> 与 <code>@Profile</code> 区别</h2><p>Spring 3.1 推出的 @Profiles 注解功能与 @Conditional 注解类似，都是提供一种 “If-Then-Else” 能力，即条件配置功能。但是更早出现的 @Profiles 主要是用来根据不同的运行环境加载不同的应用配置；@Conditional 注解是一种更高层次的实现，他没有 @Profile 注解的一些限制，是 @profile 的一种更加通用的版本，其主要被用作 Bean 的条件加载。</p><p>@Profile 注解使用举例</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code class=language-java data-lang=java><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-java data-lang=java><span class=nd>@Profile</span><span class=p>(</span><span class=s>&#34;Development&#34;</span><span class=p>)</span>
+<span class=nd>@Configuration</span>
+<span class=kd>public</span> <span class=nf>class</span> <span class=n>DevDatabaseConfig</span> <span class=nf>implements</span> <span class=n>DatabaseConfig</span> <span class=p>{</span>
+    <span class=nd>@Override</span>
+    <span class=nd>@Bean</span>
+    <span class=kd>public</span> <span class=nf>DataSource</span> <span class=n>createDataSource</span><span class=p>()</span> <span class=p>{</span>
+        <span class=n>System</span><span class=p>.</span><span class=na>out</span><span class=p>.</span><span class=na>println</span><span class=p>(</span><span class=s>&#34;Creating DEV database&#34;</span><span class=p>);</span>
+        <span class=n>DriverManagerDataSource</span> <span class=nf>dataSource</span> <span class=o>=</span> <span class=k>new</span> <span class=n>DriverManagerDataSource</span><span class=p>();</span>
+        <span class=cm>/*
+</span><span class=cm>         * Set MySQL specific properties for Development Environment
+</span><span class=cm>         */</span>
+        <span class=k>return</span> <span class=n>dataSource</span><span class=p>;</span>
+    <span class=p>}</span>
+<span class=p>}</span>
+
+<span class=nd>@Profile</span><span class=p>(</span><span class=s>&#34;Production&#34;</span><span class=p>)</span>
+<span class=nd>@Configuration</span>
+<span class=kd>public</span> <span class=nf>class</span> <span class=n>ProductionDatabaseConfig</span> <span class=nf>implements</span> <span class=n>DatabaseConfig</span> <span class=p>{</span>
+    <span class=nd>@Override</span>
+    <span class=nd>@Bean</span>
+    <span class=kd>public</span> <span class=nf>DataSource</span> <span class=n>createDataSource</span><span class=p>()</span> <span class=p>{</span>
+        <span class=n>System</span><span class=p>.</span><span class=na>out</span><span class=p>.</span><span class=na>println</span><span class=p>(</span><span class=s>&#34;Creating Production database&#34;</span><span class=p>);</span>
+        <span class=n>DriverManagerDataSource</span> <span class=nf>dataSource</span> <span class=o>=</span> <span class=k>new</span> <span class=n>DriverManagerDataSource</span><span class=p>();</span>
+        <span class=cm>/*
+</span><span class=cm>         * Set ORACLE specific properties for Production environment
+</span><span class=cm>         */</span>
+        <span class=k>return</span> <span class=n>dataSource</span><span class=p>;</span>
+    <span class=p>}</span>
+<span class=p>}</span></code></pre></td></tr></table></div></div><p>以上两个配置类都实现了 DatabaseConfig 接口，特殊的地方在于它们都用 @Profile 标注，被 @Profile 标注的组件只有当指定 profile 值匹配时才生效。可以通过以下方式设置 profile 值：</p><ol><li>设置 spring.profiles.active 属性（通过 JVM 参数、环境变量或者 web.xml 中的 Servlet context 参数）</li><li>ApplicationContext.getEnvironment().setActiveProfiles(“ProfileName”)</li></ol><p>在 Spring 3.x 里 @Profiles 注解只能用在类级别，但是在 Spring 4.0 以后则既可以用在类级别也可以用在方法级别，主要是因为在 4.0 中 Spring 使用 @Conditional 对其做了重构：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code class=language-java data-lang=java><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-java data-lang=java><span class=nd>@Retention</span><span class=p>(</span><span class=n>RetentionPolicy</span><span class=p>.</span><span class=na>RUNTIME</span><span class=p>)</span>
+<span class=nd>@Target</span><span class=p>({</span><span class=n>ElementType</span><span class=p>.</span><span class=na>TYPE</span><span class=p>,</span> <span class=n>ElementType</span><span class=p>.</span><span class=na>METHOD</span><span class=p>})</span>
+<span class=nd>@Documented</span>
+<span class=nd>@Conditional</span><span class=p>(</span><span class=n>ProfileCondition</span><span class=p>.</span><span class=na>class</span><span class=p>)</span>  <span class=c1>// 使用 @Conditional 实现 @Profile
+</span><span class=c1></span><span class=kd>public</span> <span class=nd>@interface</span> <span class=n>Profile</span> <span class=p>{</span>
+	<span class=n>String</span><span class=p>[]</span> <span class=nf>value</span><span class=p>();</span>
+<span class=p>}</span></code></pre></td></tr></table></div></div><h2 id=conditional-注解使用场景><code>@Conditional</code> 注解使用场景</h2><p>我们知道在 Spring Boot 中大量使用了 <code>@Conditional</code> 注解，我们在平时的开发中如果遇到以下一些场景则可以考虑使用该注解:</p><ul><li>Condition whether a property is available or not using Environment variables, irrespective of its value.</li><li>Like Profiles, Condition whether a property value is available or not using Environment variables.</li><li>Conditions based on a Bean definition are present in Spring Application context.</li><li>Conditions based on a Bean object are present in Spring Application context.</li><li>Conditions based on some or all Bean properties values.</li><li>Conditions based on some Resources are present in current Spring Application Context or not.</li><li>Conditions based on Bean’s Annotations</li><li>Conditions Bean’s Method’s Annotations.</li><li>Conditions based on Bean’s Annotation’s parameter values</li><li>Conditions based on Bean’s Method’s Annotation’s parameter values.</li></ul><h2 id=参考>参考</h2><ul><li><a href=https://javapapers.com/spring/spring-conditional-annotation/>Spring @Conditional Annotation</a></li><li><a href=http://wiselyman.iteye.com/blog/2002449>Spring4.0系列5-@Conditional</a></li></ul></div><div class=post-copyright><p class=copyright-item><span class=item-title>Author</span>
+<span class=item-content>gravel</span></p><p class=copyright-item><span class=item-title>LastMod</span>
+<span class=item-content>2018-07-21</span></p><p class=copyright-item><span class=item-title>License</span>
+<span class=item-content><a rel="license noopener" href=https://creativecommons.org/licenses/by-nc-nd/4.0/ target=_blank>CC BY-NC-ND 4.0</a></span></p></div><footer class=post-footer><div class=post-tags><a href=/tags/java/>java</a></div><nav class=post-nav><a class=prev href=/post/redis%E7%AE%80%E5%8D%95%E8%AE%B2%E8%A7%A3/><i class="iconfont icon-left"></i><span class="prev-text nav-default">Redis简单讲解</span>
+<span class="prev-text nav-mobile">Prev</span></a>
+<a class=next href=/post/java%E5%9F%BA%E7%A1%80%E4%BB%A5%E5%8F%8A%E8%BF%9B%E9%98%B6%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/><span class="next-text nav-default">java基础以及进阶知识点总结</span>
+<span class="next-text nav-mobile">Next</span>
+<i class="iconfont icon-right"></i></a></nav></footer></article></div><div id=disqus_thread></div><script type=text/javascript>(function(){if(window.location.hostname==='localhost')return;var dsq=document.createElement('script');dsq.type='text/javascript';dsq.async=true;var disqus_shortname='leongravel';dsq.src='//'+disqus_shortname+'.disqus.com/embed.js';(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(dsq);})();</script><noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript></div></main><footer id=footer class=footer><div class=social-links><a href=mailto:leebroncc@gmail.com class="iconfont icon-email" title=email></a><a href=https://twitter.com/leebroncc class="iconfont icon-twitter" title=twitter></a><a href=https://github.com/leonGravel class="iconfont icon-github" title=github></a><a href=https://www.zhihu.com/people/gravel-20/activities class="iconfont icon-zhihu" title=zhihu></a><a href=https://space.bilibili.com/321842652/#/ class="iconfont icon-bilibili" title=bilibili></a><a href=https://leongravel.com/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a></div><div class=copyright><span class=power-by>Powered by <a class=hexo-link href=https://gohugo.io>Hugo</a></span>
+<span class=division>|</span>
+<span class=theme-info>Theme -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a></span><div class=busuanzi-footer><span id=busuanzi_container_site_pv>site pv: <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span></span>
+<span class=division>|</span>
+<span id=busuanzi_container_site_uv>site uv: <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span></span></div><span class=copyright-year>&copy;
+2016 -
+2019
+<span class=heart><i class="iconfont icon-heart"></i></span><span class=author>Gravel</span></span></div></footer><div class=back-to-top id=back-to-top><i class="iconfont icon-up"></i></div></div><script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script><script type=text/javascript src=/dist/even.ece58db6.min.js></script></body></html>

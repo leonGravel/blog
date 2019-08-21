@@ -1,0 +1,195 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><title>java-String知识点汇总 - gravel&#39;s blog</title><meta name=renderer content=webkit><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=cache-control content=no-transform><meta http-equiv=cache-control content=no-siteapp><meta name=theme-color content=#f8f5ec><meta name=msapplication-navbutton-color content=#f8f5ec><meta name=apple-mobile-web-app-capable content=yes><meta name=apple-mobile-web-app-status-bar-style content=#f8f5ec><meta name=author content=gravel><meta name=description content="Java 的 String 类几乎是 Java 中最常使用到的对象类型，关于 String 的一些基础知识对开发者来说显得尤为重要。下面就对 String 相关的一些知识点进行列举和归纳，希望能够加深对 String 对象的认识。"><meta name=keywords content="Hugo,gravel's blog"><meta name=generator content="Hugo 0.57.2 with even 4.0.0"><link rel=canonical href=https://leongravel.com/post/%E5%85%B3%E4%BA%8Ejava-string%E7%9A%84%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><link href=/dist/even.1cafc379.min.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><meta property=og:title content=java-String知识点汇总><meta property=og:description content="Java 的 String 类几乎是 Java 中最常使用到的对象类型，关于 String 的一些基础知识对开发者来说显得尤为重要。下面就对 String 相关的一些知识点进行列举和归纳，希望能够加深对 String 对象的认识。"><meta property=og:type content=article><meta property=og:url content=https://leongravel.com/post/%E5%85%B3%E4%BA%8Ejava-string%E7%9A%84%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB/><meta property=article:published_time content=2018-09-26T23:01:41+00:00><meta property=article:modified_time content=2018-09-26T23:01:41+00:00><meta itemprop=name content=java-String知识点汇总><meta itemprop=description content="Java 的 String 类几乎是 Java 中最常使用到的对象类型，关于 String 的一些基础知识对开发者来说显得尤为重要。下面就对 String 相关的一些知识点进行列举和归纳，希望能够加深对 String 对象的认识。"><meta itemprop=datePublished content=2018-09-26T23:01:41&#43;00:00><meta itemprop=dateModified content=2018-09-26T23:01:41&#43;00:00><meta itemprop=wordCount content=4337><meta itemprop=keywords content=java,><meta name=twitter:card content=summary><meta name=twitter:title content=java-String知识点汇总><meta name=twitter:description content="Java 的 String 类几乎是 Java 中最常使用到的对象类型，关于 String 的一些基础知识对开发者来说显得尤为重要。下面就对 String 相关的一些知识点进行列举和归纳，希望能够加深对 String 对象的认识。"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script><script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>gravel&#39;s blog</a></div><div class=mobile-navbar-icon><span></span><span></span><span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/><li class=mobile-menu-item>Home</li></a><a href=/post/><li class=mobile-menu-item>Archives</li></a><a href=/tags/><li class=mobile-menu-item>Tags</li></a><a href=/categories/><li class=mobile-menu-item>Categories</li></a><a href=/resume><li class=mobile-menu-item>Resume</li></a><a href=/about><li class=mobile-menu-item>About</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>gravel&#39;s blog</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/>Home</a></li><li class=menu-item><a class=menu-item-link href=/post/>Archives</a></li><li class=menu-item><a class=menu-item-link href=/tags/>Tags</a></li><li class=menu-item><a class=menu-item-link href=/categories/>Categories</a></li><li class=menu-item><a class=menu-item-link href=/resume>Resume</a></li><li class=menu-item><a class=menu-item-link href=/about>About</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>java-String知识点汇总</h1><div class=post-meta><span class=post-time>2018-09-26</span><div class=post-category><a href=/categories/java/>java</a></div><span class=more-meta>4337 words</span>
+<span class=more-meta>9 mins read</span>
+<span id=busuanzi_container_page_pv class=more-meta><span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> times read</span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>Contents</h2><div class="post-toc-content always-active"><nav id=TableOfContents><ul><li><ul><li><a href=#字符串常量池>字符串常量池</a></li><li><a href=#string-itern-的基本原理和作用>String.itern()的基本原理和作用</a></li><li><a href=#string-s-new-string-abc-语句创建了几个对象><code>String s = new String(“abc”)</code>语句创建了几个对象？</a></li><li><a href=#string-的-equals-以及-hashcode>String 的 <code>==</code>、<code>equals</code> 以及 <code>hashcode</code></a></li><li><a href=#hashcode-方法的作用>hashcode 方法的作用</a></li><li><a href=#可以直接根据hashcode值判断两个对象是否相等吗>可以直接根据hashcode值判断两个对象是否相等吗？</a></li><li><a href=#在重写equals方法的同时-必须重写hashcode方法-为什么这么说>在重写equals方法的同时，必须重写hashCode方法。为什么这么说？</a></li><li><a href=#hashcode-是对象的内存地址吗>hashcode 是对象的内存地址吗</a></li><li><a href=#string-stringbuffer-stringbuilder的区别>String, StringBuffer，StringBuilder的区别？</a></li><li><a href=#string是不可变的有什么好处>String是不可变的有什么好处？</a></li><li><a href=#java-能不能自己创建一个-java-lang-string-的对象>Java 能不能自己创建一个 <code>java.lang.String</code> 的对象</a></li></ul></li></ul></nav></div></div><div class=post-content><p>Java 的 String 类几乎是 Java 中最常使用到的对象类型，关于 String 的一些基础知识对开发者来说显得尤为重要。下面就对 String 相关的一些知识点进行列举和归纳，希望能够加深对 String 对象的认识。</p><h2 id=字符串常量池>字符串常量池</h2><p>JVM为了提高性能和减少内存开销，在实例化字符串常量的时候进行了一些优化。为了减少在JVM中创建的字符串的数量，字符串类维护了一个字符串池，每当代码创建字符串常量时，JVM会首先检查字符串常量池。如果字符串已经存在池中，就返回池中的实例引用。如果字符串不在池中，就会实例化一个字符串并放到池中。<strong>Java能够进行这样的优化是因为字符串是不可变的，可以不用担心数据冲突进行共享。</strong></p><p>另外需要注意<strong>通过new操作符创建的字符串对象不指向字符串池中的任何对象，但是可以通过使用字符串的intern()方法来指向其中的某一个。</strong></p><h2 id=string-itern-的基本原理和作用>String.itern()的基本原理和作用</h2><p>String.intern()是一个Native方法，底层调用C++的 StringTable::intern 方法，源码注释：当调用 intern 方法时，如果常量池中已经该字符串，则返回池中的字符串；否则将此字符串添加到常量池中，并返回字符串的引用。</p><p>所以明面上，它有两大好处，一是重复的字符串，会用同一个引用代替；二是字符串比较，不再需要逐个字符的equals()比较，而用==对比引用是否相同即可。</p><h2 id=string-s-new-string-abc-语句创建了几个对象><code>String s = new String(“abc”)</code>语句创建了几个对象？</h2><p>首先括号里的&rdquo;abc&rdquo;先到String pool里看有没&rdquo;abc&rdquo;这个对象，没有则在pool里创建这个对象。此时在pool创建了一个&rdquo;abc&rdquo;对象。然后通过new语句又创建了一个&rdquo;abc&rdquo;对象，而这个对象是放在内存的堆里，这里的s指向堆里的对象。</p><p>故创建常量池和堆内存中两个对象，两个对象的地址值不一样，返回的是堆内存的地址。</p><h2 id=string-的-equals-以及-hashcode>String 的 <code>==</code>、<code>equals</code> 以及 <code>hashcode</code></h2><p>先来看一段代码：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code class=language-java data-lang=java><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-java data-lang=java><span class=kd>public</span> <span class=nf>static</span> <span class=kt>void</span> <span class=nf>main</span><span class=p>(</span><span class=n>String</span><span class=p>[]</span> <span class=nf>args</span><span class=p>)</span> <span class=p>{</span>
+	<span class=n>String</span> <span class=nf>a</span> <span class=o>=</span> <span class=s>&#34;hello&#34;</span><span class=p>;</span>
+	<span class=n>String</span> <span class=nf>b</span> <span class=o>=</span> <span class=s>&#34;hello&#34;</span><span class=p>;</span>
+	<span class=n>String</span> <span class=nf>c</span> <span class=o>=</span> <span class=k>new</span> <span class=n>String</span><span class=p>(</span><span class=s>&#34;hello&#34;</span><span class=p>);</span>
+	<span class=n>String</span> <span class=nf>d</span> <span class=o>=</span> <span class=k>new</span> <span class=n>String</span><span class=p>(</span><span class=s>&#34;hello&#34;</span><span class=p>);</span>
+	<span class=n>System</span><span class=p>.</span><span class=na>out</span><span class=p>.</span><span class=na>println</span><span class=p>(</span><span class=n>a</span><span class=p>.</span><span class=na>hashCode</span><span class=p>()</span> <span class=o>==</span> <span class=n>b</span><span class=p>.</span><span class=na>hashCode</span><span class=p>());</span> <span class=c1>//true， String重写了hashcode方法，只跟String的value[]有关
+</span><span class=c1></span>	<span class=n>System</span><span class=p>.</span><span class=na>out</span><span class=p>.</span><span class=na>println</span><span class=p>(</span><span class=n>a</span><span class=p>.</span><span class=na>hashCode</span><span class=p>()</span> <span class=o>==</span> <span class=n>c</span><span class=p>.</span><span class=na>hashCode</span><span class=p>());</span> <span class=c1>//true 同上
+</span><span class=c1></span>	<span class=n>System</span><span class=p>.</span><span class=na>out</span><span class=p>.</span><span class=na>println</span><span class=p>(</span><span class=n>a</span><span class=p>.</span><span class=na>equals</span><span class=p>(</span><span class=n>b</span><span class=p>));</span> <span class=c1>//true，String也重写了equals方法，只跟value[]有关
+</span><span class=c1></span>	<span class=n>System</span><span class=p>.</span><span class=na>out</span><span class=p>.</span><span class=na>println</span><span class=p>(</span><span class=n>a</span><span class=p>.</span><span class=na>equals</span><span class=p>(</span><span class=n>c</span><span class=p>));</span> <span class=c1>//true，同上
+</span><span class=c1></span>	<span class=n>System</span><span class=p>.</span><span class=na>out</span><span class=p>.</span><span class=na>println</span><span class=p>(</span><span class=n>a</span> <span class=o>==</span> <span class=n>b</span><span class=p>);</span> <span class=c1>//true,因为a和b都在常量池中，
+</span><span class=c1></span>	<span class=n>System</span><span class=p>.</span><span class=na>out</span><span class=p>.</span><span class=na>println</span><span class=p>(</span><span class=n>a</span> <span class=o>==</span> <span class=n>c</span><span class=p>);</span> <span class=c1>//false，a在常量池中，c在堆中
+</span><span class=c1></span>	<span class=n>System</span><span class=p>.</span><span class=na>out</span><span class=p>.</span><span class=na>println</span><span class=p>(</span><span class=n>c</span> <span class=o>==</span> <span class=n>d</span><span class=p>);</span> <span class=c1>//false，c和d都在堆中，但是为不同的对象
+</span><span class=c1></span>	
+	<span class=n>String</span> <span class=nf>hello</span> <span class=o>=</span> <span class=s>&#34;Hello&#34;</span><span class=p>,</span> <span class=n>lo</span> <span class=o>=</span> <span class=s>&#34;lo&#34;</span><span class=p>;</span>
+	<span class=n>System</span><span class=p>.</span><span class=na>out</span><span class=p>.</span><span class=na>println</span><span class=p>((</span><span class=n>hello</span> <span class=o>==</span> <span class=p>(</span><span class=s>&#34;Hel&#34;</span><span class=o>+</span><span class=s>&#34;lo&#34;</span><span class=p>)));</span> <span class=c1>//true,&#34;Hel&#34;+&#34;lo&#34;在编译时进行计算，被当做常量
+</span><span class=c1></span>	<span class=n>System</span><span class=p>.</span><span class=na>out</span><span class=p>.</span><span class=na>println</span><span class=p>((</span><span class=n>hello</span> <span class=o>==</span> <span class=p>(</span><span class=s>&#34;Hel&#34;</span><span class=o>+</span><span class=n>lo</span><span class=p>)));</span> <span class=c1>//false，在运行时通过连接计算出的字符串是新创建的，因此是堆中创建的新对象
+</span><span class=c1></span>	<span class=n>System</span><span class=p>.</span><span class=na>out</span><span class=p>.</span><span class=na>println</span><span class=p>(</span><span class=n>hello</span> <span class=o>==</span> <span class=p>(</span><span class=s>&#34;Hel&#34;</span><span class=o>+</span><span class=n>lo</span><span class=p>).</span><span class=na>intern</span><span class=p>());</span> <span class=c1>//true，通过使用字符串的intern()方法来指向字符串池中的对象
+</span><span class=c1></span><span class=p>}</span></code></pre></td></tr></table></div></div><p>再来看看 String 重写的 hashcode 及 equals 方法</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code class=language-java data-lang=java><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-java data-lang=java><span class=kd>public</span> <span class=nf>int</span> <span class=n>hashCode</span><span class=p>()</span> <span class=p>{</span>
+    <span class=kt>int</span> <span class=nf>h</span> <span class=o>=</span> <span class=n>hash</span><span class=p>;</span>
+    <span class=k>if</span> <span class=p>(</span><span class=n>h</span> <span class=o>==</span> <span class=n>0</span> <span class=o>&amp;&amp;</span> <span class=n>value</span><span class=p>.</span><span class=na>length</span> <span class=o>&gt;</span> <span class=n>0</span><span class=p>)</span> <span class=p>{</span>
+        <span class=kt>char</span> <span class=nf>val</span><span class=p>[]</span> <span class=o>=</span> <span class=n>value</span><span class=p>;</span>
+
+        <span class=k>for</span> <span class=p>(</span><span class=kt>int</span> <span class=nf>i</span> <span class=o>=</span> <span class=n>0</span><span class=p>;</span> <span class=n>i</span> <span class=o>&lt;</span> <span class=n>value</span><span class=p>.</span><span class=na>length</span><span class=p>;</span> <span class=n>i</span><span class=o>++</span><span class=p>)</span> <span class=p>{</span>
+            <span class=n>h</span> <span class=o>=</span> <span class=n>31</span> <span class=o>*</span> <span class=n>h</span> <span class=o>+</span> <span class=n>val</span><span class=p>[</span><span class=n>i</span><span class=p>];</span>
+        <span class=p>}</span>
+        <span class=n>hash</span> <span class=o>=</span> <span class=n>h</span><span class=p>;</span>
+    <span class=p>}</span>
+    <span class=k>return</span> <span class=n>h</span><span class=p>;</span>
+<span class=p>}</span>   
+
+<span class=kd>public</span> <span class=nf>boolean</span> <span class=n>equals</span><span class=p>(</span><span class=n>Object</span> <span class=nf>anObject</span><span class=p>)</span> <span class=p>{</span>
+    <span class=k>if</span> <span class=p>(</span><span class=k>this</span> <span class=o>==</span> <span class=n>anObject</span><span class=p>)</span> <span class=p>{</span>
+        <span class=k>return</span> <span class=kc>true</span><span class=p>;</span>
+    <span class=p>}</span>
+    <span class=k>if</span> <span class=p>(</span><span class=n>anObject</span> <span class=nf>instanceof</span> <span class=n>String</span><span class=p>)</span> <span class=p>{</span>
+        <span class=n>String</span> <span class=nf>anotherString</span> <span class=o>=</span> <span class=p>(</span><span class=n>String</span><span class=p>)</span><span class=n>anObject</span><span class=p>;</span>
+        <span class=kt>int</span> <span class=nf>n</span> <span class=o>=</span> <span class=n>value</span><span class=p>.</span><span class=na>length</span><span class=p>;</span>
+        <span class=k>if</span> <span class=p>(</span><span class=n>n</span> <span class=o>==</span> <span class=n>anotherString</span><span class=p>.</span><span class=na>value</span><span class=p>.</span><span class=na>length</span><span class=p>)</span> <span class=p>{</span>
+            <span class=kt>char</span> <span class=nf>v1</span><span class=p>[]</span> <span class=o>=</span> <span class=n>value</span><span class=p>;</span>
+            <span class=kt>char</span> <span class=nf>v2</span><span class=p>[]</span> <span class=o>=</span> <span class=n>anotherString</span><span class=p>.</span><span class=na>value</span><span class=p>;</span>
+            <span class=kt>int</span> <span class=nf>i</span> <span class=o>=</span> <span class=n>0</span><span class=p>;</span>
+            <span class=k>while</span> <span class=p>(</span><span class=n>n</span><span class=o>--</span> <span class=o>!=</span> <span class=n>0</span><span class=p>)</span> <span class=p>{</span>
+                <span class=k>if</span> <span class=p>(</span><span class=n>v1</span><span class=p>[</span><span class=n>i</span><span class=p>]</span> <span class=o>!=</span> <span class=n>v2</span><span class=p>[</span><span class=n>i</span><span class=p>])</span>
+                    <span class=k>return</span> <span class=kc>false</span><span class=p>;</span>
+                <span class=n>i</span><span class=o>++</span><span class=p>;</span>
+            <span class=p>}</span>
+            <span class=k>return</span> <span class=kc>true</span><span class=p>;</span>
+        <span class=p>}</span>
+    <span class=p>}</span>
+    <span class=k>return</span> <span class=kc>false</span><span class=p>;</span>
+<span class=p>}</span>    </code></pre></td></tr></table></div></div><p>结论：</p><ul><li>String的hashCode之和value有关</li><li>equals比较的也只是value（指向同一个对象时value也必然相同，换句话就是<code>a==b ||（a.length=b.length &amp;&amp; {a[i]=b[i]}）</code>）</li><li>a==b比较的是ref</li><li>hashSet中比较是否重复的依据是<code>a.hasCode()=b.hasCode() &amp;&amp; a.equals(b)</code></li><li>因此两个不同ref的String对象在hashSet中会被认为是同一个元素</li><li><strong>两个String的hashCode相同并不代表着equals比较时会相等</strong>，<strong>即不同的String可能会产生相同的hash值</strong>，例如<code>Aa</code>和<code>BB</code>的hashcode都是2112</li></ul><h2 id=hashcode-方法的作用>hashcode 方法的作用</h2><p>Java的Object类中定义了<code>public native int hashCode()</code>方法，也就是说每一个java类都会继承这个方法（有的类会重写此方法），那这个方法到底有什么用，为什么这么重要？</p><p><strong>在Java中，hashCode方法的主要作用是为了配合基于散列的集合一起正常运行，这样的散列集合包括HashSet、HashMap以及HashTable。</strong></p><p>举个例子：当向集合中插入对象时，如何判别在集合中是否已经存在该对象了？（注意：集合中不允许重复的元素存在）。</p><p>很容易想到的方法是调用equals方法来逐个进行比较，这个方法确实可行，但是如果集合中已经存在一万条数据或者更多的数据，如果采用equals方法去逐一比较，效率必然是一个问题。</p><p>JDK中实现的方法是：当集合要添加新的对象时，先调用这个对象的hashCode方法，得到对应的hashcode值，实际上在HashMap的具体实现中会用一个table保存已经存进去的对象的hashcode值（hashcode值一般都会被缓存），如果table中没有该hashcode值，它就可以直接存进去，不用再进行任何比较了；如果存在该hashcode值， 就调用它的equals方法与新元素进行比较，相同的话就不存了，不相同就散列其它的地址。这样一来实际调用equals方法的次数就大大降低了。</p><p>总结一句话就是：<strong>可以根据hashcode值判断两个对象是否不等，这样效率更高！</strong></p><h2 id=可以直接根据hashcode值判断两个对象是否相等吗>可以直接根据hashcode值判断两个对象是否相等吗？</h2><p>不可以！前面也演示了不同的对象可能会生成相同的hashcode值。虽然不能根据hashcode值判断两个对象是否相等，但是可以直接根据hashcode值判断两个对象不等，如果两个对象的hashcode值不等，则必定是两个不同的对象。</p><ul><li>两个对象调用equals方法得到的结果为true，则两个对象的hashcode值必定相等；</li><li>如果equals方法得到的结果为false，则两个对象的hashcode值不一定不同</li><li>如果两个对象的hashcode值不等，则equals方法得到的结果必定为false；</li><li>如果两个对象的hashcode值相等，则equals方法得到的结果未知。</li></ul><h2 id=在重写equals方法的同时-必须重写hashcode方法-为什么这么说>在重写equals方法的同时，必须重写hashCode方法。为什么这么说？</h2><p>重写 equals 方法后必须重写 hashCode 是为了让 Java 中所有使用到 Hash 算法的数据结构能够正常运行。</p><p>举个例子：假如 a 和 b 是两个对象，你重写了 equals() 方法，a.equals(b)结果为true。</p><p>然后创建一个 HashMap，执行 map.put(a,c); map 中插入了一条数据，键是 a 值是 c，调用 map.get(a) 可以返回对象 c，但是调用 map.get(b) 却不能返回对象 c， 但是 a 和 b 两个对象是相等的，相等的对象却得不到相同的结果，就不符合逻辑了。因为 HashMap 是根据键对象的 HashCode 来进行快速查找的，所以你必须保证 a 和 b 这两个相同对象的 HashCode 也相同，因此你需要重写 hashCode() 方法。另外，如果你要用到 HashSet，在这个例子中 a 和 b 可以同时插入到 HashSet 中，然而这两个对象在逻辑上有时相等的，这不符合 HashSet 的定义。</p><p>另外这也是hashcode方法的要求，在Object的hashcode方法注释中明确做了如下说明：
+&gt; If two objects are equal according to the equals(Object) method, then calling the hashCode() method on each of the two objects must produce the same integer result.</p><h2 id=hashcode-是对象的内存地址吗>hashcode 是对象的内存地址吗</h2><p>首先String就不是，因为它重写了hashcode方法。这个问题问的应该是object中的hashcode的native方法。因为不同JVM的实现不一样，可能有JVM这样实现，但大多时候并不是这样，只能说可能存储地址有一定关联。</p><h2 id=string-stringbuffer-stringbuilder的区别>String, StringBuffer，StringBuilder的区别？</h2><ul><li>String 是字符串常量，是不可变的，而 StringBuffer 及 StringBuilder 可变</li><li>在做字符串拼接时，直接操作 String 比较耗资源，因为它的不可变性，会导致创建多个中间对象</li><li>String、StringBuffer 是线程安全的，StringBuilder 线程不安全</li></ul><p>三者之间的关系看这张图：</p><p><img src=http://ochyazsr6.bkt.clouddn.com/1294873a37967d1f431ce3a5db02fe75.jpg alt></p><p>看源码会发现 StringBuffer 和 StringBuilder 继承了同样的接口和抽象类，其中的方法和实现也几乎都一样，唯一的区别就是在 StringBuffer 中很多方法都加了 <code>synchronized</code> 修饰符
+从而达到线程安全的目的。</p><h2 id=string是不可变的有什么好处>String是不可变的有什么好处？</h2><ol><li>由于String是不可变类，所以在多线程中使用是安全的，我们不需要做任何其他同步操作。</li><li>不同的字符串变量可以引用池中的相同的字符串，节省大量内存空间。</li></ol><h2 id=java-能不能自己创建一个-java-lang-string-的对象>Java 能不能自己创建一个 <code>java.lang.String</code> 的对象</h2><p>先说结论，下面会详细解释。可以创建，但是不能正常的加载。首先 JVM 类加载的<code>双亲委托机制</code>使得所有的类都优先从父类或者启动类加载，导致同名自定义的类没有机会加载；其次即使定义了一个父类找不到的类名从而轮到自定义的类加载器加载，也会因为 JVM 限制包名以 <code>java.*</code> 开头的类加载，会抛出一个安全异常。</p><p>其实这个问题和 String 没什么关系，所有 rt.jar 包下的类都同理。这里主要涉及到 Java 的类加载机制，以及类加载的一些特殊限制（处于安全考虑）。下面对类加载相关的知识进行简单总结。</p><p>Java 类加载有一个称为双亲委托的机制：<strong>某个特定的类加载器在接到加载类的请求时，首先将加载任务委托给父类加载器，依次递归，如果父类加载器可以完成类加载任务，就成功返回；只有父类加载器无法完成此加载任务时，才自己去加载。</strong></p><p>使用双亲委派模型的好处在于 Java 类随着它的类加载器一起具备了一种带有优先级的层次关系。例如类java.lang.Object，它存在在 rt.jar 中，无论哪一个类加载器要加载这个类，最终都是委派给处于模型最顶端的 Bootstrap ClassLoader 进行加载，因此 Object 类在程序的各种类加载器环境中都是同一个类。</p><p>jdk 自带了3种类加载器，分别是启动类加载器（Bootstrap ClassLoader），扩展类加载器（Extension ClassLoader），应用程序类加载器（Application ClassLoader）。启动类加载器由native实现（HotSpot虚拟机中由c++实现），后两种加载器是继承自抽象类 java.lang.ClassLoader。</p><p>在 rt.jar 包中的 java.lang.ClassLoader 类中，我们可以查看类加载实现过程的代码如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code class=language-java data-lang=java><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-java data-lang=java><span class=kd>protected</span> <span class=nf>Class</span><span class=o>&lt;?&gt;</span> <span class=n>loadClass</span><span class=p>(</span><span class=n>String</span> <span class=nf>name</span><span class=p>,</span> <span class=kt>boolean</span> <span class=nf>resolve</span><span class=p>)</span>
+        <span class=kd>throws</span> <span class=nf>ClassNotFoundException</span>
+<span class=p>{</span>
+    <span class=kd>synchronized</span> <span class=p>(</span><span class=n>getClassLoadingLock</span><span class=p>(</span><span class=n>name</span><span class=p>))</span> <span class=p>{</span>
+        <span class=c1>// First, check if the class has already been loaded
+</span><span class=c1></span>        <span class=n>Class</span><span class=o>&lt;?&gt;</span> <span class=n>c</span> <span class=o>=</span> <span class=n>findLoadedClass</span><span class=p>(</span><span class=n>name</span><span class=p>);</span> <span class=c1>//首先检查该类是否已经加载过
+</span><span class=c1></span>        <span class=k>if</span> <span class=p>(</span><span class=n>c</span> <span class=o>==</span> <span class=kc>null</span><span class=p>)</span> <span class=p>{</span> <span class=c1>//没加载过的话按照以下步骤加载
+</span><span class=c1></span>            <span class=kt>long</span> <span class=nf>t0</span> <span class=o>=</span> <span class=n>System</span><span class=p>.</span><span class=na>nanoTime</span><span class=p>();</span>
+            <span class=k>try</span> <span class=p>{</span>
+                <span class=k>if</span> <span class=p>(</span><span class=n>parent</span> <span class=o>!=</span> <span class=kc>null</span><span class=p>)</span> <span class=p>{</span> <span class=c1>//1. 有父加载器时递归调用父加载器加载
+</span><span class=c1></span>                    <span class=n>c</span> <span class=o>=</span> <span class=n>parent</span><span class=p>.</span><span class=na>loadClass</span><span class=p>(</span><span class=n>name</span><span class=p>,</span> <span class=kc>false</span><span class=p>);</span>
+                <span class=p>}</span> <span class=k>else</span> <span class=p>{</span> <span class=c1>//2. 没有父加载器时调用启动加载器加载
+</span><span class=c1></span>                    <span class=n>c</span> <span class=o>=</span> <span class=n>findBootstrapClassOrNull</span><span class=p>(</span><span class=n>name</span><span class=p>);</span>
+                <span class=p>}</span>
+            <span class=p>}</span> <span class=k>catch</span> <span class=p>(</span><span class=n>ClassNotFoundException</span> <span class=nf>e</span><span class=p>)</span> <span class=p>{</span>
+                <span class=c1>// ClassNotFoundException thrown if class not found
+</span><span class=c1></span>                <span class=c1>// from the non-null parent class loader
+</span><span class=c1></span>            <span class=p>}</span>
+            <span class=c1>//3. 前面几步都没有加载的情况下调用加载器实现类自定义的findClass方法自定义加载
+</span><span class=c1></span>            <span class=k>if</span> <span class=p>(</span><span class=n>c</span> <span class=o>==</span> <span class=kc>null</span><span class=p>)</span> <span class=p>{</span>
+                <span class=c1>// If still not found, then invoke findClass in order
+</span><span class=c1></span>                <span class=c1>// to find the class.
+</span><span class=c1></span>                <span class=kt>long</span> <span class=nf>t1</span> <span class=o>=</span> <span class=n>System</span><span class=p>.</span><span class=na>nanoTime</span><span class=p>();</span>
+                <span class=n>c</span> <span class=o>=</span> <span class=n>findClass</span><span class=p>(</span><span class=n>name</span><span class=p>);</span>
+
+                <span class=c1>// this is the defining class loader; record the stats
+</span><span class=c1></span>                <span class=n>sun</span><span class=p>.</span><span class=na>misc</span><span class=p>.</span><span class=na>PerfCounter</span><span class=p>.</span><span class=na>getParentDelegationTime</span><span class=p>().</span><span class=na>addTime</span><span class=p>(</span><span class=n>t1</span> <span class=o>-</span> <span class=n>t0</span><span class=p>);</span>
+                <span class=n>sun</span><span class=p>.</span><span class=na>misc</span><span class=p>.</span><span class=na>PerfCounter</span><span class=p>.</span><span class=na>getFindClassTime</span><span class=p>().</span><span class=na>addElapsedTimeFrom</span><span class=p>(</span><span class=n>t1</span><span class=p>);</span>
+                <span class=n>sun</span><span class=p>.</span><span class=na>misc</span><span class=p>.</span><span class=na>PerfCounter</span><span class=p>.</span><span class=na>getFindClasses</span><span class=p>().</span><span class=na>increment</span><span class=p>();</span>
+            <span class=p>}</span>
+        <span class=p>}</span>
+        <span class=k>if</span> <span class=p>(</span><span class=n>resolve</span><span class=p>)</span> <span class=p>{</span>
+            <span class=n>resolveClass</span><span class=p>(</span><span class=n>c</span><span class=p>);</span>
+        <span class=p>}</span>
+        <span class=k>return</span> <span class=n>c</span><span class=p>;</span>
+    <span class=p>}</span>
+<span class=p>}</span></code></pre></td></tr></table></div></div><p>如果需要自定义类加载器，方法注释中可以看到 <em>Subclasses of ClassLoader are encouraged to override findClass(String) rather than this method.</em> 也就是说一般子类只需要重写这个方法即可，而不是重写整个 loadClass() 方法。</p></div><div class=post-copyright><p class=copyright-item><span class=item-title>Author</span>
+<span class=item-content>gravel</span></p><p class=copyright-item><span class=item-title>LastMod</span>
+<span class=item-content>2018-09-26</span></p><p class=copyright-item><span class=item-title>License</span>
+<span class=item-content><a rel="license noopener" href=https://creativecommons.org/licenses/by-nc-nd/4.0/ target=_blank>CC BY-NC-ND 4.0</a></span></p></div><footer class=post-footer><div class=post-tags><a href=/tags/java/>java</a></div><nav class=post-nav><a class=prev href=/post/%E5%A6%82%E4%BD%95%E8%BF%9B%E5%85%A5%E8%BF%90%E8%A1%8C%E7%9A%84tomcat%E5%AE%B9%E5%99%A8/><i class="iconfont icon-left"></i><span class="prev-text nav-default">Docker 如何进入运行的tomcat容器</span>
+<span class="prev-text nav-mobile">Prev</span></a>
+<a class=next href=/post/tomcat%E5%90%AF%E5%8A%A8%E6%8A%A5%E9%94%99/><span class="next-text nav-default">tomcat启动报错</span>
+<span class="next-text nav-mobile">Next</span>
+<i class="iconfont icon-right"></i></a></nav></footer></article></div><div id=disqus_thread></div><script type=text/javascript>(function(){if(window.location.hostname==='localhost')return;var dsq=document.createElement('script');dsq.type='text/javascript';dsq.async=true;var disqus_shortname='leongravel';dsq.src='//'+disqus_shortname+'.disqus.com/embed.js';(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(dsq);})();</script><noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript></div></main><footer id=footer class=footer><div class=social-links><a href=mailto:leebroncc@gmail.com class="iconfont icon-email" title=email></a><a href=https://twitter.com/leebroncc class="iconfont icon-twitter" title=twitter></a><a href=https://github.com/leonGravel class="iconfont icon-github" title=github></a><a href=https://www.zhihu.com/people/gravel-20/activities class="iconfont icon-zhihu" title=zhihu></a><a href=https://space.bilibili.com/321842652/#/ class="iconfont icon-bilibili" title=bilibili></a><a href=https://leongravel.com/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a></div><div class=copyright><span class=power-by>Powered by <a class=hexo-link href=https://gohugo.io>Hugo</a></span>
+<span class=division>|</span>
+<span class=theme-info>Theme -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a></span><div class=busuanzi-footer><span id=busuanzi_container_site_pv>site pv: <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span></span>
+<span class=division>|</span>
+<span id=busuanzi_container_site_uv>site uv: <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span></span></div><span class=copyright-year>&copy;
+2016 -
+2019
+<span class=heart><i class="iconfont icon-heart"></i></span><span class=author>Gravel</span></span></div></footer><div class=back-to-top id=back-to-top><i class="iconfont icon-up"></i></div></div><script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script><script type=text/javascript src=/dist/even.ece58db6.min.js></script></body></html>

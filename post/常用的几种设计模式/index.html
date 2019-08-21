@@ -1,0 +1,255 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><title>常用的几种设计模式 - gravel&#39;s blog</title><meta name=renderer content=webkit><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=cache-control content=no-transform><meta http-equiv=cache-control content=no-siteapp><meta name=theme-color content=#f8f5ec><meta name=msapplication-navbutton-color content=#f8f5ec><meta name=apple-mobile-web-app-capable content=yes><meta name=apple-mobile-web-app-status-bar-style content=#f8f5ec><meta name=author content=gravel><meta name=description content=在《设计模式》这本书里，GoF定义了23种设计模式，个人能力有限，在实际使用或者业余编码过程中，并没有完全接触完全。这里我罗列一下在java中几种常用的设计模式。><meta name=keywords content="Hugo,gravel's blog"><meta name=generator content="Hugo 0.57.2 with even 4.0.0"><link rel=canonical href=https://leongravel.com/post/%E5%B8%B8%E7%94%A8%E7%9A%84%E5%87%A0%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><link href=/dist/even.1cafc379.min.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><meta property=og:title content=常用的几种设计模式><meta property=og:description content=在《设计模式》这本书里，GoF定义了23种设计模式，个人能力有限，在实际使用或者业余编码过程中，并没有完全接触完全。这里我罗列一下在java中几种常用的设计模式。><meta property=og:type content=article><meta property=og:url content=https://leongravel.com/post/%E5%B8%B8%E7%94%A8%E7%9A%84%E5%87%A0%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/><meta property=article:published_time content=2018-07-14T18:01:41+00:00><meta property=article:modified_time content=2018-07-14T18:01:41+00:00><meta itemprop=name content=常用的几种设计模式><meta itemprop=description content=在《设计模式》这本书里，GoF定义了23种设计模式，个人能力有限，在实际使用或者业余编码过程中，并没有完全接触完全。这里我罗列一下在java中几种常用的设计模式。><meta itemprop=datePublished content=2018-07-14T18:01:41&#43;00:00><meta itemprop=dateModified content=2018-07-14T18:01:41&#43;00:00><meta itemprop=wordCount content=2561><meta itemprop=keywords content=设计模式,><meta name=twitter:card content=summary><meta name=twitter:title content=常用的几种设计模式><meta name=twitter:description content=在《设计模式》这本书里，GoF定义了23种设计模式，个人能力有限，在实际使用或者业余编码过程中，并没有完全接触完全。这里我罗列一下在java中几种常用的设计模式。><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script><script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>gravel&#39;s blog</a></div><div class=mobile-navbar-icon><span></span><span></span><span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/><li class=mobile-menu-item>Home</li></a><a href=/post/><li class=mobile-menu-item>Archives</li></a><a href=/tags/><li class=mobile-menu-item>Tags</li></a><a href=/categories/><li class=mobile-menu-item>Categories</li></a><a href=/resume><li class=mobile-menu-item>Resume</li></a><a href=/about><li class=mobile-menu-item>About</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>gravel&#39;s blog</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/>Home</a></li><li class=menu-item><a class=menu-item-link href=/post/>Archives</a></li><li class=menu-item><a class=menu-item-link href=/tags/>Tags</a></li><li class=menu-item><a class=menu-item-link href=/categories/>Categories</a></li><li class=menu-item><a class=menu-item-link href=/resume>Resume</a></li><li class=menu-item><a class=menu-item-link href=/about>About</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>常用的几种设计模式</h1><div class=post-meta><span class=post-time>2018-07-14</span>
+<span class=more-meta>2561 words</span>
+<span class=more-meta>6 mins read</span>
+<span id=busuanzi_container_page_pv class=more-meta><span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> times read</span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>Contents</h2><div class="post-toc-content always-active"><nav id=TableOfContents><ul><li><ul><li><a href=#创建型模式>创建型模式</a><ul><li><a href=#工厂模式>工厂模式</a></li><li><a href=#单例模式>单例模式</a></li></ul></li><li><a href=#结构型模式>结构型模式</a><ul><li><a href=#适配器模式>适配器模式</a></li><li><a href=#代理模式>代理模式</a></li><li><a href=#装饰模式>装饰模式</a></li></ul></li><li><a href=#行为型模式>行为型模式</a><ul><li><a href=#观察者模式>观察者模式</a></li></ul></li><li><a href=#总结>总结</a></li></ul></li></ul></nav></div></div><div class=post-content><p>在《设计模式》这本书里，GoF定义了23种设计模式，个人能力有限，在实际使用或者业余编码过程中，并没有完全接触完全。这里我罗列一下在java中几种常用的设计模式。</p><p>GoF将设计模式分为了三大类：</p><ul><li><a href=#创建型模式>创建型模式</a></li><li><a href=#结构型模式>结构型模式</a></li><li><p><a href=#行为型模式>行为型模式</a></p><h2 id=创建型模式>创建型模式</h2><p>创建型模式就是创建对象的模式，抽象了实例化的过程。它帮助一个系统独立于如何创建、组合和表示它的那些对象。关注的是对象的创建，创建型模式将创建对象的过程进行了抽象，也可以理解为将创建对象的过程进行了封装，作为客户程序仅仅需要去使用对象，而不再关心创建对象过程中的逻辑。
+常用的创建型模式有以下几种：</p></li><li><p><a href=#工厂模式>工厂模式</a></p></li><li><p><a href=#单例模式>单例模式</a></p></li><li><p><a href=#建造者模式>建造者模式</a></p></li></ul><h3 id=工厂模式>工厂模式</h3><p>定义一个用于创建对象的接口，让子类决定实例化哪一个类。工厂方法使一个类的实例化延迟到其子类。
+<code>Product</code>为抽象产品类负责定义产品的共性，实现对事物最抽象的定义；
+<code>Creator</code>为抽象创建类，也就是抽象工厂，具体如何创建产品类是由具体的实现工厂<code>ConcreteCreator</code>完成的。
+java代码实现如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></pre></td><td class=lntd><pre class=chroma>public class ConcreteCreator extends Creator {
+public &lt;T extends Product&gt; T createProduct(Class&lt;T&gt; c){
+             Product product=null;
+             try {
+                    product = (Product)Class.forName(c.getName()).newInstance();
+             } catch (Exception e) {
+                    //异常处理
+             }
+             return (T)product;         
+     }
+}</pre></td></tr></table></div></div><p>可以用以下的方法实例化各种产品：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></pre></td><td class=lntd><pre class=chroma>ConcreteCreator factory = new ConcreteCreator();
+ProductA productA =factory.createProduct(ProductA.class);
+ProductB productB =factory.createProduct(ProductB.class);</pre></td></tr></table></div></div><h3 id=单例模式>单例模式</h3><p>确保某一个类只有一个实例，而且自行实例化并向整个系统提供这个实例。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span></pre></td><td class=lntd><pre class=chroma> /**
+ * @author gravel 
+ * 中国的历史上一般都是一个朝代一个皇帝
+ * @date 2018-07-15
+ */
+public class Emperor {
+	private static final Emperor emperor =new Emperor();  //初始化一个皇帝
+	
+	
+	private Emperor(){
+	    //这里限制只产生一个皇帝
+		//世俗和道德约束你，目的就是不希望产生第二个皇帝
+	}
+	
+	public static Emperor getInstance(){
+		return emperor;
+	}
+	
+	//皇帝发话了
+	public static void say(){
+		System.out.println(&#34;我就是皇帝某某某....&#34;);		
+	}
+}</pre></td></tr></table></div></div><p>单例模式主要分两种，一种是类加载时实例，一种是使用时实例。
+另外在实际场景中Spring中创建的Bean实例默认都是单例模式存在的。
+### 建造者模式
+将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。
+在建造者模式中，有如下四个角色：</p><ul><li>Product产品类：通常是实现了模板方法模式，也就是有模板方法和基本方法。</li><li>Builder抽象建造者：规范产品的组建，一般是由子类实现。</li><li>ConcreteBuilder具体建造者：实现抽象类定义的所有方法，并且返回一个组件好的对象。</li><li>Director导演：负责安排已有模块的顺序，然后告诉Builder开始建造。</li></ul><p>这个模式我初次接触到的时候感觉有点抽象，我看到有大佬提到java的StringBuilder也是使用的建造者模式。</p><p>StringBuilder把构建者的角色交给了其的父类AbstractStringBuilder</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></pre></td><td class=lntd><pre class=chroma>public final class StringBuilder
+    extends AbstractStringBuilder
+    implements java.io.Serializable, CharSequence
+{
+。。。。。。
+}</pre></td></tr></table></div></div><p>以append方法为例，最终调用的是父类的append（）：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></pre></td><td class=lntd><pre class=chroma>    public StringBuilder append(String str) {
+        super.append(str);
+        return this;
+    }</pre></td></tr></table></div></div><p>父类AbstractStringBuilder的实现代码：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></pre></td><td class=lntd><pre class=chroma>    public AbstractStringBuilder append(String str) {
+        if (str == null) str = &#34;null&#34;;
+        int len = str.length();
+        ensureCapacityInternal(count + len);
+        str.getChars(0, len, value, count);
+        count += len;
+        return this;//返回构建对象
+    }</pre></td></tr></table></div></div><h2 id=结构型模式>结构型模式</h2><p>在解决了对象的创建问题之后，对象的组成以及对象之间的依赖关系就成了开发人员关注的焦点，因为如何设计对象的结构、继承和依赖关系会影响到后续程序的维护性、代码的健壮性、耦合性等。对象结构的设计很容易体现出设计人员水平的高低，常用的几种结构型模式有：
+* <a href=#适配器模式>适配器模式</a>
+* <a href=#代理模式>代理模式</a>
+* <a href=#装饰模式>装饰模式</a></p><h3 id=适配器模式>适配器模式</h3><p>将一个类的接口变换成客户端所期待的另一种接口，从而是原本因接口不匹配而无法在一起工作的两个类能够在一起工作。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span></pre></td><td class=lntd><pre class=chroma>// 原有的接口，不能完全符合客户要求，但是我们有不能改
+interface IOrigin{
+    public void deal();
+}
+// 定义一个符合客户要求的新接口
+interface ITarget{
+    public void newDeal(int type);
+}
+class Target implements ITarget{
+    private IOrigin origin;
+    public void newDeal(int type){
+        if (type==0){
+        //这里调用原来的接口
+            origin.deal();
+        }else{
+        //满足新的需求
+        }
+    }
+}
+public class TestAdapter {
+    public  void test(){
+        // 原来是IOrigin接口但是不符合我要求，所以用ITarget适配一下
+        // 
+        ITarget target = new Target();
+        target.newDeal(1);
+    }
+}</pre></td></tr></table></div></div><h3 id=代理模式>代理模式</h3><p>代理模式给某一个对象提供一个代理对象，并由代理对象控制对原对象的引用。通俗的来讲代理模式就是我们生活中常见的中介。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></pre></td><td class=lntd><pre class=chroma>// 一个顾客要买房
+class Customer{
+    public void sellHouse(){
+    }
+}
+class Proxy {
+    private Customer customer;
+    public void buyHouse(){
+        customer.sellHouse();
+    }
+}
+public class TestProxy {
+    public void test(){
+        // 一个买家要买房的话直接跟中介（代理）大交道就可以了
+        Proxy proxy = new Proxy();
+        proxy.buyHouse();
+    }
+}</pre></td></tr></table></div></div><p>spring AOP也使用了动态代理的模式。</p><h3 id=装饰模式>装饰模式</h3><p>动态地给一个对象添加一些额外的职责。就增加功能来说，装饰模式比生成子类更为灵活。
+装饰模式在Java中最经典的应用就是I/O流，回忆一下，当我们使用流式操作读取文件内容时，怎么实现呢？示例如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></pre></td><td class=lntd><pre class=chroma>public static void main(String[] args) throws IOException {
+		DataInputStream dis = null;
+		try {
+			dis = new DataInputStream(
+					new BufferedInputStream(
+							new FileInputStream(&#34;E:/IOTest.txt&#34;)
+							)
+					);
+			byte[] bs = new byte[dis.available()];
+			dis.read(bs);
+			System.out.println(&#34;文件内容====&gt;&#34;+new String(bs));
+		} finally{
+			dis.close();
+		}
+}</pre></td></tr></table></div></div><p>FileInputStream对象就相当于被装饰的对象，而BufferedInputStream对象和DataInputStream对象则相当于装饰器。</p><h2 id=行为型模式>行为型模式</h2><p>行为型模式(Behavioral Pattern)是对在不同的对象之间划分责任和算法的抽象化。
+行为型模式不仅仅关注类和对象的结构，而且重点关注它们之间的相互作用。
+通过行为型模式，可以更加清晰地划分类与对象的职责，并研究系统在运行时实例对象 之间的交互。在系统运行时，对象并不是孤立的，它们可以通过相互通信与协作完成某些复杂功能，一个对象在运行时也将影响到其他对象的运行。
+这里我就写一种：</p><h3 id=观察者模式>观察者模式</h3><p>建立一种对象与对象之间的依赖关系，一个对象发生改变时将自动通知其他对象，其他对象将相应做出反应。在此，发生改变的对象称为观察目标，而被通知的对象称为观察者，一个观察目标可以对应多个观察者，而且这些观察者之间没有相互联系，可以根据需要增加和删除观察者，使得系统更易于扩展，这就是观察者模式的模式动机。</p><p>在我们实际使用中，观察者模式应该比较多。比如消息队列之类的，比较经典的有Kafka中的订阅以及发布。</p><h2 id=总结>总结</h2><p>Gof定义了23种设计模式，我这里只列了自己比较熟悉的几种，剩余的几种，比如迭代器，其实已经被java融合进jdk中，我们在开发中并不需要自己写。个人感觉设计模式的概念对于一些模块的重构和解耦帮助很大。学习不止！</p></div><div class=post-copyright><p class=copyright-item><span class=item-title>Author</span>
+<span class=item-content>gravel</span></p><p class=copyright-item><span class=item-title>LastMod</span>
+<span class=item-content>2018-07-14</span></p><p class=copyright-item><span class=item-title>License</span>
+<span class=item-content><a rel="license noopener" href=https://creativecommons.org/licenses/by-nc-nd/4.0/ target=_blank>CC BY-NC-ND 4.0</a></span></p></div><footer class=post-footer><div class=post-tags><a href=/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/>设计模式</a></div><nav class=post-nav><a class=prev href=/post/java%E5%9F%BA%E7%A1%80%E4%BB%A5%E5%8F%8A%E8%BF%9B%E9%98%B6%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/><i class="iconfont icon-left"></i><span class="prev-text nav-default">java基础以及进阶知识点总结</span>
+<span class="prev-text nav-mobile">Prev</span></a>
+<a class=next href=/post/springboot/><span class="next-text nav-default">springboot</span>
+<span class="next-text nav-mobile">Next</span>
+<i class="iconfont icon-right"></i></a></nav></footer></article></div><div id=disqus_thread></div><script type=text/javascript>(function(){if(window.location.hostname==='localhost')return;var dsq=document.createElement('script');dsq.type='text/javascript';dsq.async=true;var disqus_shortname='leongravel';dsq.src='//'+disqus_shortname+'.disqus.com/embed.js';(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(dsq);})();</script><noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript></div></main><footer id=footer class=footer><div class=social-links><a href=mailto:leebroncc@gmail.com class="iconfont icon-email" title=email></a><a href=https://twitter.com/leebroncc class="iconfont icon-twitter" title=twitter></a><a href=https://github.com/leonGravel class="iconfont icon-github" title=github></a><a href=https://www.zhihu.com/people/gravel-20/activities class="iconfont icon-zhihu" title=zhihu></a><a href=https://space.bilibili.com/321842652/#/ class="iconfont icon-bilibili" title=bilibili></a><a href=https://leongravel.com/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a></div><div class=copyright><span class=power-by>Powered by <a class=hexo-link href=https://gohugo.io>Hugo</a></span>
+<span class=division>|</span>
+<span class=theme-info>Theme -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a></span><div class=busuanzi-footer><span id=busuanzi_container_site_pv>site pv: <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span></span>
+<span class=division>|</span>
+<span id=busuanzi_container_site_uv>site uv: <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span></span></div><span class=copyright-year>&copy;
+2016 -
+2019
+<span class=heart><i class="iconfont icon-heart"></i></span><span class=author>Gravel</span></span></div></footer><div class=back-to-top id=back-to-top><i class="iconfont icon-up"></i></div></div><script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script><script type=text/javascript src=/dist/even.ece58db6.min.js></script></body></html>

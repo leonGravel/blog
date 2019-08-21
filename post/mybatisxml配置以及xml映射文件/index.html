@@ -1,0 +1,1487 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><title>mybatisXML配置以及XML映射文件 - gravel&#39;s blog</title><meta name=renderer content=webkit><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=cache-control content=no-transform><meta http-equiv=cache-control content=no-siteapp><meta name=theme-color content=#f8f5ec><meta name=msapplication-navbutton-color content=#f8f5ec><meta name=apple-mobile-web-app-capable content=yes><meta name=apple-mobile-web-app-status-bar-style content=#f8f5ec><meta name=author content=gravel><meta name=description content=最近在公司内部技术交流会上分享了mybatis相关的配置资料，现在整理下弄到博客上面。><meta name=keywords content="Hugo,gravel's blog"><meta name=generator content="Hugo 0.57.2 with even 4.0.0"><link rel=canonical href=https://leongravel.com/post/mybatisxml%E9%85%8D%E7%BD%AE%E4%BB%A5%E5%8F%8Axml%E6%98%A0%E5%B0%84%E6%96%87%E4%BB%B6/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><link href=/dist/even.1cafc379.min.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><meta property=og:title content=mybatisXML配置以及XML映射文件><meta property=og:description content=最近在公司内部技术交流会上分享了mybatis相关的配置资料，现在整理下弄到博客上面。><meta property=og:type content=article><meta property=og:url content=https://leongravel.com/post/mybatisxml%E9%85%8D%E7%BD%AE%E4%BB%A5%E5%8F%8Axml%E6%98%A0%E5%B0%84%E6%96%87%E4%BB%B6/><meta property=article:published_time content=2017-09-22T19:33:40+00:00><meta property=article:modified_time content=2017-09-22T19:33:40+00:00><meta itemprop=name content=mybatisXML配置以及XML映射文件><meta itemprop=description content=最近在公司内部技术交流会上分享了mybatis相关的配置资料，现在整理下弄到博客上面。><meta itemprop=datePublished content=2017-09-22T19:33:40&#43;00:00><meta itemprop=dateModified content=2017-09-22T19:33:40&#43;00:00><meta itemprop=wordCount content=22296><meta itemprop=keywords content=mybatis,><meta name=twitter:card content=summary><meta name=twitter:title content=mybatisXML配置以及XML映射文件><meta name=twitter:description content=最近在公司内部技术交流会上分享了mybatis相关的配置资料，现在整理下弄到博客上面。><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script><script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>gravel&#39;s blog</a></div><div class=mobile-navbar-icon><span></span><span></span><span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/><li class=mobile-menu-item>Home</li></a><a href=/post/><li class=mobile-menu-item>Archives</li></a><a href=/tags/><li class=mobile-menu-item>Tags</li></a><a href=/categories/><li class=mobile-menu-item>Categories</li></a><a href=/resume><li class=mobile-menu-item>Resume</li></a><a href=/about><li class=mobile-menu-item>About</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>gravel&#39;s blog</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/>Home</a></li><li class=menu-item><a class=menu-item-link href=/post/>Archives</a></li><li class=menu-item><a class=menu-item-link href=/tags/>Tags</a></li><li class=menu-item><a class=menu-item-link href=/categories/>Categories</a></li><li class=menu-item><a class=menu-item-link href=/resume>Resume</a></li><li class=menu-item><a class=menu-item-link href=/about>About</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>mybatisXML配置以及XML映射文件</h1><div class=post-meta><span class=post-time>2017-09-22</span><div class=post-category><a href=/categories/java/>Java</a></div><span class=more-meta>22296 words</span>
+<span class=more-meta>45 mins read</span>
+<span id=busuanzi_container_page_pv class=more-meta><span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> times read</span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>Contents</h2><div class="post-toc-content always-active"><nav id=TableOfContents><ul><li><ul><li><a href=#xml-映射配置文件>XML 映射配置文件</a><ul><li><a href=#a-name-properties-a-properties><a name=properties></a>properties</a></li><li><a href=#a-name-settings-a-settings><a name=settings></a>settings</a></li><li><a href=#a-name-typealiases-a-typealiases><a name=typeAliases></a>typeAliases</a></li><li><a href=#a-name-typehandlers-a-typehandlers><a name=typeHandlers></a>typeHandlers</a></li><li><a href=#a-name-a-a-处理枚举类型><a name=a></a>处理枚举类型</a></li><li><a href=#a-name-aobjectfactory-a-对象工厂-objectfactory><a name=aobjectFactory></a>对象工厂（objectFactory）</a></li><li><a href=#a-name-aplugins-a-插件-plugins><a name=aplugins></a>插件（plugins）</a></li><li><a href=#a-name-aenvironments-a-配置环境-environments><a name=aenvironments></a>配置环境（environments）</a></li><li><a href=#a-name-databaseidprovider-a-databaseidprovider><a name=databaseIdProvider></a>databaseIdProvider</a></li><li><a href=#a-name-amappers-a-映射器-mappers><a name=amappers></a>映射器（mappers）</a></li></ul></li><li><a href=#a-name-mapper-xml-a-mapper-xml-文件><a name=Mapper_XML_></a>Mapper XML 文件</a><ul><li><a href=#a-name-select-a-select><a name=select></a>select</a></li><li><a href=#a-name-insert-update-delete-a-insert-update-和-delete><a name=insert_update__delete></a>insert, update 和 delete</a></li><li><a href=#a-name-aparameters-a-参数-parameters><a name=aParameters></a>参数（Parameters）</a><ul><li><a href=#a-name-a-a-字符串替换><a name=a></a>字符串替换</a></li></ul></li><li><a href=#a-name-result-maps-a-result-maps><a name=Result_Maps></a>Result Maps</a><ul><li><a href=#a-name-a-a-高级结果映射><a name=a></a>高级结果映射</a></li></ul></li></ul></li></ul></li><li><a href=#a-name-t0-a-1-嵌套查询><a name=t0></a>1.嵌套查询</a></li><li><a href=#a-name-t1-a-2-嵌套结果><a name=t1></a>2.嵌套结果：</a></li><li><a href=#a-name-t2-a-多结果集关联><a name=t2></a>多结果集关联</a><ul><li><ul><li><a href=#a-name-a-a-自动映射><a name=a></a>自动映射</a></li><li><a href=#a-name-a-a-缓存><a name=a></a>缓存</a><ul><li><a href=#a-name-a-a-使用自定义缓存><a name=a></a>使用自定义缓存</a></li><li><a href=#a-name-a-a-参照缓存><a name=a></a>参照缓存</a></li></ul></li></ul></li><li><a href=#结束>结束</a></li></ul></li></ul></nav></div></div><div class=post-content><p>最近在公司内部技术交流会上分享了mybatis相关的配置资料，现在整理下弄到博客上面。</p><h2 id=xml-映射配置文件>XML 映射配置文件</h2><p>MyBatis 的配置文件包含了会深深影响 MyBatis 行为的设置（settings）和属性（properties）信息。文档的顶层结构如下：</p><ul><li>configuration 配置<ul><li><a href=#properties>properties 属性</a></li><li><a href=#settings>settings 设置</a></li><li><a href=#typeAliases>typeAliases 类型别名</a></li><li><a href=#typeHandlers>typeHandlers 类型处理器</a></li><li><a href=#objectFactory>objectFactory 对象工厂</a></li><li><a href=#plugins>plugins 插件</a></li><li><a href=#environments>environments 环境</a><ul><li>environment 环境变量<ul><li>transactionManager 事务管理器</li><li>dataSource 数据源</li></ul></li></ul></li><li><a href=#databaseIdProvider>databaseIdProvider 数据库厂商标识</a></li><li><a href=#mappers>mappers 映射器</a></li></ul></li></ul><p><a name=properties></a></p><h3 id=a-name-properties-a-properties><a name=properties></a>properties</h3><p>这些属性都是可外部配置且可动态替换的，既可以在典型的 Java 属性文件中配置，亦可通过 properties 元素的子元素来传递。例如：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></pre></td><td class=lntd><pre class=chroma>&lt;properties resource=&#34;org/mybatis/example/config.properties&#34;&gt;
+  &lt;property name=&#34;username&#34; value=&#34;dev_user&#34;/&gt;
+  &lt;property name=&#34;password&#34; value=&#34;F2Fa3!33TYyg&#34;/&gt;
+&lt;/properties&gt;</pre></td></tr></table></div></div><p>其中的属性就可以在整个配置文件中使用来替换需要动态配置的属性值。比如:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></pre></td><td class=lntd><pre class=chroma>&lt;dataSource type=&#34;POOLED&#34;&gt;
+  &lt;property name=&#34;driver&#34; value=&#34;${driver}&#34;/&gt;
+  &lt;property name=&#34;url&#34; value=&#34;${url}&#34;/&gt;
+  &lt;property name=&#34;username&#34; value=&#34;${username}&#34;/&gt;
+  &lt;property name=&#34;password&#34; value=&#34;${password}&#34;/&gt;
+&lt;/dataSource&gt;</pre></td></tr></table></div></div><p>这个例子中的 username 和 password 将会由 properties 元素中设置的相应值来替换。 driver 和 url 属性将会由 config.properties 文件中对应的值来替换。这样就为配置提供了诸多灵活选择。</p><p>属性也可以被传递到 SqlSessionFactoryBuilder.build()方法中。例如：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></pre></td><td class=lntd><pre class=chroma>SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(reader, props);
+
+// ... or ...
+
+SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(reader, environment, props);</pre></td></tr></table></div></div><p>如果属性在不只一个地方进行了配置，那么 MyBatis 将按照下面的顺序来加载：</p><ul><li>在 properties 元素体内指定的属性首先被读取。</li><li>然后根据 properties 元素中的 resource 属性读取类路径下属性文件或根据 url 属性指定的路径读取属性文件，并覆盖已读取的同名属性。</li><li>最后读取作为方法参数传递的属性，并覆盖已读取的同名属性。</li></ul><p>因此，通过方法参数传递的属性具有最高优先级，resource/url 属性中指定的配置文件次之，最低优先级的是 properties 属性中指定的属性。</p><p>从MyBatis 3.4.2开始，你可以为占位符指定一个默认值。例如：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></pre></td><td class=lntd><pre class=chroma>&lt;dataSource type=&#34;POOLED&#34;&gt;
+  &lt;!-- ... --&gt;
+  &lt;property name=&#34;username&#34; value=&#34;${username:ut_user}&#34;/&gt; &lt;!-- If &#39;username&#39; property not present, username become &#39;ut_user&#39; --&gt;
+&lt;/dataSource&gt;</pre></td></tr></table></div></div><p>这个特性默认是关闭的。如果你想为占位符指定一个默认值， 你应该添加一个指定的属性来开启这个特性。例如：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></pre></td><td class=lntd><pre class=chroma>&lt;properties resource=&#34;org/mybatis/example/config.properties&#34;&gt;
+  &lt;!-- ... --&gt;
+  &lt;property name=&#34;org.apache.ibatis.parsing.PropertyParser.enable-default-value&#34; value=&#34;true&#34;/&gt; &lt;!-- Enable this feature --&gt;
+&lt;/properties&gt;</pre></td></tr></table></div></div><p>提示： 你可以使用 <tt>&ldquo;:&rdquo;</tt> 作为属性键(e.g. <tt>db:username</tt>) 或者你也可以在sql定义中使用 OGNL 表达式的三元运算符(e.g. <tt>${tableName != null ? tableName : &lsquo;global_constants&rsquo;}</tt>)， 你应该通过增加一个指定的属性来改变分隔键和默认值的字符。例如：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></pre></td><td class=lntd><pre class=chroma>&lt;properties resource=&#34;org/mybatis/example/config.properties&#34;&gt;
+  &lt;!-- ... --&gt;
+  &lt;property name=&#34;org.apache.ibatis.parsing.PropertyParser.default-value-separator&#34; value=&#34;?:&#34;/&gt; &lt;!-- Change default value of separator --&gt;
+&lt;/properties&gt;</pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></pre></td><td class=lntd><pre class=chroma>&lt;dataSource type=&#34;POOLED&#34;&gt;
+  &lt;!-- ... --&gt;
+  &lt;property name=&#34;username&#34; value=&#34;${db:username?:ut_user}&#34;/&gt;
+&lt;/dataSource&gt;</pre></td></tr></table></div></div><p><a name=settings></a></p><h3 id=a-name-settings-a-settings><a name=settings></a>settings</h3><p>这是 MyBatis 中极为重要的调整设置，它们会改变 MyBatis 的运行时行为。下表描述了设置中各项的意图、默认值等。</p><table><thead><tr><th>设置参数</th><th>描述</th><th>有效值</th><th>默认值</th></tr></thead><tbody><tr><td>cacheEnabled</td><td>该配置影响的所有映射器中配置的缓存的全局开关。</td><td>true</td><td>false</td></tr><tr><td>lazyLoadingEnabled</td><td>延迟加载的全局开关。当开启时，所有关联对象都会延迟加载。特定关联关系中可通过设置<tt>fetchType</tt>属性来覆盖该项的开关状态。</td><td>true</td><td>false</td></tr><tr><td>aggressiveLazyLoading</td><td>当启用时，带有延迟加载属性的对象的加载与否完全取决于对任意延迟属性的调用；反之，每种属性将会按需加载。</td><td>true</td><td>false</td></tr><tr><td>multipleResultSetsEnabled</td><td>是否允许单一语句返回多结果集（需要兼容驱动）。</td><td>true</td><td>false</td></tr><tr><td>useColumnLabel</td><td>使用列标签代替列名。不同的驱动在这方面会有不同的表现，具体可参考相关驱动文档或通过测试这两种不同的模式来观察所用驱动的结果。</td><td>true</td><td>false</td></tr><tr><td>useGeneratedKeys</td><td>允许 JDBC 支持自动生成主键，需要驱动兼容。如果设置为 true 则这个设置强制使用自动生成主键，尽管一些驱动不能兼容但仍可正常工作（比如 Derby）。</td><td>true</td><td>false</td></tr><tr><td>autoMappingBehavior</td><td>指定 MyBatis 是否以及如何自动映射指定的列到字段或属性。NONE 表示取消自动映射；PARTIAL 只会自动映射没有定义嵌套结果集映射的结果集。FULL 会自动映射任意复杂的结果集（包括嵌套和其他情况）。</td><td>NONE, PARTIAL, FULL</td><td>PARTIAL</td></tr><tr><td>defaultExecutorType</td><td>配置默认的执行器。SIMPLE 就是普通的执行器；REUSE 执行器会重用预处理语句（prepared statements）；BATCH 执行器将重用语句并执行批量更新。</td><td>SIMPLE REUSE BATCH</td><td>SIMPLE</td></tr><tr><td>defaultStatementTimeout</td><td>设置超时时间，它决定驱动等待数据库响应的秒数。</td><td>Any positive integer</td><td>Not Set (null)</td></tr><tr><td>safeRowBoundsEnabled</td><td>允许在嵌套语句中使用行分界（RowBounds）。</td><td>true</td><td>false</td></tr><tr><td>mapUnderscoreToCamelCase</td><td>是否开启自动驼峰命名规则（camel case）映射，即从经典数据库列名 A_COLUMN 到经典 Java 属性名 aColumn 的类似映射。</td><td>true</td><td>false</td></tr><tr><td>localCacheScope</td><td>MyBatis 利用本地缓存机制（Local Cache）防止循环引用（circular references）和加速重复嵌套查询。默认值为 SESSION，这种情况下会缓存一个会话中执行的所有查询。若设置值为 STATEMENT，本地会话仅用在语句执行上，对相同 SqlSession 的不同调用将不会共享数据。</td><td>SESSION</td><td>STATEMENT</td></tr><tr><td>jdbcTypeForNull</td><td>当没有为参数提供特定的 JDBC 类型时，为空值指定 JDBC 类型。某些驱动需要指定列的 JDBC 类型，多数情况直接用一般类型即可，比如 NULL、VARCHAR 或 OTHER。</td><td>JdbcType enumeration. Most common are: NULL, VARCHAR and OTHER</td><td>OTHER</td></tr><tr><td>lazyLoadTriggerMethods</td><td>指定哪个对象的方法触发一次延迟加载。</td><td>A method name list separated by commas</td><td>equals,clone,hashCode,toString</td></tr><tr><td>defaultScriptingLanguage</td><td>指定动态 SQL 生成的默认语言。</td><td>A type alias or fully qualified class name.</td><td>org.apache.ibatis.scripting.xmltags.XMLDynamicLanguageDriver</td></tr><tr><td>callSettersOnNulls</td><td>指定当结果集中值为 null 的时候是否调用映射对象的 setter（map 对象时为 put）方法，这对于有 Map.keySet() 依赖或 null 值初始化的时候是有用的。注意原始类型（int、boolean等）是不能设置成 null 的。</td><td>true</td><td>false</td></tr><tr><td>logPrefix</td><td>指定 MyBatis 增加到日志名称的前缀。</td><td>Any String</td><td>Not set</td></tr><tr><td>logImpl</td><td>指定 MyBatis 所用日志的具体实现，未指定时将自动查找。</td><td>SLF4J</td><td>LOG4J</td></tr><tr><td>proxyFactory</td><td>为 Mybatis 用来创建具有延迟加载能力的对象设置代理工具。</td><td>CGLIB</td><td>JAVASSIST</td></tr></tbody></table><p>一个配置完整的 settings 元素的示例如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></pre></td><td class=lntd><pre class=chroma>&lt;settings&gt;
+  &lt;setting name=&#34;cacheEnabled&#34; value=&#34;true&#34;/&gt;
+  &lt;setting name=&#34;lazyLoadingEnabled&#34; value=&#34;true&#34;/&gt;
+  &lt;setting name=&#34;multipleResultSetsEnabled&#34; value=&#34;true&#34;/&gt;
+  &lt;setting name=&#34;useColumnLabel&#34; value=&#34;true&#34;/&gt;
+  &lt;setting name=&#34;useGeneratedKeys&#34; value=&#34;false&#34;/&gt;
+  &lt;setting name=&#34;autoMappingBehavior&#34; value=&#34;PARTIAL&#34;/&gt;
+  &lt;setting name=&#34;autoMappingUnknownColumnBehavior&#34; value=&#34;WARNING&#34;/&gt;
+  &lt;setting name=&#34;defaultExecutorType&#34; value=&#34;SIMPLE&#34;/&gt;
+  &lt;setting name=&#34;defaultStatementTimeout&#34; value=&#34;25&#34;/&gt;
+  &lt;setting name=&#34;defaultFetchSize&#34; value=&#34;100&#34;/&gt;
+  &lt;setting name=&#34;safeRowBoundsEnabled&#34; value=&#34;false&#34;/&gt;
+  &lt;setting name=&#34;mapUnderscoreToCamelCase&#34; value=&#34;false&#34;/&gt;
+  &lt;setting name=&#34;localCacheScope&#34; value=&#34;SESSION&#34;/&gt;
+  &lt;setting name=&#34;jdbcTypeForNull&#34; value=&#34;OTHER&#34;/&gt;
+  &lt;setting name=&#34;lazyLoadTriggerMethods&#34; value=&#34;equals,clone,hashCode,toString&#34;/&gt;
+&lt;/settings&gt;</pre></td></tr></table></div></div><p><a name=typeAliases></a></p><h3 id=a-name-typealiases-a-typealiases><a name=typeAliases></a>typeAliases</h3><p>类型别名是为 Java 类型设置一个短的名字。它只和 XML 配置有关，存在的意义仅在于用来减少类完全限定名的冗余。例如:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></pre></td><td class=lntd><pre class=chroma>&lt;typeAliases&gt;
+  &lt;typeAlias alias=&#34;Author&#34; type=&#34;domain.blog.Author&#34;/&gt;
+  &lt;typeAlias alias=&#34;Blog&#34; type=&#34;domain.blog.Blog&#34;/&gt;
+  &lt;typeAlias alias=&#34;Comment&#34; type=&#34;domain.blog.Comment&#34;/&gt;
+  &lt;typeAlias alias=&#34;Post&#34; type=&#34;domain.blog.Post&#34;/&gt;
+  &lt;typeAlias alias=&#34;Section&#34; type=&#34;domain.blog.Section&#34;/&gt;
+  &lt;typeAlias alias=&#34;Tag&#34; type=&#34;domain.blog.Tag&#34;/&gt;
+&lt;/typeAliases&gt;</pre></td></tr></table></div></div><p>当这样配置时，<tt>Blog</tt>可以用在任何使用<tt>domain.blog.Blog</tt>的地方。</p><p>也可以指定一个包名，MyBatis 会在包名下面搜索需要的 Java Bean，比如:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></pre></td><td class=lntd><pre class=chroma><span class=p>&lt;</span><span class=nx>typeAliases</span><span class=p>&gt;</span>
+  <span class=p>&lt;</span><span class=kn>package</span> <span class=nx>name</span><span class=p>=</span><span class=s>&#34;domain.blog&#34;</span><span class=o>/</span><span class=p>&gt;</span>
+<span class=p>&lt;</span><span class=o>/</span><span class=nx>typeAliases</span><span class=p>&gt;</span></pre></td></tr></table></div></div><p>每一个在包 <tt>domain.blog</tt> 中的 Java Bean，在没有注解的情况下，会使用 Bean 的首字母小写的非限定类名来作为它的别名。 比如 <tt>domain.blog.Author</tt> 的别名为 <tt>author</tt>；若有注解，则别名为其注解值。看下面的例子：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></pre></td><td class=lntd><pre class=chroma>@Alias(&#34;author&#34;)
+public class Author {
+    ...
+}</pre></td></tr></table></div></div><p>已经为许多常见的 Java 类型内建了相应的类型别名。它们都是大小写不敏感的，需要注意的是由基本类型名称重复导致的特殊处理。</p><table><thead><tr><th>别名</th><th>映射的类型</th></tr></thead><tbody><tr><td>_byte</td><td>byte</td></tr><tr><td>_long</td><td>long</td></tr><tr><td>_short</td><td>short</td></tr><tr><td>_int</td><td>int</td></tr><tr><td>_integer</td><td>int</td></tr><tr><td>_double</td><td>double</td></tr><tr><td>_float</td><td>float</td></tr><tr><td>_boolean</td><td>boolean</td></tr><tr><td>string</td><td>String</td></tr><tr><td>byte</td><td>Byte</td></tr><tr><td>long</td><td>Long</td></tr><tr><td>short</td><td>Short</td></tr><tr><td>int</td><td>Integer</td></tr><tr><td>integer</td><td>Integer</td></tr><tr><td>double</td><td>Double</td></tr><tr><td>float</td><td>Float</td></tr><tr><td>boolean</td><td>Boolean</td></tr><tr><td>date</td><td>Date</td></tr><tr><td>decimal</td><td>BigDecimal</td></tr><tr><td>bigdecimal</td><td>BigDecimal</td></tr><tr><td>object</td><td>Object</td></tr><tr><td>map</td><td>Map</td></tr><tr><td>hashmap</td><td>HashMap</td></tr><tr><td>list</td><td>List</td></tr><tr><td>arraylist</td><td>ArrayList</td></tr><tr><td>collection</td><td>Collection</td></tr><tr><td>iterator</td><td>Iterator</td></tr></tbody></table><p><a name=typeHandlers></a></p><h3 id=a-name-typehandlers-a-typehandlers><a name=typeHandlers></a>typeHandlers</h3><p>类型处理器的作用就是</p><ul><li>查询时把数据库存储的值转换成java类型</li><li>修改是把java类型转换成数据库类型存储，处理</li><li>下面这个表格描述了默认的类型处理器。</li></ul><table><thead><tr><th>类型处理器</th><th>Java 类型</th><th>JDBC 类型</th></tr></thead><tbody><tr><td><tt>BooleanTypeHandler</tt></td><td><tt>java.lang.Boolean</tt>, <tt>boolean</tt></td><td>数据库兼容的 <tt>BOOLEAN</tt></td></tr><tr><td><tt>ByteTypeHandler</tt></td><td><tt>java.lang.Byte</tt>, <tt>byte</tt></td><td>数据库兼容的 <tt>NUMERIC</tt> 或 <tt>BYTE</tt></td></tr><tr><td><tt>ShortTypeHandler</tt></td><td><tt>java.lang.Short</tt>, <tt>short</tt></td><td>数据库兼容的 <tt>NUMERIC</tt> 或 <tt>SHORT INTEGER</tt></td></tr><tr><td><tt>IntegerTypeHandler</tt></td><td><tt>java.lang.Integer</tt>, <tt>int</tt></td><td>数据库兼容的 <tt>NUMERIC</tt> 或 <tt>INTEGER</tt></td></tr><tr><td><tt>LongTypeHandler</tt></td><td><tt>java.lang.Long</tt>, <tt>long</tt></td><td>数据库兼容的 <tt>NUMERIC</tt> 或 <tt>LONG INTEGER</tt></td></tr><tr><td><tt>FloatTypeHandler</tt></td><td><tt>java.lang.Float</tt>, <tt>float</tt></td><td>数据库兼容的 <tt>NUMERIC</tt> 或 <tt>FLOAT</tt></td></tr><tr><td><tt>DoubleTypeHandler</tt></td><td><tt>java.lang.Double</tt>, <tt>double</tt></td><td>数据库兼容的 <tt>NUMERIC</tt> 或 <tt>DOUBLE</tt></td></tr><tr><td><tt>BigDecimalTypeHandler</tt></td><td><tt>java.math.BigDecimal</tt></td><td>数据库兼容的 <tt>NUMERIC</tt> 或 <tt>DECIMAL</tt></td></tr><tr><td><tt>StringTypeHandler</tt></td><td><tt>java.lang.String</tt></td><td><tt>CHAR</tt>, <tt>VARCHAR</tt></td></tr><tr><td><tt>ClobReaderTypeHandler</tt></td><td><tt>java.io.Reader</tt></td><td>-</td></tr><tr><td><tt>ClobTypeHandler</tt></td><td><tt>java.lang.String</tt></td><td><tt>CLOB</tt>, <tt>LONGVARCHAR</tt></td></tr><tr><td><tt>NStringTypeHandler</tt></td><td><tt>java.lang.String</tt></td><td><tt>NVARCHAR</tt>, <tt>NCHAR</tt></td></tr><tr><td><tt>NClobTypeHandler</tt></td><td><tt>java.lang.String</tt></td><td><tt>NCLOB</tt></td></tr><tr><td><tt>BlobInputStreamTypeHandler</tt></td><td><tt>java.io.InputStream</tt></td><td>-</td></tr><tr><td><tt>ByteArrayTypeHandler</tt></td><td><tt>byte[]</tt></td><td>数据库兼容的字节流类型</td></tr><tr><td><tt>BlobTypeHandler</tt></td><td><tt>byte[]</tt></td><td><tt>BLOB</tt>, <tt>LONGVARBINARY</tt></td></tr><tr><td><tt>DateTypeHandler</tt></td><td><tt>java.util.Date</tt></td><td><tt>TIMESTAMP</tt></td></tr><tr><td><tt>DateOnlyTypeHandler</tt></td><td><tt>java.util.Date</tt></td><td><tt>DATE</tt></td></tr><tr><td><tt>TimeOnlyTypeHandler</tt></td><td><tt>java.util.Date</tt></td><td><tt>TIME</tt></td></tr><tr><td><tt>SqlTimestampTypeHandler</tt></td><td><tt>java.sql.Timestamp</tt></td><td><tt>TIMESTAMP</tt></td></tr><tr><td><tt>SqlDateTypeHandler</tt></td><td><tt>java.sql.Date</tt></td><td><tt>DATE</tt></td></tr><tr><td><tt>SqlTimeTypeHandler</tt></td><td><tt>java.sql.Time</tt></td><td><tt>TIME</tt></td></tr><tr><td><tt>ObjectTypeHandler</tt></td><td>Any</td><td><tt>OTHER</tt> 或未指定类型</td></tr><tr><td><tt>EnumTypeHandler</tt></td><td>Enumeration Type</td><td>VARCHAR-任何兼容的字符串类型，存储枚举的名称（而不是索引）</td></tr><tr><td><tt>EnumOrdinalTypeHandler</tt></td><td>Enumeration Type</td><td>任何兼容的 <tt>NUMERIC</tt> 或 <tt>DOUBLE</tt> 类型，存储枚举的索引（而不是名称）。</td></tr><tr><td><tt>InstantTypeHandler</tt></td><td><tt>java.time.Instant</tt></td><td><tt>TIMESTAMP</tt></td></tr><tr><td><tt>LocalDateTimeTypeHandler</tt></td><td><tt>java.time.LocalDateTime</tt></td><td><tt>TIMESTAMP</tt></td></tr><tr><td><tt>LocalDateTypeHandler</tt></td><td><tt>java.time.LocalDate</tt></td><td><tt>DATE</tt></td></tr><tr><td><tt>LocalTimeTypeHandler</tt></td><td><tt>java.time.LocalTime</tt></td><td><tt>TIME</tt></td></tr><tr><td><tt>OffsetDateTimeTypeHandler</tt></td><td><tt>java.time.OffsetDateTime</tt></td><td><tt>TIMESTAMP</tt></td></tr><tr><td><tt>OffsetTimeTypeHandler</tt></td><td><tt>java.time.OffsetTime</tt></td><td><tt>TIME</tt></td></tr><tr><td><tt>ZonedDateTimeTypeHandler</tt></td><td><tt>java.time.ZonedDateTime</tt></td><td><tt>TIMESTAMP</tt></td></tr><tr><td><tt>YearTypeHandler</tt></td><td><tt>java.time.Year</tt></td><td><tt>INTEGER</tt></td></tr><tr><td><tt>MonthTypeHandler</tt></td><td><tt>java.time.Month</tt></td><td><tt>INTEGER</tt></td></tr><tr><td><tt>YearMonthTypeHandler</tt></td><td><tt>java.time.YearMonth</tt></td><td><tt>VARCHAR</tt> or <tt>LONGVARCHAR</tt></td></tr><tr><td><tt>JapaneseDateTypeHandler</tt></td><td><tt>java.time.chrono.JapaneseDate</tt></td><td><tt>DATE</tt></td></tr></tbody></table><p>你可以重写类型处理器或创建你自己的类型处理器来处理不支持的或非标准的类型。 具体做法为：实现 <tt>org.apache.ibatis.type.TypeHandler</tt> 接口， 或继承一个很便利的类 <tt>org.apache.ibatis.type.BaseTypeHandler</tt>， 然后可以选择性地将它映射到一个 JDBC 类型。比如：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span></pre></td><td class=lntd><pre class=chroma>// ExampleTypeHandler.java
+@MappedJdbcTypes(JdbcType.VARCHAR)
+public class ExampleTypeHandler extends BaseTypeHandler&lt;String&gt; {
+
+  @Override
+  public void setNonNullParameter(PreparedStatement ps, int i, String parameter, JdbcType jdbcType) throws SQLException {
+    ps.setString(i, parameter);
+  }
+
+  @Override
+  public String getNullableResult(ResultSet rs, String columnName) throws SQLException {
+    return rs.getString(columnName);
+  }
+
+  @Override
+  public String getNullableResult(ResultSet rs, int columnIndex) throws SQLException {
+    return rs.getString(columnIndex);
+  }
+
+  @Override
+  public String getNullableResult(CallableStatement cs, int columnIndex) throws SQLException {
+    return cs.getString(columnIndex);
+  }
+}</pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></pre></td><td class=lntd><pre class=chroma>&lt;!-- mybatis-config.xml --&gt;
+&lt;typeHandlers&gt;
+  &lt;typeHandler handler=&#34;org.mybatis.example.ExampleTypeHandler&#34;/&gt;
+&lt;/typeHandlers&gt;</pre></td></tr></table></div></div><p>使用这个的类型处理器将会覆盖已经存在的处理 Java 的 String 类型属性和 VARCHAR 参数及结果的类型处理器。 要注意 MyBatis 不会窥探数据库元信息来决定使用哪种类型，所以你必须在参数和结果映射中指明那是 VARCHAR 类型的字段， 以使其能够绑定到正确的类型处理器上。 这是因为：MyBatis 直到语句被执行才清楚数据类型。</p><p>通过类型处理器的泛型，MyBatis 可以得知该类型处理器处理的 Java 类型，不过这种行为可以通过两种方法改变：</p><ul><li>在类型处理器的配置元素（typeHandler element）上增加一个 <tt>javaType</tt> 属性（比如：<tt>javaType=&ldquo;String&rdquo;</tt>）；</li><li>在类型处理器的类上（TypeHandler class）增加一个 <tt>@MappedTypes</tt> 注解来指定与其关联的 Java 类型列表。 如果在 <tt>javaType</tt> 属性中也同时指定，则注解方式将被忽略。</li></ul><p>可以通过两种方式来指定被关联的 JDBC 类型：</p><ul><li>在类型处理器的配置元素上增加一个 <tt>jdbcType</tt> 属性（比如：<tt>jdbcType=&ldquo;VARCHAR&rdquo;</tt>）；</li><li>在类型处理器的类上（TypeHandler class）增加一个 <tt>@MappedJdbcTypes</tt> 注解来指定与其关联的 JDBC 类型列表。 如果在 <tt>jdbcType</tt> 属性中也同时指定，则注解方式将被忽略。</li></ul><p>当决定在<tt>ResultMap</tt>中使用某一TypeHandler时，此时java类型是已知的（从结果类型中获得），但是JDBC类型是未知的。 因此Mybatis使用<tt>javaType=[TheJavaType], jdbcType=null</tt>的组合来选择一个TypeHandler。 这意味着使用<tt>@MappedJdbcTypes</tt>注解可以_限制_TypeHandler的范围，同时除非显示的设置，否则TypeHandler在<tt>ResultMap</tt>中将是无效的。 如果希望在<tt>ResultMap</tt>中使用TypeHandler，那么设置<tt>@MappedJdbcTypes</tt>注解的<tt>includeNullJdbcType=true</tt>即可。 然而从Mybatis 3.4.0开始，如果<strong>只有一个</strong>注册的TypeHandler来处理Java类型，那么它将是<tt>ResultMap</tt>使用Java类型时的默认值（即使没有<tt>includeNullJdbcType=true</tt>）。</p><p>最后，可以让 MyBatis 为你查找类型处理器：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></pre></td><td class=lntd><pre class=chroma><span class=p>&lt;!</span><span class=o>--</span> <span class=nx>mybatis</span><span class=o>-</span><span class=nx>config</span><span class=p>.</span><span class=nx>xml</span> <span class=o>--</span><span class=p>&gt;</span>
+<span class=p>&lt;</span><span class=nx>typeHandlers</span><span class=p>&gt;</span>
+  <span class=p>&lt;</span><span class=kn>package</span> <span class=nx>name</span><span class=p>=</span><span class=s>&#34;org.mybatis.example&#34;</span><span class=o>/</span><span class=p>&gt;</span>
+<span class=p>&lt;</span><span class=o>/</span><span class=nx>typeHandlers</span><span class=p>&gt;</span></pre></td></tr></table></div></div><p>注意在使用自动检索（autodiscovery）功能的时候，只能通过注解方式来指定 JDBC 的类型。</p><p>你能创建一个泛型类型处理器，它可以处理多于一个类。为达到此目的， 需要增加一个接收该类作为参数的构造器，这样在构造一个类型处理器的时候 MyBatis 就会传入一个具体的类。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></pre></td><td class=lntd><pre class=chroma>//GenericTypeHandler.java
+public class GenericTypeHandler&lt;E extends MyObject&gt; extends BaseTypeHandler&lt;E&gt; {
+
+  private Class&lt;E&gt; type;
+
+  public GenericTypeHandler(Class&lt;E&gt; type) {
+    if (type == null) throw new IllegalArgumentException(&#34;Type argument cannot be null&#34;);
+    this.type = type;
+  }
+  ...</pre></td></tr></table></div></div><p><tt>EnumTypeHandler</tt> 和 <tt>EnumOrdinalTypeHandler</tt> 都是泛型类型处理器（generic TypeHandlers）， 我们将会在接下来的部分详细探讨。</p><h3 id=a-name-a-a-处理枚举类型><a name=a></a>处理枚举类型</h3><p>若想映射枚举类型 <tt>Enum</tt>，则需要从 <tt>EnumTypeHandler</tt> 或者 <tt>EnumOrdinalTypeHandler</tt> 中选一个来使用。</p><p>比如说我们想存储取近似值时用到的舍入模式。默认情况下，MyBatis 会利用 <tt>EnumTypeHandler</tt> 来把 <tt>Enum</tt> 值转换成对应的名字。</p><p><strong>注意 <tt>EnumTypeHandler</tt> 在某种意义上来说是比较特别的，其他的处理器只针对某个特定的类，而它不同，它会处理任意继承了 <tt>Enum</tt> 的类。</strong></p><p>不过，我们可能不想存储名字，相反我们的 DBA 会坚持使用整形值代码。那也一样轻而易举： 在配置文件中把 <tt>EnumOrdinalTypeHandler</tt> 加到 <tt>typeHandlers</tt> 中即可， 这样每个 <tt>RoundingMode</tt> 将通过他们的序数值来映射成对应的整形。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></pre></td><td class=lntd><pre class=chroma>&lt;!-- mybatis-config.xml --&gt;
+&lt;typeHandlers&gt;
+  &lt;typeHandler handler=&#34;org.apache.ibatis.type.EnumOrdinalTypeHandler&#34; javaType=&#34;java.math.RoundingMode&#34;/&gt;
+&lt;/typeHandlers&gt;</pre></td></tr></table></div></div><p>但是怎样能将同样的 <tt>Enum</tt> 既映射成字符串又映射成整形呢？</p><p>自动映射器（auto-mapper）会自动地选用 <tt>EnumOrdinalTypeHandler</tt> 来处理， 所以如果我们想用普通的 <tt>EnumTypeHandler</tt>，就非要为那些 SQL 语句显式地设置要用到的类型处理器不可。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span></pre></td><td class=lntd><pre class=chroma>&lt;!DOCTYPE mapper
+    PUBLIC &#34;-//mybatis.org//DTD Mapper 3.0//EN&#34;
+    &#34;http://mybatis.org/dtd/mybatis-3-mapper.dtd&#34;&gt;
+
+&lt;mapper namespace=&#34;org.apache.ibatis.submitted.rounding.Mapper&#34;&gt;
+	&lt;resultMap type=&#34;org.apache.ibatis.submitted.rounding.User&#34; id=&#34;usermap&#34;&gt;
+		&lt;id column=&#34;id&#34; property=&#34;id&#34;/&gt;
+		&lt;result column=&#34;name&#34; property=&#34;name&#34;/&gt;
+		&lt;result column=&#34;funkyNumber&#34; property=&#34;funkyNumber&#34;/&gt;
+		&lt;result column=&#34;roundingMode&#34; property=&#34;roundingMode&#34;/&gt;
+	&lt;/resultMap&gt;
+
+	&lt;select id=&#34;getUser&#34; resultMap=&#34;usermap&#34;&gt;
+		select * from users
+	&lt;/select&gt;
+	&lt;insert id=&#34;insert&#34;&gt;
+	    insert into users (id, name, funkyNumber, roundingMode) values (
+	    	#{id}, #{name}, #{funkyNumber}, #{roundingMode}
+	    )
+	&lt;/insert&gt;
+
+	&lt;resultMap type=&#34;org.apache.ibatis.submitted.rounding.User&#34; id=&#34;usermap2&#34;&gt;
+		&lt;id column=&#34;id&#34; property=&#34;id&#34;/&gt;
+		&lt;result column=&#34;name&#34; property=&#34;name&#34;/&gt;
+		&lt;result column=&#34;funkyNumber&#34; property=&#34;funkyNumber&#34;/&gt;
+		&lt;result column=&#34;roundingMode&#34; property=&#34;roundingMode&#34; typeHandler=&#34;org.apache.ibatis.type.EnumTypeHandler&#34;/&gt;
+	&lt;/resultMap&gt;
+	&lt;select id=&#34;getUser2&#34; resultMap=&#34;usermap2&#34;&gt;
+		select * from users2
+	&lt;/select&gt;
+	&lt;insert id=&#34;insert2&#34;&gt;
+	    insert into users2 (id, name, funkyNumber, roundingMode) values (
+	    	#{id}, #{name}, #{funkyNumber}, #{roundingMode, typeHandler=org.apache.ibatis.type.EnumTypeHandler}
+	    )
+	&lt;/insert&gt;
+
+&lt;/mapper&gt;</pre></td></tr></table></div></div><p>注意，这里的 select 语句强制使用 <tt>resultMap</tt> 来代替 <tt>resultType</tt>。</p><p><a name=objectFactory></a></p><h3 id=a-name-aobjectfactory-a-对象工厂-objectfactory><a name=aobjectFactory></a>对象工厂（objectFactory）</h3><p>MyBatis 每次创建结果对象的新实例时，它都会使用一个对象工厂（ObjectFactory）实例来完成。 默认的对象工厂需要做的仅仅是实例化目标类，要么通过默认构造方法，要么在参数映射存在的时候通过参数构造方法来实例化。 如果想覆盖对象工厂的默认行为，则可以通过创建自己的对象工厂来实现。比如：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></pre></td><td class=lntd><pre class=chroma>// ExampleObjectFactory.java
+public class ExampleObjectFactory extends DefaultObjectFactory {
+  public Object create(Class type) {
+    return super.create(type);
+  }
+  public Object create(Class type, List&lt;Class&gt; constructorArgTypes, List&lt;Object&gt; constructorArgs) {
+    return super.create(type, constructorArgTypes, constructorArgs);
+  }
+  public void setProperties(Properties properties) {
+    super.setProperties(properties);
+  }
+  public &lt;T&gt; boolean isCollection(Class&lt;T&gt; type) {
+    return Collection.class.isAssignableFrom(type);
+  }}</pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></pre></td><td class=lntd><pre class=chroma>&lt;!-- mybatis-config.xml --&gt;
+&lt;objectFactory type=&#34;org.mybatis.example.ExampleObjectFactory&#34;&gt;
+  &lt;property name=&#34;someProperty&#34; value=&#34;100&#34;/&gt;
+&lt;/objectFactory&gt;</pre></td></tr></table></div></div><p>ObjectFactory 接口很简单，它包含两个创建用的方法，一个是处理默认构造方法的，另外一个是处理带参数的构造方法的。 最后，setProperties 方法可以被用来配置 ObjectFactory，在初始化你的 ObjectFactory 实例后， objectFactory 元素体中定义的属性会被传递给 setProperties 方法。</p><p><a name=plugins></a></p><h3 id=a-name-aplugins-a-插件-plugins><a name=aplugins></a>插件（plugins）</h3><p>MyBatis 允许你在已映射语句执行过程中的某一点进行拦截调用。默认情况下，MyBatis 允许使用插件来拦截的方法调用包括：</p><ul><li>Executor (update, query, flushStatements, commit, rollback, getTransaction, close, isClosed)</li><li>ParameterHandler (getParameterObject, setParameters)</li><li>ResultSetHandler (handleResultSets, handleOutputParameters)</li><li>StatementHandler (prepare, parameterize, batch, update, query)</li></ul><p>这些类中方法的细节可以通过查看每个方法的签名来发现，或者直接查看 MyBatis 的发行包中的源代码。 假设你想做的不仅仅是监控方法的调用，那么你应该很好的了解正在重写的方法的行为。 因为如果在试图修改或重写已有方法的行为的时候，你很可能在破坏 MyBatis 的核心模块。 这些都是更低层的类和方法，所以使用插件的时候要特别当心。</p><p>通过 MyBatis 提供的强大机制，使用插件是非常简单的，只需实现 Interceptor 接口，并指定了想要拦截的方法签名即可。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span></pre></td><td class=lntd><pre class=chroma>@Intercepts({ @Signature(type = StatementHandler.class, method = &#34;prepare&#34;, args = { Connection.class, Integer.class}) })
+public class SQLStatsInterceptor implements Interceptor  {
+
+	private final Logger logger = Logger.getLogger(SQLStatsInterceptor.class);
+
+    @Override
+    public Object intercept(Invocation invocation) throws Throwable {
+
+        StatementHandler statementHandler = (StatementHandler) invocation.getTarget();
+        BoundSql boundSql = statementHandler.getBoundSql();
+        String sql = boundSql.getSql();
+        logger.info(&#34;mybatis intercept sql:{&#34;+sql+&#34;}&#34;);
+        return invocation.proceed();
+    }
+
+    @Override
+    public Object plugin(Object target) {
+        return Plugin.wrap(target, this);
+    }
+
+    @Override
+    public void setProperties(Properties properties) {
+        String dialect = properties.getProperty(&#34;dialect&#34;);
+        logger.info(&#34;mybatis intercept dialect:{&#34;+dialect+&#34;}&#34;);
+    }
+
+}</pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></pre></td><td class=lntd><pre class=chroma>&lt;!-- mybatis-config.xml --&gt;
+&lt;plugins&gt;
+		&lt;plugin interceptor=&#34;com.gravel.plugins.SQLStatsInterceptor&#34;&gt;
+			&lt;property name=&#34;dialect&#34; value=&#34;mysql&#34; /&gt;
+		&lt;/plugin&gt;
+	&lt;/plugins&gt;</pre></td></tr></table></div></div><p>上面的插件将会拦截在 Executor 实例中所有的 “update” 方法调用， 这里的 Executor 是负责执行低层映射语句的内部对象。</p><p>NOTE <strong>覆盖配置类</strong></p><p>除了用插件来修改 MyBatis 核心行为之外，还可以通过完全覆盖配置类来达到目的。只需继承后覆盖其中的每个方法，再把它传递到 SqlSessionFactoryBuilder.build(myConfig) 方法即可。再次重申，这可能会严重影响 MyBatis 的行为，务请慎之又慎。</p><p><a name=environments></a></p><h3 id=a-name-aenvironments-a-配置环境-environments><a name=aenvironments></a>配置环境（environments）</h3><p>MyBatis 可以配置成适应多种环境，这种机制有助于将 SQL 映射应用于多种数据库之中， 现实情况下有多种理由需要这么做。例如，开发、测试和生产环境需要有不同的配置；或者共享相同 Schema 的多个生产数据库， 想使用相同的 SQL 映射。许多类似的用例。</p><p><strong>不过要记住：尽管可以配置多个环境，每个 SqlSessionFactory 实例只能选择其一。</strong></p><p>所以，如果你想连接两个数据库，就需要创建两个 SqlSessionFactory 实例，每个数据库对应一个。而如果是三个数据库，就需要三个实例，依此类推，记起来很简单：</p><ul><li><strong>每个数据库对应一个 SqlSessionFactory 实例</strong></li></ul><p>为了指定创建哪种环境，只要将它作为可选的参数传递给 SqlSessionFactoryBuilder 即可。可以接受环境配置的两个方法签名是：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span></pre></td><td class=lntd><pre class=chroma>SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(reader, environment);
+SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(reader, environment,properties);</pre></td></tr></table></div></div><p>如果忽略了环境参数，那么默认环境将会被加载，如下所示：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span></pre></td><td class=lntd><pre class=chroma>SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(reader);
+SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(reader,properties);</pre></td></tr></table></div></div><p>环境元素定义了如何配置环境。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></pre></td><td class=lntd><pre class=chroma>&lt;environments default=&#34;development&#34;&gt;
+  &lt;environment id=&#34;development&#34;&gt;
+    &lt;transactionManager type=&#34;JDBC&#34;&gt;
+      &lt;property name=&#34;...&#34; value=&#34;...&#34;/&gt;
+    &lt;/transactionManager&gt;
+    &lt;dataSource type=&#34;POOLED&#34;&gt;
+      &lt;property name=&#34;driver&#34; value=&#34;${driver}&#34;/&gt;
+      &lt;property name=&#34;url&#34; value=&#34;${url}&#34;/&gt;
+      &lt;property name=&#34;username&#34; value=&#34;${username}&#34;/&gt;
+      &lt;property name=&#34;password&#34; value=&#34;${password}&#34;/&gt;
+    &lt;/dataSource&gt;
+  &lt;/environment&gt;
+&lt;/environments&gt;</pre></td></tr></table></div></div><p>注意这里的关键点:</p><ul><li>默认的环境 ID（比如:default=”development”）。</li><li>每个 environment 元素定义的环境 ID（比如:id=”development”）。</li><li>事务管理器的配置（比如:type=”JDBC”）。</li><li>数据源的配置（比如:type=”POOLED”）。</li></ul><p>默认的环境和环境 ID 是一目了然的。随你怎么命名，只要保证默认环境要匹配其中一个环境ID。</p><p><strong>事务管理器（transactionManager）</strong></p><p>在 MyBatis 中有两种类型的事务管理器（也就是 type=”[JDBC|MANAGED]”）：</p><ul><li>JDBC – 这个配置就是直接使用了 JDBC 的提交和回滚设置，它依赖于从数据源得到的连接来管理事务作用域。</li><li><p>MANAGED – 这个配置几乎没做什么。它从来不提交或回滚一个连接，而是让容器来管理事务的整个生命周期（比如 JEE 应用服务器的上下文）。 默认情况下它会关闭连接，然而一些容器并不希望这样，因此需要将 closeConnection 属性设置为 false 来阻止它默认的关闭行为。例如:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></pre></td><td class=lntd><pre class=chroma>&lt;transactionManager type=&#34;MANAGED&#34;&gt;
+  &lt;property name=&#34;closeConnection&#34; value=&#34;false&#34;/&gt;
+&lt;/transactionManager&gt;</pre></td></tr></table></div></div></li></ul><p>NOTE如果你正在使用 Spring + MyBatis，则没有必要配置事务管理器， 因为 Spring 模块会使用自带的管理器来覆盖前面的配置。</p><p>这两种事务管理器类型都不需要任何属性。它们不过是类型别名，换句话说，你可以使用 TransactionFactory 接口的实现类的完全限定名或类型别名代替它们。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></pre></td><td class=lntd><pre class=chroma>public interface TransactionFactory {
+  void setProperties(Properties props);  
+  Transaction newTransaction(Connection conn);
+  Transaction newTransaction(DataSource dataSource, TransactionIsolationLevel level, boolean autoCommit);  
+}</pre></td></tr></table></div></div><p>任何在 XML 中配置的属性在实例化之后将会被传递给 setProperties() 方法。你也需要创建一个 Transaction 接口的实现类，这个接口也很简单：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></pre></td><td class=lntd><pre class=chroma>public interface Transaction {
+  Connection getConnection() throws SQLException;
+  void commit() throws SQLException;
+  void rollback() throws SQLException;
+  void close() throws SQLException;
+  Integer getTimeout() throws SQLException;
+}</pre></td></tr></table></div></div><p>使用这两个接口，你可以完全自定义 MyBatis 对事务的处理。</p><p><strong>数据源（dataSource）</strong></p><p>dataSource 元素使用标准的 JDBC 数据源接口来配置 JDBC 连接对象的资源。</p><ul><li>许多 MyBatis 的应用程序将会按示例中的例子来配置数据源。然而它并不是必须的。要知道为了方便使用延迟加载，数据源才是必须的。</li></ul><p>有三种内建的数据源类型（也就是 type=”[UNPOOLED|POOLED|JNDI]”）：</p><p><strong>UNPOOLED</strong>– 这个数据源的实现只是每次被请求时打开和关闭连接。虽然一点慢，它对在及时可用连接方面没有性能要求的简单应用程序是一个很好的选择。 不同的数据库在这方面表现也是不一样的，所以对某些数据库来说使用连接池并不重要，这个配置也是理想的。UNPOOLED 类型的数据源仅仅需要配置以下 5 种属性：</p><ul><li><tt>driver</tt> – 这是 JDBC 驱动的 Java 类的完全限定名（并不是JDBC驱动中可能包含的数据源类）。</li><li><tt>url</tt> – 这是数据库的 JDBC URL 地址。</li><li><tt>username</tt> – 登录数据库的用户名。</li><li><tt>password</tt> – 登录数据库的密码。</li><li><tt>defaultTransactionIsolationLevel</tt> – 默认的连接事务隔离级别。</li></ul><p>作为可选项，你也可以传递属性给数据库驱动。要这样做，属性的前缀为“driver.”，例如：</p><ul><li><tt>driver.encoding=UTF8</tt></li></ul><p>这将通过DriverManager.getConnection(url,driverProperties)方法传递值为 <tt>UTF8</tt> 的 <tt>encoding</tt> 属性给数据库驱动。</p><p><strong>POOLED</strong>– 这种数据源的实现利用“池”的概念将 JDBC 连接对象组织起来，避免了创建新的连接实例时所必需的初始化和认证时间。 这是一种使得并发 Web 应用快速响应请求的流行处理方式。</p><p>除了上述提到 UNPOOLED 下的属性外，会有更多属性用来配置 POOLED 的数据源：</p><ul><li><tt>poolMaximumActiveConnections</tt> – 在任意时间可以存在的活动（也就是正在使用）连接数量，默认值：10</li><li><tt>poolMaximumIdleConnections</tt> – 任意时间可能存在的空闲连接数。</li><li><tt>poolMaximumCheckoutTime</tt> – 在被强制返回之前，池中连接被检出（checked out）时间，默认值：20000 毫秒（即 20 秒）</li><li><tt>poolTimeToWait</tt> – 这是一个底层设置，如果获取连接花费的相当长的时间，它会给连接池打印状态日志并重新尝试获取一个连接（避免在误配置的情况下一直安静的失败），默认值：20000 毫秒（即 20 秒）。</li><li><tt>poolMaximumLocalBadConnectionTolerance</tt> – 这是一个关于坏连接容忍度的底层设置， 作用于每一个尝试从缓存池获取连接的线程. 如果这个线程获取到的是一个坏的连接，那么这个数据源允许这 个线程尝试重新获取一个新的连接，但是这个重新尝试的次数不应该超过 <tt>poolMaximumIdleConnections</tt> 与 <tt>poolMaximumLocalBadConnectionTolerance</tt> 之和。 默认值：3 (Since: 3.4.5)</li><li><tt>poolPingQuery</tt> – 发送到数据库的侦测查询，用来检验连接是否处在正常工作秩序中并准备接受请求。默认是“NO PING QUERY SET”，这会导致多数数据库驱动失败时带有一个恰当的错误消息。</li><li><tt>poolPingEnabled</tt> – 是否启用侦测查询。若开启，也必须使用一个可执行的 SQL 语句设置 <tt>poolPingQuery</tt> 属性（最好是一个非常快的 SQL），默认值：false。</li><li><tt>poolPingConnectionsNotUsedFor</tt> – 配置 poolPingQuery 的使用频度。这可以被设置成匹配具体的数据库连接超时时间，来避免不必要的侦测，默认值：0（即所有连接每一时刻都被侦测 — 当然仅当 poolPingEnabled 为 true 时适用）。</li></ul><p><strong>JNDI</strong>– 这个数据源的实现是为了能在如 EJB 或应用服务器这类容器中使用，容器可以集中或在外部配置数据源，然后放置一个 JNDI 上下文的引用。这种数据源配置只需要两个属性：</p><ul><li><tt>initial_context</tt> – 这个属性用来在 InitialContext 中寻找上下文（即，initialContext.lookup(initial_context)）。这是个可选属性，如果忽略，那么 data_source 属性将会直接从 InitialContext 中寻找。</li><li><tt>data_source</tt> – 这是引用数据源实例位置的上下文的路径。提供了 initial_context 配置时会在其返回的上下文中进行查找，没有提供时则直接在 InitialContext 中查找。</li></ul><p>和其他数据源配置类似，可以通过添加前缀“env.”直接把属性传递给初始上下文。比如：</p><ul><li><tt>env.encoding=UTF8</tt></li></ul><p>这就会在初始上下文（InitialContext）实例化时往它的构造方法传递值为 <tt>UTF8</tt> 的 <tt>encoding</tt> 属性。</p><p>通过需要实现接口 <tt>org.apache.ibatis.datasource.DataSourceFactory</tt> ， 也可使用任何第三方数据源，：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></pre></td><td class=lntd><pre class=chroma>public interface DataSourceFactory {
+  void setProperties(Properties props);
+  DataSource getDataSource();
+}</pre></td></tr></table></div></div><p><tt>org.apache.ibatis.datasource.unpooled.UnpooledDataSourceFactory</tt> 可被用作父类来构建新的数据源适配器，比如下面这段插入 C3P0 数据源所必需的代码：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></pre></td><td class=lntd><pre class=chroma>import org.apache.ibatis.datasource.unpooled.UnpooledDataSourceFactory;
+import com.mchange.v2.c3p0.ComboPooledDataSource;
+
+public class C3P0DataSourceFactory extends UnpooledDataSourceFactory {
+
+  public C3P0DataSourceFactory() {
+    this.dataSource = new ComboPooledDataSource();
+  }
+}</pre></td></tr></table></div></div><p>为了令其工作，为每个需要 MyBatis 调用的 setter 方法中增加一个属性。下面是一个可以连接至 PostgreSQL 数据库的例子：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></pre></td><td class=lntd><pre class=chroma>&lt;dataSource type=&#34;org.myproject.C3P0DataSourceFactory&#34;&gt;
+  &lt;property name=&#34;driver&#34; value=&#34;org.postgresql.Driver&#34;/&gt;
+  &lt;property name=&#34;url&#34; value=&#34;jdbc:postgresql:mydb&#34;/&gt;
+  &lt;property name=&#34;username&#34; value=&#34;postgres&#34;/&gt;
+  &lt;property name=&#34;password&#34; value=&#34;root&#34;/&gt;
+&lt;/dataSource&gt;</pre></td></tr></table></div></div><p><a name=databaseIdProvider></a></p><h3 id=a-name-databaseidprovider-a-databaseidprovider><a name=databaseIdProvider></a>databaseIdProvider</h3><p>MyBatis 可以根据不同的数据库厂商执行不同的语句，这种多厂商的支持是基于映射语句中的 <tt>databaseId</tt> 属性。 MyBatis 会加载不带 <tt>databaseId</tt> 属性和带有匹配当前数据库 <tt>databaseId</tt> 属性的所有语句。 如果同时找到带有 <tt>databaseId</tt> 和不带 <tt>databaseId</tt> 的相同语句，则后者会被舍弃。 为支持多厂商特性只要像下面这样在 mybatis-config.xml 文件中加入 <tt>databaseIdProvider</tt> 即可：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span></pre></td><td class=lntd><pre class=chroma>&lt;databaseIdProvider type=&#34;DB_VENDOR&#34; /&gt;</pre></td></tr></table></div></div><p>这里的 DB_VENDOR 会通过 <tt>DatabaseMetaData#getDatabaseProductName()</tt> 返回的字符串进行设置。 由于通常情况下这个字符串都非常长而且相同产品的不同版本会返回不同的值，所以最好通过设置属性别名来使其变短，如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></pre></td><td class=lntd><pre class=chroma>&lt;databaseIdProvider type=&#34;DB_VENDOR&#34;&gt;
+  &lt;property name=&#34;SQL Server&#34; value=&#34;sqlserver&#34;/&gt;
+  &lt;property name=&#34;DB2&#34; value=&#34;db2&#34;/&gt;        
+  &lt;property name=&#34;Oracle&#34; value=&#34;oracle&#34; /&gt;
+&lt;/databaseIdProvider&gt;</pre></td></tr></table></div></div><p>在有 properties 时，DB_VENDOR databaseIdProvider 的将被设置为第一个能匹配数据库产品名称的属性键对应的值，如果没有匹配的属性将会设置为 “null”。 在这个例子中，如果 <tt>getDatabaseProductName()</tt> 返回“Oracle (DataDirect)”，databaseId 将被设置为“oracle”。</p><p>你可以通过实现接口 <tt>org.apache.ibatis.mapping.DatabaseIdProvider</tt> 并在 mybatis-config.xml 中注册来构建自己的 DatabaseIdProvider：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></pre></td><td class=lntd><pre class=chroma>public interface DatabaseIdProvider {
+  void setProperties(Properties p);
+  String getDatabaseId(DataSource dataSource) throws SQLException;
+}</pre></td></tr></table></div></div><p><a name=mappers></a></p><h3 id=a-name-amappers-a-映射器-mappers><a name=amappers></a>映射器（mappers）</h3><p>既然 MyBatis 的行为已经由上述元素配置完了，我们现在就要定义 SQL 映射语句了。但是首先我们需要告诉 MyBatis 到哪里去找到这些语句。 Java 在自动查找这方面没有提供一个很好的方法，所以最佳的方式是告诉 MyBatis 到哪里去找映射文件。你可以使用相对于类路径的资源引用， 或完全限定资源定位符（包括 <tt>file:///</tt> 的 URL），或类名和包名等。例如：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></pre></td><td class=lntd><pre class=chroma>&lt;!-- Using classpath relative resources --&gt;
+&lt;mappers&gt;
+  &lt;mapper resource=&#34;org/mybatis/builder/AuthorMapper.xml&#34;/&gt;
+  &lt;mapper resource=&#34;org/mybatis/builder/BlogMapper.xml&#34;/&gt;
+  &lt;mapper resource=&#34;org/mybatis/builder/PostMapper.xml&#34;/&gt;
+&lt;/mappers&gt;</pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></pre></td><td class=lntd><pre class=chroma>&lt;!-- Using url fully qualified paths --&gt;
+&lt;mappers&gt;
+  &lt;mapper url=&#34;file:///var/mappers/AuthorMapper.xml&#34;/&gt;
+  &lt;mapper url=&#34;file:///var/mappers/BlogMapper.xml&#34;/&gt;
+  &lt;mapper url=&#34;file:///var/mappers/PostMapper.xml&#34;/&gt;
+&lt;/mappers&gt;</pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></pre></td><td class=lntd><pre class=chroma>&lt;!-- Using mapper interface classes --&gt;
+&lt;mappers&gt;
+  &lt;mapper class=&#34;org.mybatis.builder.AuthorMapper&#34;/&gt;
+  &lt;mapper class=&#34;org.mybatis.builder.BlogMapper&#34;/&gt;
+  &lt;mapper class=&#34;org.mybatis.builder.PostMapper&#34;/&gt;
+&lt;/mappers&gt;</pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></pre></td><td class=lntd><pre class=chroma><span class=p>&lt;!</span><span class=o>--</span> <span class=nx>Register</span> <span class=nx>all</span> <span class=nx>interfaces</span> <span class=nx>in</span> <span class=nx>a</span> <span class=kn>package</span> <span class=nx>as</span> <span class=nx>mappers</span> <span class=o>--</span><span class=p>&gt;</span>
+<span class=p>&lt;</span><span class=nx>mappers</span><span class=p>&gt;</span>
+  <span class=p>&lt;</span><span class=kn>package</span> <span class=nx>name</span><span class=p>=</span><span class=s>&#34;org.mybatis.builder&#34;</span><span class=o>/</span><span class=p>&gt;</span>
+<span class=p>&lt;</span><span class=o>/</span><span class=nx>mappers</span><span class=p>&gt;</span></pre></td></tr></table></div></div><p>这些配置会告诉了 MyBatis 去哪里找映射文件.</p><h2 id=a-name-mapper-xml-a-mapper-xml-文件><a name=Mapper_XML_></a>Mapper XML 文件</h2><p>MyBatis 的真正强大在于它的映射语句，也是它的魔力所在。由于它的异常强大，映射器的 XML 文件就显得相对简单。如果拿它跟具有相同功能的 JDBC 代码进行对比，你会立即发现省掉了将近 95% 的代码。MyBatis 就是针对 SQL 构建的，并且比普通的方法做的更好。</p><p>SQL 映射文件有很少的几个顶级元素（按照它们应该被定义的顺序）：</p><ul><li><tt>cache</tt> – 给定命名空间的缓存配置。</li><li><tt>cache-ref</tt> – 其他命名空间缓存配置的引用。</li><li><tt>resultMap</tt> – 是最复杂也是最强大的元素，用来描述如何从数据库结果集中来加载对象。</li><li><tt><del>parameterMap</del></tt> <del>– 已废弃！老式风格的参数映射。内联参数是首选,这个元素可能在将来被移除，这里不会记录。</del></li><li><tt>sql</tt> – 可被其他语句引用的可重用语句块。</li><li><tt>insert</tt> – 映射插入语句</li><li><tt>update</tt> – 映射更新语句</li><li><tt>delete</tt> – 映射删除语句</li><li><tt>select</tt> – 映射查询语句</li></ul><p>下一部分将从语句本身开始来描述每个元素的细节。</p><p><a name=select></a></p><h3 id=a-name-select-a-select><a name=select></a>select</h3><p>查询语句是 MyBatis 中最常用的元素之一，光能把数据存到数据库中价值并不大，如果还能重新取出来才有用，多数应用也都是查询比修改要频繁。对每个插入、更新或删除操作，通常对应多个查询操作。这是 MyBatis 的基本原则之一，也是将焦点和努力放到查询和结果映射的原因。简单查询的 select 元素是非常简单的。比如：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></pre></td><td class=lntd><pre class=chroma>&lt;select id=&#34;selectPerson&#34; parameterType=&#34;int&#34; resultType=&#34;hashmap&#34;&gt;
+  SELECT * FROM PERSON WHERE ID = #{id}
+&lt;/select&gt;</pre></td></tr></table></div></div><p>这个语句被称作 selectPerson，接受一个 int（或 Integer）类型的参数，并返回一个 HashMap 类型的对象，其中的键是列名，值便是结果行中的对应值。</p><p>注意参数符号：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span></pre></td><td class=lntd><pre class=chroma>#{id}</pre></td></tr></table></div></div><p>这就告诉 MyBatis 创建一个预处理语句参数，通过 JDBC，这样的一个参数在 SQL 中会由一个“?”来标识，并被传递到一个新的预处理语句中，就像这样：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></pre></td><td class=lntd><pre class=chroma>// Similar JDBC code, NOT MyBatis…
+String selectPerson = &#34;SELECT * FROM PERSON WHERE ID=?&#34;;
+PreparedStatement ps = conn.prepareStatement(selectPerson);
+ps.setInt(1,id);</pre></td></tr></table></div></div><p>当然，这需要很多单独的 JDBC 的代码来提取结果并将它们映射到对象实例中，这就是 MyBatis 节省你时间的地方。我们需要深入了解参数和结果映射，细节部分我们下面来了解。</p><p>select 元素有很多属性允许你配置，来决定每条语句的作用细节。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span></pre></td><td class=lntd><pre class=chroma>&lt;select
+        &lt;!--  1. id （必须配置）
+        id是命名空间中的唯一标识符，可被用来代表这条语句。 
+        一个命名空间（namespace） 对应一个dao接口, 
+        这个id也应该对应dao里面的某个方法（相当于方法的实现），因此id 应该与方法名一致  --&gt;
+     
+     id=&#34;selectPerson&#34;
+     
+     &lt;!-- 2. parameterType （可选配置, 默认为mybatis自动选择处理）
+        将要传入语句的参数的完全限定类名或别名， 如果不配置，mybatis会通过ParameterHandler 根据参数类型默认选择合适的typeHandler进行处理
+        parameterType 主要指定参数类型，可以是int, short, long, string等类型，也可以是复杂类型（如对象） --&gt;
+     parameterType=&#34;int&#34;
+     
+     &lt;!-- 3. resultType (resultType 与 resultMap 二选一配置)
+         resultType用以指定返回类型，指定的类型可以是基本类型，可以是java容器，也可以是javabean --&gt;
+     resultType=&#34;hashmap&#34;
+     
+     &lt;!-- 4. resultMap (resultType 与 resultMap 二选一配置)
+         resultMap用于引用我们通过 resultMap标签定义的映射类型，这也是mybatis组件高级复杂映射的关键 --&gt;
+     resultMap=&#34;personResultMap&#34;
+     
+     &lt;!-- 5. flushCache (可选配置)
+         将其设置为 true，任何时候只要语句被调用，都会导致本地缓存和二级缓存都会被清空，默认值：false --&gt;
+     flushCache=&#34;false&#34;
+     
+     &lt;!-- 6. useCache (可选配置)
+         将其设置为 true，将会导致本条语句的结果被二级缓存，默认值：对 select 元素为 true --&gt;
+     useCache=&#34;true&#34;
+     
+     &lt;!-- 7. timeout (可选配置) 
+         这个设置是在抛出异常之前，驱动程序等待数据库返回请求结果的秒数。默认值为 unset（依赖驱动）--&gt;
+     timeout=&#34;10000&#34;
+     
+     &lt;!-- 8. fetchSize (可选配置) 
+         这是尝试影响驱动程序每次批量返回的结果行数和这个设置值相等。默认值为 unset（依赖驱动)--&gt;
+     fetchSize=&#34;256&#34;
+     
+     &lt;!-- 9. statementType (可选配置) 
+         STATEMENT，PREPARED 或 CALLABLE 的一个。这会让 MyBatis 分别使用 Statement，PreparedStatement 或 CallableStatement，默认值：PREPARED--&gt;
+     statementType=&#34;PREPARED&#34;
+     
+     &lt;!-- 10. resultSetType (可选配置) 
+         FORWARD_ONLY，SCROLL_SENSITIVE 或 SCROLL_INSENSITIVE 中的一个，默认值为 unset （依赖驱动）--&gt;
+     resultSetType=&#34;FORWARD_ONLY&#34;&gt;</pre></td></tr></table></div></div><p>配置看起来总是这么多，不过实际常用的配置也就那么几个， 根据自己的需要，上面都已注明是否必须配置。</p><p><a name=insert_update_and_delete></a></p><h3 id=a-name-insert-update-delete-a-insert-update-和-delete><a name=insert_update__delete></a>insert, update 和 delete</h3><p>数据变更语句 insert，update 和 delete 的实现非常接近：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span><span class=lnt>64
+</span><span class=lnt>65
+</span></pre></td><td class=lntd><pre class=chroma>&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34; ?&gt;   
+&lt;!DOCTYPE mapper   
+PUBLIC &#34;-//ibatis.apache.org//DTD Mapper 3.0//EN&#34;  
+&#34;http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd&#34;&gt; 
+
+&lt;!-- mapper 为根元素节点， 一个namespace对应一个dao --&gt;
+&lt;mapper namespace=&#34;com.dy.dao.UserDao&#34;&gt;
+
+    &lt;insert
+      &lt;!-- 1. id （必须配置）
+        id是命名空间中的唯一标识符，可被用来代表这条语句。 
+        一个命名空间（namespace） 对应一个dao接口, 
+        这个id也应该对应dao里面的某个方法（相当于方法的实现），因此id 应该与方法名一致 --&gt;
+      
+      id=&#34;insertUser&#34;
+      
+      &lt;!-- 2. parameterType （可选配置, 默认为mybatis自动选择处理）
+        将要传入语句的参数的完全限定类名或别名， 如果不配置，mybatis会通过ParameterHandler 根据参数类型默认选择合适的typeHandler进行处理
+        parameterType 主要指定参数类型，可以是int, short, long, string等类型，也可以是复杂类型（如对象） --&gt;
+      
+      parameterType=&#34;com.demo.User&#34;
+      
+      &lt;!-- 3. flushCache （可选配置，默认配置为true）
+        将其设置为 true，任何时候只要语句被调用，都会导致本地缓存和二级缓存都会被清空，默认值：true（对应插入、更新和删除语句） --&gt;
+      
+      flushCache=&#34;true&#34;
+      
+      &lt;!-- 4. statementType （可选配置，默认配置为PREPARED）
+        STATEMENT，PREPARED 或 CALLABLE 的一个。这会让 MyBatis 分别使用 Statement，PreparedStatement 或 CallableStatement，默认值：PREPARED。 --&gt;
+      
+      statementType=&#34;PREPARED&#34;
+      
+      &lt;!-- 5. keyProperty (可选配置， 默认为unset)
+        （仅对 insert 和 update 有用）唯一标记一个属性，MyBatis 会通过 getGeneratedKeys 的返回值或者通过 insert 语句的 selectKey 子元素设置它的键值，默认：unset。如果希望得到多个生成的列，也可以是逗号分隔的属性名称列表。 --&gt;
+      
+      keyProperty=&#34;&#34;
+      
+      &lt;!-- 6. keyColumn     (可选配置)
+        （仅对 insert 和 update 有用）通过生成的键值设置表中的列名，这个设置仅在某些数据库（像 PostgreSQL）是必须的，当主键列不是表中的第一列的时候需要设置。如果希望得到多个生成的列，也可以是逗号分隔的属性名称列表。 --&gt;
+      
+      keyColumn=&#34;&#34;
+      
+      &lt;!-- 7. useGeneratedKeys (可选配置， 默认为false)
+        （仅对 insert 和 update 有用）这会令 MyBatis 使用 JDBC 的 getGeneratedKeys 方法来取出由数据库内部生成的主键（比如：像 MySQL 和 SQL Server 这样的关系数据库管理系统的自动递增字段），默认值：false。  --&gt;
+      
+      useGeneratedKeys=&#34;false&#34;
+      
+      &lt;!-- 8. timeout  (可选配置， 默认为unset, 依赖驱动)
+        这个设置是在抛出异常之前，驱动程序等待数据库返回请求结果的秒数。默认值为 unset（依赖驱动）。 --&gt;
+      timeout=&#34;20&#34;&gt;
+
+    &lt;update
+      id=&#34;updateUser&#34;
+      parameterType=&#34;com.demo.User&#34;
+      flushCache=&#34;true&#34;
+      statementType=&#34;PREPARED&#34;
+      timeout=&#34;20&#34;&gt;
+
+    &lt;delete
+      id=&#34;deleteUser&#34;
+      parameterType=&#34;com.demo.User&#34;
+      flushCache=&#34;true&#34;
+      statementType=&#34;PREPARED&#34;
+      timeout=&#34;20&#34;&gt;
+&lt;/mapper&gt;</pre></td></tr></table></div></div><p>下面就是 insert，update 和 delete 语句的示例：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></pre></td><td class=lntd><pre class=chroma>&lt;insert id=&#34;insertAuthor&#34;&gt;
+  insert into Author (id,username,password,email,bio)
+  values (#{id},#{username},#{password},#{email},#{bio})
+&lt;/insert&gt;
+
+&lt;update id=&#34;updateAuthor&#34;&gt;
+  update Author set
+    username = #{username},
+    password = #{password},
+    email = #{email},
+    bio = #{bio}
+  where id = #{id}
+&lt;/update&gt;
+
+&lt;delete id=&#34;deleteAuthor&#34;&gt;
+  delete from Author where id = #{id}
+&lt;/delete&gt;</pre></td></tr></table></div></div><p>如前所述，插入语句的配置规则更加丰富，在插入语句里面有一些额外的属性和子元素用来处理主键的生成，而且有多种生成方式。</p><p>首先，如果你的数据库支持自动生成主键的字段（比如 MySQL 和 SQL Server），那么你可以设置 useGeneratedKeys=”true”，然后再把 keyProperty 设置到目标属性上就OK了。例如，如果上面的 Author 表已经对 id 使用了自动生成的列类型，那么语句可以修改为:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></pre></td><td class=lntd><pre class=chroma>&lt;insert id=&#34;insertAuthor&#34; useGeneratedKeys=&#34;true&#34;
+    keyProperty=&#34;id&#34;&gt;
+  insert into Author (username,password,email,bio)
+  values (#{username},#{password},#{email},#{bio})
+&lt;/insert&gt;</pre></td></tr></table></div></div><p>如果你的数据库还支持多行插入, 你也可以传入一个<tt>Author</tt>s数组或集合，并返回自动生成的主键。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></pre></td><td class=lntd><pre class=chroma>&lt;insert id=&#34;insertAuthor&#34; useGeneratedKeys=&#34;true&#34;
+    keyProperty=&#34;id&#34;&gt;
+  insert into Author (username, password, email, bio) values
+  &lt;foreach item=&#34;item&#34; collection=&#34;list&#34; separator=&#34;,&#34;&gt;
+    (#{item.username}, #{item.password}, #{item.email}, #{item.bio})
+  &lt;/foreach&gt;
+&lt;/insert&gt;</pre></td></tr></table></div></div><p>对于不支持自动生成类型的数据库或可能不支持自动生成主键 JDBC 驱动来说，MyBatis 有另外一种方法来生成主键。</p><p>这里有一个简单（甚至很傻）的示例，它可以生成一个随机 ID（你最好不要这么做，但这里展示了 MyBatis 处理问题的灵活性及其所关心的广度）：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></pre></td><td class=lntd><pre class=chroma>&lt;insert id=&#34;insertAuthor&#34;&gt;
+  &lt;selectKey keyProperty=&#34;id&#34; resultType=&#34;int&#34; order=&#34;BEFORE&#34;&gt;
+    select CAST(RANDOM()*1000000 as INTEGER) a from SYSIBM.SYSDUMMY1
+  &lt;/selectKey&gt;
+  insert into Author
+    (id, username, password, email,bio, favourite_section)
+  values
+    (#{id}, #{username}, #{password}, #{email}, #{bio}, #{favouriteSection,jdbcType=VARCHAR})
+&lt;/insert&gt;</pre></td></tr></table></div></div><p>同理，如果我们在使用mysql的时候，想在数据插入后返回插入的id, 我们也可以使用 selectKey 这个元素：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></pre></td><td class=lntd><pre class=chroma>&lt;!-- 对应userDao中的insertUser方法，  --&gt;
+   &lt;insert id=&#34;insertUser&#34; parameterType=&#34;com.dy.entity.User&#34;&gt;
+           &lt;!-- oracle等不支持id自增长的，可根据其id生成策略，先获取id 
+           
+        &lt;selectKey resultType=&#34;int&#34; order=&#34;BEFORE&#34; keyProperty=&#34;id&#34;&gt;
+              select seq_user_id.nextval as id from dual
+        &lt;/selectKey&gt;
+        
+        --&gt; 
+        
+        &lt;!-- mysql插入数据后，获取id --&gt;
+        &lt;selectKey keyProperty=&#34;id&#34; resultType=&#34;int&#34; order=&#34;AFTER&#34; &gt;
+               SELECT LAST_INSERT_ID() as id
+           &lt;/selectKey&gt;
+          
+           insert into user(id, name, age) 
+               values(#{id}, #{name} #{age})
+   &lt;/insert&gt;</pre></td></tr></table></div></div><p>在上面的示例中，selectKey 元素将会首先运行，Author 的 id 会被设置，然后插入语句会被调用。这给你了一个和数据库中来处理自动生成的主键类似的行为，避免了使 Java 代码变得复杂。</p><p>selectKey 元素描述如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></pre></td><td class=lntd><pre class=chroma>&lt;selectKey
+        &lt;!-- selectKey 语句结果应该被设置的目标属性。如果希望得到多个生成的列，也可以是逗号分隔的属性名称列表。 --&gt;
+        keyProperty=&#34;id&#34;
+        &lt;!-- 结果的类型。MyBatis 通常可以推算出来，但是为了更加确定写上也不会有什么问题。MyBatis 允许任何简单类型用作主键的类型，包括字符串。如果希望作用于多个生成的列，则可以使用一个包含期望属性的 Object 或一个 Map。 --&gt;
+        resultType=&#34;int&#34;
+        &lt;!-- 这可以被设置为 BEFORE 或 AFTER。如果设置为 BEFORE，那么它会首先选择主键，设置 keyProperty 然后执行插入语句。如果设置为 AFTER，那么先执行插入语句，然后是 selectKey 元素 - 这和像 Oracle 的数据库相似，在插入语句内部可能有嵌入索引调用。 --&gt;
+        order=&#34;BEFORE&#34;
+        &lt;!-- 与前面相同，MyBatis 支持 STATEMENT，PREPARED 和 CALLABLE 语句的映射类型，分别代表 PreparedStatement 和 CallableStatement 类型。 --&gt;
+        statementType=&#34;PREPARED&#34;&gt;</pre></td></tr></table></div></div><h3 id=a-name-aparameters-a-参数-parameters><a name=aParameters></a>参数（Parameters）</h3><p>前面的所有语句中你所见到的都是简单参数的例子，实际上参数是 MyBatis 非常强大的元素，对于简单的做法，大概 90% 的情况参数都很少，比如：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></pre></td><td class=lntd><pre class=chroma>&lt;select id=&#34;selectUsers&#34; resultType=&#34;User&#34;&gt;
+  select id, username, password
+  from users
+  where id = #{id}
+&lt;/select&gt;</pre></td></tr></table></div></div><p>上面的这个示例说明了一个非常简单的命名参数映射。参数类型被设置为 <tt>int</tt>，这样这个参数就可以被设置成任何内容。原生的类型或简单数据类型（比如整型和字符串）因为没有相关属性，它会完全用参数值来替代。然而，如果传入一个复杂的对象，行为就会有一点不同了。比如：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></pre></td><td class=lntd><pre class=chroma>&lt;insert id=&#34;insertUser&#34; parameterType=&#34;User&#34;&gt;
+  insert into users (id, username, password)
+  values (#{id}, #{username}, #{password})
+&lt;/insert&gt;</pre></td></tr></table></div></div><p>如果 User 类型的参数对象传递到了语句中，id、username 和 password 属性将会被查找，然后将它们的值传入预处理语句的参数中。</p><p>这点对于向语句中传参是比较好的而且又简单，不过参数映射的功能远不止于此。</p><p>首先，像 MyBatis 的其他部分一样，参数也可以指定一个特殊的数据类型。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span></pre></td><td class=lntd><pre class=chroma>#{property,javaType=int,jdbcType=NUMERIC}</pre></td></tr></table></div></div><p>像 MyBatis 的剩余部分一样，javaType 通常可以从参数对象中来去确定，前提是只要对象不是一个 HashMap。那么 javaType 应该被确定来保证使用正确类型处理器。</p><p>NOTE 如果 null 被当作值来传递，对于所有可能为空的列，JDBC Type 是需要的。你可以自己通过阅读预处理语句的 setNull() 方法的 JavaDocs 文档来研究这种情况。</p><p>为了以后定制类型处理方式，你也可以指定一个特殊的类型处理器类（或别名），比如：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span></pre></td><td class=lntd><pre class=chroma>#{age,javaType=int,jdbcType=NUMERIC,typeHandler=MyTypeHandler}</pre></td></tr></table></div></div><p>尽管看起来配置变得越来越繁琐，但实际上是很少去设置它们。</p><p>对于数值类型，还有一个小数保留位数的设置，来确定小数点后保留的位数。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span></pre></td><td class=lntd><pre class=chroma>#{height,javaType=double,jdbcType=NUMERIC,numericScale=2}</pre></td></tr></table></div></div><p>最后，mode 属性允许你指定 IN，OUT 或 INOUT 参数。如果参数为 OUT 或 INOUT，参数对象属性的真实值将会被改变，就像你在获取输出参数时所期望的那样。如果 mode 为 OUT（或 INOUT），而且 jdbcType 为 CURSOR(也就是 Oracle 的 REFCURSOR)，你必须指定一个 resultMap 来映射结果集到参数类型。要注意这里的 javaType 属性是可选的，如果左边的空白是 jdbcType 的 CURSOR 类型，它会自动地被设置为结果集。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span></pre></td><td class=lntd><pre class=chroma>#{department, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=departmentResultMap}</pre></td></tr></table></div></div><p>MyBatis 也支持很多高级的数据类型，比如结构体，但是当注册 out 参数时你必须告诉它语句类型名称。比如（再次提示，在实际中要像这样不能换行）：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span></pre></td><td class=lntd><pre class=chroma>#{middleInitial, mode=OUT, jdbcType=STRUCT, jdbcTypeName=MY_TYPE, resultMap=departmentResultMap}</pre></td></tr></table></div></div><p>尽管所有这些强大的选项很多时候你只简单指定属性名，其他的事情 MyBatis 会自己去推断，最多你需要为可能为空的列名指定 <tt>jdbcType</tt>。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></pre></td><td class=lntd><pre class=chroma>#{firstName}
+#{middleInitial,jdbcType=VARCHAR}
+#{lastName}</pre></td></tr></table></div></div><h4 id=a-name-a-a-字符串替换><a name=a></a>字符串替换</h4><p>默认情况下,使用#{}格式的语法会导致 MyBatis 创建预处理语句属性并安全地设置值（比如?）。这样做更安全，更迅速，通常也是首选做法，不过有时你只是想直接在 SQL 语句中插入一个不改变的字符串。比如，像 ORDER BY，你可以这样来使用：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span></pre></td><td class=lntd><pre class=chroma>ORDER BY ${columnName}</pre></td></tr></table></div></div><p>这里 MyBatis 不会修改或转义字符串。</p><p>NOTE 以这种方式接受从用户输出的内容并提供给语句中不变的字符串是不安全的，会导致潜在的 SQL 注入攻击，因此要么不允许用户输入这些字段，要么自行转义并检验。</p><p><a name=Result_Maps></a></p><h3 id=a-name-result-maps-a-result-maps><a name=Result_Maps></a>Result Maps</h3><p>resultMap 元素是 MyBatis 中最重要最强大的元素。它就是让你远离 90%的需要从结果 集中取出数据的 JDBC 代码的那个东西, 而且在一些情形下允许你做一些 JDBC 不支持的事 情。 事实上, 编写相似于对复杂语句联合映射这些等同的代码, 也许可以跨过上千行的代码。 ResultMap 的设计就是简单语句不需要明确的结果映射,而很多复杂语句确实需要描述它们 的关系。</p><p>你已经看到简单映射语句的示例了,但没有明确的 resultMap。比如:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></pre></td><td class=lntd><pre class=chroma>&lt;select id=&#34;selectUsers&#34; resultType=&#34;map&#34;&gt;
+  select id, username, hashedPassword
+  from some_table
+  where id = #{id}
+&lt;/select&gt;</pre></td></tr></table></div></div><p>这样一个语句简单作用于所有列被自动映射到 HashMap 的键上,这由 resultType 属性 指定。这在很多情况下是有用的,但是 HashMap 不能很好描述一个领域模型。那样你的应 用程序将会使用 JavaBeans 或 POJOs(Plain Old Java Objects,普通 Java 对象)来作为领域 模型。MyBatis 对两者都支持。看看下面这个 JavaBean:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span></pre></td><td class=lntd><pre class=chroma><span class=kn>package</span> <span class=nx>com</span><span class=p>.</span><span class=nx>someapp</span><span class=p>.</span><span class=nx>model</span><span class=p>;</span>
+<span class=nx>public</span> <span class=nx>class</span> <span class=nx>User</span> <span class=p>{</span>
+  <span class=nx>private</span> <span class=kt>int</span> <span class=nx>id</span><span class=p>;</span>
+  <span class=nx>private</span> <span class=nx>String</span> <span class=nx>username</span><span class=p>;</span>
+  <span class=nx>private</span> <span class=nx>String</span> <span class=nx>hashedPassword</span><span class=p>;</span>
+
+  <span class=nx>public</span> <span class=kt>int</span> <span class=nf>getId</span><span class=p>()</span> <span class=p>{</span>
+    <span class=k>return</span> <span class=nx>id</span><span class=p>;</span>
+  <span class=p>}</span>
+  <span class=nx>public</span> <span class=nx>void</span> <span class=nf>setId</span><span class=p>(</span><span class=kt>int</span> <span class=nx>id</span><span class=p>)</span> <span class=p>{</span>
+    <span class=nx>this</span><span class=p>.</span><span class=nx>id</span> <span class=p>=</span> <span class=nx>id</span><span class=p>;</span>
+  <span class=p>}</span>
+  <span class=nx>public</span> <span class=nx>String</span> <span class=nf>getUsername</span><span class=p>()</span> <span class=p>{</span>
+    <span class=k>return</span> <span class=nx>username</span><span class=p>;</span>
+  <span class=p>}</span>
+  <span class=nx>public</span> <span class=nx>void</span> <span class=nf>setUsername</span><span class=p>(</span><span class=nx>String</span> <span class=nx>username</span><span class=p>)</span> <span class=p>{</span>
+    <span class=nx>this</span><span class=p>.</span><span class=nx>username</span> <span class=p>=</span> <span class=nx>username</span><span class=p>;</span>
+  <span class=p>}</span>
+  <span class=nx>public</span> <span class=nx>String</span> <span class=nf>getHashedPassword</span><span class=p>()</span> <span class=p>{</span>
+    <span class=k>return</span> <span class=nx>hashedPassword</span><span class=p>;</span>
+  <span class=p>}</span>
+  <span class=nx>public</span> <span class=nx>void</span> <span class=nf>setHashedPassword</span><span class=p>(</span><span class=nx>String</span> <span class=nx>hashedPassword</span><span class=p>)</span> <span class=p>{</span>
+    <span class=nx>this</span><span class=p>.</span><span class=nx>hashedPassword</span> <span class=p>=</span> <span class=nx>hashedPassword</span><span class=p>;</span>
+  <span class=p>}</span>
+<span class=p>}</span></pre></td></tr></table></div></div><p>基于 JavaBean 的规范,上面这个类有 3 个属性:id,username 和 hashedPassword。这些 在 select 语句中会精确匹配到列名。</p><p>这样的一个 JavaBean 可以被映射到结果集,就像映射到 HashMap 一样简单。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></pre></td><td class=lntd><pre class=chroma>&lt;select id=&#34;selectUsers&#34; resultType=&#34;com.someapp.model.User&#34;&gt;
+  select id, username, hashedPassword
+  from some_table
+  where id = #{id}
+&lt;/select&gt;</pre></td></tr></table></div></div><p>要记住类型别名是你的伙伴。使用它们你可以不用输入类的全路径。比如:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></pre></td><td class=lntd><pre class=chroma>&lt;!-- In mybatis-config.xml file --&gt;
+&lt;typeAlias type=&#34;com.someapp.model.User&#34; alias=&#34;User&#34;/&gt;
+
+&lt;!-- In SQL Mapping XML file --&gt;
+&lt;select id=&#34;selectUsers&#34; resultType=&#34;User&#34;&gt;
+  select id, username, hashedPassword
+  from some_table
+  where id = #{id}
+&lt;/select&gt;</pre></td></tr></table></div></div><p>这些情况下,MyBatis 会在幕后自动创建一个 ResultMap,基于属性名来映射列到 JavaBean 的属性上。如果列名没有精确匹配,你可以在列名上使用 select 字句的别名(一个 基本的 SQL 特性)来匹配标签。比如:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></pre></td><td class=lntd><pre class=chroma>&lt;select id=&#34;selectUsers&#34; resultType=&#34;User&#34;&gt;
+  select
+    user_id             as &#34;id&#34;,
+    user_name           as &#34;userName&#34;,
+    hashed_password     as &#34;hashedPassword&#34;
+  from some_table
+  where id = #{id}
+&lt;/select&gt;</pre></td></tr></table></div></div><p>ResultMap 最优秀的地方你已经了解了很多了,但是你还没有真正的看到一个。这些简 单的示例不需要比你看到的更多东西。 只是出于示例的原因, 让我们来看看最后一个示例中 外部的 resultMap 是什么样子的,这也是解决列名不匹配的另外一种方式。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></pre></td><td class=lntd><pre class=chroma>&lt;resultMap id=&#34;userResultMap&#34; type=&#34;User&#34;&gt;
+  &lt;id property=&#34;id&#34; column=&#34;user_id&#34; /&gt;
+  &lt;result property=&#34;username&#34; column=&#34;user_name&#34;/&gt;
+  &lt;result property=&#34;password&#34; column=&#34;hashed_password&#34;/&gt;
+&lt;/resultMap&gt;</pre></td></tr></table></div></div><p>引用它的语句使用 resultMap 属性就行了(注意我们去掉了 resultType 属性)。比如:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></pre></td><td class=lntd><pre class=chroma>&lt;select id=&#34;selectUsers&#34; resultMap=&#34;userResultMap&#34;&gt;
+  select user_id, user_name, hashed_password
+  from some_table
+  where id = #{id}
+&lt;/select&gt;</pre></td></tr></table></div></div><p>如果世界总是这么简单就好了。</p><h4 id=a-name-a-a-高级结果映射><a name=a></a>高级结果映射</h4><p>MyBatis 创建的一个想法:数据库不用永远是你想要的或需要它们是什么样的。而我们 最喜欢的数据库最好是第三范式或 BCNF 模式,但它们有时不是。如果可能有一个单独的 数据库映射,所有应用程序都可以使用它,这是非常好的,但有时也不是。结果映射就是 MyBatis 提供处理这个问题的答案。</p><p>1.首先，我们先看看一个常见的博客页面的组成，如下：</p><p>a.页面上能够展示的部分：正文，标题，日期，作者，评论正文，评论时间，评论人等等</p><p>b.页面之外的部分：用户名，用户id，用户密码，用户基本信息（电话，邮箱，地址，兴趣，特长，等等）</p><p>2.将我们页面上的信息从数据库中查出来的SQL语句转化为Mapper文件中的语句，可能是如下内容：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span></pre></td><td class=lntd><pre class=chroma>  &lt;select id=&#34;selectBlogDetails&#34; resultMap=&#34;detailedBlogResultMap&#34;&gt;  
+  select  
+  B.id as blog_id,  
+  B.title as blog_title,  
+  B.author_id as blog_author_id,  
+  A.id as author_id,  
+  A.username as author_username,  
+ A.password as author_password,  
+  A.email as author_email,  
+ A.bio as author_bio,  
+  A.favourite_section as author_favourite_section,  
+  P.id as post_id,  
+  P.blog_id as post_blog_id,  
+  P.author_id as post_author_id,  
+  P.created_on as post_created_on,  
+  P.section as post_section,  
+  P.subject as post_subject,  
+  P.draft as draft,  
+  P.body as post_body,  
+  C.id as comment_id,  
+ C.post_id as comment_post_id,  
+  C.name as comment_name,  
+  C.comment as comment_text,  
+  T.id as tag_id,  
+ T.name as tag_name  
+ from Blog B  
+ left outer join Author A on B.author_id = A.id  
+  left outer join Post P on B.id = P.blog_id  
+ left outer join Comment C on P.id = C.post_id  
+ left outer join Post_Tag PT on PT.post_id = P.id  
+  left outer join Tag T on PT.tag_id = T.id  
+  where B.id = #{id}  
+ &lt;/select&gt;  </pre></td></tr></table></div></div><p>其对应着非常复杂的结果集合，Mapper文件可能长这个样子，如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span></pre></td><td class=lntd><pre class=chroma> &lt;!-- Very Complex Result Map --&gt;  
+  &lt;resultMap id=&#34;detailedBlogResultMap&#34; type=&#34;Blog&#34;&gt;  
+  &lt;constructor&gt;  
+  &lt;idArg column=&#34;blog_id&#34; javaType=&#34;int&#34;/&gt;  
+ &lt;/constructor&gt;  
+  &lt;result property=&#34;title&#34; column=&#34;blog_title&#34;/&gt;  
+  &lt;association property=&#34;author&#34; javaType=&#34;Author&#34;&gt;  
+  &lt;id property=&#34;id&#34; column=&#34;author_id&#34;/&gt;  
+  &lt;result property=&#34;username&#34; column=&#34;author_username&#34;/&gt;  
+  &lt;result property=&#34;password&#34; column=&#34;author_password&#34;/&gt;  
+  &lt;result property=&#34;email&#34; column=&#34;author_email&#34;/&gt;  
+ &lt;result property=&#34;bio&#34; column=&#34;author_bio&#34;/&gt;  
+  &lt;result property=&#34;favouriteSection&#34; column=&#34;author_favourite_section&#34;/&gt;  
+  &lt;/association&gt;  
+  &lt;collection property=&#34;posts&#34; ofType=&#34;Post&#34;&gt;  
+  &lt;id property=&#34;id&#34; column=&#34;post_id&#34;/&gt;  
+  &lt;result property=&#34;subject&#34; column=&#34;post_subject&#34;/&gt;  
+  &lt;association property=&#34;author&#34; javaType=&#34;Author&#34;/&gt;  
+  &lt;collection property=&#34;comments&#34; ofType=&#34;Comment&#34;&gt;  
+  &lt;id property=&#34;id&#34; column=&#34;comment_id&#34;/&gt;  
+  &lt;/collection&gt;  
+  &lt;collection property=&#34;tags&#34; ofType=&#34;Tag&#34; &gt;  
+  &lt;id property=&#34;id&#34; column=&#34;tag_id&#34;/&gt;  
+  &lt;/collection&gt;  
+  &lt;discriminator javaType=&#34;int&#34; column=&#34;draft&#34;&gt;  
+  &lt;case value=&#34;1&#34; resultType=&#34;DraftPost&#34;/&gt;  
+  &lt;/discriminator&gt;  
+ &lt;/collection&gt;  
+.  &lt;/resultMap&gt;  </pre></td></tr></table></div></div><p>对于初学者而言，看到这样的一份XML文件，我想内心一定是崩溃的！但是，不要担心，我们日常开发，很少能够遇到这样的场景，并且，相信通过我们一步一步的解释这个配置文档，以后各位也能够运用自如。</p><p>在上面的resultMap中存在很多的子元素，下面我们来逐一解释：</p><p>“constructor”:类在实例化时，用来注入结果到构造方法中。</p><p>“idArg”：ID参数，标记结果作为ID，可以帮助提高整体的效率。</p><p>“arg”：注入到构造方法的一个不同结果。</p><p>“id”：这个id，类似于数据库的主键，能够帮助提高整体的效率
+“result”：即结果字段，其中包括Java对象的属性值，和数据库列名</p><p>“association”：复杂类型的结果关联，结果映射能够关联自身，或者关联另一个结果集</p><p>“collection”：复杂类型的集合，结果映射自身，或者映射结果集</p><p>“discriminator”：使用结果值来决定使用哪个结果映射</p><p>“case”：基于某些值的结果映射。嵌入结果映射，这种情形也映射到它本身，因此，能够包含相同的元素，或者参照一个外部的结果映射。</p><p>对于resultMap标签，上文的基础用法中我们已经介绍了他的属性含义。但，在此之外，还有一个属性值为：</p><p>“autoMapping”：如果出现此配置，Mybatis将会启用或者禁用自动匹配resultMap的功能，这个属性将会在全局范围内覆盖自动匹配机制。默认情况下是没有这个配置的，因此，如果需要，请保持慎重。</p><p>下面，我们开始详细说明每一个元素，如果有心急的读者想使用前面增改删查功能，请读者一定按照单元测试的方法推进，千万不要一次性配置大量属性，以免影响学习兴趣。</p><p>a.构造方法</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></pre></td><td class=lntd><pre class=chroma> &lt;constructor&gt;  
+  &lt;idArg column=&#34;id&#34; javaType=&#34;int&#34;/&gt;  
+  &lt;arg column=&#34;username&#34; javaType=&#34;String&#34;/&gt;  
+  &lt;/constructor&gt;  </pre></td></tr></table></div></div><p>尽管对于大部分的DTO对象，以及我们的domain模型，属性值都是能够起到相应的作用，但是，在某些情况下如我们想使用一些固定的类。如：通常情况下的表格中包括一些仅供浏览的数据或者很少改变的数据。Mybatis的构造函数注入功能允许我们在类初始化时就设置某些值，而不暴露其中的public方法。同时Mybatis也支持私有的属性与私有的JavaBeans属性来实现这个目的，尽管这样，一些开发者还是更愿意使用构造函数注入的方式。</p><p>例如，程序中我们存在这样一个实体类，如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></pre></td><td class=lntd><pre class=chroma>1.  public class User {  
+2.  //...  
+3.  public User(int id, String username) {  
+4.  //...  
+5.  }  
+6.  //...  
+7.  }  </pre></td></tr></table></div></div><p>在Mybatis中，为了向这个构造方法中注入结果，Mybatis需要通过它的参数的类型来表示构造方法。java中，没有反射参数名称的方法，因此，当创建一个构造方法的元素是，必须保证参数是按照顺序排列的，而且，数据类型也必须匹配！</p><p>b.关联</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code class="language-<association property=" author" column=blog_author_id  javatype=Author>" data-lang="<association property="author" column="blog_author_id" javatype="author">"><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre class=chroma><code class="language-<association property=" author" column=blog_author_id  javatype=Author>" data-lang="<association property="author" column="blog_author_id" javatype="author">">2.  &lt;id property=&#34;id&#34; column=&#34;author_id&#34;/&gt;  
+3.  &lt;result property=&#34;username&#34; column=&#34;author_username&#34;/&gt;  
+4.  &lt;/association&gt;  </code></pre></td></tr></table></div></div><p>关联元素用来处理数据模型中的“has-one”关系。如我们上文示例的一个博客有一个用户。关联映射大部分是基于这种应用场景。使用时，我们制定目标属性，可以选用javaType，jdbcType，typeHandler等属性来覆盖结果集合。</p><p>关联查询的不同之处是，我们必须告诉告诉Mybatis如何加载关联关系，这里有两种供我们选择的方法：</p><p>嵌套查询：即通过执行另一个预期返回复杂类型的SQL语句。</p><p>嵌套结果：使用嵌套结果映射来处理联合结果中重复的子集。
+在正式的使用之前，我们先来看看这个的属性配置的具体含义，注意，这里的属性配置跟前文基本增改删查中的区别：</p><p>property : 映射到列结果的字段或属性。如果匹配的是存在的,和给定名称相同的 property JavaBeans 的属性, 那么就会使用。 否则 MyBatis 将会寻找给定名称的字段。 这两种情形你可以使用通常点式的复杂属性导航。比如,可以这样映射  :“ username ”, 或 者 映 射 到 一 些 复 杂 的属性 : “address.street.number” 。</p><p>javaType : 一个 Java 类的完全限定名,或一个类型别名(参考上面内建类型别名的列 表) 。如果你映射到一个 JavaBean,MyBatis 通常可以断定类型。然而,如 javaType 果你映射到的是 HashMap,那么你应该明确地指定 javaType 来保证所需的行为。
+jdbcType : 在这个表格之前的所支持的 JDBC 类型列表中的类型。JDBC 类型是仅仅 需要对插入, 更新和删除操作可能为空的列进行处理。这是 JDBC 的需要, jdbcType 而不是 MyBatis 的。如果你直接使用 JDBC 编程,你需要指定这个类型-但 仅仅对可能为空的值。
+typeHandler : 我们在前面讨论过默认的类型处理器。使用这个属性,你可以覆盖默认的 typeHandler 类型处理器。 这个属性值是类的完全限定名或者是一个类型处理器的实现, 或者是类型别名。</p><hr><p>现在正式的介绍这两种方式：</p><h1 id=a-name-t0-a-1-嵌套查询><a name=t0></a>1.嵌套查询</h1><p>column : 这是来自数据库的类名,或重命名的列标签的值作为一个输入参数传递给嵌套语句，这和通常传递给 resultSet.getString(columnName)方法的字符串是相同的。
+注 意 : 要 处 理 复 合 主 键 , 你 可 以 指 定 多 个 列 名 通 过 column= ” {prop1=col1,prop2=col2} ” 这种语法来传递给嵌套查询语 句。这会引起 prop1 和 prop2 以参数对象形式来设置给目标嵌套查询语句
+select : 另外一个映射语句的 ID,将会按照属性的映射来加载复杂类型。获取的在列属性中指定的列的值将被传递给目标 select 语句作为参数。表格后面 有一个详细的示例。
+注 意 : 要 处 理 复 合 主 键 ,  可 以  通 过使用 column= ” {prop1=col1,prop2=col2} ” 这种语法指定多个列名传递给嵌套查询语句。这会导致 prop1 和 prop2 以参数对象形式来设置给目标嵌套查询语句。
+fetchType : 可选的，他的有效值是lazy，eager。如果存在的话，他将在当前映射关系中取代全局变量lazyLoadingEnabled。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></pre></td><td class=lntd><pre class=chroma>  &lt;resultMap id=&#34;blogResult&#34; type=&#34;Blog&#34;&gt;  
+ &lt;association property=&#34;author&#34; column=&#34;author_id&#34; javaType=&#34;Author&#34; select=&#34;selectAuthor&#34;/&gt;  
+  &lt;/resultMap&gt;  
+
+  &lt;select id=&#34;selectBlog&#34; resultMap=&#34;blogResult&#34;&gt;  
+  SELECT * FROM BLOG WHERE ID = #{id}  
+  &lt;/select&gt;  
+
+ &lt;select id=&#34;selectAuthor&#34; resultType=&#34;Author&#34;&gt;  
+  SELECT * FROM AUTHOR WHERE ID = #{id}  
+  &lt;/select&gt;  </pre></td></tr></table></div></div><p>我们有两个查询语句:一个来加载博客,另外一个来加载作者,而且博客的结果映射描 述了“selectAuthor”语句应该被用来加载它的 author 属性。</p><p>其他所有的属性将会被自动加载,前提假设它们的列和属性名相匹配。</p><p>这种方式很简单, 但是对于大型数据集合和列表将不会表现很好。 问题就是我们熟知的 “N+1 查询问题”。概括地讲,N+1 查询问题可以是这样引起的:</p><ul><li>执行了一个单独的 SQL 语句来获取结果列表(就是“+1”)。</li><li>对返回的每条记录,执行了一个查询语句来为每个加载细节(就是“N”)。</li></ul><p>这个问题会导致成百上千的 SQL 语句被执行。这通常不是期望的。</p><p>MyBatis 能延迟加载这样的查询就是一个好处,因此你可以分散这些语句同时运行的消耗。然而,如果你加载一个列表,之后迅速迭代来访问嵌套的数据,你会调用所有的延迟加载,这样的行为可能是很糟糕的。</p><p>所以还有另外一种方法。</p><h1 id=a-name-t1-a-2-嵌套结果><a name=t1></a>2.嵌套结果：</h1><p>首先，我们先来看看有哪些属性能够供我们使用：</p><p>resultMap : 这是结果映射的 ID,可以映射关联的嵌套结果到一个合适的对象图中。这是一种替代方法来调用另外一个查询语句。这允许你联合多个表来合成到 resultMap 一个单独的结果集。这样的结果集可能包含需要被分解的相同的，重复的数据组并且合理映射到一个嵌套的对象图。为了使它变得容易,MyBatis 让你“链接”结果映射,来处理嵌套结果。下面给予一个很容易来仿照例子。
+columnPrefix : 当连接多个表时，你最好使用列的别名来避免在一个结果集合中出现的名称重复。对于制定的前缀，Mybatis允许我们映射列到外部集合中，具体用法请参照后面的例子
+notNullColumn : 只有在至少有一个非空列映射到子对象的属性时，才创建一个默认的子对象。通过这个属性，我们可以设置哪一个列必须有值来改变这个行为，此时的Mybatis就会按照这个非空设置来创建一个子对象。多个列存在时，可以通过逗号作为分割符。默认情况下，该属性是不会被设置的，即unset
+autoMapping : 如果存在此属性的话，Mybatis会在映射到对应属性时启用或者禁用自动映射的功能。这个属性将会在全局范围内覆盖自动映射的功能。
+注意：该属性没有对外部结果集造成影响。因此，在select或者结果集合中使用是没有意义的。默认情况下，它是不设置的，即unset</p><p>上面的内容是不是让各位已经头晕目眩了？不要急，我们马上就给大家展示一个非常简单的例子来说明上面各个属性是怎么工作的。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></pre></td><td class=lntd><pre class=chroma>  &lt;select id=&#34;selectBlog&#34; resultMap=&#34;blogResult&#34;&gt;  
+  select  
+  B.id            as blog_id,  
+  B.title         as blog_title,  
+  B.author_id     as blog_author_id,  
+  A.id            as author_id,  
+  A.username      as author_username,  
+  A.password      as author_password,  
+  A.email         as author_email,  
+  A.bio           as author_bio  
+  from Blog B left outer join Author A on B.author_id = A.id  
+  where B.id = #{id}  
+  &lt;/select&gt;  </pre></td></tr></table></div></div><p>仔细观察这个联合查询，以及采用的保护方法确保了所有结果被唯一的，清晰的命名。这样使得我们的映射非常的简单。</p><p>现在，我们来看看如何映射这个结果</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></pre></td><td class=lntd><pre class=chroma>  &lt;resultMap id=&#34;blogResult&#34; type=&#34;Blog&#34;&gt;  
+  &lt;id property=&#34;id&#34; column=&#34;blog_id&#34; /&gt;  
+  &lt;result property=&#34;title&#34; column=&#34;blog_title&#34;/&gt;  
+  &lt;association property=&#34;author&#34; resultMap=&#34;authorResult&#34; /&gt;  
+  &lt;/resultMap&gt;  
+
+  &lt;resultMap id=&#34;authorResult&#34; type=&#34;Author&#34;&gt;  
+  &lt;id property=&#34;id&#34; column=&#34;author_id&#34;/&gt;  
+  &lt;result property=&#34;username&#34; column=&#34;author_username&#34;/&gt;  
+  &lt;result property=&#34;password&#34; column=&#34;author_password&#34;/&gt;  
+  &lt;result property=&#34;email&#34; column=&#34;author_email&#34;/&gt;  
+  &lt;result property=&#34;bio&#34; column=&#34;author_bio&#34;/&gt;  
+  &lt;/resultMap&gt;  </pre></td></tr></table></div></div><p>在上面的这个例子中，我们已经观察到博客的“author”关联另外一个“resultMap”结果映射，来加载“Author”实例</p><p>特别注意的是：在嵌套结果映射中，元素“id”扮演了一个非常重要的角色。我们应该特别指明一个或者多个属性来唯一的标识这个结果。在实际应用中，如果不指定这个“id”，Mybatis仍然能够继续运行，但是会产生很大的性能消耗。但是，也需要尽可能的少的选择这些属性，数据库的主键显然是一个非常好的选择！</p><p>上面的例子使用了外部结果集元素来映射关联。这样的做法，使得id为“Authot”的结果集能够被不断的重用。但是，假如我们没有重用的需求，或者，我们只是想简单的把我们的结果映射到一个单独描述的结果集合当中的话，就不再需要上面的方式书写了，直接嵌套关联结果映射就好。具体的做法如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></pre></td><td class=lntd><pre class=chroma>  &lt;resultMap id=&#34;blogResult&#34; type=&#34;Blog&#34;&gt;  
+  &lt;id property=&#34;id&#34; column=&#34;blog_id&#34; /&gt;  
+  &lt;result property=&#34;title&#34; column=&#34;blog_title&#34;/&gt;  
+  &lt;association property=&#34;author&#34; javaType=&#34;Author&#34;&gt;  
+  &lt;id property=&#34;id&#34; column=&#34;author_id&#34;/&gt;  
+  &lt;result property=&#34;username&#34; column=&#34;author_username&#34;/&gt;  
+ &lt;result property=&#34;password&#34; column=&#34;author_password&#34;/&gt;  
+  &lt;result property=&#34;email&#34; column=&#34;author_email&#34;/&gt;  
+  &lt;result property=&#34;bio&#34; column=&#34;author_bio&#34;/&gt;  
+ &lt;/association&gt;  
+  &lt;/resultMap&gt;  </pre></td></tr></table></div></div><p>针对上面的例子，加入这篇博客存在一个“联合作者”又该怎么办呢？具体的做法如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></pre></td><td class=lntd><pre class=chroma>  &lt;select id=&#34;selectBlog&#34; resultMap=&#34;blogResult&#34;&gt;  
+ select  
+  B.id            as blog_id,  
+  B.title         as blog_title,  
+    A.id            as author_id,  
+  A.username      as author_username,  
+  A.password      as author_password,  
+  A.email         as author_email,  
+  A.bio           as author_bio,  
+  CA.id           as co_author_id,  
+  CA.username     as co_author_username,  
+  CA.password     as co_author_password,  
+  CA.email        as co_author_email,  
+  CA.bio          as co_author_bio  
+  from Blog B  
+  left outer join Author A on B.author_id = A.id  
+  left outer join Author CA on B.co_author_id = CA.id  
+  where B.id = #{id}  
+  &lt;/select&gt;  </pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></pre></td><td class=lntd><pre class=chroma>  &lt;resultMap id=&#34;authorResult&#34; type=&#34;Author&#34;&gt;  
+  &lt;id property=&#34;id&#34; column=&#34;author_id&#34;/&gt;  
+  &lt;result property=&#34;username&#34; column=&#34;author_username&#34;/&gt;  
+  &lt;result property=&#34;password&#34; column=&#34;author_password&#34;/&gt;  
+  &lt;result property=&#34;email&#34; column=&#34;author_email&#34;/&gt;  
+  &lt;result property=&#34;bio&#34; column=&#34;author_bio&#34;/&gt;  
+ &lt;/resultMap&gt;  </pre></td></tr></table></div></div><p>由于结果集当中的列名与查询结果当中列名不一致，我们需要使用明确指定“columnPrefix”来重用这个结果集，以此来映射“联合作者”的查询结果。具体写法如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></pre></td><td class=lntd><pre class=chroma>  &lt;resultMap id=&#34;blogResult&#34; type=&#34;Blog&#34;&gt;  
+  &lt;id property=&#34;id&#34; column=&#34;blog_id&#34; /&gt;  
+  &lt;result property=&#34;title&#34; column=&#34;blog_title&#34;/&gt;  
+  &lt;association property=&#34;author&#34;  
+  resultMap=&#34;authorResult&#34; /&gt;  
+  &lt;association property=&#34;coAuthor&#34;  
+  resultMap=&#34;authorResult&#34;  
+  columnPrefix=&#34;co_&#34; /&gt;  
+  &lt;/resultMap&gt;  </pre></td></tr></table></div></div><h1 id=a-name-t2-a-多结果集关联><a name=t2></a>多结果集关联</h1><p>|column :当时用多结果集的这个属性来指定被逗号分隔的列时，将会使得该列与<tt>foreignColumn</tt> 相关联，从而确定了关联列之间的父子关系
+foreignColumn : 标识出包含foreing keys的列的名称。这个foreing keys的值将会和父类型中指定的列属性的值相匹配</p><p>resultSet : 标识这个将会从哪里加载的复杂类型数据的结果集合的名称 |</p><p>从3.2.3版本开始，Mybatis提供了另外一种方式来解决“N+1”问题</p><p>某些数据库允许在存储过程中返回多个结果集，或者同时执行多个语句并且每一个都返回一个结果集合。这就使得我们可以只用访问数据库一次，且不用使用join，就返回存在关联的数据。</p><p>举个例子，执行下面的语句将会返回两个结果集合。第一个返回博客文章的结果集合，第二个返回作者的结果集合</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></pre></td><td class=lntd><pre class=chroma>  SELECT * FROM BLOG WHERE ID = #{id}  
+
+  SELECT * FROM AUTHOR WHERE ID = #{id}  </pre></td></tr></table></div></div><p>我们必须给予每一个结果集合一个指定的名称。方式是：在结果集合中增加一个<tt>resultSets</tt> 属性，来映射语句中被逗号分隔的名称。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></pre></td><td class=lntd><pre class=chroma> &lt;select id=&#34;selectBlog&#34; resultSets=&#34;blogs,authors&#34; resultMap=&#34;blogResult&#34; statementType=&#34;CALLABLE&#34;&gt;  
+ {call getBlogsAndAuthors(#{id,jdbcType=INTEGER,mode=IN})}  
+  &lt;/select&gt;  </pre></td></tr></table></div></div><p>现在，我们来指定：数据填充的“author”的集合包含在“authors”的结果集中</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></pre></td><td class=lntd><pre class=chroma>&lt;resultMap id=&#34;blogResult&#34; type=&#34;Blog&#34;&gt;  
+  &lt;id property=&#34;id&#34; column=&#34;id&#34; /&gt;  
+  &lt;result property=&#34;title&#34; column=&#34;title&#34;/&gt;  
+  &lt;association property=&#34;author&#34; javaType=&#34;Author&#34; resultSet=&#34;authors&#34; column=&#34;author_id&#34; foreignColumn=&#34;id&#34;&gt;  
+  &lt;id property=&#34;id&#34; column=&#34;id&#34;/&gt;  
+  &lt;result property=&#34;username&#34; column=&#34;username&#34;/&gt;  
+  &lt;result property=&#34;password&#34; column=&#34;password&#34;/&gt;  
+  &lt;result property=&#34;email&#34; column=&#34;email&#34;/&gt;  
+  &lt;result property=&#34;bio&#34; column=&#34;bio&#34;/&gt;  
+  &lt;/association&gt;  
+  &lt;/resultMap&gt;  </pre></td></tr></table></div></div><p>上面所属的这些内容，解决了我们“has-one”的问题。</p><hr><h3 id=a-name-a-a-自动映射><a name=a></a>自动映射</h3><p>正如你在前面一节看到的，在简单的场景下，MyBatis可以替你自动映射查询结果。 如果遇到复杂的场景，你需要构建一个result map。 但是在本节你将看到，你也可以混合使用这两种策略。 让我们到深一点的层面上看看自动映射是怎样工作的。</p><p>当自动映射查询结果时，MyBatis会获取sql返回的列名并在java类中查找相同名字的属性（忽略大小写）。 这意味着如果Mybatis发现了_ID_列和_id_属性，Mybatis会将_ID_的值赋给_id_。</p><p>通常数据库列使用大写单词命名，单词间用下划线分隔；而java属性一般遵循驼峰命名法。 为了在这两种命名方式之间启用自动映射，需要将 <tt>mapUnderscoreToCamelCase</tt>设置为true。</p><p>自动映射甚至在特定的result map下也能工作。在这种情况下，对于每一个result map,所有的ResultSet提供的列， 如果没有被手工映射，则将被自动映射。自动映射处理完毕后手工映射才会被处理。 在接下来的例子中， <em>id</em> 和 _userName_列将被自动映射， _hashed<em>password</em> 列将根据配置映射。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></pre></td><td class=lntd><pre class=chroma>&lt;select id=&#34;selectUsers&#34; resultMap=&#34;userResultMap&#34;&gt;
+  select
+    user_id             as &#34;id&#34;,
+    user_name           as &#34;userName&#34;,
+    hashed_password
+  from some_table
+  where id = #{id}
+&lt;/select&gt;</pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></pre></td><td class=lntd><pre class=chroma>&lt;resultMap id=&#34;userResultMap&#34; type=&#34;User&#34;&gt;
+  &lt;result property=&#34;password&#34; column=&#34;hashed_password&#34;/&gt;
+&lt;/resultMap&gt;</pre></td></tr></table></div></div><p>有三种自动映射等级：</p><ul><li><tt>NONE</tt> - 禁用自动映射。仅设置手动映射属性。</li><li><tt>PARTIAL</tt> - 将自动映射结果除了那些有内部定义内嵌结果映射的(joins).</li><li><tt>FULL</tt> - 自动映射所有。</li></ul><p>默认值是<tt>PARTIAL</tt>，这是有原因的。当使用<tt>FULL</tt>时，自动映射会在处理join结果时执行，并且join取得若干相同行的不同实体数据，因此这可能导致非预期的映射。下面的例子将展示这种风险：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></pre></td><td class=lntd><pre class=chroma>&lt;select id=&#34;selectBlog&#34; resultMap=&#34;blogResult&#34;&gt;
+  select
+    B.id,
+    B.title,
+    A.username,
+  from Blog B left outer join Author A on B.author_id = A.id
+  where B.id = #{id}
+&lt;/select&gt;</pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></pre></td><td class=lntd><pre class=chroma>&lt;resultMap id=&#34;blogResult&#34; type=&#34;Blog&#34;&gt;
+  &lt;association property=&#34;author&#34; resultMap=&#34;authorResult&#34;/&gt;
+&lt;/resultMap&gt;
+
+&lt;resultMap id=&#34;authorResult&#34; type=&#34;Author&#34;&gt;
+  &lt;result property=&#34;username&#34; column=&#34;author_username&#34;/&gt;
+&lt;/resultMap&gt;</pre></td></tr></table></div></div><p>在结果中_Blog_和_Author_均将自动映射。但是注意_Author_有一个_id_属性，在ResultSet中有一个列名为_id_， 所以Author的id将被填充为Blog的id，这不是你所期待的。所以需要谨慎使用<tt>FULL</tt>。</p><p>通过添加<tt>autoMapping</tt>属性可以忽略自动映射等级配置，你可以启用或者禁用自动映射指定的ResultMap。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></pre></td><td class=lntd><pre class=chroma>&lt;resultMap id=&#34;userResultMap&#34; type=&#34;User&#34; autoMapping=&#34;false&#34;&gt;
+  &lt;result property=&#34;password&#34; column=&#34;hashed_password&#34;/&gt;
+&lt;/resultMap&gt;</pre></td></tr></table></div></div><p><a name=cache></a></p><h3 id=a-name-a-a-缓存><a name=a></a>缓存</h3><p>MyBatis 包含一个非常强大的查询缓存特性,它可以非常方便地配置和定制。MyBatis 3 中的缓存实现的很多改进都已经实现了,使得它更加强大而且易于配置。</p><p>默认情况下是没有开启缓存的,除了局部的 session 缓存,可以增强变现而且处理循环 依赖也是必须的。要开启二级缓存,你需要在你的 SQL 映射文件中添加一行:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span></pre></td><td class=lntd><pre class=chroma>&lt;cache/&gt;</pre></td></tr></table></div></div><p>字面上看就是这样。这个简单语句的效果如下:</p><ul><li>映射语句文件中的所有 select 语句将会被缓存。</li><li>映射语句文件中的所有 insert,update 和 delete 语句会刷新缓存。</li><li>缓存会使用 Least Recently Used(LRU,最近最少使用的)算法来收回。</li><li>根据时间表(比如 no Flush Interval,没有刷新间隔), 缓存不会以任何时间顺序 来刷新。</li><li>缓存会存储列表集合或对象(无论查询方法返回什么)的 1024 个引用。</li><li>缓存会被视为是 read/write(可读/可写)的缓存,意味着对象检索不是共享的,而 且可以安全地被调用者修改,而不干扰其他调用者或线程所做的潜在修改。</li></ul><p>所有的这些属性都可以通过缓存元素的属性来修改。比如:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></pre></td><td class=lntd><pre class=chroma>&lt;cache
+  eviction=&#34;FIFO&#34;
+  flushInterval=&#34;60000&#34;
+  size=&#34;512&#34;
+  readOnly=&#34;true&#34;/&gt;</pre></td></tr></table></div></div><p>这个更高级的配置创建了一个 FIFO 缓存,并每隔 60 秒刷新,存数结果对象或列表的 512 个引用,而且返回的对象被认为是只读的,因此在不同线程中的调用者之间修改它们会 导致冲突。</p><p>可用的收回策略有:</p><ul><li><tt>LRU</tt> – 最近最少使用的:移除最长时间不被使用的对象。</li><li><tt>FIFO</tt> – 先进先出:按对象进入缓存的顺序来移除它们。</li><li><tt>SOFT</tt> – 软引用:移除基于垃圾回收器状态和软引用规则的对象。</li><li><tt>WEAK</tt> – 弱引用:更积极地移除基于垃圾收集器状态和弱引用规则的对象。</li></ul><p>默认的是 LRU。</p><p>flushInterval(刷新间隔)可以被设置为任意的正整数,而且它们代表一个合理的毫秒 形式的时间段。默认情况是不设置,也就是没有刷新间隔,缓存仅仅调用语句时刷新。</p><p>size(引用数目)可以被设置为任意正整数,要记住你缓存的对象数目和你运行环境的 可用内存资源数目。默认值是 1024。</p><p>readOnly(只读)属性可以被设置为 true 或 false。只读的缓存会给所有调用者返回缓 存对象的相同实例。因此这些对象不能被修改。这提供了很重要的性能优势。可读写的缓存 会返回缓存对象的拷贝(通过序列化) 。这会慢一些,但是安全,因此默认是 false。</p><h4 id=a-name-a-a-使用自定义缓存><a name=a></a>使用自定义缓存</h4><p>除了这些自定义缓存的方式, 你也可以通过实现你自己的缓存或为其他第三方缓存方案 创建适配器来完全覆盖缓存行为。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span></pre></td><td class=lntd><pre class=chroma>&lt;cache type=&#34;com.domain.something.MyCustomCache&#34;/&gt;</pre></td></tr></table></div></div><p>这个示 例展 示了 如何 使用 一个 自定义 的缓 存实 现。type 属 性指 定的 类必 须实现 org.mybatis.cache.Cache 接口。这个接口是 MyBatis 框架中很多复杂的接口之一,但是简单 给定它做什么就行。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></pre></td><td class=lntd><pre class=chroma>public interface Cache {
+  String getId();
+  int getSize();
+  void putObject(Object key, Object value);
+  Object getObject(Object key);
+  boolean hasKey(Object key);
+  Object removeObject(Object key);
+  void clear();
+}</pre></td></tr></table></div></div><p>要配置你的缓存, 简单和公有的 JavaBeans 属性来配置你的缓存实现, 而且是通过 cache 元素来传递属性, 比如, 下面代码会在你的缓存实现中调用一个称为 “setCacheFile(String file)” 的方法:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></pre></td><td class=lntd><pre class=chroma>&lt;cache type=&#34;com.domain.something.MyCustomCache&#34;&gt;
+  &lt;property name=&#34;cacheFile&#34; value=&#34;/tmp/my-custom-cache.tmp&#34;/&gt;
+&lt;/cache&gt;</pre></td></tr></table></div></div><p>你可以使用所有简单类型作为 JavaBeans 的属性,MyBatis 会进行转换。 And you can specify a placeholder(e.g. <tt>${cache.file}</tt>) to replace value defined at <a href=configuration.html#properties>configuration properties</a>.</p><p>从3.4.2版本开始，MyBatis已经支持在所有属性设置完毕以后可以调用一个初始化方法。如果你想要使用这个特性，请在你的自定义缓存类里实现 <tt>org.apache.ibatis.builder.InitializingObject</tt> 接口。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></pre></td><td class=lntd><pre class=chroma>public interface InitializingObject {
+  void initialize() throws Exception;
+}</pre></td></tr></table></div></div><p>记得缓存配置和缓存实例是绑定在 SQL 映射文件的命名空间是很重要的。因此,所有 在相同命名空间的语句正如绑定的缓存一样。 语句可以修改和缓存交互的方式, 或在语句的 语句的基础上使用两种简单的属性来完全排除它们。默认情况下,语句可以这样来配置:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></pre></td><td class=lntd><pre class=chroma>&lt;select ... flushCache=&#34;false&#34; useCache=&#34;true&#34;/&gt;
+&lt;insert ... flushCache=&#34;true&#34;/&gt;
+&lt;update ... flushCache=&#34;true&#34;/&gt;
+&lt;delete ... flushCache=&#34;true&#34;/&gt;</pre></td></tr></table></div></div><p>因为那些是默认的,你明显不能明确地以这种方式来配置一条语句。相反,如果你想改 变默认的行为,只能设置 flushCache 和 useCache 属性。比如,在一些情况下你也许想排除 从缓存中查询特定语句结果,或者你也许想要一个查询语句来刷新缓存。相似地,你也许有 一些更新语句依靠执行而不需要刷新缓存。</p><h4 id=a-name-a-a-参照缓存><a name=a></a>参照缓存</h4><p>回想一下上一节内容, 这个特殊命名空间的唯一缓存会被使用或者刷新相同命名空间内 的语句。也许将来的某个时候,你会想在命名空间中共享相同的缓存配置和实例。在这样的 情况下你可以使用 cache-ref 元素来引用另外一个缓存。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><span class=lnt>1
+</span></pre></td><td class=lntd><pre class=chroma>&lt;cache-ref namespace=&#34;com.someone.application.data.SomeMapper&#34;/&gt;</pre></td></tr></table></div></div><h2 id=结束>结束</h2><p>谢谢各位。</p></div><div class=post-copyright><p class=copyright-item><span class=item-title>Author</span>
+<span class=item-content>gravel</span></p><p class=copyright-item><span class=item-title>LastMod</span>
+<span class=item-content>2017-09-22</span></p><p class=copyright-item><span class=item-title>License</span>
+<span class=item-content><a rel="license noopener" href=https://creativecommons.org/licenses/by-nc-nd/4.0/ target=_blank>CC BY-NC-ND 4.0</a></span></p></div><footer class=post-footer><div class=post-tags><a href=/tags/mybatis/>mybatis</a></div><nav class=post-nav><a class=prev href=/post/hexo-ci/><i class="iconfont icon-left"></i><span class="prev-text nav-default">测试持续集成，明晚更新具体博客</span>
+<span class="prev-text nav-mobile">Prev</span></a>
+<a class=next href=/post/learngit-0/><span class="next-text nav-default">git学习笔记</span>
+<span class="next-text nav-mobile">Next</span>
+<i class="iconfont icon-right"></i></a></nav></footer></article></div><div id=disqus_thread></div><script type=text/javascript>(function(){if(window.location.hostname==='localhost')return;var dsq=document.createElement('script');dsq.type='text/javascript';dsq.async=true;var disqus_shortname='leongravel';dsq.src='//'+disqus_shortname+'.disqus.com/embed.js';(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(dsq);})();</script><noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript></div></main><footer id=footer class=footer><div class=social-links><a href=mailto:leebroncc@gmail.com class="iconfont icon-email" title=email></a><a href=https://twitter.com/leebroncc class="iconfont icon-twitter" title=twitter></a><a href=https://github.com/leonGravel class="iconfont icon-github" title=github></a><a href=https://www.zhihu.com/people/gravel-20/activities class="iconfont icon-zhihu" title=zhihu></a><a href=https://space.bilibili.com/321842652/#/ class="iconfont icon-bilibili" title=bilibili></a><a href=https://leongravel.com/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a></div><div class=copyright><span class=power-by>Powered by <a class=hexo-link href=https://gohugo.io>Hugo</a></span>
+<span class=division>|</span>
+<span class=theme-info>Theme -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a></span><div class=busuanzi-footer><span id=busuanzi_container_site_pv>site pv: <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span></span>
+<span class=division>|</span>
+<span id=busuanzi_container_site_uv>site uv: <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span></span></div><span class=copyright-year>&copy;
+2016 -
+2019
+<span class=heart><i class="iconfont icon-heart"></i></span><span class=author>Gravel</span></span></div></footer><div class=back-to-top id=back-to-top><i class="iconfont icon-up"></i></div></div><script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script><script type=text/javascript src=/dist/even.ece58db6.min.js></script></body></html>
