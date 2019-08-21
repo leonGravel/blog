@@ -1,0 +1,23 @@
+name: Main workflow
+
+on:
+  push:
+    branches:
+    - hugo
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@hugo
+    - name: build
+      uses: peaceiris/actions-hugo@v0.57.2
+      with:
+        args: --gc --minify --cleanDestinationDir
+    - name: deploy
+      uses: peaceiris/actions-gh-pages@v1.1.0
+      if: contains(github.ref, 'master')
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        PUBLISH_BRANCH: master
+        PUBLISH_DIR: ./public
