@@ -9,7 +9,7 @@ date: 2018-05-23 22:54:41
 
 <!--more-->
 
-## 首先，什么是SSD?
+## 什么是SSD
 
  固态硬盘（Solid State Drives），简称固盘，固态硬盘（Solid State Drive）用固态电子存储芯片阵列而制成的硬盘，由控制单元和存储单元（FLASH芯片、DRAM芯片）组成。
 
