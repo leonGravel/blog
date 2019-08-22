@@ -7,16 +7,18 @@ on:
 
 jobs:
   build-deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
     - uses: actions/checkout@master
     - name: build
       uses: peaceiris/actions-hugo@v0.57.2
+      if: github.event.deleted == false
       with:
         args: --gc --minify --cleanDestinationDir
     - name: deploy
       uses: peaceiris/actions-gh-pages@v1.1.0
+      if: success()
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        PUBLISH_BRANCH: master
+        PUBLISH_BRANCH: gh-pages
         PUBLISH_DIR: ./public
