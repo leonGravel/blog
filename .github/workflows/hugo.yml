@@ -1,8 +1,10 @@
-name: hugo workflow
+name: github pages
+
 on:
   push:
     branches:
     - hugo
+
 jobs:
   build-deploy:
     runs-on: ubuntu-18.04
@@ -18,5 +20,5 @@ jobs:
       if: success()
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        PUBLISH_BRANCH: master
+        PUBLISH_BRANCH: gh-pages
         PUBLISH_DIR: ./public
