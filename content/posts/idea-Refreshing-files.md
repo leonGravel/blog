@@ -1,5 +1,5 @@
 ---
-title: idea Refreshing files 卡住了
+title: idea Refreshing files 卡顿
 tags: ["idea"]
 author: gravel
 date: 2019-11-18 18:01:41 
