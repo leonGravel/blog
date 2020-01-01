@@ -102,7 +102,7 @@ params:
   profile:
     enabled: true # Whether to show profile bar
     avatar: avatar.png
-    gravatar: leebroncc@gmail.com # Gravatar email address, if you enable Gravatar, your avatar config will be overriden
+    gravatar: la9249@163.com # Gravatar email address, if you enable Gravatar, your avatar config will be overriden
     author: leon gravel
     author_title: 一个脱离了高级趣味的空栈工程师
     author_description: Stop the world!
