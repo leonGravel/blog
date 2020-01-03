@@ -101,7 +101,7 @@ params:
   # profile
   profile:
     enabled: true # Whether to show profile bar
-    avatar: avatar.png
+    avatar: https://s.gravatar.com/avatar/fd0e02edb15e0dfd419fba201edebfeb?s=80
     gravatar: la9249@163.com # Gravatar email address, if you enable Gravatar, your avatar config will be overriden
     author: leon gravel
     author_title: 一个脱离了高级趣味的空栈工程师
@@ -123,9 +123,10 @@ params:
       enabled: true
       width: 40
       height: 40
-      url: favicon.ico
+      url: https://s.gravatar.com/avatar/fd0e02edb15e0dfd419fba201edebfeb?s=80
     title: Hugo # 页面title
-    favicon: favicon.ico
+    favicon: https://s.gravatar.com/avatar/fd0e02edb15e0dfd419fba201edebfeb?s=80
+
     board: <p>今年的目标是。。什么呢</p> # 公告牌
 
   # Share
