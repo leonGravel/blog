@@ -107,7 +107,7 @@ params:
     author_title: 一个脱离了高级趣味的空栈工程师
     author_description: Stop the world!
     location: ChongQing, China
-    follow: https://github.com/leongravel
+    follow: https://leongravel.com/
     # Social Links
     social:
       links:
@@ -127,7 +127,7 @@ params:
     title: Hugo # 页面title
     favicon: https://s.gravatar.com/avatar/fd0e02edb15e0dfd419fba201edebfeb?s=80
 
-    board: <p>今年的目标是。。什么呢</p> # 公告牌
+    board: <p>专注、学习、思考</p> # 公告牌
 
   # Share
   # weibo,qq,qzone,wechat,tencent,douban,diandian,facebook,twitter,google,linkedin

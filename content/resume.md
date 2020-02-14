@@ -22,7 +22,8 @@ title: "李鳌的简历"
 ## 重庆金融资产交易所/平安智慧城市（2019年4月 - 至今）
 
 - Python 数据分析框架搭建
-- 基于 Azkaban 的任务调度系统研发
+- 研发基于 Canal 以及 Kafka 的实时采集系统
+- Azkaban 任务调度系统研发
 
 ## 北京华宇信息技术有限公司（2017 年 8 月 - 2019年4月）
 
@@ -37,28 +38,22 @@ title: "李鳌的简历"
 - 框架性能优化
 - 流程引擎二次开发
 
-# 开源项目及作品
+## 开源项目及作品
 
-- [SpringBoot-Kafka-WebSocket](https://github.com/leonGravel/SpringBoot-Kafka-WebSocket): 基于 SpringBoot 集成 Kafka 和  WebSocket 的项目
-
-- [Alioth-cloud](https://github.com/leonGravel/Alioth-Cloud)：一个基于 springboot 和 springcloud 的微服务项目
-
-- [echo-rpc](https://github.com/leonGravel/echo-rpc)：netty 实现的 RPC 框架
-
+- [Alioth-cloud](https://github.com/leonGravel/Alioth-Cloud)：一个基于 SpringBoot  和 SpringCloud  的微服务项目。
+- [echo-rpc](https://github.com/leonGravel/echo-rpc)： Netty 和 Spring 实现的 RPC 框架。
+- [shortCut](https://github.com/Alkaids/shortcut) : 短地址生成工具，基于 Twitter 的雪花算法，给新增的转换请求发号，得到新的短地址。
 - 个人博客： [https://leongravel.com](https://leongravel.com/)
 
+## 职业专长
 
-# 职业专长
-
-* 网络协议：TCP/IP，HTTP
-* 语言：Java，Python
-* 数据库：PostgreSQL，MySQL
-* 容器化：Docker，Docker-compose
-* 主流框架：Spring，SpringMVC，SpringBoot，SpringCloud，Dubbo，Mybatis，Pandas
-* 消息中间件：Kafka 
-* 缓存：Redis，Guava Cache
-* 操作系统：Linux
-* CI/CD：Gitlab-CI，Jenkins
+- 编程语言：Java，Python
+- 数据库：MySQL，PostgreSQL
+- 容器化：Docker，Docker-compose
+- 主流框架：Spring，SpringMVC，SpringBoot，SpringCloud，Dubbo，Mybatis
+- 中间件：kafka，Redis，Zookeeper，Canal
+- 操作系统：Linux
+- CI/CD：Gitlab-CI，Jenkins
 
 ------
 
