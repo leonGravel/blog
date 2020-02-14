@@ -9,7 +9,7 @@ enableEmoji: true
 PygmentsCodeFences: false
 googleAnalytics: ""      # UA-XXXXXXXX-X 
 permalinks:
-  posts: /:year/:month/:filename/
+  posts: /:filename/
 
 taxonomies:
     category : categories
