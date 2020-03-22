@@ -40,7 +40,6 @@ title: "李鳌的简历"
 
 ## 开源项目及作品
 
-- [Alioth-cloud](https://github.com/leonGravel/Alioth-Cloud)：一个基于 SpringBoot  和 SpringCloud  的微服务项目。
 - [echo-rpc](https://github.com/leonGravel/echo-rpc)： Netty 和 Spring 实现的 RPC 框架。
 - [shortCut](https://github.com/Alkaids/shortcut) : 短地址生成工具，基于 Twitter 的雪花算法，给新增的转换请求发号，得到新的短地址。
 - 个人博客： [https://leongravel.com](https://leongravel.com/)
