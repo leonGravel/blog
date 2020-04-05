@@ -1,6 +1,6 @@
 ---
 title: docker安装目录迁移
-categories: ["Docker"]
+categories: ["Devops"]
 tags: ["docker"]
 date: 2018-10-20 23:01:41 
 author: gravel

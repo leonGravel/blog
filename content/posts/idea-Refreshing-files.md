@@ -1,6 +1,7 @@
 ---
 title: idea Refreshing files 卡顿
-tags: ["idea"]
+categories: ["Devops"]#文章文类
+tags: ["idea","问题笔记"]
 author: gravel
 date: 2019-11-18 18:01:41 
 

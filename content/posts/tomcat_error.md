@@ -1,7 +1,7 @@
 ---
 title: tomcat启动报错
-categories: ["java"]
-tags: ["tomcat","bug"] 
+categories: ["Java基础"]
+tags: ["tomcat","问题笔记"] 
 aothor : gravel 
 date: 2018-04-04 20:54:41 
 ---

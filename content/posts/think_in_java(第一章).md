@@ -1,7 +1,7 @@
 ---
 title: think-in-Java（第一章）
-categories: ["java"]
-tags: ["book","think_in_Java"]
+categories: ["Java基础"]
+tags: ["读书笔记","think_in_Java"]
 date: 2018-06-06 22:54:41
 ---
 

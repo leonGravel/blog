@@ -1,6 +1,6 @@
 ---
 title: Docker容器扩容
-categories: ["Docker"]
+categories: ["Devops"]
 tags: ["docker","bugfix"]
 date: 2018-10-09 23:01:41 
 author: gravel

@@ -1,7 +1,7 @@
 ---
 title: Dubbo在Docker中的服务注册
-categories: ["Java"]
-tags: ["docker","dubbo"]
+categories: ["微服务"]
+tags: ["docker","dubbo","问题笔记"]
 date: 2018-09-28 23:01:41 
 author: gravel
 ---

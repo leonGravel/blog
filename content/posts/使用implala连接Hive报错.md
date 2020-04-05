@@ -1,7 +1,7 @@
 ---
 title: 使用implala连接hive报错
-categories: ["python","hive","bugs"]
-tags: ["python"]
+categories: ["Python"]
+tags: ["Python","问题笔记"]
 date: 2019-07-01 20:54:41
 ---
 

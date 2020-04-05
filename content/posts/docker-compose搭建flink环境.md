@@ -1,6 +1,6 @@
 ---
 title: docker-compose搭建flink环境
-categories: ["Docker"]
+categories: ["Devops"]
 tags: ["docker","docker-compose"]
 date: 2018-10-15 23:01:41 
 author: gravel

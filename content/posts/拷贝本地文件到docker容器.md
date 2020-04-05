@@ -1,6 +1,6 @@
 ---
 title: 拷贝文件到Docker容器中
-categories: ["Docker"]
+categories: ["Devops"]
 tags: ["docker"]
 date: 2018-09-27 23:01:41 
 author: gravel

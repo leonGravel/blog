@@ -1,6 +1,6 @@
 ---
 title: k8s集群搭建
-categories: ["Docker"]
+categories: ["Devops"]
 tags: ["docker","k8s"]
 date: 2018-09-10 20:54:41
 ---

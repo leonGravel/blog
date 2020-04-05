@@ -1,7 +1,7 @@
 ---
 title: Docker上传镜像到私服出错
-categories: ["Docker"]
-tags: ["docker"]
+categories: ["Devops"]
+tags: ["docker","问题笔记"]
 date: 2018-09-05 23:01:41 
 author: gravel
 ---

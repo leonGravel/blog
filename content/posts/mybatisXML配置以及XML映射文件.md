@@ -1,6 +1,6 @@
 ---
 title: mybatisXML配置以及XML映射文件
-categories: ["Java"]
+categories: ["Java基础"]
 tags: ["mybatis"]
 author : gravel
 date: 2017-09-22 19:33:40 #发表日期，一般不改动

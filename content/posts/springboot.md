@@ -1,6 +1,6 @@
 ---
 title: springboot
-categories: ["springboot"]
+categories: ["Java基础"]
 tags: ["java","springboot"]
 author: gravel
 

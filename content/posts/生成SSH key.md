@@ -1,6 +1,6 @@
 ---
 title: git 生成SSH key
-categories: ["Coding"]
+categories: ["Devops"]
 tags: ["git"]
 date: 2018-03-11 20:54:41
 ---

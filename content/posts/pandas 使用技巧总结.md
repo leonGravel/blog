@@ -1,6 +1,6 @@
 ---
 title: pandas 使用技巧总结（持续更新）
-categories: ["python","pandas","DataFrame"]
+categories: ["Python"]
 tags: ["python","数据分析"]
 date: 2019-06-30 20:54:41
 ---

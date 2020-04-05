@@ -1,6 +1,6 @@
 ---
 title: 基于Alpine的基础镜像构建
-categories: ["Docker"]
+categories: ["Devops"]
 tags: ["docker","linux","alpine"]
 date: 2019-02-23 23:01:41 
 author: gravel

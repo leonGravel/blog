@@ -1,6 +1,7 @@
 ---
 title: 安卓 9.0 刷机跳过开机验证
-tags: ["刷机"]
+categories: ["刷机"]
+tags: ["刷机","Andorid"]
 author: gravel
 date: 2020-01-01 00:01:41 
 ---

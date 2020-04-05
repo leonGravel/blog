@@ -1,6 +1,6 @@
 ---
 title: Redis简单讲解 
-categories: ["Redis"]
+categories: ["缓存"]
 tags: ["redis"]
 date: 2018-07-25 23:01:41 
 author: gravel

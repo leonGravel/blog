@@ -1,6 +1,6 @@
 ---
 title: 使用git rebase合并多个commit提交
-categories: ["git"]
+categories: ["Devops"]
 tags: ["git"]
 date: 2019-02-27 23:01:41 
 author: gravel

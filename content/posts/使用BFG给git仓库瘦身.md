@@ -1,7 +1,7 @@
 ---
 title: 使用BFG给git仓库瘦身
-categories: ["git"]
-tags: ["git","bfg.jar"]
+categories: ["Devops"]
+tags: ["git","bfg"]
 date: 2018-11-01 23:01:41 
 author: gravel
 

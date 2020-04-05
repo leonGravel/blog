@@ -1,7 +1,7 @@
 ---
 title: spring-conditional
-categories: ["spring"]
-tags: ["java"]
+categories: ["Java基础"]
+tags: ["java","spring"]
 author: gravel
 
 date: 2018-07-21 23:01:41 

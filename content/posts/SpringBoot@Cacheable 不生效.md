@@ -1,6 +1,6 @@
 ---
 title: Springboot@Cacheable 不生效
-categories: ["Java"]
+categories: ["Java基础"]
 tags: ["springboot","guava","cache"]
 date: 2019-07-16 20:54:41
 ---

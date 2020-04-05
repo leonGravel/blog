@@ -1,7 +1,7 @@
 ---
 title: java基础以及进阶知识点总结 
-categories: ["java"]
-tags: ["java","基础"]
+categories: ["Java基础"]
+tags: ["java"]
 date: 2018-07-15 23:01:41 
 author: gravel
 ---

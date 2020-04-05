@@ -1,7 +1,7 @@
 ---
 title: azkaban回调配置
-categories: ["azkaban"]
-tags: ["java","调度"]
+categories: ["Devops"]
+tags: ["java","调度","azkaban"]
 date: 2019-07-06 23:01:41 
 author: gravel
 

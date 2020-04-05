@@ -1,6 +1,6 @@
 ---
 title:  使用Gitment作为博客评论插件
-categories: ["blog"]
+categories: ["博客"]
 tags: ["gitment","github_page","issue"]
 date: 2018-03-17 00:54:41
 ---

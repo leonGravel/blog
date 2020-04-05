@@ -1,6 +1,6 @@
 ---
 title: Docker部署zabbix填坑指南
-categories: ["Docker"]
+categories: ["Devops"]
 tags: ["docker","docker-compose","zabbix"]
 date: 2020-02-11 20:54:41
 ---

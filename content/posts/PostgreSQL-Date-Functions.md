@@ -1,7 +1,7 @@
 ---
 title:  postgreSQL 日期函数整理
-categories: ["Coding"]
-tags: ["sql"]
+categories: ["数据库"]
+tags: ["sql","pgsql"]
 date: 2018-03-19 21:18:41
 ---
 

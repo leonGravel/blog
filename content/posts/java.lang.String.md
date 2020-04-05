@@ -1,7 +1,7 @@
 ---
 title: 【转载】java.lang.String
-categories: ["Coding"]
-tags: ["java"]
+categories: ["Java基础"]
+tags: ["java","问题笔记"]
 date: 2018-03-12 20:54:41
 ---
 

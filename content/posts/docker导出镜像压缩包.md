@@ -1,7 +1,7 @@
 ---
 title: docker导出镜像压缩包
-categories: ["Docker"]
-tags: ["docker"]
+categories: ["Devops"]
+tags: ["docker","github"]
 date: 2019-02-18 23:01:41 
 author: gravel
 

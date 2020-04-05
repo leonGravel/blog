@@ -1,6 +1,6 @@
 ---
 title: 给Docker容器设置固定ip
-categories: ["Docker"]
+categories: ["Devops"]
 tags: ["docker","docker-compose"]
 date: 2019-02-11 20:54:41
 

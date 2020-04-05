@@ -1,6 +1,6 @@
 ---
 title: gitlab CI vs jenkins 如何选择
-categories: ["CI"]
+categories: ["Devops"]
 tags: ["Jenkins","gitlab-CI"]
 date: 2018-11-04 23:01:41 
 author: gravel

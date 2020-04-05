@@ -1,6 +1,6 @@
 ---
 title: gitlab runner + docker 自动构建
-categories: ["Docker"]
+categories: ["Devops"]
 tags: ["docker","gitlab-CI"]
 date: 2018-09-11 23:01:41 
 author: gravel

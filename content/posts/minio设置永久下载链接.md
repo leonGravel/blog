@@ -1,6 +1,6 @@
 ---
 title: minio设置永久下载链接
-categories: ["minio"]
+categories: ["Devops"]
 tags: ["docker","minio"]
 date: 2018-12-05 10:01:41 
 author: gravel

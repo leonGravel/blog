@@ -1,7 +1,7 @@
 ---
 title: Docker 如何进入运行的tomcat容器
-categories: ["Docker"]
-tags: ["docker","tomcat"]
+categories: ["Devops"]
+tags: ["docker","tomcat","问题笔记"]
 date: 2018-09-26 23:01:41 
 author: gravel
 ---

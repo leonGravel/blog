@@ -1,6 +1,6 @@
 ---
 title: 引入spring-cloud-starter-openfeign后有些类找不到 
-categories: ["java"]
+categories: ["Java基础"]
 tags: ["java","springcloud"]
 date: 2018-09-03 23:01:41 
 author: gravel
