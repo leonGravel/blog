@@ -1,0 +1,37 @@
+{{- define "content"}}
+
+<main class="main" role="main">
+  {{/* partial "archive-list.html" . - */}}
+  <div class="content article-list">
+    <!-- {{- print ($.Scratch.Get "pages") }} -->
+    {{ $paginator := .Paginate ($.Scratch.Get "pages") }}
+    {{ range $paginator.Pages }}
+    <article
+      class="article article-type-page"
+      itemscope
+      itemtype="http://schema.org/BlogPosting"
+    >
+      <div class="article-header">
+        {{- .Scratch.Set "class_name" "article-title" }}
+        {{ partial "post/title.html" . -}}
+        {{- .Scratch.Delete "class_name"}}
+      </div>
+      {{- if .Summary }}
+      <div class="article-entry text-muted" itemprop="description">
+        {{- .Summary -}}
+      </div>
+      {{- end }}
+      <p class="article-meta">
+        {{- partial "post/date.html" . }}
+        {{- partial "post/category.html" . }}
+        {{- partial "post/tag.html" . }}
+        <span class="post-comment"><i class="icon icon-comment"></i> &nbsp;<a href="{{- .RelPermalink }}#comments" class="article-comment-link">{{- T "article_comments" }}</a></span>
+        {{- partial "post/wc.html" . }}
+      </p>
+    </article>
+    {{- end -}}
+  </div>
+  {{ partial "pagination.html" . }}
+</main>
+{{- end }}
+

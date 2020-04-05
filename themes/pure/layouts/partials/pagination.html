@@ -1,0 +1,27 @@
+{{ $paginator := .Paginate .Site.RegularPages }}
+<nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+    <ul class="pager pull-left">
+      {{- with $paginator.Prev -}}
+      <li class="prev">
+        <a href="{{ .URL}}">
+          <i class="icon icon-angle-left"></i>
+          {{ T "prevPage" }}
+        </a>
+      </li>
+      {{- end -}}
+
+      {{- with $paginator.Next -}}
+      <li class="next">
+        <a href="{{ .URL }}">
+          <i class="icon icon-angle-right"></i>
+          {{T "nextPage"}}
+        </a>
+      </li>
+      {{- end }}
+    </ul>
+    <div class="total-article bar-right">
+      Page:{{ $paginator.PageNumber }}/{{ $paginator.TotalPages }}
+    </div>
+  </div>
+</nav>
