@@ -4,7 +4,7 @@ title: Gravel`s blogs
 defaultContentLanguage: zh  # en/zh/...
 footnoteReturnLinkContents: ↩
 hasCJKLanguage: true
-paginate: 7
+paginate: 20
 enableEmoji: true
 PygmentsCodeFences: false
 googleAnalytics: ""      # UA-XXXXXXXX-X 
@@ -127,7 +127,7 @@ params:
     title: Hugo # 页面title
     favicon: https://s.gravatar.com/avatar/fd0e02edb15e0dfd419fba201edebfeb?s=80
 
-    board: <p>专注、学习、思考</p> # 公告牌
+    board: <p>文章 URL 上下文调整，原来的评论好像都失效了。</p><p>重新启用 disqus 评论插件，需科学上网。</p> # 公告牌
 
   # Share
   # weibo,qq,qzone,wechat,tencent,douban,diandian,facebook,twitter,google,linkedin
@@ -186,7 +186,7 @@ params:
 
   # config
   config:
-    skin: theme-purple # theme color default is white. other type [theme-black,theme-blue,theme-green,theme-purple]
+    skin: theme-black # theme color default is white. other type [theme-black,theme-blue,theme-green,theme-purple]
     layout: main-center # main-left main-center main-right
     excerpt_link: Read More
     toc: true
@@ -202,5 +202,4 @@ params:
   widgets:
     - board
     - category
-    - tag
     - recent_posts
