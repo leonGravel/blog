@@ -127,7 +127,7 @@ params:
     title: Hugo # 页面title
     favicon: https://s.gravatar.com/avatar/fd0e02edb15e0dfd419fba201edebfeb?s=80
 
-    board: <p>文章 URL 上下文调整，原来的评论好像都失效了。</p><p>重新启用 disqus 评论插件，需科学上网。</p> # 公告牌
+    board: <p>当人们学习设计技术时，各种可能性令他们兴奋不已，然而真实项目的错综复杂又会为他们泼上一盆冷水。</p> # 公告牌
 
   # Share
   # weibo,qq,qzone,wechat,tencent,douban,diandian,facebook,twitter,google,linkedin
