@@ -11,12 +11,16 @@ title: "李鳌的简历"
 
 - 李鳌/男/1995
 - 本科/电子信息工程/重庆交通大学
-- 工作年限：3.5 年
+- 工作年限：4 年
 - 博客：[https://leongravel.com](https://leongravel.com/)
 - GitHub：<https://github.com/leongravel>
 - 期望职位：Java 高级工程师
 
 # 工作经历
+
+## 美团点评（2020年4月 - 至今）
+
+- 打杂
 
 ## 重庆金融资产交易所/平安智慧城市（2019年4月 - 2020年3月）
 
