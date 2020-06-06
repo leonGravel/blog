@@ -1,0 +1,147 @@
+<!doctype html><html lang=zh><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><title>springboot - Gravel`s blogs</title><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui"><meta name=renderer content="webkit"><meta http-equiv=cache-control content="no-transform"><meta http-equiv=cache-control content="no-siteapp"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="black"><meta name=format-detection content="telephone=no,email=no,adress=no"><meta name=theme-color content="#000000"><meta http-equiv=window-target content="_top"><meta name=description content="Spring Boot 简介 Spring Boot(英文中是引导的意思)，是用来简化Spring应用的搭建到开发的过程。应用开箱即用，只要通过 just run（可能是 java -jar 或 tomcat 或 maven插件run 或 shell脚本），就可以启动项目。二者，Spring Boot 只要很少的Spring配置文件（例如那些xml，property）。 因为习惯优先于配置的原则，使得Spring Boot在快速开发应用和微服务架构实践中得到广泛应用。 Javaer装好JDK环境和Maven工具就可以开始学习Boot了~"><meta name=generator content="Hugo 0.72.0 with theme pure"><title>springboot - Gravel`s blogs</title><link rel=stylesheet href=https://leongravel.com/css/style.min.7dc20efbc53647d41aa9ddea0c48e59300223d084e66ea0cbe7c30bd88903acc.css><link rel=stylesheet href=https://cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css async><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css async><meta property="og:title" content="springboot"><meta property="og:description" content="Spring Boot 简介
+Spring Boot(英文中是引导的意思)，是用来简化Spring应用的搭建到开发的过程。应用开箱即用，只要通过 just run（可能是 java -jar 或 tomcat 或 maven插件run 或 shell脚本），就可以启动项目。二者，Spring Boot 只要很少的Spring配置文件（例如那些xml，property）。 因为习惯优先于配置的原则，使得Spring Boot在快速开发应用和微服务架构实践中得到广泛应用。   Javaer装好JDK环境和Maven工具就可以开始学习Boot了~"><meta property="og:type" content="article"><meta property="og:url" content="https://leongravel.com/post/springboot/"><meta property="article:published_time" content="2018-07-11T23:01:41+00:00"><meta property="article:modified_time" content="2018-07-11T23:01:41+00:00"><meta itemprop=name content="springboot"><meta itemprop=description content="Spring Boot 简介
+Spring Boot(英文中是引导的意思)，是用来简化Spring应用的搭建到开发的过程。应用开箱即用，只要通过 just run（可能是 java -jar 或 tomcat 或 maven插件run 或 shell脚本），就可以启动项目。二者，Spring Boot 只要很少的Spring配置文件（例如那些xml，property）。 因为习惯优先于配置的原则，使得Spring Boot在快速开发应用和微服务架构实践中得到广泛应用。   Javaer装好JDK环境和Maven工具就可以开始学习Boot了~"><meta itemprop=datePublished content="2018-07-11T23:01:41+00:00"><meta itemprop=dateModified content="2018-07-11T23:01:41+00:00"><meta itemprop=wordCount content="3446"><meta itemprop=keywords content="java,springboot,"><meta name=twitter:card content="summary"><meta name=twitter:title content="springboot"><meta name=twitter:description content="Spring Boot 简介
+Spring Boot(英文中是引导的意思)，是用来简化Spring应用的搭建到开发的过程。应用开箱即用，只要通过 just run（可能是 java -jar 或 tomcat 或 maven插件run 或 shell脚本），就可以启动项目。二者，Spring Boot 只要很少的Spring配置文件（例如那些xml，property）。 因为习惯优先于配置的原则，使得Spring Boot在快速开发应用和微服务架构实践中得到广泛应用。   Javaer装好JDK环境和Maven工具就可以开始学习Boot了~"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script><script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--></head></head><body class="main-center theme-black" itemscope itemtype=http://schema.org/WebPage><header class=header itemscope itemtype=http://schema.org/WPHeader><div class=slimContent><div class=navbar-header><div class="profile-block text-center"><a id=avatar href=https://leongravel.com/ target=_blank><img class="img-circle img-rotate" src="https://s.gravatar.com/avatar/fd0e02edb15e0dfd419fba201edebfeb?s=80" width=200 height=200></a><h2 id=name class="hidden-xs hidden-sm">leon gravel</h2><h3 id=title class="hidden-xs hidden-sm hidden-md">一个脱离了高级趣味的空栈工程师</h3><small id=location class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i>ChongQing, China</small></div><div class=search id=search-form-wrap><form class="search-form sidebar-form"><div class=input-group><input type=text class="search-form-input form-control" placeholder=搜索>
+<span class=input-group-btn><button type=submit class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button></span></div><div class=ins-search><div class=ins-search-mask></div><div class=ins-search-container><div class=ins-input-wrapper><input type=text class=ins-search-input placeholder=想要查找什么... x-webkit-speech>
+<button type=button class="close ins-close ins-selectable" data-dismiss=modal aria-label=Close><span aria-hidden=true>×</span></button></div><div class=ins-section-wrapper><div class=ins-section-container></div></div></div></div></form></div><button class="navbar-toggle collapsed" type=button data-toggle=collapse data-target=#main-navbar aria-controls=main-navbar aria-expanded=false>
+<span class=sr-only>Toggle navigation</span>
+<span class=icon-bar></span><span class=icon-bar></span><span class=icon-bar></span></button></div><nav id=main-navbar class="collapse navbar-collapse" itemscope itemtype=http://schema.org/SiteNavigationElement role=navigation><ul class="nav navbar-nav main-nav"><li class="menu-item menu-item-home"><a href=/><i class="icon icon-home-fill"></i><span class=menu-title>Home</span></a></li><li class="menu-item menu-item-archives"><a href=/posts/><i class="icon icon-archives-fill"></i><span class=menu-title>Archives</span></a></li><li class="menu-item menu-item-categories"><a href=/categories/><i class="icon icon-folder"></i><span class=menu-title>Categories</span></a></li><li class="menu-item menu-item-tags"><a href=/tags/><i class="icon icon-tags"></i><span class=menu-title>Tags</span></a></li><li class="menu-item menu-item-resume"><a href=/resume/><i class="icon icon-profile"></i><span class=menu-title>Resume</span></a></li><li class="menu-item menu-item-about"><a href=/about/><i class="icon icon-cup-fill"></i><span class=menu-title>About</span></a></li></ul></nav></div></header><aside class=sidebar itemscope itemtype=http://schema.org/WPSideBar><div class=slimContent><div class=widget><h3 class=widget-title>公告</h3><div class=widget-body><div id=board><div class=content><p>当人们学习设计技术时，各种可能性令他们兴奋不已，然而真实项目的错综复杂又会为他们泼上一盆冷水。</p></div></div></div></div><div class=widget><h3 class=widget-title>分类</h3><div class=widget-body><ul class=category-list><li class=category-list-item><a href=https://leongravel.com/categories/devops/ class=category-list-link>devops</a><span class=category-list-count>24</span></li><li class=category-list-item><a href=https://leongravel.com/categories/java%E5%9F%BA%E7%A1%80/ class=category-list-link>java基础</a><span class=category-list-count>12</span></li><li class=category-list-item><a href=https://leongravel.com/categories/python/ class=category-list-link>python</a><span class=category-list-count>3</span></li><li class=category-list-item><a href=https://leongravel.com/categories/%E5%88%B7%E6%9C%BA/ class=category-list-link>刷机</a><span class=category-list-count>1</span></li><li class=category-list-item><a href=https://leongravel.com/categories/%E5%8D%9A%E5%AE%A2/ class=category-list-link>博客</a><span class=category-list-count>3</span></li><li class=category-list-item><a href=https://leongravel.com/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/ class=category-list-link>微服务</a><span class=category-list-count>2</span></li><li class=category-list-item><a href=https://leongravel.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/ class=category-list-link>数据库</a><span class=category-list-count>1</span></li><li class=category-list-item><a href=https://leongravel.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/ class=category-list-link>数据结构与算法</a><span class=category-list-count>1</span></li><li class=category-list-item><a href=https://leongravel.com/categories/%E7%A1%AC%E4%BB%B6/ class=category-list-link>硬件</a><span class=category-list-count>1</span></li><li class=category-list-item><a href=https://leongravel.com/categories/%E7%BC%93%E5%AD%98/ class=category-list-link>缓存</a><span class=category-list-count>1</span></li><li class=category-list-item><a href=https://leongravel.com/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/ class=category-list-link>设计模式</a><span class=category-list-count>1</span></li></ul></div></div><div class=widget><h3 class=widget-title>最新文章</h3><div class=widget-body><ul class="recent-post-list list-unstyled no-thumbnail"><li><div class=item-inner><p class=item-title><a href=https://leongravel.com/post/zabbix-docker/ class=title>Docker部署zabbix填坑指南</a></p><p class=item-date><time datetime="2020-02-11 20:54:41 +0000 UTC" itemprop=datePublished>2020-02-11</time></p></div></li><li><div class=item-inner><p class=item-title><a href=https://leongravel.com/post/android-setup/ class=title>安卓 9.0 刷机跳过开机验证</a></p><p class=item-date><time datetime="2020-01-01 00:01:41 +0000 UTC" itemprop=datePublished>2020-01-01</time></p></div></li><li><div class=item-inner><p class=item-title><a href=https://leongravel.com/post/idea-refreshing-files/ class=title>idea Refreshing files 卡顿</a></p><p class=item-date><time datetime="2019-11-18 18:01:41 +0000 UTC" itemprop=datePublished>2019-11-18</time></p></div></li><li><div class=item-inner><p class=item-title><a href=https://leongravel.com/post/springbootcacheable-%E4%B8%8D%E7%94%9F%E6%95%88/ class=title>Springboot@Cacheable 不生效</a></p><p class=item-date><time datetime="2019-07-16 20:54:41 +0000 UTC" itemprop=datePublished>2019-07-16</time></p></div></li><li><div class=item-inner><p class=item-title><a href=https://leongravel.com/post/azkaban%E5%9B%9E%E8%B0%83%E9%85%8D%E7%BD%AE/ class=title>azkaban回调配置</a></p><p class=item-date><time datetime="2019-07-06 23:01:41 +0000 UTC" itemprop=datePublished>2019-07-06</time></p></div></li></ul></div></div></div></aside><aside class="sidebar sidebar-toc collapse" id=collapseToc itemscope itemtype=http://schema.org/WPSideBar><div class=slimContent><h4 class=toc-title>文章目录</h4><nav id=toc class="js-toc toc"></nav></div></aside><main class=main role=main><div class=content><article id=- class="article article-type-" itemscope itemtype=http://schema.org/BlogPosting><div class=article-header><h1 itemprop=name><a class=article-title href=/post/springboot/>springboot</a></h1><div class=article-meta><span class=article-date><i class="icon icon-calendar-check"></i>&nbsp;
+<a href=https://leongravel.com/post/springboot/ class=article-date><time datetime="2018-07-11 23:01:41 +0000 UTC" itemprop=datePublished>2018-07-11</time></a></span>
+<span class=article-category><i class="icon icon-folder"></i>&nbsp;
+<a class=article-category-link href=/categories/java%E5%9F%BA%E7%A1%80/>Java基础</a></span>
+<span class=article-tag><i class="icon icon-tags"></i>&nbsp;
+<a class=article-tag-link href=/tags/java/>java</a>
+<a class=article-tag-link href=/tags/springboot/>springboot</a></span>
+<span class="article-read hidden-xs"><i class="icon icon-eye-fill" aria-hidden=true></i><span id=busuanzi_container_page_pv><span id=busuanzi_value_page_pv>0</span></span></span>
+<span class=post-comment><i class="icon icon-comment"></i>&nbsp;<a href=/post/springboot/#comments class=article-comment-link>评论</a></span>
+<span class="post-wordcount hidden-xs" itemprop=wordCount>字数统计: 3446字</span>
+<span class="post-readcount hidden-xs" itemprop=timeRequired>阅读时长: 7分</span></div></div><div class="article-entry marked-body js-toc-content" itemprop=articleBody><h2 id=spring-boot-简介>Spring Boot 简介</h2><p>Spring Boot(英文中是<code>引导</code>的意思)，是用来简化Spring应用的搭建到开发的过程。应用开箱即用，只要通过 <code>just run</code>（可能是 java -jar 或 tomcat 或 maven插件run 或 shell脚本），就可以启动项目。二者，Spring Boot 只要很少的Spring配置文件（例如那些xml，property）。 因为<code>习惯优先于配置</code>的原则，使得Spring Boot在快速开发应用和微服务架构实践中得到广泛应用。 Javaer装好JDK环境和Maven工具就可以开始学习Boot了~</p><h2 id=hello-world>Hello world</h2><p>首先得有个maven基础项目，可以直接使用Maven骨架工程生成Maven骨架Web项目，即man archetype:generate命令：</p><pre><code>mvn archetype:generate -DgroupId=springboot -DartifactId=springboot-helloworld -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+</code></pre><h3 id=pomxml配置>pom.xml配置</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+
+    &lt;groupId&gt;springboot&lt;/groupId&gt;
+    &lt;artifactId&gt;springboot-helloworld&lt;/artifactId&gt;
+    &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+    &lt;name&gt;springboot-helloworld :: HelloWorld Demo&lt;/name&gt;
+
+    &lt;!-- Spring Boot 启动父依赖 --&gt;
+    &lt;parent&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
+        &lt;version&gt;1.3.3.RELEASE&lt;/version&gt;
+    &lt;/parent&gt;
+
+    &lt;dependencies&gt;
+        &lt;!-- Spring Boot web依赖 --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+
+        &lt;!-- Junit --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;junit&lt;/groupId&gt;
+            &lt;artifactId&gt;junit&lt;/artifactId&gt;
+            &lt;version&gt;4.12&lt;/version&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+&lt;/project&gt;
+</code></pre><p>只要加入一个 Spring Boot 启动父依赖即可。</p><h3 id=controller层>Controller层</h3><p>HelloWorldController的代码如下：</p><pre><code>/**
+ * Spring Boot HelloWorld案例
+ *
+ * Created by liao on 2018/7/12.
+ */
+@RestController
+public class HelloWorldController {
+
+    @RequestMapping(&quot;/&quot;)
+    public String sayHello() {
+        return &quot;Hello,World!&quot;;
+    }
+}
+</code></pre><p>@RestController和@RequestMapping注解是来自SpringMVC的注解，它们不是SpringBoot的特定部分。 1. @RestController：提供实现了REST API，可以服务JSON,XML或者其他。这里是以String的形式渲染出结果。 2. @RequestMapping：提供路由信息，"/&ldquo;路径的HTTP Request都会被映射到sayHello方法进行处理。</p><h3 id=启动应用类>启动应用类</h3><p>和第一段描述一样，开箱即用。如下面Application类：</p><pre><code>/**
+ * Spring Boot应用启动类
+ *
+ * Created by liao on 2018/7/12.
+ */
+@SpringBootApplication
+public class Application {
+
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class,args);
+    }
+}
+</code></pre><ol><li>@SpringBootApplication：Spring Boot 应用的标识</li><li>Application很简单，一个main函数作为主入口。SpringApplication引导应用，并将Application本身作为参数传递给run方法。具体run方法会启动嵌入式的Tomcat并初始化Spring环境及其各Spring组件。</li></ol><h2 id=运行>运行</h2><p>Just Run的宗旨，运行很简单，直接右键Run运行Application类。同样你也可以Debug Run。可以在控制台中看到：</p><pre><code>Tomcat started on port(s): 8080 (http)
+Started Application in 5.986 seconds (JVM running for 7.398)
+</code></pre><p>然后访问<a href=http://localhost:8080/>http://localhost:8080/</a>,即可在页面中看到Spring Boot对你 say hello：</p><pre><code>Hello,World！
+</code></pre><h2 id=配置文件>配置文件</h2><p>我在Spring Boot使用过程中，最直观的感受就是没有了原来自己整合Spring应用时繁多的XML配置内容，替代它的是在pom.xml中引入模块化的Starter POMs，其中各个模块都有自己的默认配置，所以如果不是特殊应用场景，就只需要在application.properties中完成一些属性配置就能开启各模块的应用。</p><h3 id=自定义属性与加载>自定义属性与加载</h3><p>在使用Spring Boot的时候，通常也需要定义一些自己使用的属性，可以如下方式直接定义：</p><pre><code>com.gravel.name=李鳌
+com.gravel.title=李鳌的文章
+</code></pre><p>然后通过<code>@Value("${属性名}")</code>注解来加载对应的配置属性，具体如下：</p><pre><code>@Component
+public class gravelProperties {
+
+    @Value(&quot;${com.gravel.name}&quot;)
+    private String name;
+    @Value(&quot;${com.gravel.title}&quot;)
+    private String title;
+
+    // 省略getter和setter
+
+}
+</code></pre><p>可以通过单元测试来验证<code>gravelProperties</code>中的属性是否已经根据配置文件加载了。</p><pre><code>@RunWith(SpringJUnit4ClassRunner.class)
+@SpringApplicationConfiguration(Application.class)
+public class ApplicationTests {
+
+    @Autowired
+    private gravelProperties tProperties;
+
+
+    @Test
+    public void getHello() throws Exception {
+        Assert.assertEquals(tProperties.getName(), &quot;李鳌&quot;);
+        Assert.assertEquals(tProperties.getTitle(), &quot;李鳌的文章&quot;);
+    }
+
+}
+</code></pre><h3 id=属性配置类>属性配置类</h3><p>springboot还支持引入外部配置文件，这里举个例子。属性配置类 <code>StaticProperties.class</code></p><pre><code>@Component
+public class StaticProperties {
+
+    public static String CUSTOM_NAME;
+
+    @Value(&quot;${custom.name}&quot;)
+    public void setCustomName(String customName) {
+        CUSTOM_NAME = customName;
+    }
+
+}
+</code></pre><p>Spring Boot 配置提示 resources/META-INF/spring-configuration-metadata.json</p><pre><code>{
+  &quot;properties&quot;: [
+    {
+      &quot;name&quot;: &quot;custom.name&quot;,
+      &quot;type&quot;: &quot;java.lang.String&quot;,
+      &quot;sourceType&quot;: &quot;com.gravel.config.StaticProperties&quot;
+    }
+  ]
+}
+</code></pre><p>Spring Boot 配置 application.properties</p><pre><code>custom.name=liao
+</code></pre><p>至此，即可在 Spring Boot 全局任意引用 StaticProperties.CUSTOM_NAME来获取这个属性啦。</p><h3 id=参数间的引用>参数间的引用</h3><p>在<code>application.properties</code>中的各个参数之间也可以直接引用来使用，就像下面的设置：</p><pre><code>com.gravel.name=李鳌
+com.gravel.title=李鳌的文章
+com.gravel.blog.desc=${com.gravel.name}正在努力写《${com.gravel.title}》
+</code></pre><p><code>com.gravel.blog.desc</code>参数引用了上文中定义的name和title属性，最后该属性的值就是李鳌正在努力写《李鳌的文章》。</p><h3 id=通过命令行设置属性值>通过命令行设置属性值</h3><p>相信使用过一段时间<code>Spring Boot</code>的用户，一定知道这条命令：<code>java -jar xxx.jar --server.port=8888</code>，通过使用<code>—server.port</code>属性来设置<code>xxx.jar</code>应用的端口为<code>8888</code>。</p><p>在命令行运行时，连续的两个减号&ndash;就是对<code>application.properties</code>中的属性值进行赋值的标识。所以，<code>java -jar xxx.jar --server.port=8888</code>命令，等价于我们在<code>application.properties</code>中添加属性<code>server.port=8888</code>，该设置在样例工程中可见，读者可通过删除该值或使用命令行来设置该值来验证。</p><p>通过命令行来修改属性值固然提供了不错的便利性，但是通过命令行就能更改应用运行的参数，那岂不是很不安全？是的，所以Spring Boot也贴心的提供了屏蔽命令行访问属性的设置，只需要这句设置就能屏蔽：<code>SpringApplication.setAddCommandLineProperties(false)</code>。</p><h3 id=多环境配置>多环境配置</h3><p>我们在开发Spring Boot应用时，通常同一套程序会被应用和安装到几个不同的环境，比如：开发、测试、生产等。其中每个环境的数据库地址、服务器端口等等配置都会不同，如果在为不同环境打包时都要频繁修改配置文件的话，那必将是个非常繁琐且容易发生错误的事。</p><p>对于多环境的配置，各种项目构建工具或是框架的基本思路是一致的，通过配置多份不同环境的配置文件，再通过打包命令指定需要打包的内容之后进行区分打包，Spring Boot也不例外，或者说更加简单。</p><p>在Spring Boot中多环境配置文件名需要满足<code>application-{profile}.properties</code>的格式，其中<code>{profile}</code>对应你的环境标识，比如：</p><ul><li><code>application-dev.properties</code>：开发环境</li><li><code>application-test.properties</code>：测试环境</li><li><code>application-prod.properties</code>：生产环境</li></ul><p>至于哪个具体的配置文件会被加载，需要在<code>application.properties</code>文件中通过<code>spring.profiles.active</code>属性来设置，其值对应<code>{profile}</code>值。
+如：<code>spring.profiles.active=test</code>就会加载<code>application-test.properties</code>配置文件内容。`
+下面，以不同环境配置不同的服务端口为例，进行样例实验。</p><p>针对各环境新建不同的配置文件<code>application-dev.properties</code>、<code>application-test.properties</code>、<code>application-prod.properties</code>;</p><p>在这三个文件均都设置不同的<code>server.port</code>属性，如：dev环境设置为1111，test环境设置为2222，prod环境设置为3333,</p><p><code>application.properties</code>中设置<code>spring.profiles.active=dev</code>，就是说默认以dev环境设置</p><p>测试不同配置的加载</p><ul><li>执行<code>java -jar xxx.jar</code>，可以观察到服务端口被设置为1111，也就是默认的开发环境（dev）</li><li>执行<code>java -jar xxx.jar --spring.profiles.active=test</code>，可以观察到服务端口被设置为2222，也就是测试环境的配置（test）</li><li>执行<code>java -jar xxx.jar --spring.profiles.active=prod</code>，可以观察到服务端口被设置为3333，也就是生产环境的配置（prod）
+按照上面的实验，可以如下总结多环境的配置思路：</li></ul><p><code>application.properties</code>中配置通用内容，并设置<code>spring.profiles.active=dev</code>，以开发环境为默认配置
+<code>application-{profile}.properties</code>中配置各个环境不同的内容
+通过命令行方式去激活不同环境的配置。</p></div><div class=article-footer><blockquote class=mt-2x><ul class="post-copyright list-unstyled"><li class="post-copyright-link hidden-xs"><strong>本文链接:</strong>
+<a href=https://leongravel.com/post/springboot/ title=springboot target=_blank rel=external>https://leongravel.com/post/springboot/</a></li><li class=post-copyright-license><strong>License：</strong><a href=http://creativecommons.org/licenses/by/4.0/deed.zh target=_blank rel=external>CC BY 4.0 CN</a></li></ul></blockquote><div class="panel panel-default panel-badger"><div class=panel-body><figure class=media><div class=media-left><a href=https://leongravel.com/ target=_blank class="img-burn thumb-sm visible-lg"><img src="https://s.gravatar.com/avatar/fd0e02edb15e0dfd419fba201edebfeb?s=80" class="img-rounded w-full" alt></a></div><div class=media-body><h3 class=media-heading><a href=https://leongravel.com/ target=_blank><span class=text-dark>leon gravel</span><small class=ml-1x>一个脱离了高级趣味的空栈工程师</small></a></h3><div>Stop the world!</div></div></figure></div></div></div></article><section id=comments><div id=disqus_thread><noscript>Please enable JavaScript to view the <a href=//disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript></div></section></div><nav class="bar bar-footer clearfix" data-stick-bottom><div class=bar-inner><ul class="pager pull-left"><li class=prev><a href=https://leongravel.com/post/think_in_java%E7%AC%AC%E4%B8%80%E7%AB%A0/ title=think-in-Java（第一章）><i class="icon icon-angle-left" aria-hidden=true></i><span>&nbsp;&nbsp;下一篇</span></a></li><li class=next><a href=https://leongravel.com/post/%E5%B8%B8%E7%94%A8%E7%9A%84%E5%87%A0%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/ title=常用的几种设计模式><span>上一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden=true></i></a></li><li class=toggle-toc><a class="toggle-btn collapsed" data-toggle=collapse href=#collapseToc aria-expanded=false title=文章目录 role=button><span>[&nbsp;</span><span>文章目录</span>
+<i class="text-collapsed icon icon-anchor"></i><i class="text-in icon icon-close"></i><span>]</span></a></li></ul><div class=bar-right><div class=share-component data-sites=weibo,qq,wechat,facebook,twitter data-mobile-sites=weibo,qq,qzone></div></div></div></nav></main><footer class=footer itemscope itemtype=http://schema.org/WPFooter><ul class=social-links><li><a href=https://github.com/leongravel target=_blank title=github data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li><li><a href=https://leongravel.com/index.xml target=_blank title=rss data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li></ul><div class=copyright>&copy;2016 -
+2020<div class=publishby>Theme by <a href=https://github.com/xiaoheiAh target=_blank>xiaoheiAh </a>base on<a href=https://github.com/xiaoheiAh/hugo-theme-pure target=_blank> pure</a>.</div></div></footer><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script><script type=text/x-mathjax-config>
+    MathJax.Hub.Config({
+            showMathMenu: false, //disables context menu
+            tex2jax: {
+            inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+           }
+    });
+</script><script src=https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js></script><script>window.jQuery||document.write('<script src="js/jquery.min.js"><\/script>')</script><script type=text/javascript src=https://cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js></script><script type=text/javascript src=https://cdn.staticfile.org/highlight.js/9.15.10/languages/python.min.js defer></script><script type=text/javascript src=https://cdn.staticfile.org/highlight.js/9.15.10/languages/javascript.min.js defer></script><script type=text/javascript src=https://cdn.staticfile.org/highlight.js/9.15.10/languages/java.min.js defer></script><script>hljs.configure({tabReplace:'    ',classPrefix:''})
+hljs.initHighlightingOnLoad();</script><script src=https://leongravel.com/js/application.min.bdeb64b910570b6c41badc6a05b7afb0c8ad9efd8525de3c7257d59e786326a3.js></script><script src=https://leongravel.com/js/plugin.min.51ff8c7317566f82259170fa36e09c4493adc9b9378b427a01ad3f017ebac7dd.js></script><script>(function(window){var INSIGHT_CONFIG={TRANSLATION:{POSTS:'文章',PAGES:'页面',CATEGORIES:'分类',TAGS:'标签',UNTITLED:'(未命名)',},ROOT_URL:'https:\/\/leongravel.com\/',CONTENT_URL:'https:\/\/leongravel.com\/\/searchindex.json ',};window.INSIGHT_CONFIG=INSIGHT_CONFIG;})(window);</script><script type=text/javascript src=https://leongravel.com/js/insight.min.a343cd9a5a7698336b28ef3a7c16a3a1b1d2d5fb17dc8ed04022bbe08cc5459073a15bdafa3a8a58cdd56080784bdd69fa70b1ae8597565c799c57ed00f0e120.js defer></script><script src=https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js></script><script>tocbot.init({tocSelector:'.js-toc',contentSelector:'.js-toc-content',headingSelector:'h1, h2, h3',hasInnerContainers:true,});</script><script async src=https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><script>(function(){var d=document,s=d.createElement('script');s.src='https://'+'leongravel'+'.disqus.com/embed.js';s.setAttribute('data-timestamp',+new Date());(d.head||d.body).appendChild(s);})();</script></body></html>

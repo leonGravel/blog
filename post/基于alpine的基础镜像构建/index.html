@@ -1,0 +1,127 @@
+<!doctype html><html lang=zh><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><title>基于Alpine的基础镜像构建 - Gravel`s blogs</title><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui"><meta name=renderer content="webkit"><meta http-equiv=cache-control content="no-transform"><meta http-equiv=cache-control content="no-siteapp"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="black"><meta name=format-detection content="telephone=no,email=no,adress=no"><meta name=theme-color content="#000000"><meta http-equiv=window-target content="_top"><meta name=description content="刚开始在项目中使用docker的时候，使用的是centos作为基础镜像。centos的官方镜像有70M左右。加上jdk、tomcat，一个完整的业务系统，可能有450M左右。在项目组同学去试用部署的时候，所以的应用包加上服务包，有点过于大了。而且以centos作为基础镜像，可能包含很多我们并不需要的功能。所以，决定转用alpine。"><meta name=generator content="Hugo 0.72.0 with theme pure"><title>基于Alpine的基础镜像构建 - Gravel`s blogs</title><link rel=stylesheet href=https://leongravel.com/css/style.min.7dc20efbc53647d41aa9ddea0c48e59300223d084e66ea0cbe7c30bd88903acc.css><link rel=stylesheet href=https://cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css async><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css async><meta property="og:title" content="基于Alpine的基础镜像构建"><meta property="og:description" content="刚开始在项目中使用docker的时候，使用的是centos作为基础镜像。centos的官方镜像有70M左右。加上jdk、tomcat，一个完整的业务系统，可能有450M左右。在项目组同学去试用部署的时候，所以的应用包加上服务包，有点过于大了。而且以centos作为基础镜像，可能包含很多我们并不需要的功能。所以，决定转用alpine。"><meta property="og:type" content="article"><meta property="og:url" content="https://leongravel.com/post/%E5%9F%BA%E4%BA%8Ealpine%E7%9A%84%E5%9F%BA%E7%A1%80%E9%95%9C%E5%83%8F%E6%9E%84%E5%BB%BA/"><meta property="article:published_time" content="2019-02-23T23:01:41+00:00"><meta property="article:modified_time" content="2019-02-23T23:01:41+00:00"><meta itemprop=name content="基于Alpine的基础镜像构建"><meta itemprop=description content="刚开始在项目中使用docker的时候，使用的是centos作为基础镜像。centos的官方镜像有70M左右。加上jdk、tomcat，一个完整的业务系统，可能有450M左右。在项目组同学去试用部署的时候，所以的应用包加上服务包，有点过于大了。而且以centos作为基础镜像，可能包含很多我们并不需要的功能。所以，决定转用alpine。"><meta itemprop=datePublished content="2019-02-23T23:01:41+00:00"><meta itemprop=dateModified content="2019-02-23T23:01:41+00:00"><meta itemprop=wordCount content="1633"><meta itemprop=keywords content="docker,linux,alpine,"><meta name=twitter:card content="summary"><meta name=twitter:title content="基于Alpine的基础镜像构建"><meta name=twitter:description content="刚开始在项目中使用docker的时候，使用的是centos作为基础镜像。centos的官方镜像有70M左右。加上jdk、tomcat，一个完整的业务系统，可能有450M左右。在项目组同学去试用部署的时候，所以的应用包加上服务包，有点过于大了。而且以centos作为基础镜像，可能包含很多我们并不需要的功能。所以，决定转用alpine。"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script><script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--></head></head><body class="main-center theme-black" itemscope itemtype=http://schema.org/WebPage><header class=header itemscope itemtype=http://schema.org/WPHeader><div class=slimContent><div class=navbar-header><div class="profile-block text-center"><a id=avatar href=https://leongravel.com/ target=_blank><img class="img-circle img-rotate" src="https://s.gravatar.com/avatar/fd0e02edb15e0dfd419fba201edebfeb?s=80" width=200 height=200></a><h2 id=name class="hidden-xs hidden-sm">leon gravel</h2><h3 id=title class="hidden-xs hidden-sm hidden-md">一个脱离了高级趣味的空栈工程师</h3><small id=location class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i>ChongQing, China</small></div><div class=search id=search-form-wrap><form class="search-form sidebar-form"><div class=input-group><input type=text class="search-form-input form-control" placeholder=搜索>
+<span class=input-group-btn><button type=submit class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button></span></div><div class=ins-search><div class=ins-search-mask></div><div class=ins-search-container><div class=ins-input-wrapper><input type=text class=ins-search-input placeholder=想要查找什么... x-webkit-speech>
+<button type=button class="close ins-close ins-selectable" data-dismiss=modal aria-label=Close><span aria-hidden=true>×</span></button></div><div class=ins-section-wrapper><div class=ins-section-container></div></div></div></div></form></div><button class="navbar-toggle collapsed" type=button data-toggle=collapse data-target=#main-navbar aria-controls=main-navbar aria-expanded=false>
+<span class=sr-only>Toggle navigation</span>
+<span class=icon-bar></span><span class=icon-bar></span><span class=icon-bar></span></button></div><nav id=main-navbar class="collapse navbar-collapse" itemscope itemtype=http://schema.org/SiteNavigationElement role=navigation><ul class="nav navbar-nav main-nav"><li class="menu-item menu-item-home"><a href=/><i class="icon icon-home-fill"></i><span class=menu-title>Home</span></a></li><li class="menu-item menu-item-archives"><a href=/posts/><i class="icon icon-archives-fill"></i><span class=menu-title>Archives</span></a></li><li class="menu-item menu-item-categories"><a href=/categories/><i class="icon icon-folder"></i><span class=menu-title>Categories</span></a></li><li class="menu-item menu-item-tags"><a href=/tags/><i class="icon icon-tags"></i><span class=menu-title>Tags</span></a></li><li class="menu-item menu-item-resume"><a href=/resume/><i class="icon icon-profile"></i><span class=menu-title>Resume</span></a></li><li class="menu-item menu-item-about"><a href=/about/><i class="icon icon-cup-fill"></i><span class=menu-title>About</span></a></li></ul></nav></div></header><aside class=sidebar itemscope itemtype=http://schema.org/WPSideBar><div class=slimContent><div class=widget><h3 class=widget-title>公告</h3><div class=widget-body><div id=board><div class=content><p>当人们学习设计技术时，各种可能性令他们兴奋不已，然而真实项目的错综复杂又会为他们泼上一盆冷水。</p></div></div></div></div><div class=widget><h3 class=widget-title>分类</h3><div class=widget-body><ul class=category-list><li class=category-list-item><a href=https://leongravel.com/categories/devops/ class=category-list-link>devops</a><span class=category-list-count>24</span></li><li class=category-list-item><a href=https://leongravel.com/categories/java%E5%9F%BA%E7%A1%80/ class=category-list-link>java基础</a><span class=category-list-count>12</span></li><li class=category-list-item><a href=https://leongravel.com/categories/python/ class=category-list-link>python</a><span class=category-list-count>3</span></li><li class=category-list-item><a href=https://leongravel.com/categories/%E5%88%B7%E6%9C%BA/ class=category-list-link>刷机</a><span class=category-list-count>1</span></li><li class=category-list-item><a href=https://leongravel.com/categories/%E5%8D%9A%E5%AE%A2/ class=category-list-link>博客</a><span class=category-list-count>3</span></li><li class=category-list-item><a href=https://leongravel.com/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/ class=category-list-link>微服务</a><span class=category-list-count>2</span></li><li class=category-list-item><a href=https://leongravel.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/ class=category-list-link>数据库</a><span class=category-list-count>1</span></li><li class=category-list-item><a href=https://leongravel.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/ class=category-list-link>数据结构与算法</a><span class=category-list-count>1</span></li><li class=category-list-item><a href=https://leongravel.com/categories/%E7%A1%AC%E4%BB%B6/ class=category-list-link>硬件</a><span class=category-list-count>1</span></li><li class=category-list-item><a href=https://leongravel.com/categories/%E7%BC%93%E5%AD%98/ class=category-list-link>缓存</a><span class=category-list-count>1</span></li><li class=category-list-item><a href=https://leongravel.com/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/ class=category-list-link>设计模式</a><span class=category-list-count>1</span></li></ul></div></div><div class=widget><h3 class=widget-title>最新文章</h3><div class=widget-body><ul class="recent-post-list list-unstyled no-thumbnail"><li><div class=item-inner><p class=item-title><a href=https://leongravel.com/post/zabbix-docker/ class=title>Docker部署zabbix填坑指南</a></p><p class=item-date><time datetime="2020-02-11 20:54:41 +0000 UTC" itemprop=datePublished>2020-02-11</time></p></div></li><li><div class=item-inner><p class=item-title><a href=https://leongravel.com/post/android-setup/ class=title>安卓 9.0 刷机跳过开机验证</a></p><p class=item-date><time datetime="2020-01-01 00:01:41 +0000 UTC" itemprop=datePublished>2020-01-01</time></p></div></li><li><div class=item-inner><p class=item-title><a href=https://leongravel.com/post/idea-refreshing-files/ class=title>idea Refreshing files 卡顿</a></p><p class=item-date><time datetime="2019-11-18 18:01:41 +0000 UTC" itemprop=datePublished>2019-11-18</time></p></div></li><li><div class=item-inner><p class=item-title><a href=https://leongravel.com/post/springbootcacheable-%E4%B8%8D%E7%94%9F%E6%95%88/ class=title>Springboot@Cacheable 不生效</a></p><p class=item-date><time datetime="2019-07-16 20:54:41 +0000 UTC" itemprop=datePublished>2019-07-16</time></p></div></li><li><div class=item-inner><p class=item-title><a href=https://leongravel.com/post/azkaban%E5%9B%9E%E8%B0%83%E9%85%8D%E7%BD%AE/ class=title>azkaban回调配置</a></p><p class=item-date><time datetime="2019-07-06 23:01:41 +0000 UTC" itemprop=datePublished>2019-07-06</time></p></div></li></ul></div></div></div></aside><aside class="sidebar sidebar-toc collapse" id=collapseToc itemscope itemtype=http://schema.org/WPSideBar><div class=slimContent><h4 class=toc-title>文章目录</h4><nav id=toc class="js-toc toc"></nav></div></aside><main class=main role=main><div class=content><article id=- class="article article-type-" itemscope itemtype=http://schema.org/BlogPosting><div class=article-header><h1 itemprop=name><a class=article-title href=/post/%E5%9F%BA%E4%BA%8Ealpine%E7%9A%84%E5%9F%BA%E7%A1%80%E9%95%9C%E5%83%8F%E6%9E%84%E5%BB%BA/>基于Alpine的基础镜像构建</a></h1><div class=article-meta><span class=article-date><i class="icon icon-calendar-check"></i>&nbsp;
+<a href=https://leongravel.com/post/%E5%9F%BA%E4%BA%8Ealpine%E7%9A%84%E5%9F%BA%E7%A1%80%E9%95%9C%E5%83%8F%E6%9E%84%E5%BB%BA/ class=article-date><time datetime="2019-02-23 23:01:41 +0000 UTC" itemprop=datePublished>2019-02-23</time></a></span>
+<span class=article-category><i class="icon icon-folder"></i>&nbsp;
+<a class=article-category-link href=/categories/devops/>Devops</a></span>
+<span class=article-tag><i class="icon icon-tags"></i>&nbsp;
+<a class=article-tag-link href=/tags/docker/>docker</a>
+<a class=article-tag-link href=/tags/linux/>linux</a>
+<a class=article-tag-link href=/tags/alpine/>alpine</a></span>
+<span class="article-read hidden-xs"><i class="icon icon-eye-fill" aria-hidden=true></i><span id=busuanzi_container_page_pv><span id=busuanzi_value_page_pv>0</span></span></span>
+<span class=post-comment><i class="icon icon-comment"></i>&nbsp;<a href=/post/%E5%9F%BA%E4%BA%8Ealpine%E7%9A%84%E5%9F%BA%E7%A1%80%E9%95%9C%E5%83%8F%E6%9E%84%E5%BB%BA/#comments class=article-comment-link>评论</a></span>
+<span class="post-wordcount hidden-xs" itemprop=wordCount>字数统计: 1633字</span>
+<span class="post-readcount hidden-xs" itemprop=timeRequired>阅读时长: 4分</span></div></div><div class="article-entry marked-body js-toc-content" itemprop=articleBody><p>刚开始在项目中使用docker的时候，使用的是centos作为基础镜像。centos的官方镜像有70M左右。加上jdk、tomcat，一个完整的业务系统，可能有450M左右。在项目组同学去试用部署的时候，所以的应用包加上服务包，有点过于大了。而且以centos作为基础镜像，可能包含很多我们并不需要的功能。所以，决定转用alpine。</p><h3 id=alpine介绍>alpine介绍</h3><p>在alpine的官网上写着：</p><pre><code>Alpine Linux is a security-oriented, lightweight Linux distribution based on musl libc and busybox.//Alpine Linux 是一个社区开发的面向安全应用的轻量级 Linux 发行版。
+</code></pre><p>最令人吃惊的是，他的官方docker镜像，只有5M。所以在2016年的时候，docker官方已经将推荐基础镜像，从Ubuntu转为alpine。</p><h3 id=编写基础镜像的dockerfile>编写基础镜像的Dockerfile</h3><p>alpine优点是安全，体积小，但同时，他肯定也缺少一些本地化的东西。</p><p>我尝试过直接将alpine作为基础镜像去运行一个tomcat应用，发现在解压war包的时候，里面的中文文件无法被识别。另外无法直接将时区设置为东八区。</p><p>在结合网上资料整理之后发现，alpine主要也是这两个问题困扰着使用中文的程序员。所以我们需要定制化自己的alpine基础镜像。结合Dockerfile来说吧。</p><pre><code>FROM  alpine:3.6
+
+MAINTAINER leongravel &quot;leebroncc@gmail.com&quot;
+
+## 设置默认语言环境
+ENV LANG=C.UTF-8
+
+# 安装 GNU libc (aka glibc)和C.UTF-8 locale的依赖 以及设置时区
+# 下面这么长一串，主要是通过apk安装glibc的依赖，他的作用主要是本地化支持，和字符集的切换。
+RUN ALPINE_GLIBC_BASE_URL=&quot;https://github.com/sgerrand/alpine-pkg-glibc/releases/download&quot; &amp;&amp; \
+    ALPINE_GLIBC_PACKAGE_VERSION=&quot;2.27-r0&quot; &amp;&amp; \
+    ALPINE_GLIBC_BASE_PACKAGE_FILENAME=&quot;glibc-$ALPINE_GLIBC_PACKAGE_VERSION.apk&quot; &amp;&amp; \
+    ALPINE_GLIBC_BIN_PACKAGE_FILENAME=&quot;glibc-bin-$ALPINE_GLIBC_PACKAGE_VERSION.apk&quot; &amp;&amp; \
+    ALPINE_GLIBC_I18N_PACKAGE_FILENAME=&quot;glibc-i18n-$ALPINE_GLIBC_PACKAGE_VERSION.apk&quot; &amp;&amp; \
+    apk add --no-cache --virtual=.build-dependencies wget ca-certificates &amp;&amp; \
+    echo \
+        &quot;-----BEGIN PUBLIC KEY-----\
+        MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApZ2u1KJKUu/fW4A25y9m\
+        y70AGEa/J3Wi5ibNVGNn1gT1r0VfgeWd0pUybS4UmcHdiNzxJPgoWQhV2SSW1JYu\
+        tOqKZF5QSN6X937PTUpNBjUvLtTQ1ve1fp39uf/lEXPpFpOPL88LKnDBgbh7wkCp\
+        m2KzLVGChf83MS0ShL6G9EQIAUxLm99VpgRjwqTQ/KfzGtpke1wqws4au0Ab4qPY\
+        KXvMLSPLUp7cfulWvhmZSegr5AdhNw5KNizPqCJT8ZrGvgHypXyiFvvAH5YRtSsc\
+        Zvo9GI2e2MaZyo9/lvb+LbLEJZKEQckqRj4P26gmASrZEPStwc+yqy1ShHLA0j6m\
+        1QIDAQAB\
+        -----END PUBLIC KEY-----&quot; | sed 's/   */\n/g' &gt; &quot;/etc/apk/keys/sgerrand.rsa.pub&quot; &amp;&amp; \
+    wget \
+        &quot;$ALPINE_GLIBC_BASE_URL/$ALPINE_GLIBC_PACKAGE_VERSION/$ALPINE_GLIBC_BASE_PACKAGE_FILENAME&quot; \
+        &quot;$ALPINE_GLIBC_BASE_URL/$ALPINE_GLIBC_PACKAGE_VERSION/$ALPINE_GLIBC_BIN_PACKAGE_FILENAME&quot; \
+        &quot;$ALPINE_GLIBC_BASE_URL/$ALPINE_GLIBC_PACKAGE_VERSION/$ALPINE_GLIBC_I18N_PACKAGE_FILENAME&quot; &amp;&amp; \
+    apk add --no-cache \
+        &quot;$ALPINE_GLIBC_BASE_PACKAGE_FILENAME&quot; \
+        &quot;$ALPINE_GLIBC_BIN_PACKAGE_FILENAME&quot; \
+        &quot;$ALPINE_GLIBC_I18N_PACKAGE_FILENAME&quot; &amp;&amp; \
+    \
+    rm &quot;/etc/apk/keys/sgerrand.rsa.pub&quot; &amp;&amp; \
+    /usr/glibc-compat/bin/localedef --force --inputfile POSIX --charmap UTF-8 &quot;$LANG&quot; || true &amp;&amp; \
+    echo &quot;export LANG=$LANG&quot; &gt; /etc/profile.d/locale.sh &amp;&amp; \
+    \
+    apk del glibc-i18n &amp;&amp; \
+    \
+    rm &quot;/root/.wget-hsts&quot; &amp;&amp; \
+    apk del .build-dependencies &amp;&amp; \
+    rm \
+        &quot;$ALPINE_GLIBC_BASE_PACKAGE_FILENAME&quot; \
+        &quot;$ALPINE_GLIBC_BIN_PACKAGE_FILENAME&quot; \
+        &quot;$ALPINE_GLIBC_I18N_PACKAGE_FILENAME&quot; &amp;&amp; \
+  echo 'http://mirrors.ustc.edu.cn/alpine/v3.6/main' &gt; /etc/apk/repositories \
+    &amp;&amp; echo 'http://mirrors.ustc.edu.cn/alpine/v3.6/community' &gt;&gt;/etc/apk/repositories \
+&amp;&amp; apk update &amp;&amp; apk add tzdata \
+&amp;&amp; ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \ 
+&amp;&amp; echo &quot;Asia/Shanghai&quot; &gt; /etc/timezone
+
+## 上面这三行代码，是通过apk添加tzdata支持，将时区设置为东八区，也就是中国区的时间。
+</code></pre><p>构建docker镜像</p><pre><code>docker build -t base-alpine . // 构建镜像
+</code></pre><p>通过以上这个命令，我们就完成了基础镜像的构建。这个镜像只比最纯净的alpine官方镜像大2M。</p><h3 id=通过基础镜像构建其他应用>通过基础镜像构建其他应用</h3><p>完成以上的基础镜像之后，其实大部分工作都已经完成了。下面也通过Dockerfile来讲个例子。</p><ol><li>jdk8的镜像构建</li></ol><pre><code>FROM cdjd/ci/base-alpine
+
+MAINTAINER  leongravel &quot;leebroncc@gmail.com&quot;
+
+ENV JAVA_VERSION=8 \
+    JAVA_UPDATE=192 \
+    JAVA_BUILD=12 \
+    JAVA_PATH=750e1c8617c5452694857ad95c3ee230 \
+    JAVA_HOME=&quot;/usr/lib/jvm/default-jvm&quot;
+
+RUN apk add --no-cache --virtual=build-dependencies wget ca-certificates unzip &amp;&amp; \
+    cd &quot;/tmp&quot; &amp;&amp; \
+    wget --header &quot;Cookie: oraclelicense=accept-securebackup-cookie;&quot; \
+        &quot;http://download.oracle.com/otn-pub/java/jdk/${JAVA_VERSION}u${JAVA_UPDATE}-b${JAVA_BUILD}/${JAVA_PATH}/jdk-${JAVA_VERSION}u${JAVA_UPDATE}-linux-x64.tar.gz&quot; &amp;&amp; \
+    tar -xzf &quot;jdk-${JAVA_VERSION}u${JAVA_UPDATE}-linux-x64.tar.gz&quot; &amp;&amp; \
+    mkdir -p &quot;/usr/lib/jvm&quot; &amp;&amp; \
+    mv &quot;/tmp/jdk1.${JAVA_VERSION}.0_${JAVA_UPDATE}&quot; &quot;/usr/lib/jvm/java-${JAVA_VERSION}-oracle&quot; &amp;&amp; \
+    ln -s &quot;java-${JAVA_VERSION}-oracle&quot; &quot;$JAVA_HOME&quot; &amp;&amp; \
+    ln -s &quot;$JAVA_HOME/bin/&quot;* &quot;/usr/bin/&quot; &amp;&amp; \
+    rm -rf &quot;$JAVA_HOME/&quot;*src.zip &amp;&amp; \
+    wget --header &quot;Cookie: oraclelicense=accept-securebackup-cookie;&quot; \
+        &quot;http://download.oracle.com/otn-pub/java/jce/${JAVA_VERSION}/jce_policy-${JAVA_VERSION}.zip&quot; &amp;&amp; \
+    unzip -jo -d &quot;${JAVA_HOME}/jre/lib/security&quot; &quot;jce_policy-${JAVA_VERSION}.zip&quot; &amp;&amp; \
+    rm &quot;${JAVA_HOME}/jre/lib/security/README.txt&quot; &amp;&amp; \
+    apk del build-dependencies &amp;&amp; \
+    rm &quot;/tmp/&quot;*
+</code></pre><p>这个dockerfile比上面的那个要好理解一点，首先基于我们已经构建好的cdjd/ci/base-alpine，从oracle官网上，通过wget下载JDK8，然后解压。将解压后的文件移动到定义好的java-home,然后同ln软连接，配置java环境变量。然后下载jce_policy补丁包，放入/jre/lib/security文件夹。 删除一些不必要文件。</p><p>然后：</p><pre><code>docker build -t jdk1.8 . // 构建镜像
+</code></pre><p>完成JDK8环境的构建。我们可以通过这个镜像，去运行一些springboot的项目。</p><p>接下来说下tomcat镜像，tomcat我这里选用的是tomcat7，Dockerfile如下：</p><pre><code># 版本信息
+FROM jdk1.8
+MAINTAINER  leongravel &quot;leebroncc@gmail.com&quot;
+
+# add tomcat
+COPY tomcat /opt/tomcat
+
+#设置环境变量
+ENV TOMCAT_HOME /opt/tomcat \
+  PATH ${PATH}:${TOMCAT_HOME}/bin
+
+#开启内部服务端口
+EXPOSE 8080
+ENTRYPOINT [&quot;/opt/tomcat/bin/catalina.sh&quot;, &quot;run&quot;]
+</code></pre><p>这里我是把已经解压好的tomcat copy进镜像构建，然后设置tomcat环境变量。</p><h3 id=dockerfile相关问题解释>Dockerfile相关问题解释</h3><p>我们知道镜像都是由一层一层的layer构成的，而这一层一层的layer就是我们所写的dockerfile里面的命令所定义的，比如:</p><pre><code>RUN mkdir -p /opt/thunisoft
+RUN cd /opt/thunisoft
+</code></pre><p>这就会生成两个layer，所以我们再编写dockerfile时候，应该尽可能的将所有的命令，都通过各种方式合并起来，这样构建的镜像会比两条命令，小很多。</p><pre><code>RUN mkdir -p /opt/thunisoft &amp;&amp; \
+    cd /opt/thunisoft 
+</code></pre><p>以上是正确示范。</p><p>另外，如果需要在dockerfile里面下载外部资源，最好下载到tmp目录里面，使用完成之后，再将这个目录统一删除。</p></div><div class=article-footer><blockquote class=mt-2x><ul class="post-copyright list-unstyled"><li class="post-copyright-link hidden-xs"><strong>本文链接:</strong>
+<a href=https://leongravel.com/post/%E5%9F%BA%E4%BA%8Ealpine%E7%9A%84%E5%9F%BA%E7%A1%80%E9%95%9C%E5%83%8F%E6%9E%84%E5%BB%BA/ title=基于Alpine的基础镜像构建 target=_blank rel=external>https://leongravel.com/post/%E5%9F%BA%E4%BA%8Ealpine%E7%9A%84%E5%9F%BA%E7%A1%80%E9%95%9C%E5%83%8F%E6%9E%84%E5%BB%BA/</a></li><li class=post-copyright-license><strong>License：</strong><a href=http://creativecommons.org/licenses/by/4.0/deed.zh target=_blank rel=external>CC BY 4.0 CN</a></li></ul></blockquote><div class="panel panel-default panel-badger"><div class=panel-body><figure class=media><div class=media-left><a href=https://leongravel.com/ target=_blank class="img-burn thumb-sm visible-lg"><img src="https://s.gravatar.com/avatar/fd0e02edb15e0dfd419fba201edebfeb?s=80" class="img-rounded w-full" alt></a></div><div class=media-body><h3 class=media-heading><a href=https://leongravel.com/ target=_blank><span class=text-dark>leon gravel</span><small class=ml-1x>一个脱离了高级趣味的空栈工程师</small></a></h3><div>Stop the world!</div></div></figure></div></div></div></article><section id=comments><div id=disqus_thread><noscript>Please enable JavaScript to view the <a href=//disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript></div></section></div><nav class="bar bar-footer clearfix" data-stick-bottom><div class=bar-inner><ul class="pager pull-left"><li class=prev><a href=https://leongravel.com/post/docker%E5%AF%BC%E5%87%BA%E9%95%9C%E5%83%8F%E5%8E%8B%E7%BC%A9%E5%8C%85/ title=docker导出镜像压缩包><i class="icon icon-angle-left" aria-hidden=true></i><span>&nbsp;&nbsp;下一篇</span></a></li><li class=next><a href=https://leongravel.com/post/%E4%BD%BF%E7%94%A8gitrebase%E5%90%88%E5%B9%B6%E5%A4%9A%E4%B8%AAcommit%E6%8F%90%E4%BA%A4/ title="使用git rebase合并多个commit提交"><span>上一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden=true></i></a></li><li class=toggle-toc><a class="toggle-btn collapsed" data-toggle=collapse href=#collapseToc aria-expanded=false title=文章目录 role=button><span>[&nbsp;</span><span>文章目录</span>
+<i class="text-collapsed icon icon-anchor"></i><i class="text-in icon icon-close"></i><span>]</span></a></li></ul><div class=bar-right><div class=share-component data-sites=weibo,qq,wechat,facebook,twitter data-mobile-sites=weibo,qq,qzone></div></div></div></nav></main><footer class=footer itemscope itemtype=http://schema.org/WPFooter><ul class=social-links><li><a href=https://github.com/leongravel target=_blank title=github data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li><li><a href=https://leongravel.com/index.xml target=_blank title=rss data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li></ul><div class=copyright>&copy;2016 -
+2020<div class=publishby>Theme by <a href=https://github.com/xiaoheiAh target=_blank>xiaoheiAh </a>base on<a href=https://github.com/xiaoheiAh/hugo-theme-pure target=_blank> pure</a>.</div></div></footer><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script><script type=text/x-mathjax-config>
+    MathJax.Hub.Config({
+            showMathMenu: false, //disables context menu
+            tex2jax: {
+            inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+           }
+    });
+</script><script src=https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js></script><script>window.jQuery||document.write('<script src="js/jquery.min.js"><\/script>')</script><script type=text/javascript src=https://cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js></script><script type=text/javascript src=https://cdn.staticfile.org/highlight.js/9.15.10/languages/python.min.js defer></script><script type=text/javascript src=https://cdn.staticfile.org/highlight.js/9.15.10/languages/javascript.min.js defer></script><script type=text/javascript src=https://cdn.staticfile.org/highlight.js/9.15.10/languages/java.min.js defer></script><script>hljs.configure({tabReplace:'    ',classPrefix:''})
+hljs.initHighlightingOnLoad();</script><script src=https://leongravel.com/js/application.min.bdeb64b910570b6c41badc6a05b7afb0c8ad9efd8525de3c7257d59e786326a3.js></script><script src=https://leongravel.com/js/plugin.min.51ff8c7317566f82259170fa36e09c4493adc9b9378b427a01ad3f017ebac7dd.js></script><script>(function(window){var INSIGHT_CONFIG={TRANSLATION:{POSTS:'文章',PAGES:'页面',CATEGORIES:'分类',TAGS:'标签',UNTITLED:'(未命名)',},ROOT_URL:'https:\/\/leongravel.com\/',CONTENT_URL:'https:\/\/leongravel.com\/\/searchindex.json ',};window.INSIGHT_CONFIG=INSIGHT_CONFIG;})(window);</script><script type=text/javascript src=https://leongravel.com/js/insight.min.a343cd9a5a7698336b28ef3a7c16a3a1b1d2d5fb17dc8ed04022bbe08cc5459073a15bdafa3a8a58cdd56080784bdd69fa70b1ae8597565c799c57ed00f0e120.js defer></script><script src=https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js></script><script>tocbot.init({tocSelector:'.js-toc',contentSelector:'.js-toc-content',headingSelector:'h1, h2, h3',hasInnerContainers:true,});</script><script async src=https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><script>(function(){var d=document,s=d.createElement('script');s.src='https://'+'leongravel'+'.disqus.com/embed.js';s.setAttribute('data-timestamp',+new Date());(d.head||d.body).appendChild(s);})();</script></body></html>

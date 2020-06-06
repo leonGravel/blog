@@ -1,0 +1,124 @@
+<!doctype html><html lang=zh><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><title>gitlab runner + docker 自动构建 - Gravel`s blogs</title><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui"><meta name=renderer content="webkit"><meta http-equiv=cache-control content="no-transform"><meta http-equiv=cache-control content="no-siteapp"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="black"><meta name=format-detection content="telephone=no,email=no,adress=no"><meta name=theme-color content="#000000"><meta http-equiv=window-target content="_top"><meta name=description content="最开始的时候，我尝试Jenkins+docker，可是Jenkins的docker依赖和插件，实在太过麻烦，配置项等等，太重。所以我转为使用gitlab runner来实现自动构建并打包镜像。"><meta name=generator content="Hugo 0.72.0 with theme pure"><title>gitlab runner + docker 自动构建 - Gravel`s blogs</title><link rel=stylesheet href=https://leongravel.com/css/style.min.7dc20efbc53647d41aa9ddea0c48e59300223d084e66ea0cbe7c30bd88903acc.css><link rel=stylesheet href=https://cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css async><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css async><meta property="og:title" content="gitlab runner + docker 自动构建"><meta property="og:description" content="最开始的时候，我尝试Jenkins+docker，可是Jenkins的docker依赖和插件，实在太过麻烦，配置项等等，太重。所以我转为使用gitlab runner来实现自动构建并打包镜像。"><meta property="og:type" content="article"><meta property="og:url" content="https://leongravel.com/post/gitlabrunner-docker%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85%E9%95%9C%E5%83%8Fpush%E5%88%B0%E5%85%AC%E5%8F%B8%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93/"><meta property="article:published_time" content="2018-09-11T23:01:41+00:00"><meta property="article:modified_time" content="2018-09-11T23:01:41+00:00"><meta itemprop=name content="gitlab runner + docker 自动构建"><meta itemprop=description content="最开始的时候，我尝试Jenkins+docker，可是Jenkins的docker依赖和插件，实在太过麻烦，配置项等等，太重。所以我转为使用gitlab runner来实现自动构建并打包镜像。"><meta itemprop=datePublished content="2018-09-11T23:01:41+00:00"><meta itemprop=dateModified content="2018-09-11T23:01:41+00:00"><meta itemprop=wordCount content="1166"><meta itemprop=keywords content="docker,gitlab-CI,"><meta name=twitter:card content="summary"><meta name=twitter:title content="gitlab runner + docker 自动构建"><meta name=twitter:description content="最开始的时候，我尝试Jenkins+docker，可是Jenkins的docker依赖和插件，实在太过麻烦，配置项等等，太重。所以我转为使用gitlab runner来实现自动构建并打包镜像。"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script><script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--></head></head><body class="main-center theme-black" itemscope itemtype=http://schema.org/WebPage><header class=header itemscope itemtype=http://schema.org/WPHeader><div class=slimContent><div class=navbar-header><div class="profile-block text-center"><a id=avatar href=https://leongravel.com/ target=_blank><img class="img-circle img-rotate" src="https://s.gravatar.com/avatar/fd0e02edb15e0dfd419fba201edebfeb?s=80" width=200 height=200></a><h2 id=name class="hidden-xs hidden-sm">leon gravel</h2><h3 id=title class="hidden-xs hidden-sm hidden-md">一个脱离了高级趣味的空栈工程师</h3><small id=location class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i>ChongQing, China</small></div><div class=search id=search-form-wrap><form class="search-form sidebar-form"><div class=input-group><input type=text class="search-form-input form-control" placeholder=搜索>
+<span class=input-group-btn><button type=submit class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button></span></div><div class=ins-search><div class=ins-search-mask></div><div class=ins-search-container><div class=ins-input-wrapper><input type=text class=ins-search-input placeholder=想要查找什么... x-webkit-speech>
+<button type=button class="close ins-close ins-selectable" data-dismiss=modal aria-label=Close><span aria-hidden=true>×</span></button></div><div class=ins-section-wrapper><div class=ins-section-container></div></div></div></div></form></div><button class="navbar-toggle collapsed" type=button data-toggle=collapse data-target=#main-navbar aria-controls=main-navbar aria-expanded=false>
+<span class=sr-only>Toggle navigation</span>
+<span class=icon-bar></span><span class=icon-bar></span><span class=icon-bar></span></button></div><nav id=main-navbar class="collapse navbar-collapse" itemscope itemtype=http://schema.org/SiteNavigationElement role=navigation><ul class="nav navbar-nav main-nav"><li class="menu-item menu-item-home"><a href=/><i class="icon icon-home-fill"></i><span class=menu-title>Home</span></a></li><li class="menu-item menu-item-archives"><a href=/posts/><i class="icon icon-archives-fill"></i><span class=menu-title>Archives</span></a></li><li class="menu-item menu-item-categories"><a href=/categories/><i class="icon icon-folder"></i><span class=menu-title>Categories</span></a></li><li class="menu-item menu-item-tags"><a href=/tags/><i class="icon icon-tags"></i><span class=menu-title>Tags</span></a></li><li class="menu-item menu-item-resume"><a href=/resume/><i class="icon icon-profile"></i><span class=menu-title>Resume</span></a></li><li class="menu-item menu-item-about"><a href=/about/><i class="icon icon-cup-fill"></i><span class=menu-title>About</span></a></li></ul></nav></div></header><aside class=sidebar itemscope itemtype=http://schema.org/WPSideBar><div class=slimContent><div class=widget><h3 class=widget-title>公告</h3><div class=widget-body><div id=board><div class=content><p>当人们学习设计技术时，各种可能性令他们兴奋不已，然而真实项目的错综复杂又会为他们泼上一盆冷水。</p></div></div></div></div><div class=widget><h3 class=widget-title>分类</h3><div class=widget-body><ul class=category-list><li class=category-list-item><a href=https://leongravel.com/categories/devops/ class=category-list-link>devops</a><span class=category-list-count>24</span></li><li class=category-list-item><a href=https://leongravel.com/categories/java%E5%9F%BA%E7%A1%80/ class=category-list-link>java基础</a><span class=category-list-count>12</span></li><li class=category-list-item><a href=https://leongravel.com/categories/python/ class=category-list-link>python</a><span class=category-list-count>3</span></li><li class=category-list-item><a href=https://leongravel.com/categories/%E5%88%B7%E6%9C%BA/ class=category-list-link>刷机</a><span class=category-list-count>1</span></li><li class=category-list-item><a href=https://leongravel.com/categories/%E5%8D%9A%E5%AE%A2/ class=category-list-link>博客</a><span class=category-list-count>3</span></li><li class=category-list-item><a href=https://leongravel.com/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/ class=category-list-link>微服务</a><span class=category-list-count>2</span></li><li class=category-list-item><a href=https://leongravel.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/ class=category-list-link>数据库</a><span class=category-list-count>1</span></li><li class=category-list-item><a href=https://leongravel.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/ class=category-list-link>数据结构与算法</a><span class=category-list-count>1</span></li><li class=category-list-item><a href=https://leongravel.com/categories/%E7%A1%AC%E4%BB%B6/ class=category-list-link>硬件</a><span class=category-list-count>1</span></li><li class=category-list-item><a href=https://leongravel.com/categories/%E7%BC%93%E5%AD%98/ class=category-list-link>缓存</a><span class=category-list-count>1</span></li><li class=category-list-item><a href=https://leongravel.com/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/ class=category-list-link>设计模式</a><span class=category-list-count>1</span></li></ul></div></div><div class=widget><h3 class=widget-title>最新文章</h3><div class=widget-body><ul class="recent-post-list list-unstyled no-thumbnail"><li><div class=item-inner><p class=item-title><a href=https://leongravel.com/post/zabbix-docker/ class=title>Docker部署zabbix填坑指南</a></p><p class=item-date><time datetime="2020-02-11 20:54:41 +0000 UTC" itemprop=datePublished>2020-02-11</time></p></div></li><li><div class=item-inner><p class=item-title><a href=https://leongravel.com/post/android-setup/ class=title>安卓 9.0 刷机跳过开机验证</a></p><p class=item-date><time datetime="2020-01-01 00:01:41 +0000 UTC" itemprop=datePublished>2020-01-01</time></p></div></li><li><div class=item-inner><p class=item-title><a href=https://leongravel.com/post/idea-refreshing-files/ class=title>idea Refreshing files 卡顿</a></p><p class=item-date><time datetime="2019-11-18 18:01:41 +0000 UTC" itemprop=datePublished>2019-11-18</time></p></div></li><li><div class=item-inner><p class=item-title><a href=https://leongravel.com/post/springbootcacheable-%E4%B8%8D%E7%94%9F%E6%95%88/ class=title>Springboot@Cacheable 不生效</a></p><p class=item-date><time datetime="2019-07-16 20:54:41 +0000 UTC" itemprop=datePublished>2019-07-16</time></p></div></li><li><div class=item-inner><p class=item-title><a href=https://leongravel.com/post/azkaban%E5%9B%9E%E8%B0%83%E9%85%8D%E7%BD%AE/ class=title>azkaban回调配置</a></p><p class=item-date><time datetime="2019-07-06 23:01:41 +0000 UTC" itemprop=datePublished>2019-07-06</time></p></div></li></ul></div></div></div></aside><aside class="sidebar sidebar-toc collapse" id=collapseToc itemscope itemtype=http://schema.org/WPSideBar><div class=slimContent><h4 class=toc-title>文章目录</h4><nav id=toc class="js-toc toc"></nav></div></aside><main class=main role=main><div class=content><article id=- class="article article-type-" itemscope itemtype=http://schema.org/BlogPosting><div class=article-header><h1 itemprop=name><a class=article-title href=/post/gitlabrunner-docker%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85%E9%95%9C%E5%83%8Fpush%E5%88%B0%E5%85%AC%E5%8F%B8%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93/>gitlab runner + docker 自动构建</a></h1><div class=article-meta><span class=article-date><i class="icon icon-calendar-check"></i>&nbsp;
+<a href=https://leongravel.com/post/gitlabrunner-docker%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85%E9%95%9C%E5%83%8Fpush%E5%88%B0%E5%85%AC%E5%8F%B8%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93/ class=article-date><time datetime="2018-09-11 23:01:41 +0000 UTC" itemprop=datePublished>2018-09-11</time></a></span>
+<span class=article-category><i class="icon icon-folder"></i>&nbsp;
+<a class=article-category-link href=/categories/devops/>Devops</a></span>
+<span class=article-tag><i class="icon icon-tags"></i>&nbsp;
+<a class=article-tag-link href=/tags/docker/>docker</a>
+<a class=article-tag-link href=/tags/gitlab-ci/>gitlab-CI</a></span>
+<span class="article-read hidden-xs"><i class="icon icon-eye-fill" aria-hidden=true></i><span id=busuanzi_container_page_pv><span id=busuanzi_value_page_pv>0</span></span></span>
+<span class=post-comment><i class="icon icon-comment"></i>&nbsp;<a href=/post/gitlabrunner-docker%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85%E9%95%9C%E5%83%8Fpush%E5%88%B0%E5%85%AC%E5%8F%B8%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93/#comments class=article-comment-link>评论</a></span>
+<span class="post-wordcount hidden-xs" itemprop=wordCount>字数统计: 1166字</span>
+<span class="post-readcount hidden-xs" itemprop=timeRequired>阅读时长: 3分</span></div></div><div class="article-entry marked-body js-toc-content" itemprop=articleBody><p>最开始的时候，我尝试<code>Jenkins</code>+<code>docker</code>，可是<code>Jenkins</code>的<code>docker</code>依赖和插件，实在太过麻烦，配置项等等，太重。所以我转为使用<code>gitlab runner</code>来实现自动构建并打包镜像。</p><h2 id=准备工作>准备工作</h2><ul><li>安装<code>docker</code></li><li>在<code>docker</code>同一个机器上安装<code>gitlab runner</code></li><li>配置<code>.gitlab-ci.yml</code></li></ul><h3 id=安装docker>安装Docker</h3><p>参考官方文档，唯一需要注意的是，需要将镜像仓库地址修改为私有的地址。可以通过配置<code>Deamon.json</code>实现。具体配置如下。
+<code>registry-mirrors</code>代表私有仓库地址，<code>insecure-registries</code>的作用是，<code>push</code>指向的地址。</p><blockquote><p>Docker自从1.3.X之后docker registry交互默认使用的是HTTPS，所以这里最好直接指定仓库地址，不然push的时候会报错。</p></blockquote><pre><code>{
+  &quot;registry-mirrors&quot;: [
+    &quot;http://registry.******.com:5000&quot;
+  ],
+  &quot;insecure-registries&quot;: [
+    &quot;registry.******.com:5000&quot;
+  ],
+  &quot;debug&quot;: true,
+  &quot;experimental&quot;: false
+}
+</code></pre><h3 id=安装gitlab-runner>安装gitlab runner</h3><p>服务器是<code>centos 7</code>,以下的步骤都是基于<code>centos 7</code></p><h4 id=下载二进制安装文件>下载二进制安装文件</h4><pre><code>curl -L https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.rpm.sh | sudo bash
+</code></pre><h4 id=安装>安装</h4><pre><code>sudo yum install gitlab-runner
+</code></pre><h4 id=注册runner>注册Runner</h4><pre><code>sudo gitlab-runner register
+</code></pre><ol><li>填入填入私有gitlab的url</li></ol><pre><code>Please enter the gitlab-ci coordinator URL (e.g. https://gitlab.com )
+https://gitlab.******.com
+</code></pre><ol start=2><li>输入项目的gitlab token</li></ol><pre><code>Please enter the gitlab-ci token for this runner
+xxx
+</code></pre><ol start=3><li>添加runner描述</li></ol><pre><code>Please enter the gitlab-ci description for this runner
+jiedu-ci
+</code></pre><ol start=4><li>添加描述标签，若添加多个需用逗号隔开</li></ol><pre><code>Please enter the gitlab-ci tags for this runner (comma separated):
+ci,shws,jiedu
+</code></pre><ol start=5><li>选择runner 运行模式
+这里我选择的Docker，因为我们要使用docker 镜像以及一些其他的镜像</li></ol><blockquote><p>其他的我也不是很了解</p></blockquote><pre><code>Please enter the executor: ssh, docker+machine, docker-ssh+machine, kubernetes, docker, parallels, virtualbox, docker-ssh, shell:
+docker
+</code></pre><ol start=6><li>设置基础镜像</li></ol><pre><code>Please enter the Docker image (eg. ruby:2.1):
+registry.******.com:5000/dzjz/ci/maven
+</code></pre><h4 id=配置gitlab-runner>配置gitlab runner</h4><pre><code>vi /etc/gitlab-runner/config.toml
+</code></pre><p>写入</p><pre><code>concurrent = 1
+check_interval = 0
+environment = [&quot;MAVEN_HOME=/path/to/maven&quot;]
+[[runners]]
+  name = &quot;shws-ci&quot;
+  url = &quot;http://gitlab.******.com&quot;
+  token = &quot;234234*******************&quot;
+  executor = &quot;docker&quot;
+  output_limit = 208192
+  [runners.docker]
+    tls_verify = false
+    image = &quot;registry.******.com:5000/dzjz/ci/maven&quot;
+    privileged = true
+	cache_dir = &quot;cache&quot;
+    disable_cache = false
+     volumes = [&quot;/var/run/docker.sock:/var/run/docker.sock&quot;, &quot;/cache&quot;,&quot;/root/.m2:/root/.m2&quot;]
+    shm_size = 0
+	pull_policy = &quot;if-not-present&quot;
+  [runners.cache]
+
+</code></pre><p>当然这个部分后期会进一步完善修改，目前只是一个示例。</p><h3 id=配置gitlab-ciyml>配置.gitlab-ci.yml</h3><p>这一部分，具体可以参考官方文档以及<a href=https://segmentfault.com/a/1190000011890710>这篇</a>，项目的配置如下：</p><pre><code># 定义stages
+stages:
+  - build
+  - push
+  
+
+
+# 构建各个依赖组件的jar包，并复制Dockerfile对应位置等待构建.
+build-job:
+  #  image: registry.******.com:5000/dzjz/ci/maven
+    stage: build
+    only:
+        - feature/20180428-1.0.0.0script1-第二版
+
+    script:
+        - mkdir -p jd-ci/shws/kf
+        - cd shws/ &amp;&amp; pwd
+        - mvn clean install -U
+        - echo '准备发布生活卫生镜像到私有镜像仓库！'
+        - rm -rf src/dockerfile/*.war
+        - cd .. &amp;&amp; pwd
+        - cp -r shws/target/shws.war shws/src/dockerfile/Dockerfile jd-ci/shws/kf
+        - cd jd-ci/shws/kf/ &amp;&amp; ls
+    ## 下面这个配置的作用是在不同的job间传递共享war包以及Dockerfile
+    artifacts:
+      name:  &quot;${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG}&quot;
+      paths:
+        - jd-ci/shws/kf/*
+      expire_in: 1 day
+
+
+push-job:
+  stage: push
+  only:
+    - feature/20180428-1.0.0.0script1-第二版
+  image: registry.******.com:5000/docker:latest
+  services: 
+    - registry.******.com:5000/docker:dind
+  before_script:
+  - docker info
+  script:
+    - echo '准备构建镜像并push到私有仓库'
+    #- cd ./jd/shws/kf/ &amp;&amp; ls
+    - docker stop shws-kf || true
+    - docker rm -f shws-kf || true
+    - docker rmi registry.******.com:5000/cdjd/shws-kf || true
+    - docker build -t registry.******.com:5000/cdjd/shws-kf ./jd-ci/shws/kf/
+    - docker push registry.******.com:5000/cdjd/shws-kf
+    - rm -rf jd-ci/shws/kf
+
+</code></pre><p>这个配置文件中，<code>only</code>部分代表你的分支，script部分代表对应的脚本。其他业务系统需要替换的东西（比如构建镜像的名字，缓存的名称，这些可以自定义）。</p><h3 id=结束>结束</h3><p>以上就是<code>gitlab runner </code>+ <code>docker</code>实现自动构建打包镜像并上传的简单教程。</p></div><div class=article-footer><blockquote class=mt-2x><ul class="post-copyright list-unstyled"><li class="post-copyright-link hidden-xs"><strong>本文链接:</strong>
+<a href=https://leongravel.com/post/gitlabrunner-docker%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85%E9%95%9C%E5%83%8Fpush%E5%88%B0%E5%85%AC%E5%8F%B8%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93/ title="gitlab runner + docker 自动构建" target=_blank rel=external>https://leongravel.com/post/gitlabrunner-docker%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85%E9%95%9C%E5%83%8Fpush%E5%88%B0%E5%85%AC%E5%8F%B8%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93/</a></li><li class=post-copyright-license><strong>License：</strong><a href=http://creativecommons.org/licenses/by/4.0/deed.zh target=_blank rel=external>CC BY 4.0 CN</a></li></ul></blockquote><div class="panel panel-default panel-badger"><div class=panel-body><figure class=media><div class=media-left><a href=https://leongravel.com/ target=_blank class="img-burn thumb-sm visible-lg"><img src="https://s.gravatar.com/avatar/fd0e02edb15e0dfd419fba201edebfeb?s=80" class="img-rounded w-full" alt></a></div><div class=media-body><h3 class=media-heading><a href=https://leongravel.com/ target=_blank><span class=text-dark>leon gravel</span><small class=ml-1x>一个脱离了高级趣味的空栈工程师</small></a></h3><div>Stop the world!</div></div></figure></div></div></div></article><section id=comments><div id=disqus_thread><noscript>Please enable JavaScript to view the <a href=//disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript></div></section></div><nav class="bar bar-footer clearfix" data-stick-bottom><div class=bar-inner><ul class="pager pull-left"><li class=prev><a href=https://leongravel.com/post/k8s%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/ title=k8s集群搭建><i class="icon icon-angle-left" aria-hidden=true></i><span>&nbsp;&nbsp;下一篇</span></a></li><li class=next><a href=https://leongravel.com/post/dubbo%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E7%AE%80%E6%9E%90/ title=Dubbo的工作原理简析><span>上一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden=true></i></a></li><li class=toggle-toc><a class="toggle-btn collapsed" data-toggle=collapse href=#collapseToc aria-expanded=false title=文章目录 role=button><span>[&nbsp;</span><span>文章目录</span>
+<i class="text-collapsed icon icon-anchor"></i><i class="text-in icon icon-close"></i><span>]</span></a></li></ul><div class=bar-right><div class=share-component data-sites=weibo,qq,wechat,facebook,twitter data-mobile-sites=weibo,qq,qzone></div></div></div></nav></main><footer class=footer itemscope itemtype=http://schema.org/WPFooter><ul class=social-links><li><a href=https://github.com/leongravel target=_blank title=github data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li><li><a href=https://leongravel.com/index.xml target=_blank title=rss data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li></ul><div class=copyright>&copy;2016 -
+2020<div class=publishby>Theme by <a href=https://github.com/xiaoheiAh target=_blank>xiaoheiAh </a>base on<a href=https://github.com/xiaoheiAh/hugo-theme-pure target=_blank> pure</a>.</div></div></footer><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script><script type=text/x-mathjax-config>
+    MathJax.Hub.Config({
+            showMathMenu: false, //disables context menu
+            tex2jax: {
+            inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+           }
+    });
+</script><script src=https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js></script><script>window.jQuery||document.write('<script src="js/jquery.min.js"><\/script>')</script><script type=text/javascript src=https://cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js></script><script type=text/javascript src=https://cdn.staticfile.org/highlight.js/9.15.10/languages/python.min.js defer></script><script type=text/javascript src=https://cdn.staticfile.org/highlight.js/9.15.10/languages/javascript.min.js defer></script><script type=text/javascript src=https://cdn.staticfile.org/highlight.js/9.15.10/languages/java.min.js defer></script><script>hljs.configure({tabReplace:'    ',classPrefix:''})
+hljs.initHighlightingOnLoad();</script><script src=https://leongravel.com/js/application.min.bdeb64b910570b6c41badc6a05b7afb0c8ad9efd8525de3c7257d59e786326a3.js></script><script src=https://leongravel.com/js/plugin.min.51ff8c7317566f82259170fa36e09c4493adc9b9378b427a01ad3f017ebac7dd.js></script><script>(function(window){var INSIGHT_CONFIG={TRANSLATION:{POSTS:'文章',PAGES:'页面',CATEGORIES:'分类',TAGS:'标签',UNTITLED:'(未命名)',},ROOT_URL:'https:\/\/leongravel.com\/',CONTENT_URL:'https:\/\/leongravel.com\/\/searchindex.json ',};window.INSIGHT_CONFIG=INSIGHT_CONFIG;})(window);</script><script type=text/javascript src=https://leongravel.com/js/insight.min.a343cd9a5a7698336b28ef3a7c16a3a1b1d2d5fb17dc8ed04022bbe08cc5459073a15bdafa3a8a58cdd56080784bdd69fa70b1ae8597565c799c57ed00f0e120.js defer></script><script src=https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js></script><script>tocbot.init({tocSelector:'.js-toc',contentSelector:'.js-toc-content',headingSelector:'h1, h2, h3',hasInnerContainers:true,});</script><script async src=https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><script>(function(){var d=document,s=d.createElement('script');s.src='https://'+'leongravel'+'.disqus.com/embed.js';s.setAttribute('data-timestamp',+new Date());(d.head||d.body).appendChild(s);})();</script></body></html>
