@@ -1,4 +1,4 @@
-baseURL: https://leongravel.com/
+baseURL: https://gggggravel.com/
 theme: pure
 title: Gravel`s blogs
 defaultContentLanguage: zh  # en/zh/...
@@ -107,7 +107,7 @@ params:
     author_title: 一个脱离了高级趣味的空栈工程师
     author_description: Stop the world!
     location: ChongQing, China
-    follow: https://leongravel.com/
+    follow: https://gggggravel.com/
     # Social Links
     social:
       links:
